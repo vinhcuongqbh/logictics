@@ -15,6 +15,8 @@ class CreateTrangthaisTable extends Migration
     {
         Schema::create('trangthais', function (Blueprint $table) {
             $table->id();
+            $table->string('tentrangthai');
+            $table->text('ghichu')->nullable();
             $table->timestamps();
         });
     }

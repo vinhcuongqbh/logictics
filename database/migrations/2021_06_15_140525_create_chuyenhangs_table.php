@@ -15,6 +15,13 @@ class CreateChuyenhangsTable extends Migration
     {
         Schema::create('chuyenhangs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_nhanvienquanly');
+            $table->foreignId('id_khogui');
+            $table->foreignId('id_khonhan');
+            $table->foreignId('id_trangthai');
+            $table->dateTime('ngaygui')->nullable();
+            $table->dateTime('ngaynhandukien')->nullable();
+            $table->dateTime('ngaynhanthucte')->nullable();
             $table->timestamps();
         });
     }

@@ -134,8 +134,26 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        //Kiểm tra thông tin đầu Nhân viên
+        'id_loainhanvien' => [
+            'required' => 'Vui lòng chọn Loại nhân viên',
+        ],
+        'tennhanvien' => [
+            'required' => 'Vui lòng nhập Tên Nhân viên',
+        ],
+        'sodienthoai' => [
+            'required' => 'Vui lòng nhập Số điện thoại',
+            'unique' => 'Số điện thoại này đã được đăng ký',
+        ],
+        'email' => [
+            'required' => 'Vui lòng nhập Email',
+            'unique' => 'Địa chỉ email này đã được đăng ký',
+        ],
+        'password' => [
+            'required' => 'Vui lòng nhập Mật mã cấp cho Nhân viên',
+        ],
+        'diachi' => [
+            'required' => 'Vui lòng nhập Địa chỉ của Nhân viên',
         ],
     ],
 

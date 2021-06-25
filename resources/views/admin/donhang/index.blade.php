@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Khách hàng')
+@section('title', 'Đơn hàng')
 
 @section('content_header')
-    <h1>Khách hàng</h1>
+    <h1>Đơn hàng</h1>
 @stop
 
 @section('content')
-    <p>Đây là trang quản lý Khách hàng</p>
+    <p>Đây là trang quản lý Đơn hàng</p>
 @stop
 
 @section('css')

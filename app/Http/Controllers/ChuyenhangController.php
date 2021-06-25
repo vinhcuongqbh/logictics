@@ -13,7 +13,7 @@ class ChuyenhangController extends Controller
      */
     public function index()
     {
-        return view('chuyenhang/index');
+        return view('admin.chuyenhang.index');
     }
 
     /**

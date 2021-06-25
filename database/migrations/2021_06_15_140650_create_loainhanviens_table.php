@@ -15,6 +15,8 @@ class CreateLoainhanviensTable extends Migration
     {
         Schema::create('loainhanviens', function (Blueprint $table) {
             $table->id();
+            $table->string('tenloainhanvien');
+            $table->text('ghichu')->nullable();
             $table->timestamps();
         });
     }

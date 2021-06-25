@@ -15,6 +15,11 @@ class CreateKhohangsTable extends Migration
     {
         Schema::create('khohangs', function (Blueprint $table) {
             $table->id();
+            $table->string('tenkhohang');
+            $table->string('sodienthoai')->nullable();
+            $table->string('diachi')->nullable();
+            $table->foreignId('id_nhanvienquanly');
+            $table->boolean('id_trangthai');
             $table->timestamps();
         });
     }

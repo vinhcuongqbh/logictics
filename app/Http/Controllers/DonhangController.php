@@ -13,7 +13,7 @@ class DonhangController extends Controller
      */
     public function index()
     {
-        return view('donhang/index');
+        return view('admin.donhang.index');
     }
 
     /**

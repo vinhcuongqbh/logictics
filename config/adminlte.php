@@ -241,7 +241,7 @@ return [
         [
             'text'        => 'Nhân viên',
             'url'         => 'admin/nhanvien',
-            'icon'        => 'fas fa-fw fa-user',
+            'icon'        => 'far fa-fw fa-user',
         ],
         [
             'text'        => 'Khách hàng',
@@ -263,6 +263,19 @@ return [
             'url'         => 'admin/donhang',
             'icon'        => 'fas fa-fw fa-shopping-cart',
         ],
+
+        ['header' => 'THỐNG KÊ'],
+        [
+            'text'        => 'Nhân viên',
+            'url'         => '#',
+            'icon' => 'fas fa-fw fa-angle-right',
+        ],
+        [
+            'text'        => 'Đơn hàng',
+            'url'         => '#',
+            'icon' => 'fas fa-fw fa-angle-right',
+        ],
+
         ['header' => 'CÀI ĐẶT'],
         [
             'text'    => 'Danh mục',
@@ -271,14 +284,17 @@ return [
                 [
                     'text' => 'Loại nhân viên',
                     'url'  => '#',
+                    'icon' => 'fas fa-fw fa-angle-right',
                 ],
                 [
                     'text' => 'Loại hàng hóa',
                     'url'  => '#',
+                    'icon' => 'fas fa-fw fa-angle-right',
                 ],
                 [
                     'text' => 'Trạng thái đơn hàng',
                     'url'  => '#',
+                    'icon' => 'fas fa-fw fa-angle-right',
                 ],
             ],
         ],
