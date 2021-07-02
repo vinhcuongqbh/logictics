@@ -19,7 +19,7 @@ class KhachhangController extends Controller
         //Hiển thị danh sách Tài khoản đang sử dụng
         $khachhang = Khachhang::where('khachhangs.id_trangthai', 1)
             ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-            ->select('khachhangs.*', 'users.tennhanvien')
+            ->select('khachhangs.*', 'users.name')
             ->orderBy('id', 'asc')
             ->get();
 
@@ -31,7 +31,7 @@ class KhachhangController extends Controller
         //Hiển thị danh sách Tài khoản đã xóa
         $khachhang = Khachhang::where('khachhangs.id_trangthai', 0)
             ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-            ->select('khachhangs.*', 'users.tennhanvien')
+            ->select('khachhangs.*', 'users.name')
             ->orderBy('id', 'asc')
             ->get();
 
@@ -90,7 +90,7 @@ class KhachhangController extends Controller
         //Hiển thị thông tin Khách hàng
         $khachhang = Khachhang::where('khachhangs.id', $id)
             ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-            ->select('khachhangs.*', 'users.tennhanvien')
+            ->select('khachhangs.*', 'users.name')
             ->first();
         return view('admin.khachhang.show', ['khachhang' => $khachhang]);
     }
@@ -104,8 +104,9 @@ class KhachhangController extends Controller
     public function edit($id)
     {
         $khachhang = Khachhang::find($id);
-        $nhanvien = User::select('id', 'tennhanvien')
+        $nhanvien = User::select('id', 'name')
             ->where('id_loainhanvien', '>', 1)
+            ->where('id_trangthai', 1)
             ->get();
 
         return view('admin.khachhang.edit', ['khachhang' => $khachhang, 'nhanviens' => $nhanvien]);

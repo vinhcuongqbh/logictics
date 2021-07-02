@@ -19,9 +19,6 @@ class CreateChuyenhangsTable extends Migration
             $table->foreignId('id_khogui');
             $table->foreignId('id_khonhan');
             $table->foreignId('id_trangthai');
-            $table->dateTime('ngaygui')->nullable();
-            $table->dateTime('ngaynhandukien')->nullable();
-            $table->dateTime('ngaynhanthucte')->nullable();
             $table->timestamps();
         });
     }

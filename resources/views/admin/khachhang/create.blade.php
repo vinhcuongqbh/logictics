@@ -36,6 +36,7 @@
                         </div>
                     @endif
                     <form action="{{ route('khachhang.store') }}" method="post" id="khachhang-create">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="tenkhachhang">Họ và tên</label>

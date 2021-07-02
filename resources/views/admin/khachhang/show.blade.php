@@ -57,7 +57,7 @@
                             <div>
                                 <select class="custom-select" id="idtrinhdo" name="idtrinhdo" disabled>
                                     <option value="{{ $khachhang->id_nhanvienquanly }}">
-                                        {{ $khachhang->tennhanvien }}</option>
+                                        {{ $khachhang->name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                         class="btn btn-secondary float-right"
                                         style="width: 100px; margin: 5px;">SỬA</button></a>
                                 <a href="{{ route('khachhang.create') }}"><button type="button"
-                                        class="btn btn-primary float-right" style="width: 100px; margin: 5px;">TẠO
+                                        class="btn btn-primary float-right" style="width: 100px; margin: 5px;">THÊM
                                         MỚI</button></a>
 
                             </div>

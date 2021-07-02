@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Kho hàng')
+@section('title', 'Chuyến hàng')
 
 @section('content_header')
 
@@ -14,7 +14,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>KHO HÀNG</h1>
+                        <h1>CHUYẾN HÀNG</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -30,67 +30,51 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="col-auto">
-                                            <a href="{{ route('khohang.create') }}"><button type="button"
-                                                    class="btn btn-primary float-left" style="width: 100px; margin-right: 10px;">THÊM
-                                                    MỚI</button></a>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="{{ route('khohang') }}"><button type="button"
-                                                    class="btn btn-outline-primary float-left"
-                                                    style="margin-right: 10px;">ĐANG SỬ DỤNG</button></a>
-
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="{{ route('khohang.tamdung') }}"><button type="button"
-                                                    class="btn btn-outline-danger float-left"
-                                                    style="width: 100px; margin-right: 10px;">TẠM DỪNG</button></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="khohang-table" class="table table-bordered table-striped">
+                                <table id="chuyenhang-table" class="table table-bordered table-striped">
                                     <thead style="text-align: center">
                                         <tr>
                                             <th>ID</th>
-                                            <th>Tên Kho hàng</th>
-                                            <th>Số điện thoại</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Thao tác</th>
+                                            <th>Kho gửi</th>
+                                            <th>Kho nhận</th>
+                                            <th>Ngày gửi</th>
+                                            <th>Ngày nhận</th>
+                                            <th>Nhân viên quản lý</th>
+                                            <th>Lịch sử chuyến hàng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($khohangs as $khohang)
+                                        @foreach ($chuyenhangs as $chuyenhang)
                                             <tr>
                                                 <td style="text-align: center"><a
-                                                        href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->id }}</a>
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id }}</a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->tenkhohang }}</a>
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id_khogui }}</a>
+                                                </td>
+                                                <td><a
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id_khonhan }}</a>
                                                 </td>
                                                 <td style="text-align: center"><a
-                                                        href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->sodienthoai }}</a>
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->created_at }}</a>
+                                                </td>
+                                                <td><a href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}"></a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->diachi }}</a>
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->name }}</a>
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <a href="{{ route('khohang.edit', $khohang->id) }}"
+                                                    <a href="{{ route('chuyenhang.lichsuchuyenhang', $chuyenhang->id) }}"
                                                         style="padding: 3px">
-                                                        <i class="fas fa-edit"></i>
+                                                        <i class="fas fa-eye"></i>
                                                     </a>
-                                                    @if ($khohang->id_trangthai == 1)
-                                                        <a href="{{ route('khohang.delete', $khohang->id) }}"
-                                                            onclick="return confirm('Bạn muốn xóa Kho hàng này?')">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('khohang.restore', $khohang->id) }}"
-                                                            onclick="return confirm('Bạn muốn phục hồi Kho hàng này?')">
-                                                            <i class="fas fa-undo"></i>
-                                                        </a>
-                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -143,7 +127,7 @@
     <!-- Page specific script -->
     <script>
         $(function() {
-            $("#khohang-table").DataTable({
+            $("#chuyenhang-table").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "lengthChange": true,
@@ -151,7 +135,7 @@
                 "autoWidth": false,
                 "searching": true,
                 "buttons": ["copy", "excel", "pdf", "print", ]
-            }).buttons().container().appendTo('#khohang-table_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#chuyenhang-table_wrapper .col-md-6:eq(0)');
         });
     </script>
 @stop

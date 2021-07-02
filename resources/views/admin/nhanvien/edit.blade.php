@@ -36,6 +36,7 @@
                         </div>
                     @endif
                     <form action="{{ route('nhanvien.update', $nhanvien->id) }}" method="post" id="nhanvien-edit">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputStatus">Loại nhân viên</label>
@@ -47,9 +48,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="tennhanvien">Họ và tên</label>
-                                <input type="text" id="tennhanvien" name="tennhanvien"
-                                    value="{{ $nhanvien->tennhanvien }}" class="form-control">
+                                <label for="name">Họ và tên</label>
+                                <input type="text" id="name" name="name"
+                                    value="{{ $nhanvien->name }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="sodienthoai">Số điện thoại</label>
@@ -72,8 +73,19 @@
                                     class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="id_khohangquanly">Kho hàng quản lý</label>
+                                <div>
+                                    <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
+                                        @foreach ($khohangs as $khohang)
+                                            <option value="{{ $khohang->id }}" @if ($nhanvien->id_khohangquanly == $khohang->id) {{ 'selected' }} @endif>
+                                                {{ $khohang->tenkhohang }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary float-right">CẬP NHẬT</button>
+                                    <button type="submit" class="btn btn-primary float-right" style="width: 100px">CẬP NHẬT</button>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +120,7 @@
                     id_loainhanvien: {
                         required: true,
                     },
-                    tennhanvien: {
+                    name: {
                         required: true,
                     },
                     sodienthoai: {
@@ -128,7 +140,7 @@
                     id_loainhanvien: {
                         required: "Chọn Loại nhân viên",
                     },
-                    tennhanvien: {
+                    name: {
                         required: "Nhập Họ tên của Nhân viên",
                     },
                     sodienthoai: {

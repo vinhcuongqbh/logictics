@@ -36,9 +36,10 @@
                         </div>
                     @endif
                     <form action="{{ route('khohang.store') }}" method="post" id="khohang-create">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="tenkhohang">Tên kho hàng</label>
+                                <label for="tenkhohang">Tên Kho hàng</label>
                                 <input type="text" id="tenkhohang" name="tenkhohang" value="{{ old('tenkhohang') }}"
                                     class="form-control">
                             </div>
@@ -51,17 +52,6 @@
                                 <label for="diachi">Địa chỉ</label>
                                 <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
                                     class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="lienhekhac">Nhân viên quản lý</label>
-                                <div>
-                                    <select class="custom-select" id="id_nhanvienquanly" name="id_nhanvienquanly">
-                                        @foreach ($nhanviens as $nhanvien)
-                                            <option value="{{ $nhanvien->id }}">
-                                                {{ $nhanvien->tennhanvien }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-12">

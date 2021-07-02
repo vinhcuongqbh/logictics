@@ -31,18 +31,18 @@
                                     <div class="col-md-6">
                                         <div class="col-auto">
                                             <a href="{{ route('nhanvien.create') }}"><button type="button"
-                                                    class="btn btn-primary float-left" style="margin-right: 10px;">THÊM
+                                                    class="btn btn-primary float-left" style="width: 100px; margin-right: 10px">THÊM
                                                     MỚI</button></a>
                                         </div>
                                         <div class="col-auto">
                                             <a href="{{ route('nhanvien') }}"><button type="button"
                                                     class="btn btn-outline-primary float-left"
-                                                    style="margin-right: 10px;">ĐANG SỬ DỤNG</button></a>
+                                                    style="margin-right: 10px">ĐANG SỬ DỤNG</button></a>
 
                                         </div>
                                         <div class="col-auto">
                                             <a href="{{ route('nhanvien.danghiviec') }}"><button type="button"
-                                                    class="btn btn-outline-danger float-left" style="margin-right: 10px;">ĐÃ
+                                                    class="btn btn-outline-danger float-left" style="margin-right: 10px">ĐÃ
                                                     NGHỈ VIỆC</button></a>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                                         href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->id }}</a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tennhanvien }}</a>
+                                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->name }}</a>
                                                 </td>
                                                 <td style="text-align: center"><a
                                                         href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
@@ -131,8 +131,6 @@
 
 @section('js')
     <script src="/vendor/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

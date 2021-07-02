@@ -22,11 +22,11 @@ class TrangthaiSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'tentrangthai' => 'Đơn hàng được Nhập kho',
+                'tentrangthai' => 'Đơn hàng được nhập kho',
             ],
             [
                 'id' => 3,
-                'tentrangthai' => 'Đơn hàng được Xuất kho',
+                'tentrangthai' => 'Đơn hàng được xuất kho',
             ],
             [
                 'id' => 4,

@@ -43,16 +43,6 @@
                                 class="form-control" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="lienhekhac">Nhân viên quản lý</label>
-                            <div>
-                                <select class="custom-select" id="idtrinhdo" name="idtrinhdo" disabled>
-                                    <option value="{{ $khohang->id_nhanvienquanly }}">
-                                        {{ $khohang->tennhanvien }}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="col-12">
                                 @if ($khohang->id_trangthai == 1)
                                     <a href="{{ route('khohang.delete', $khohang->id) }}" onclick="return confirm('Bạn muốn xóa Kho hàng này?')"><button type="button"
@@ -67,7 +57,7 @@
                                         class="btn btn-secondary float-right"
                                         style="width: 100px; margin: 5px;">SỬA</button></a>
                                 <a href="{{ route('khohang.create') }}"><button type="button"
-                                        class="btn btn-primary float-right" style="width: 100px; margin: 5px;">TẠO
+                                        class="btn btn-primary float-right" style="width: 100px; margin: 5px;">THÊM
                                         MỚI</button></a>
 
                             </div>

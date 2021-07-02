@@ -18,8 +18,6 @@ class KhohangController extends Controller
     {
         //Hiển thị danh sách kho hàng đang sử dụng
         $khohang = Khohang::where('khohangs.id_trangthai', 1)
-            ->join('users', 'users.id', 'khohangs.id_nhanvienquanly')
-            ->select('khohangs.*', 'users.tennhanvien')
             ->orderBy('id', 'asc')
             ->get();
 
@@ -31,8 +29,6 @@ class KhohangController extends Controller
     {
         //Hiển thị danh sách kho hàng đang sử dụng
         $khohang = Khohang::where('khohangs.id_trangthai', 0)
-            ->join('users', 'users.id', 'khohangs.id_nhanvienquanly')
-            ->select('khohangs.*', 'users.tennhanvien')
             ->orderBy('id', 'asc')
             ->get();
 
@@ -46,8 +42,9 @@ class KhohangController extends Controller
      */
     public function create()
     {
-        $nhanvien = User::select('id','tennhanvien')
+        $nhanvien = User::select('id','name')
             ->where('id_loainhanvien', '>', 1)
+            ->where('id_trangthai', 1)
             ->get();
         return view('admin.khohang.create',['nhanviens' => $nhanvien]);
     }
@@ -63,9 +60,7 @@ class KhohangController extends Controller
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenkhohang' => 'required',
-            'sodienthoai' => 'required',
             'diachi' => 'required',
-            'id_nhanvienquanly' => 'required',
         ]);
 
 
@@ -74,7 +69,6 @@ class KhohangController extends Controller
         $khohang->tenkhohang = $request->tenkhohang;
         $khohang->sodienthoai = $request->sodienthoai;
         $khohang->diachi = $request->diachi;
-        $khohang->id_nhanvienquanly = $request->id_nhanvienquanly;
         $khohang->id_trangthai = 1;
         $khohang->save();
 
@@ -91,8 +85,6 @@ class KhohangController extends Controller
     {
         //Hiển thị thông tin Kho hàng
         $khohang = Khohang::where('khohangs.id', $id)
-            ->join('users', 'users.id', 'khohangs.id_nhanvienquanly')
-            ->select('khohangs.*', 'users.tennhanvien')
             ->orderBy('khohangs.id', 'asc')
             ->first();
 
@@ -107,7 +99,13 @@ class KhohangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $khohang = Khohang::find($id);
+        $nhanvien = User::select('id', 'name')
+            ->where('id_loainhanvien', '>', 1)
+            ->where('id_trangthai', 1)
+            ->get();
+
+        return view('admin.khohang.edit', ['khohang' => $khohang, 'nhanviens' => $nhanvien]);
     }
 
     /**
@@ -119,7 +117,20 @@ class KhohangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Kiểm tra thông tin đầu vào
+        $validated = $request->validate([
+            'tenkhohang' => 'required',
+            'diachi' => 'required',
+        ]);
+
+        //Cập nhật thông tin Nhân viên
+        $khohang = khohang::find($id);
+        $khohang->tenkhohang = $request->tenkhohang;
+        $khohang->sodienthoai = $request->sodienthoai;
+        $khohang->diachi = $request->diachi;
+        $khohang->save();
+
+        return redirect()->action([KhohangController::class, 'show'], ['id' => $id]);
     }
 
     /**

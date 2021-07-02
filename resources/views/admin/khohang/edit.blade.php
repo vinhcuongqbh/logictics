@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Thông tin Khách hàng')
+@section('title', 'Thông tin Kho hàng')
 
 @section('content_header')
 
@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>KHÁCH HÀNG</h1>
+                    <h1>Kho hàng</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Thông tin Khách hàng</h3>
+                        <h3 class="card-title">Thông tin Kho hàng</h3>
                     </div>
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -35,44 +35,23 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('khachhang.update', $khachhang->id) }}" method="post" id="khachhang-edit">
+                    <form action="{{ route('khohang.update', $khohang->id) }}" method="post" id="khohang-edit">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="tenkhachhang">Họ và tên</label>
-                                <input type="text" id="tenkhachhang" name="tenkhachhang"
-                                    value="{{ $khachhang->tenkhachhang }}" class="form-control">
+                                <label for="tenkhohang">Tên Kho hàng</label>
+                                <input type="text" id="tenkhohang" name="tenkhohang"
+                                    value="{{ $khohang->tenkhohang }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="sodienthoai">Số điện thoại</label>
                                 <input type="tel" id="sodienthoai" name="sodienthoai" placeholder="(+81)123-456-789"
-                                    value="{{ $khachhang->sodienthoai }}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" value="{{ $khachhang->email }}"
-                                    class="form-control">
+                                    value="{{ $khohang->sodienthoai }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="diachi">Địa chỉ</label>
-                                <input type="text" id="diachi" name="diachi" value="{{ $khachhang->diachi }}"
+                                <input type="text" id="diachi" name="diachi" value="{{ $khohang->diachi }}"
                                     class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="lienhekhac">Liên hệ khác</label>
-                                <input type="text" id="lienhekhac" name="lienhekhac" value="{{ $khachhang->lienhekhac }}"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="lienhekhac">Nhân viên quản lý</label>
-                                <div>
-                                    <select class="custom-select" id="id_nhanvienquanly" name="id_nhanvienquanly">
-                                        @foreach ($nhanviens as $nhanvien)
-                                            <option value="{{ $nhanvien->id }}" @if ($khachhang->id_nhanvienquanly == $nhanvien->id) selected @endif>
-                                                {{ $nhanvien->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-12">
@@ -107,21 +86,12 @@
 <script>
     $(function() {
 
-        $('#khachhang-edit').validate({
+        $('#khohang-edit').validate({
             rules: {
-                id_loaikhachhang: {
-                    required: true,
-                },
-                tenkhachhang: {
+                tenkhohang: {
                     required: true,
                 },
                 sodienthoai: {
-                    required: true,
-                },
-                email: {
-                    required: true,
-                },
-                password: {
                     required: true,
                 },
                 diachi: {
@@ -129,20 +99,11 @@
                 },
             },
             messages: {
-                id_loaikhachhang: {
-                    required: "Chọn Loại nhân viên",
-                },
-                tenkhachhang: {
+                tenkhohang: {
                     required: "Nhập Họ tên của Nhân viên",
                 },
                 sodienthoai: {
                     required: "Nhập Số điện thoại của Nhân viên",
-                },
-                email: {
-                    required: "Nhập Email của Nhân viên",
-                },
-                password: {
-                    required: "Nhập Mật mã cho tài khoản của Nhân viên",
                 },
                 diachi: {
                     required: "Nhập Địa chỉ của Nhân viên",

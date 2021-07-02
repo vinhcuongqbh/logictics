@@ -36,6 +36,7 @@
                         </div>
                     @endif
                     <form action="{{ route('nhanvien.store') }}" method="post" id="nhanvien-create">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="inputStatus">Loại nhân viên</label>
@@ -47,8 +48,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="tennhanvien">Họ và tên</label>
-                                <input type="text" id="tennhanvien" name="tennhanvien" value="{{ old('tennhanvien') }}"
+                                <label for="name">Họ và tên</label>
+                                <input type="text" id="name" name="name" value="{{ old('name') }}"
                                     class="form-control">
                             </div>
                             <div class="form-group">
@@ -75,6 +76,17 @@
                                 <label for="lienhekhac">Liên hệ khác</label>
                                 <input type="text" id="lienhekhac" name="lienhekhac" value="{{ old('lienhekhac') }}"
                                     class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_khohangquanly">Kho hàng quản lý</label>
+                                <div>
+                                    <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
+                                        @foreach ($khohangs as $khohang)
+                                            <option value="{{ $khohang->id }}">
+                                                {{ $khohang->tenkhohang }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-12">
@@ -114,7 +126,7 @@
                     id_loainhanvien: {
                         required: true,
                     },
-                    tennhanvien: {
+                    name: {
                         required: true,
                     },
                     sodienthoai: {
@@ -134,7 +146,7 @@
                     id_loainhanvien: {
                         required: "Chọn Loại nhân viên",
                     },
-                    tennhanvien: {
+                    name: {
                         required: "Nhập Họ tên của Nhân viên",
                     },
                     sodienthoai: {

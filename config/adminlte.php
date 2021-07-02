@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'LOGISTICS',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>TRANG CHỦ</b>',
+    'logo' => '<b>LOGISTICS</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -239,6 +239,11 @@ return [
         // Sidebar items:
         ['header' => 'QUẢN LÝ'],
         [
+            'text'        => 'Kho hàng',
+            'url'         => 'admin/khohang',
+            'icon'        => 'fas fa-fw fa-warehouse',
+        ],
+        [
             'text'        => 'Nhân viên',
             'url'         => 'admin/nhanvien',
             'icon'        => 'far fa-fw fa-user',
@@ -249,21 +254,47 @@ return [
             'icon'        => 'fas fa-fw fa-user-tie',
         ],
         [
-            'text'        => 'Kho hàng',
-            'url'         => 'admin/khohang',
-            'icon'        => 'fas fa-fw fa-warehouse',
+            'text'    => 'Đơn hàng',
+            'icon'    => 'fas fa-fw fa-shopping-cart',
+            'submenu' => [
+                [
+                    'text' => 'Đang lưu Kho',
+                    'url'  => 'admin/donhang/dmdangluukho',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+                [
+                    'text' => 'Đã xuất Kho',
+                    'url'  => 'admin/donhang/dmdaxuatkho',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+                [
+                    'text' => 'Lịch sử đơn hàng',
+                    'url'  => 'admin/donhang/lichsudonhang',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+            ],
         ],
         [
-            'text'        => 'Chuyến hàng',
-            'url'         => 'admin/chuyenhang',
-            'icon'        => 'fas fa-fw fa-plane',
+            'text'    => 'Chuyến hàng',
+            'icon'    => 'fas fa-fw fa-plane',
+            'submenu' => [
+                [
+                    'text' => 'Đã xuất Kho',
+                    'url'  => 'admin/chuyenhang/dmdaxuatkho',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+                [
+                    'text' => 'Chờ nhập Kho',
+                    'url'  => 'admin/chuyenhang/dmchonhapkho',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+                [
+                    'text' => 'Lịch sử Chuyến hàng',
+                    'url'  => 'admin/donhchuyenhang/lichsuchuyenhang',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+            ],
         ],
-        [
-            'text'        => 'Đơn hàng',
-            'url'         => 'admin/donhang',
-            'icon'        => 'fas fa-fw fa-shopping-cart',
-        ],
-
         ['header' => 'THỐNG KÊ'],
         [
             'text'        => 'Nhân viên',

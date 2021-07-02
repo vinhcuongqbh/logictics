@@ -30,14 +30,12 @@
                         <div class="form-group">
                             <label for="inputStatus">Loại nhân viên</label>
                             <select id="id_loainhanvien" name="id_loainhanvien" class="form-control custom-select" disabled>
-                                @foreach ($loainhanviens as $loainhanvien)
-                                    <option value="{{ $loainhanvien->id }}" @if ($loainhanvien->id == $nhanvien->id_loainhanvien) {{ "selected" }} @endif>{{ $loainhanvien->tenloainhanvien }}</option>
-                                @endforeach
+                                <option value="{{ $nhanvien->id_loainhanvien }}">{{ $nhanvien->tenloainhanvien }}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="tennhanvien">Họ và tên</label>
-                            <input type="text" id="tennhanvien" name="tennhanvien" value="{{ $nhanvien->tennhanvien }}"
+                            <label for="name">Họ và tên</label>
+                            <input type="text" id="name" name="name" value="{{ $nhanvien->name }}"
                                 class="form-control" disabled>
                         </div>
                         <div class="form-group">
@@ -61,6 +59,15 @@
                                 class="form-control" disabled>
                         </div>
                         <div class="form-group">
+                            <label for="id_khohangquanly">Kho hàng quản lý</label>
+                            <div>
+                                <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly" disabled>
+                                        <option value="{{ $nhanvien->id_khohangquanly }}">
+                                            {{ $nhanvien->tenkhohang }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-12">
                                 @if ($nhanvien->id_trangthai == 1)
                                     <a href="{{ route('nhanvien.delete', $nhanvien->id) }}" onclick="return confirm('Bạn muốn xóa Nhân viên này?')"><button type="button"
@@ -72,7 +79,7 @@
                                             HỒI</button></a>
                                 @endif
                                 <a href="{{ route('nhanvien.edit', $nhanvien->id) }}"><button type="button" class="btn btn-secondary float-right" style="width: 100px; margin: 5px;">SỬA</button></a>
-                                <a href="{{ route('nhanvien.create') }}"><button type="button" class="btn btn-primary float-right" style="width: 100px; margin: 5px;">TẠO MỚI</button></a>
+                                <a href="{{ route('nhanvien.create') }}"><button type="button" class="btn btn-primary float-right" style="width: 100px; margin: 5px;">THÊM MỚI</button></a>
                             </div>
                         </div>
                     </div>

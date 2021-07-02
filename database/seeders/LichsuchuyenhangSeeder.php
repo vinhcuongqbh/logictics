@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Donhang;
 use Illuminate\Database\Seeder;
 
-class DonhangSeeder extends Seeder
+class LichsuchuyenhangSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +13,6 @@ class DonhangSeeder extends Seeder
      */
     public function run()
     {
-        $donhang = Donhang::factory()->count(100)->create();
+        //
     }
 }

@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\KhohangController;
-use App\Http\Controllers\ChuyenhangController;
 use App\Http\Controllers\DonhangController;
+use App\Http\Controllers\ChuyenhangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +19,17 @@ use App\Http\Controllers\DonhangController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('admin.index');
+})->middleware(['auth']);
+
+Route::get('admin', function () {
+    return view('admin.index');
 })->middleware(['auth']);
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::group(['prefix' => 'nhanvien'], function () {
         Route::get('', [NhanvienController::class, 'index'])->name('nhanvien');
         Route::get('danghiviec', [NhanvienController::class, 'danghiviec'])->name('nhanvien.danghiviec');
-        Route::get('quantri', [NhanvienController::class, 'quantri'])->name('nhanvien.quantri');
         Route::get('create', [NhanvienController::class, 'create'])->name('nhanvien.create');
         Route::post('store', [NhanvienController::class, 'store'])->name('nhanvien.store');
         Route::get('{id}', [NhanvienController::class, 'show'])->name('nhanvien.show');
@@ -59,23 +62,38 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/restore', [KhohangController::class, 'restore'])->name('khohang.restore');
     });
 
-    Route::group(['prefix' => 'chuyenhang'], function () {
-        Route::get('', [ChuyenhangController::class, 'index'])->name('chuyenhang');
+    Route::group(['prefix' => 'donhang'], function () {
+        Route::get('dmdangluukho', [DonhangController::class, 'dmdangluukho'])->name('donhang.dmdangluukho');
+        Route::get('dmdaxuatkho', [DonhangController::class, 'dmdaxuatkho'])->name('donhang.dmdaxuatkho');
+        Route::post('xuatkho', [DonhangController::class, 'xuatkho'])->name('donhang.xuatkho');
+        Route::post('nhapkho', [DonhangController::class, 'nhapkho'])->name('donhang.nhapkho');
+
+
+        Route::get('create', [DonhangController::class, 'create'])->name('donhang.create');
+        Route::get('{id}/show', [DonhangController::class, 'show'])->name('donhang.show');
+        Route::get('{id}/edit', [DonhangController::class, 'edit'])->name('donhang.edit');
+        Route::get('{id}/delete', [DonhangController::class, 'delete'])->name('donhang.delete');
+        Route::get('{id}/restore', [DonhangController::class, 'restore'])->name('donhang.restore');
+        Route::get('{id}/lichsudonhang', [DonhangController::class, 'lichsudonhang'])->name('donhang.lichsudonhang');
+
     });
 
-    Route::group(['prefix' => 'donhang'], function () {
-        Route::get('', [DonhangController::class, 'index'])->name('donhang');
+    Route::group(['prefix' => 'chuyenhang'], function () {
+        Route::get('dmdaxuatkho', [ChuyenhangController::class, 'dmdaxuatkho'])->name('chuyenhang.dmdaxuatkho');
+        Route::get('dmchonhapkho', [ChuyenhangController::class, 'dmchonhapkho'])->name('chuyenhang.dmchonhapkho');
+        Route::get('{id}/donhangdaxuatkho', [ChuyenhangController::class, 'donhangdaxuatkho'])->name('chuyenhang.donhangdaxuatkho');
+        Route::get('{id}/donhangchonhapkho', [ChuyenhangController::class, 'donhangchonhapkho'])->name('chuyenhang.donhangchonhapkho');
+
+
+        Route::get('{id}/daxuatkho', [ChuyenhangController::class, 'daxuatkho'])->name('chuyenhang.daxuatkho');
+        Route::get('{id}/danhapkho', [ChuyenhangController::class, 'danhapkho'])->name('chuyenhang.danhapkho');
+        Route::post('{id}/lichsuchuyenhang', [ChuyenhangController::class, 'lichsuchuyenhang'])->name('chuyenhang.lichsuchuyenhang');
     });
 });
-
-
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-
-
-
+require __DIR__ . '/auth.php';

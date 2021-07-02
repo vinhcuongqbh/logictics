@@ -3,82 +3,100 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Khohang;
+use App\Models\Donhang;
+use App\Models\Chuyenhang;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChuyenhangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //Tạo chuyến hàng mới
+    public function taochuyenhangmoi()
     {
-        return view('admin.chuyenhang.index');
+        //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
+        $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
+
+        //Tạo Chuyến hàng mới
+        $chuyenhang = new Chuyenhang;
+        $chuyenhang->id_nhanvienquanly = Auth::id();
+        $chuyenhang->id_khogui = $id_khohangquanly;
+        if ($id_khohangquanly > 2) {
+            $chuyenhang->id_khonhan = 2;
+        } else if ($id_khohangquanly == 2) {
+            $chuyenhang->id_khonhan = 1;
+        } else if ($id_khohangquanly == 1) {
+            $chuyenhang->id_khonhan = 0;
+        }
+        $chuyenhang->id_trangthai = 1;
+        $chuyenhang->save();
+
+        return $chuyenhang;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    //Xuất kho Chuyến hàng
+    public function xuatkho($chuyenhang)
     {
-        //
+        $chuyenhang->id_trangthai = 3;
+        $chuyenhang->save();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    //Nhập kho Chuyến hàng
+    public function nhapkho($chuyenhang)
     {
-        //
+        $chuyenhang->id_trangthai = 2;
+        $chuyenhang->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    //Danh mục Chuyến hàng đã xuất kho
+    public function dmdaxuatkho()
     {
-        //
+        //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
+        $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
+
+        $chuyenhang = Chuyenhang::where('chuyenhangs.id_trangthai', 3)
+            ->where('chuyenhangs.id_khogui', $id_khohangquanly)
+            ->join('users', 'users.id', 'chuyenhangs.id_nhanvienquanly')
+            ->select('chuyenhangs.*', 'users.name')
+            ->get();
+
+        return view('admin.chuyenhang.dmdaxuatkho', ['chuyenhangs' => $chuyenhang]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    //Danh mục Chuyến hàng chờ nhập kho
+    public function dmchonhapkho()
     {
-        //
+        //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
+        $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
+
+        $chuyenhang = Chuyenhang::where('chuyenhangs.id_trangthai', 3)
+            ->where('chuyenhangs.id_khonhan', $id_khohangquanly)
+            ->join('users', 'users.id', 'chuyenhangs.id_nhanvienquanly')
+            ->select('chuyenhangs.*', 'users.name')
+            ->get();
+
+        return view('admin.chuyenhang.dmchonhapkho', ['chuyenhangs' => $chuyenhang]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    //Danh mục Đơn hàng thuộc Chuyến hàng đã xuất Kho
+    public function donhangdaxuatkho($id)
     {
-        //
+        $donhang = Donhang::where('id_chuyenhang', $id)
+            ->where('id_trangthai', 3)
+            ->get();
+
+        return view('admin.chuyenhang.donhangdaxuatkho', ['donhangs' => $donhang]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    //Danh mục Đơn hàng thuộc Chuyến hàng chờ nhập Kho
+    public function donhangchonhapkho($id)
     {
-        //
+        $donhang = Donhang::where('id_chuyenhang', $id)
+            ->where('id_trangthai', 3)
+            ->get();
+
+        return view('admin.chuyenhang.donhangchonhapkho', ['donhangs' => $donhang, 'id_chuyenhang' => $id]);
     }
 }

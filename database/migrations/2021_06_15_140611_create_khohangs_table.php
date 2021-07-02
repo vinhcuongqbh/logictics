@@ -18,7 +18,6 @@ class CreateKhohangsTable extends Migration
             $table->string('tenkhohang');
             $table->string('sodienthoai')->nullable();
             $table->string('diachi')->nullable();
-            $table->foreignId('id_nhanvienquanly');
             $table->boolean('id_trangthai');
             $table->timestamps();
         });
