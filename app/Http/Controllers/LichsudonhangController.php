@@ -35,7 +35,8 @@ class LichsudonhangController extends Controller
             ->join('trangthais', 'trangthais.id', 'lichsudonhangs.id_trangthai')
             ->join('khohangs as khogui', 'khogui.id', 'lichsudonhangs.id_khogui')
             ->join('khohangs as khonhan', 'khonhan.id', 'lichsudonhangs.id_khonhan')
-            ->select('lichsudonhangs.*', 'trangthais.tentrangthai', 'khogui.tenkhohang as khogui', 'khogui.diachi as diachikhogui', 'khonhan.tenkhohang as khonhan', 'khonhan.diachi as diachikhonhan', )
+            ->select('lichsudonhangs.*', 'trangthais.tentrangthai', 'khogui.tenkhohang as khogui', 'khogui.diachi as diachikhogui', 'khonhan.tenkhohang as khonhan', 'khonhan.diachi as diachikhonhan')
+            ->orderBy('id', 'asc')
             ->get();
 
         return $lichsudonhang;

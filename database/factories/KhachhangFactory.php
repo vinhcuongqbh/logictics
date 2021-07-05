@@ -26,7 +26,7 @@ class KhachhangFactory extends Factory
             'sodienthoai' => $this->faker->phoneNumber(),
             'diachi' => $this->faker->address(),
             'email' => $this->faker->unique()->safeEmail(),
-            'id_nhanvienquanly' => rand(2,10),
+            'id_nhanvienquanly' => rand(3,6),
             'id_trangthai' => 1,
         ];
     }

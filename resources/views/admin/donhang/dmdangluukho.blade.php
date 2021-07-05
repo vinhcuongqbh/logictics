@@ -46,9 +46,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-
                                     <table id="donhang-table" class="table table-bordered table-striped">
-
                                         <thead style="text-align: center">
                                             <tr>
                                                 <th>ID</th>

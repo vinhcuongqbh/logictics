@@ -22,7 +22,7 @@ class KhohangFactory extends Factory
     public function definition()
     {
         return [
-            'tenkhohang' => $this->faker->city('fa_IR'),
+            'tenkhohang' => $this->faker->city(),
             'sodienthoai' => $this->faker->phoneNumber(),
             'diachi' => $this->faker->address(),
             'id_trangthai' => 1,

@@ -56,8 +56,8 @@
                                             <th>ID</th>
                                             <th>Họ và tên</th>
                                             <th>Số điện thoại</th>
-                                            <th>Địa chỉ</th>
-                                            <th>Email</th>
+                                            <th>Cấp bậc</th>
+                                            <th>Kho quản lý</th>
                                             <th>Thao tác</th>
                                         </tr>
                                     </thead>
@@ -74,10 +74,10 @@
                                                         href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->diachi }}</a>
+                                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenloainhanvien }}</a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->email }}</a>
+                                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
                                                 </td>
                                                 <td style="text-align: center">
                                                     <a href="{{ route('nhanvien.edit', $nhanvien->id) }}"

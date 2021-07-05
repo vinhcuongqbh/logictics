@@ -267,11 +267,13 @@ return [
                     'url'  => 'admin/donhang/dmdaxuatkho',
                     'icon' => 'fas fa-fw fa-angle-right',
                 ],
+                /*
                 [
                     'text' => 'Lịch sử đơn hàng',
                     'url'  => 'admin/donhang/lichsudonhang',
                     'icon' => 'fas fa-fw fa-angle-right',
                 ],
+                */
             ],
         ],
         [
@@ -279,20 +281,22 @@ return [
             'icon'    => 'fas fa-fw fa-plane',
             'submenu' => [
                 [
-                    'text' => 'Đã xuất Kho',
-                    'url'  => 'admin/chuyenhang/dmdaxuatkho',
-                    'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                [
                     'text' => 'Chờ nhập Kho',
                     'url'  => 'admin/chuyenhang/dmchonhapkho',
                     'icon' => 'fas fa-fw fa-angle-right',
                 ],
                 [
+                    'text' => 'Đã xuất Kho',
+                    'url'  => 'admin/chuyenhang/dmdaxuatkho',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+                /*
+                [
                     'text' => 'Lịch sử Chuyến hàng',
                     'url'  => 'admin/donhchuyenhang/lichsuchuyenhang',
                     'icon' => 'fas fa-fw fa-angle-right',
                 ],
+                */
             ],
         ],
         ['header' => 'THỐNG KÊ'],

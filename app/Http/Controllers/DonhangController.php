@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DonhangController extends Controller
 {
+
+    public function create()
+    {
+        return view('admin.donhang.create');
+    }
+
     public function xuatkho(Request $request)
     {
         //Tạo chuyến hàng mới
@@ -64,7 +70,7 @@ class DonhangController extends Controller
             $donhang->id_nhanvienquanly = Auth::id();
             $donhang->id_chuyenhang = null;
             $donhang->id_khogui = User::find(Auth::id())->id_khohangquanly;
-            $donhang->id_khonhan = null;
+            $donhang->id_khonhan = 998;
             $donhang->id_trangthai = 2;
             $donhang->save();
 

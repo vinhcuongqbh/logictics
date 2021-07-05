@@ -51,10 +51,10 @@
                                                     <td>
                                                         @if ($lichsudonhang->id_trangthai == 2)
                                                             {{ $lichsudonhang->tentrangthai }} vào
-                                                            <b>{{ $lichsudonhang->khogui }}</b>
+                                                            <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }})
                                                         @elseif ($lichsudonhang->id_trangthai == 3)
-                                                            @if ($lichsudonhang->id_khonhan == 0)
-                                                                {{ $lichsudonhang->tentrangthai }} đến <b>{{ $lichsudonhang->khogui }}</b> đến địa chỉ Người nhận
+                                                            @if ($lichsudonhang->id_khonhan == 999)
+                                                                {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }}) đến địa chỉ <b>Người nhận</b>
                                                             @else
                                                                 {{ $lichsudonhang->tentrangthai }} từ
                                                                 <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }}) đến
@@ -63,7 +63,6 @@
                                                         @else
                                                             {{ $lichsudonhang->tentrangthai }}
                                                         @endif
-
                                                     </td>
                                                 </tr>
                                             @endforeach

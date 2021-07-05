@@ -21,6 +21,9 @@ class NhanvienController extends Controller
     {
         //Hiển thị danh sách Tài khoản đang sử dụng
         $nhanvien = User::where('users.id_trangthai', 1)
+            ->join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
+            ->join('khohangs', 'khohangs.id', 'users.id_khohangquanly')
+            ->select('users.*', 'loainhanviens.tenloainhanvien', 'khohangs.tenkhohang')
             ->orderBy('id', 'asc')
             ->get();
 

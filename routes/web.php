@@ -70,6 +70,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 
         Route::get('create', [DonhangController::class, 'create'])->name('donhang.create');
+        Route::post('store', [DonhangController::class, 'store'])->name('donhang.store');
         Route::get('{id}/show', [DonhangController::class, 'show'])->name('donhang.show');
         Route::get('{id}/edit', [DonhangController::class, 'edit'])->name('donhang.edit');
         Route::get('{id}/delete', [DonhangController::class, 'delete'])->name('donhang.delete');

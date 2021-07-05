@@ -57,10 +57,10 @@
                                                         href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id }}</a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id_khogui }}</a>
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->khogui }}</a>
                                                 </td>
                                                 <td><a
-                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id_khonhan }}</a>
+                                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->khonhan }}</a>
                                                 </td>
                                                 <td style="text-align: center"><a
                                                         href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->created_at }}</a>
