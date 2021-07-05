@@ -16,10 +16,7 @@ class CreateLoaihangsTable extends Migration
         Schema::create('loaihangs', function (Blueprint $table) {
             $table->id();
             $table->string('tenloaihang');
-            $table->integer('khoiluongmin');
-            $table->integer('khoiluongmax');
-            $table->bigInteger('dongia');
-            $table->text('ghichu');
+            $table->boolean('id_trangthai');
             $table->timestamps();
         });
     }

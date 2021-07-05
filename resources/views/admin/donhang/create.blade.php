@@ -75,18 +75,73 @@
                                     value="{{ old('lienhekhacnguoinhan') }}" class="form-control">
                             </div>
                         </div>
-                        <button id="addRow">Add new row</button>
-                        <table id="example" class="display" style="width:100%">
+                        <hr>
+                        <div style="margin-bottom: 20px;">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                                Thêm Mặt hàng
+                            </button>
+                        </div>
+                        <div class="modal fade" id="modal-lg">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Thêm mới mặt hàng</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="loaihang">Loại hàng hóa</label>
+                                            <input type="tel" id="loaihang" name="loaihang" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="noidunghang">Nội dung hàng</label>
+                                            <input type="text" id="noidunghang" name="noidunghang" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="khoiluong">Khối lượng</label>
+                                            <input type="text" id="khoiluong" name="khoiluong" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kichthuoc">Kích thước</label>
+                                            <input type="text" id="kichthuoc" name="kichthuoc" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="giatriuoctinh">Giá trị ước tính</label>
+                                            <input type="text" id="giatriuoctinh" name="giatriuoctinh" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tongchiphi">Tổng chi phí</label>
+                                            <input type="text" id="tongchiphi" name="tongchiphi" class="form-control"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="addRow" data-dismiss="modal">Thêm
+                                            Mặt hàng</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+
+                        <table id="example" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Họ tên người nhận</th>
-                                    <th>Số điện thoại người nhận</th>
-                                    <th>Địa chỉ người nhận</th>
+                                    <th>Nội dung hàng</th>
+                                    <th>Khối lượng</th>
+                                    <th>Kích thước</th>
+                                    <th>Giá trị ước tính</th>
+                                    <th>Chi phí</th>
                                 </tr>
                             </thead>
                         </table>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top: 20px;">
                             <div class="col-12">
                                 <input type="submit" value="TẠO MỚI" class="btn btn-primary float-right">
                             </div>
@@ -123,22 +178,28 @@
         $(document).ready(function() {
             var t = $('#example').DataTable();
             var stt = 1;
-            var tennguoinhan = document.getElementById("tennguoinhan").value;
-            var sodienthoainguoinhan = document.getElementById("sodienthoainguoinhan").value;
-            var diachinguoinhan = document.getElementById("diachinguoinhan").value;
-
             $('#addRow').on('click', function() {
-                tennguoinhan = document.getElementById("tennguoinhan").value;
-                sodienthoainguoinhan = document.getElementById("sodienthoainguoinhan").value;
-                diachinguoinhan = document.getElementById("diachinguoinhan").value;
+                var loaihang = document.getElementById("loaihang").value;
+                var noidunghang = document.getElementById("noidunghang").value;
+                var khoiluong = document.getElementById("khoiluong").value;
+                var kichthuoc = document.getElementById("kichthuoc").value;
+                var giatriuoctinh = document.getElementById("giatriuoctinh").value;
                 t.row.add([
                     stt,
-                    tennguoinhan,
-                    sodienthoainguoinhan,
-                    diachinguoinhan,
+                    loaihang,
+                    noidunghang,
+                    khoiluong,
+                    kichthuoc,
+                    giatriuoctinh,
                 ]).draw(false);
                 stt++;
+                document.getElementById("loaihang").value = "";
+                document.getElementById("noidunghang").value = "";
+                document.getElementById("khoiluong").value = "";
+                document.getElementById("kichthuoc").value = "";
+                document.getElementById("giatriuoctinh").value = "";
             });
+
         });
     </script>
 @stop
