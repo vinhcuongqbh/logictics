@@ -93,8 +93,8 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="loaihang">Loại hàng hóa</label>
-                                            <input type="text" name="loaihang" list="loaihang" class="form-control">
-                                            <datalist id="loaihang">
+                                            <input type="text" id="loaihang" name="loaihang" list="danhmucloaihang" class="form-control">
+                                            <datalist id="danhmucloaihang">
                                                 <option value="Airpods" />
                                                 <option value="Apple Watch" />
                                                 <option value="Dưới iPhone X trở xuống" />
@@ -141,19 +141,26 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
-
-                        <table id="example" class="table table-bordered table-striped">
-                            <thead>
-                                <tr style="text-align: center">
-                                    <th>STT</th>
-                                    <th>Nội dung hàng</th>
-                                    <th>Khối lượng</th>
-                                    <th>Kích thước</th>
-                                    <th>Giá trị ước tính</th>
-                                    <th>Chi phí</th>
-                                </tr>
-                            </thead>
-                        </table>
+                        <div id="donhang-table-div">
+                            <table id="donhang-table" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr style="text-align: center">
+                                        <th>STT</th>
+                                        <th>Nội dung hàng</th>
+                                        <th>Khối lượng</th>
+                                        <th>Kích thước</th>
+                                        <th>Giá trị ước tính</th>
+                                        <th>Chi phí</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr style="text-align: center">
+                                        <th colspan="5">Tổng chi phí</th>
+                                        <th id="tongchiphi"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                         <div class="form-group" style="margin-top: 20px;">
                             <div class="col-12">
                                 <input type="submit" value="TẠO MỚI" class="btn btn-primary float-right">
@@ -188,26 +195,37 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <!-- Page specific script -->
     <script>
+        //Tính chi chí
         const DONGIA = @json($dongias);
-        console.log(DONGIA);
-        const tinhChiPhi= function(){
-            let tensanpham = document.querySelector("#modal-lg > div > div > div.modal-body > div:nth-child(1) > input").value;
+        const tinhChiPhi = function() {
+            let tensanpham = document.querySelector("#loaihang").value;
             let khoiLuong = document.querySelector("#khoiluong").value;
-            let chiphi =  khoiLuong * parseInt(DONGIA.find(e=>e.tensanpham==tensanpham)?.dongia || 0);
+            let chiphi = khoiLuong * parseInt(DONGIA.find(e => e.tensanpham == tensanpham)?.dongia || 0);
             document.querySelector("#chiphi").value = chiphi;
         }
         document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
 
+        //Tổng chi phí
+        $.fn.dataTable.Api.register('column().data().sum()', function() {
+            return this.reduce(function(a, b) {
+                var x = parseFloat(a) || 0;
+                var y = parseFloat(b) || 0;
+                return x + y;
+            });
+        });
+
+
+        //Đơn hàng Table
         $(document).ready(function() {
-            var t = $('#example').DataTable();
+            var t = $('#donhang-table').DataTable();
             var stt = 1;
             $('#addRow').on('click', function() {
-                //var loaihang = document.getElementById("loaihang").value;
-                var noidunghang = document.getElementById("noidunghang").value;
-                var khoiluong = document.getElementById("khoiluong").value;
-                var kichthuoc = document.getElementById("kichthuoc").value;
-                var giatriuoctinh = document.getElementById("giatriuoctinh").value;
-                var chiphi = document.getElementById("chiphi").value;
+                //var loaihang = document.querySelector("loaihang").value;
+                var noidunghang = document.querySelector("#noidunghang").value;
+                var khoiluong = document.querySelector("#khoiluong").value;
+                var kichthuoc = document.querySelector("#kichthuoc").value;
+                var giatriuoctinh = document.querySelector("#giatriuoctinh").value;
+                var chiphi = document.querySelector("#chiphi").value;
                 t.row.add([
                     stt,
                     //loaihang,
@@ -217,16 +235,21 @@
                     giatriuoctinh,
                     chiphi,
                 ]).draw(false);
+
+                document.querySelector("#tongchiphi").innerHTML = Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(t.column(5).data().sum());
+
+
                 stt++;
-                document.getElementById("loaihang").value = "";
-                document.getElementById("noidunghang").value = "";
-                document.getElementById("khoiluong").value = "";
-                document.getElementById("kichthuoc").value = "";
-                document.getElementById("giatriuoctinh").value = "";
-                document.getElementById("chiphi").value = "";
-
+                document.querySelector("#loaihang").value = "";
+                document.querySelector("#noidunghang").value = "";
+                document.querySelector("#khoiluong").value = "";
+                document.querySelector("#kichthuoc").value = "";
+                document.querySelector("#giatriuoctinh").value = "";
+                document.querySelector("#chiphi").value = "";
             });
-
         });
     </script>
 @stop

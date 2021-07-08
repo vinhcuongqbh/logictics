@@ -22,7 +22,7 @@ class DongiaSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'tensanpham' => 'iPhone',
+                'tensanpham' => 'Apple Watch',
                 'dongia' => '200000',
             ],
         ]);
