@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donhang;
+use App\Models\Dongia;
 use App\Models\Khohang;
 use App\Models\Chuyenhang;
 use App\Models\User;
@@ -14,7 +15,9 @@ class DonhangController extends Controller
 
     public function create()
     {
-        return view('admin.donhang.create');
+        $dongia = Dongia::all();
+
+        return view('admin.donhang.create', ['dongias' => $dongia]);
     }
 
     public function xuatkho(Request $request)

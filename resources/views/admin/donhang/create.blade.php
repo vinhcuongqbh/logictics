@@ -93,7 +93,21 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="loaihang">Loại hàng hóa</label>
-                                            <input type="tel" id="loaihang" name="loaihang" class="form-control">
+                                            <input type="text" name="loaihang" list="loaihang" class="form-control">
+                                            <datalist id="loaihang">
+                                                <option value="Airpods" />
+                                                <option value="Apple Watch" />
+                                                <option value="Dưới iPhone X trở xuống" />
+                                                <option value="Từ iPhone X trở lên" />
+                                                <option value="iPad dưới 60.000 Yên" />
+                                                <option value="iPad từ 60.0000 Yên trở lên" />
+                                                <option value="Laptop Macbook dưới 4kg" />
+                                                <option value="Laptop Macbook từ 4kg trở lên" />
+                                                <option value="Thuốc lá" />
+                                                <option value="Thuốc lá điện tử" />
+                                                <option value="Linh kiện máy tính" />
+                                                <option value="Thiết bị y tế" />
+                                            </datalist>
                                         </div>
                                         <div class="form-group">
                                             <label for="noidunghang">Nội dung hàng</label>
@@ -112,9 +126,8 @@
                                             <input type="text" id="giatriuoctinh" name="giatriuoctinh" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label for="tongchiphi">Tổng chi phí</label>
-                                            <input type="text" id="tongchiphi" name="tongchiphi" class="form-control"
-                                                disabled>
+                                            <label for="chiphi">Chi phí</label>
+                                            <input type="text" id="chiphi" name="chiphi" class="form-control">
                                         </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
@@ -131,7 +144,7 @@
 
                         <table id="example" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
+                                <tr style="text-align: center">
                                     <th>STT</th>
                                     <th>Nội dung hàng</th>
                                     <th>Khối lượng</th>
@@ -175,22 +188,34 @@
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <!-- Page specific script -->
     <script>
+        const DONGIA = @json($dongias);
+        console.log(DONGIA);
+        const tinhChiPhi= function(){
+            let tensanpham = document.querySelector("#modal-lg > div > div > div.modal-body > div:nth-child(1) > input").value;
+            let khoiLuong = document.querySelector("#khoiluong").value;
+            let chiphi =  khoiLuong * parseInt(DONGIA.find(e=>e.tensanpham==tensanpham)?.dongia || 0);
+            document.querySelector("#chiphi").value = chiphi;
+        }
+        document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
+
         $(document).ready(function() {
             var t = $('#example').DataTable();
             var stt = 1;
             $('#addRow').on('click', function() {
-                var loaihang = document.getElementById("loaihang").value;
+                //var loaihang = document.getElementById("loaihang").value;
                 var noidunghang = document.getElementById("noidunghang").value;
                 var khoiluong = document.getElementById("khoiluong").value;
                 var kichthuoc = document.getElementById("kichthuoc").value;
                 var giatriuoctinh = document.getElementById("giatriuoctinh").value;
+                var chiphi = document.getElementById("chiphi").value;
                 t.row.add([
                     stt,
-                    loaihang,
+                    //loaihang,
                     noidunghang,
                     khoiluong,
                     kichthuoc,
                     giatriuoctinh,
+                    chiphi,
                 ]).draw(false);
                 stt++;
                 document.getElementById("loaihang").value = "";
@@ -198,6 +223,8 @@
                 document.getElementById("khoiluong").value = "";
                 document.getElementById("kichthuoc").value = "";
                 document.getElementById("giatriuoctinh").value = "";
+                document.getElementById("chiphi").value = "";
+
             });
 
         });
