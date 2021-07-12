@@ -29,13 +29,6 @@ class CreateDonhangsTable extends Migration
             $table->string('sodienthoainguoinhan');
             $table->string('diachinguoinhan');
             $table->string('lienhekhacnguoinhan')->nullable();
-            $table->foreignId('id_loaihang');
-            $table->text('noidunghang');
-            $table->integer('khoiluong');
-            $table->integer('kichthuoc');
-            $table->bigInteger('giatriuoctinh');
-            //$table->bigInteger('phuthu');
-            //$table->bigInteger('khuyenmai');
             $table->bigInteger('tongchiphi');
         });
     }

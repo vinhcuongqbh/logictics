@@ -20,6 +20,18 @@ class DonhangController extends Controller
         return view('admin.donhang.create', ['dongias' => $dongia]);
     }
 
+    public function store(Request $request)
+    {
+        $chiTietDonHang = json_decode($request->chiTietDonHang, true);
+        foreach ($chiTietDonHang as $value) {
+            echo $value['noidunghang']." ";
+            echo $value['khoiluong']." ";
+            echo $value['kichthuoc']." ";
+            echo $value['giatriuoctinh']." ";
+            echo $value['chiphi']."<br>";
+          }
+    }
+
     public function xuatkho(Request $request)
     {
         //Tạo chuyến hàng mới
@@ -77,14 +89,14 @@ class DonhangController extends Controller
             $donhang->id_trangthai = 2;
             $donhang->save();
 
-                //Lưu sự kiện cho từng Đơn hàng
-                $lichsudonhangController = new LichsudonhangController;
-                $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
-            }
+            //Lưu sự kiện cho từng Đơn hàng
+            $lichsudonhangController = new LichsudonhangController;
+            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        }
 
-            //Lưu sự kiện cho Chuyến hàng
-            $lichsuchuyenhangController = new LichsuchuyenhangController;
-            $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+        //Lưu sự kiện cho Chuyến hàng
+        $lichsuchuyenhangController = new LichsuchuyenhangController;
+        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
 
         return back();
         //return redirect()->route('donhang.dmdangluukho');

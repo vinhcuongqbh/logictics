@@ -55,7 +55,6 @@
                                                 <th>Số điện thoại Người gửi</th>
                                                 <th>Người nhận</th>
                                                 <th>Số điện thoại Người nhận</th>
-                                                <th>Nội dung Đơn hàng</th>
                                                 <th>Tổng chi phí</th>
                                                 <th>Thao tác</th>
                                             </tr>
@@ -83,9 +82,6 @@
                                                     </td>
                                                     <td style="text-align: center"><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
-                                                    </td>
-                                                    <td><a
-                                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->noidunghang }}</a>
                                                     </td>
                                                     <td><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tongchiphi }}</a>
@@ -171,7 +167,7 @@
                 "pageLength": 25,
                 "autoWidth": false,
                 "searching": true,
-                "buttons": ["copy", "excel", "pdf", "print", ]
+                //"buttons": ["copy", "excel", "pdf", "print", ]
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
     </script>

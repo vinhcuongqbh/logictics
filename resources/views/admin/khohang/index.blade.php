@@ -150,7 +150,7 @@
                 "pageLength": 25,
                 "autoWidth": false,
                 "searching": true,
-                "buttons": ["copy", "excel", "pdf", "print", ]
+                //"buttons": ["copy", "excel", "pdf", "print", ]
             }).buttons().container().appendTo('#khohang-table_wrapper .col-md-6:eq(0)');
         });
     </script>
