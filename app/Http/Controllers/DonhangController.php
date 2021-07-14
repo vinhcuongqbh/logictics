@@ -23,19 +23,24 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
 
-        return view('admin.donhang.create', ['danhmucmathang' => $danhmucmathang, 'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong, 'dongiatinhtheosoluong' => $dongiatinhtheosoluong, 'dongiahangcongkenh' => $dongiahangcongkenh]);
+        return view('admin.donhang.create', [
+            'danhmucmathangs' => $danhmucmathang,
+            'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
+            'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
+            'dongiahangcongkenh' => $dongiahangcongkenh
+        ]);
     }
 
     public function store(Request $request)
     {
         $chiTietDonHang = json_decode($request->chiTietDonHang, true);
         foreach ($chiTietDonHang as $value) {
-            echo $value['noidunghang']." ";
-            echo $value['khoiluong']." ";
-            echo $value['kichthuoc']." ";
-            echo $value['giatriuoctinh']." ";
-            echo $value['chiphi']."<br>";
-          }
+            echo $value['noidunghang'] . " ";
+            echo $value['khoiluong'] . " ";
+            echo $value['kichthuoc'] . " ";
+            echo $value['giatriuoctinh'] . " ";
+            echo $value['chiphi'] . "<br>";
+        }
     }
 
     public function xuatkho(Request $request)
