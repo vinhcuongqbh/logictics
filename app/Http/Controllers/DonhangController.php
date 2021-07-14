@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Donhang;
-use App\Models\Dongia;
 use App\Models\Khohang;
 use App\Models\Chuyenhang;
-use App\Models\User;
+use App\Models\Danhmucmathang;
+use App\Models\Dongiatinhtheokhoiluong;
+use App\Models\Dongiatinhtheosoluong;
+use App\Models\Dongiahangcongkenh;
 use Illuminate\Support\Facades\Auth;
 
 class DonhangController extends Controller
@@ -15,9 +18,12 @@ class DonhangController extends Controller
 
     public function create()
     {
-        $dongia = Dongia::all();
+        $danhmucmathang = Danhmucmathang::all();
+        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::all();
+        $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
+        $dongiahangcongkenh = Dongiahangcongkenh::all();
 
-        return view('admin.donhang.create', ['dongias' => $dongia]);
+        return view('admin.donhang.create', ['danhmucmathang' => $danhmucmathang, 'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong, 'dongiatinhtheosoluong' => $dongiatinhtheosoluong, 'dongiahangcongkenh' => $dongiahangcongkenh]);
     }
 
     public function store(Request $request)

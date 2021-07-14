@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDongiasTable extends Migration
+class CreateDongiatinhtheosoluongsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDongiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('dongias', function (Blueprint $table) {
+        Schema::create('dongiatinhtheosoluongs', function (Blueprint $table) {
             $table->id();
-            $table->string('tensanpham');
-            $table->string('dongia');
+            $table->string('tenmathang');
+            $table->bigInteger('dongia');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateDongiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dongias');
+        Schema::dropIfExists('dongiatinhtheosoluongs');
     }
 }

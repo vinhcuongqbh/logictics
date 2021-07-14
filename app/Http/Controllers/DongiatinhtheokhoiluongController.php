@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DongiaController extends Controller
+class DongiatinhtheokhoiluongController extends Controller
 {
     //
 }

@@ -269,14 +269,14 @@
         var stt = 1;
 
         //Tính chi chí
-        const DONGIA = @json($dongias);
-        const tinhChiPhi = function() {
-            let tensanpham = document.querySelector("#loaihang").value;
-            let khoiLuong = document.querySelector("#khoiluong").value;
-            let chiphi = khoiLuong * parseInt(DONGIA.find(e => e.tensanpham == tensanpham)?.dongia || 0);
-            document.querySelector("#chiphi").value = chiphi;
-        }
-        document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
+        const danhmucmathang = @json($danhmucmathang);
+        const dongiatinhtheokhoiluong = @json($dongiatinhtheokhoiluong); alert(dongiatinhtheokhoiluong);
+        const dongiatinhtheosoluong = @json($dongiatinhtheosoluong);
+        const dongiahangcongkenh = @json($dongiahangcongkenh);
+
+        
+       
+        
 
         //Tổng chi phí
         $.fn.dataTable.Api.register('column().data().sum()', function() {

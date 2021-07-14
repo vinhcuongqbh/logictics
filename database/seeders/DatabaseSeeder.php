@@ -21,8 +21,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KhachhangSeeder::class,
             KhohangSeeder::class,
-            DonhangSeeder::class,
-            DongiaSeeder::class,
         ]);
     }
 }
