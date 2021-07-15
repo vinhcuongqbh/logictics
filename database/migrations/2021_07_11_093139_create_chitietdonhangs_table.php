@@ -15,13 +15,12 @@ class CreateChitietdonhangsTable extends Migration
     {
         Schema::create('chitietdonhangs', function (Blueprint $table) {
             $table->foreignId('id_donhang');
-            $table->foreignId('id_loaihang');
-            $table->text('noidunghang');
+            $table->text('tenmathang');
             $table->integer('soluong')->nullable();
             $table->integer('khoiluong')->nullable();
             $table->integer('kichthuoc')->nullable();
-            $table->bigInteger('giatriuoctinh')->nullable();
             $table->bigInteger('chiphi');
+            $table->timestamps();
         });
     }
 

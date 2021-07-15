@@ -49,7 +49,9 @@
                                                         {{ $lichsudonhang->created_at }}
                                                     </td>
                                                     <td>
-                                                        @if ($lichsudonhang->id_trangthai == 2)
+                                                        @if ($lichsudonhang->id_trangthai == 1)
+                                                            Đơn hàng được khởi tạo
+                                                        @elseif ($lichsudonhang->id_trangthai == 2)
                                                             {{ $lichsudonhang->tentrangthai }} vào
                                                             <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }})
                                                         @elseif ($lichsudonhang->id_trangthai == 3)

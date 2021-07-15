@@ -11,6 +11,7 @@ use App\Models\Danhmucmathang;
 use App\Models\Dongiatinhtheokhoiluong;
 use App\Models\Dongiatinhtheosoluong;
 use App\Models\Dongiahangcongkenh;
+use App\Models\Chitietdonhang;
 use Illuminate\Support\Facades\Auth;
 
 class DonhangController extends Controller
@@ -19,7 +20,7 @@ class DonhangController extends Controller
     public function create()
     {
         $danhmucmathang = Danhmucmathang::all();
-        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::all();
+        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
 
@@ -32,15 +33,51 @@ class DonhangController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $chiTietDonHang = json_decode($request->chiTietDonHang, true);
-        foreach ($chiTietDonHang as $value) {
-            echo $value['noidunghang'] . " ";
-            echo $value['khoiluong'] . " ";
-            echo $value['kichthuoc'] . " ";
-            echo $value['giatriuoctinh'] . " ";
-            echo $value['chiphi'] . "<br>";
+    {   
+        //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
+        $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
+
+        //Tạo đơn hàng mới
+        $donhang = new Donhang;
+        $donhang->id_nhanvienquanly = Auth::id();
+        $donhang->id_khogui = $id_khohangquanly;
+        $donhang->id_trangthai = 1;
+        $donhang->tennguoigui = $request->tennguoigui;
+        $donhang->sodienthoainguoigui = $request->sodienthoainguoigui;
+        $donhang->diachinguoigui = $request->diachinguoigui;
+        $donhang->lienhekhacnguoigui = $request->lienhekhacnguoigui;
+        $donhang->tennguoinhan = $request->tennguoinhan;
+        $donhang->sodienthoainguoinhan = $request->sodienthoainguoinhan;
+        $donhang->diachinguoinhan = $request->diachinguoinhan;
+        $donhang->lienhekhacnguoinhan = $request->lienhekhacnguoinhan;
+        $donhang->tongchiphi = $request->tongchiphi2;
+        $donhang->save();
+
+        //Tạo Chi tiết đơn hàng
+        $chiTietDonHangclient = json_decode($request->chiTietDonHang, true);
+        foreach ($chiTietDonHangclient as $value) {
+            $chitietdonhang = new Chitietdonhang;
+            $chitietdonhang->id_donhang = $donhang->id;
+            $chitietdonhang->tenmathang = $value['mathang'] . " ";
+            if ($value['soluong'] <> null) $chitietdonhang->soluong = $value['soluong'];
+            if ($value['khoiluong'] <> null) $chitietdonhang->khoiluong = $value['khoiluong'];
+            if ($value['kichthuoc'] <> null) $chitietdonhang->kichthuoc = $value['kichthuoc'];
+            $chitietdonhang->chiphi = $value['chiphi'];
+            $chitietdonhang->save();
         }
+
+        //Lưu sự kiện "Khởi tạo" cho Đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+
+        //Nhập Đơn hàng vào kho
+        $donhang->id_trangthai = 2;
+        $donhang->save();
+
+        //Lưu sự kiện "Nhập kho" cho Đơn hàng
+        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+
+        return view('admin.donhang.dmdangluukho');
     }
 
     public function xuatkho(Request $request)
@@ -138,7 +175,6 @@ class DonhangController extends Controller
 
     public function lichsudonhang($id)
     {
-
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
 
