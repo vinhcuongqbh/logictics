@@ -67,6 +67,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('dmdaxuatkho', [DonhangController::class, 'dmdaxuatkho'])->name('donhang.dmdaxuatkho');
         Route::post('xuatkho', [DonhangController::class, 'xuatkho'])->name('donhang.xuatkho');
         Route::post('nhapkho', [DonhangController::class, 'nhapkho'])->name('donhang.nhapkho');
+        Route::get('xuattoanbokho', [DonhangController::class, 'xuattoanbokho'])->name('donhang.xuattoanbokho');
 
 
         Route::get('create', [DonhangController::class, 'create'])->name('donhang.create');

@@ -114,6 +114,38 @@ class DonhangController extends Controller
         //return redirect()->route('donhang.dmdangluukho');
     }
 
+    public function xuattoanbokho()
+    {
+        //Tạo chuyến hàng mới
+        $chuyenhangController = new ChuyenhangController;
+        $chuyenhang = $chuyenhangController->taochuyenhangmoi();
+
+        //Cập nhật thông tin xuất kho cho Đơn hàng
+        //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
+        $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
+
+        //Cập nhật thông tin xuất kho cho từng Đơn hàng
+        $donhangs = Donhang::where('id_khogui', $id_khohangquanly)->get();
+        foreach ($donhangs as $donhang) {
+            $donhang->id_khonhan = $chuyenhang->id_khonhan;
+            $donhang->id_chuyenhang = $chuyenhang->id;
+            $donhang->id_trangthai = 3;
+            $donhang->save();
+
+            //Lưu sự kiện cho từng Đơn hàng
+            $lichsudonhangController = new LichsudonhangController;
+            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        }
+
+        //Cập nhật thông tin xuất kho cho Chuyến hàng
+        $chuyenhangController->xuatkho($chuyenhang);
+
+        //Lưu sự kiện cho Chuyến hàng
+        $lichsuchuyenhangController = new LichsuchuyenhangController;
+        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);        return back();
+        //return redirect()->route('donhang.dmdangluukho');
+    }
+
 
     public function nhapkho(Request $request)
     {

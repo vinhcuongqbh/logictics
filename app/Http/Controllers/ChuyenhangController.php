@@ -59,7 +59,7 @@ class ChuyenhangController extends Controller
         $chuyenhang = Chuyenhang::where('chuyenhangs.id_trangthai', 3)
             ->where('chuyenhangs.id_khogui', $id_khohangquanly)
             ->join('khohangs as khogui', 'khogui.id', 'chuyenhangs.id_khogui')
-            ->join('khohangs as khonhan', 'khonhan.id', 'chuyenhangs.id_khonhan')
+            ->leftjoin('khohangs as khonhan', 'khonhan.id', 'chuyenhangs.id_khonhan')
             ->join('users', 'users.id', 'chuyenhangs.id_nhanvienquanly')
             ->select('chuyenhangs.*', 'users.name', 'khogui.tenkhohang as khogui', 'khonhan.tenkhohang as khonhan')
             ->get();
@@ -76,7 +76,7 @@ class ChuyenhangController extends Controller
         $chuyenhang = Chuyenhang::where('chuyenhangs.id_trangthai', 3)
             ->where('chuyenhangs.id_khonhan', $id_khohangquanly)
             ->join('khohangs as khogui', 'khogui.id', 'chuyenhangs.id_khogui')
-            ->join('khohangs as khonhan', 'khonhan.id', 'chuyenhangs.id_khonhan')
+            ->leftjoin('khohangs as khonhan', 'khonhan.id', 'chuyenhangs.id_khonhan')
             ->join('users', 'users.id', 'chuyenhangs.id_nhanvienquanly')
             ->select('chuyenhangs.*', 'users.name', 'khogui.tenkhohang as khogui', 'khonhan.tenkhohang as khonhan')
             ->get();

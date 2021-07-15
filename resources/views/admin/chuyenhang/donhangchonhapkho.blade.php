@@ -49,7 +49,6 @@
                                                 <th>Số điện thoại Người gửi</th>
                                                 <th>Người nhận</th>
                                                 <th>Số điện thoại Người nhận</th>
-                                                <th>Nội dung Đơn hàng</th>
                                                 <th>Tổng chi phí</th>
                                                 <th>Thao tác</th>
                                             </tr>
@@ -71,9 +70,6 @@
                                                     </td>
                                                     <td style="text-align: center"><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
-                                                    </td>
-                                                    <td><a
-                                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->noidunghang }}</a>
                                                     </td>
                                                     <td><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tongchiphi }}</a>

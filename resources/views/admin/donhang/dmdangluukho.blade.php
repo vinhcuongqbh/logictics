@@ -41,6 +41,10 @@
                                                 <button type="submit" class="btn btn-outline-success float-left"
                                                     style="width: 100px; margin-right: 10px">XUẤT KHO</button>
                                             </div>
+                                            <div class="col-auto">
+                                                <a href="{{ route('donhang.xuattoanbokho') }}"><button type="button" class="btn btn-outline-success float-left"
+                                                    style="margin-right: 10px">XUẤT TOÀN BỘ KHO</button></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

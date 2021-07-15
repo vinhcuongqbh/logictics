@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             KhachhangSeeder::class,
             KhohangSeeder::class,
-            //DonhangSeeder::class,
+            DonhangSeeder::class,
             DongiahangcongkenhSeeder::class,
             DongiatinhtheosoluongSeeder::class,
             DongiatinhtheokhoiluongSeeder::class,
