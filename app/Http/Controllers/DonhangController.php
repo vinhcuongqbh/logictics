@@ -33,7 +33,7 @@ class DonhangController extends Controller
     }
 
     public function store(Request $request)
-    {   
+    {
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
 
@@ -77,7 +77,7 @@ class DonhangController extends Controller
         //Lưu sự kiện "Nhập kho" cho Đơn hàng
         $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
 
-        return view('admin.donhang.dmdangluukho');
+        return redirect()->route('donhang.dmdangluukho');
     }
 
     public function xuatkho(Request $request)
@@ -133,7 +133,7 @@ class DonhangController extends Controller
             $donhang->id_nhanvienquanly = Auth::id();
             $donhang->id_chuyenhang = null;
             $donhang->id_khogui = User::find(Auth::id())->id_khohangquanly;
-            $donhang->id_khonhan = 998;
+            $donhang->id_khonhan = null;
             $donhang->id_trangthai = 2;
             $donhang->save();
 

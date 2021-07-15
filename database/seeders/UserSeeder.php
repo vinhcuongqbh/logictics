@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'id' => 999,
                 'id_loainhanvien' => '1',
                 'name' => 'Administrator',
                 'email' => 'admin@gmail.com',
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
                 'id_trangthai' => 1,
             ],
             [
+                'id' => 1,
                 'id_loainhanvien' => '2',
                 'name' => 'Vĩnh Trường Linh',
                 'email' => 'linhvt@gmail.com',
@@ -41,6 +43,7 @@ class UserSeeder extends Seeder
                 'id_trangthai' => 1,
             ],
             [
+                'id' => 2,
                 'id_loainhanvien' => '2',
                 'name' => 'Hoàng Ngọc Mai',
                 'email' => 'maihn@gmail.com',
@@ -51,6 +54,7 @@ class UserSeeder extends Seeder
                 'id_trangthai' => 1,
             ],
             [
+                'id' => 3,
                 'id_loainhanvien' => '3',
                 'name' => 'Ngô Duy Khánh',
                 'email' => 'khanhnd@gmail.com',
@@ -61,6 +65,7 @@ class UserSeeder extends Seeder
                 'id_trangthai' => 1,
             ],
             [
+                'id' => 4,
                 'id_loainhanvien' => '3',
                 'name' => 'Nguyễn Hương Nhài',
                 'email' => 'nhainh@gmail.com',
@@ -71,6 +76,7 @@ class UserSeeder extends Seeder
                 'id_trangthai' => 1,
             ],
             [
+                'id' => 5,
                 'id_loainhanvien' => '3',
                 'name' => 'Lê Thị Thủy',
                 'email' => 'thuylt@gmail.com',

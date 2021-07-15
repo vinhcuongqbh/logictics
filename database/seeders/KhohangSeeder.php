@@ -52,20 +52,6 @@ class KhohangSeeder extends Seeder
                     'diachi' => '5-14, Hishie 4-chome, Higashi Osaka, Osaka',
                     'id_trangthai' => 1,
                 ],
-                [
-                    'id' => 998,
-                    'tenkhohang' => '',
-                    'sodienthoai' => '',
-                    'diachi' => '',
-                    'id_trangthai' => 1,
-                ],
-                [
-                    'id' => 999,
-                    'tenkhohang' => 'Người nhận',
-                    'sodienthoai' => '',
-                    'diachi' => '',
-                    'id_trangthai' => 1,
-                ],
             ]);
         }
 

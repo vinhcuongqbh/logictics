@@ -27,7 +27,7 @@ class ChuyenhangController extends Controller
         } else if ($id_khohangquanly == 2) {
             $chuyenhang->id_khonhan = 1;
         } else if ($id_khohangquanly == 1) {
-            $chuyenhang->id_khonhan = 999;
+            $chuyenhang->id_khonhan = 0;
         }
         $chuyenhang->id_trangthai = 1;
         $chuyenhang->save();

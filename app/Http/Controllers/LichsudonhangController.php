@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class LichsudonhangController extends Controller
 {
-    public function index($id)
-    {
-        //Hiển thị Lịch sử đơn hàng
+    //Hiển thị Lịch sử đơn hàng
+    public function index($id)    {
+
         $lichsudonhang = Lichsudonhang::where('id_donhang', $id)
             ->orderBy('id', 'desc')
             ->get();
@@ -17,9 +17,10 @@ class LichsudonhangController extends Controller
         return view('admin.lichsudonhang.index', ['lichsudonhangs' => $lichsudonhang]);
     }
 
+    //Lưu sự kiện của đơn hàng
     public function luusukien($id_donhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
     {
-        //Lưu sự kiện của đơn hàng
+
         $lichsudonhang = new Lichsudonhang;
         $lichsudonhang->id_donhang = $id_donhang;
         $lichsudonhang->id_nhanvienquanly = $id_nhanvienquanly;
@@ -34,7 +35,7 @@ class LichsudonhangController extends Controller
         $lichsudonhang = Lichsudonhang::where('lichsudonhangs.id_donhang', $id_donhang)
             ->join('trangthais', 'trangthais.id', 'lichsudonhangs.id_trangthai')
             ->join('khohangs as khogui', 'khogui.id', 'lichsudonhangs.id_khogui')
-            ->join('khohangs as khonhan', 'khonhan.id', 'lichsudonhangs.id_khonhan')
+            ->leftJoin('khohangs as khonhan', 'khonhan.id', 'lichsudonhangs.id_khonhan')
             ->select('lichsudonhangs.*', 'trangthais.tentrangthai', 'khogui.tenkhohang as khogui', 'khogui.diachi as diachikhogui', 'khonhan.tenkhohang as khonhan', 'khonhan.diachi as diachikhonhan')
             ->orderBy('id', 'asc')
             ->get();

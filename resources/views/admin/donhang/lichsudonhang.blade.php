@@ -55,7 +55,7 @@
                                                             {{ $lichsudonhang->tentrangthai }} vào
                                                             <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }})
                                                         @elseif ($lichsudonhang->id_trangthai == 3)
-                                                            @if ($lichsudonhang->id_khonhan == 999)
+                                                            @if ($lichsudonhang->id_khonhan == 0)
                                                                 {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }}) đến địa chỉ <b>Người nhận</b>
                                                             @else
                                                                 {{ $lichsudonhang->tentrangthai }} từ
