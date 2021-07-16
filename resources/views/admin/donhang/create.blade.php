@@ -57,13 +57,6 @@
                                             value="{{ old('diachinguoigui') }}" class="form-control">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="lienhekhacnguoigui" class="col-sm-3 col-form-label">Liên hệ khác</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="lienhekhacnguoigui" name="lienhekhacnguoigui"
-                                            value="{{ old('lienhekhacnguoigui') }}" class="form-control">
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-sm-6" style="float: left">
                                 <div class="form-group row" style="text-align: center">
@@ -90,14 +83,6 @@
                                     <div class="col-sm-9">
                                         <input type="text" id="diachinguoinhan" name="diachinguoinhan"
                                             value="{{ old('diachinguoinhan') }}" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="lienhekhacnguoinhan" class="col-sm-3 col-form-label">Liên hệ
-                                        khác</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="lienhekhacnguoinhan" name="lienhekhacnguoinhan"
-                                            value="{{ old('lienhekhacnguoinhan') }}" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -206,8 +191,8 @@
                                                 <th>Tên Mặt hàng</th>
                                                 <th>Số lượng (Cái)</th>
                                                 <th>Khối lượng (Kg)</th>
-                                                <th>Kích thước</th> 
-                                                <th>Giá trị ước tính</th>                                               
+                                                <th>Kích thước</th>
+                                                <th>Giá trị ước tính</th>
                                                 <th>Chi phí</th>
                                             </tr>
                                         </thead>
@@ -399,5 +384,72 @@
         })
     }
     */
+</script>
+<script>
+    $(function() {
+        $('#donhang-create').validate({
+            rules: {
+                sodienthoainguoigui: {
+                    required: true,
+                },
+                tennguoigui: {
+                    required: true,
+                },
+                diachinguoigui: {
+                    required: true,
+                },
+                sodienthoainguoinhan: {
+                    required: true,
+                },
+                tennguoinhan: {
+                    required: true,
+                },
+                diachinguoinhan: {
+                    required: true,
+                },
+                loaihang: {
+                    required: true,
+                },
+                chiphi: {
+                    required: true,
+                },
+            },
+            messages: {                
+                sodienthoainguoigui: {
+                    required: "Nhập Số điện thoại của Người gửi",
+                },
+                tennguoigui: {
+                    required: "Nhập Họ tên của Người gửi",
+                },
+                diachinguoigui: {
+                    required: "Nhập địa chỉ của Người gửi",
+                },
+                sodienthoainguoinhan: {
+                    required: "Nhập Số điện thoại của Người nhận",
+                },
+                tennguoinhan: {
+                    required: "Nhập Họ tên của Người nhận",
+                },
+                diachinguoinhan: {
+                    required: "Nhập địa chỉ của Người nhận",
+                },
+                loaihang: {
+                    required: "Nhập tên Mặt hàng",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
 </script>
 @stop

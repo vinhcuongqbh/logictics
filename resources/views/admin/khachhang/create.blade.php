@@ -89,7 +89,6 @@
     <!-- Page specific script -->
     <script>
         $(function() {
-
             $('#khachhang-create').validate({
                 rules: {
                     tenkhachhang: {

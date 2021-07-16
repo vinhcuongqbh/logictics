@@ -45,11 +45,9 @@ class DonhangController extends Controller
         $donhang->tennguoigui = $request->tennguoigui;
         $donhang->sodienthoainguoigui = $request->sodienthoainguoigui;
         $donhang->diachinguoigui = $request->diachinguoigui;
-        $donhang->lienhekhacnguoigui = $request->lienhekhacnguoigui;
         $donhang->tennguoinhan = $request->tennguoinhan;
         $donhang->sodienthoainguoinhan = $request->sodienthoainguoinhan;
         $donhang->diachinguoinhan = $request->diachinguoinhan;
-        $donhang->lienhekhacnguoinhan = $request->lienhekhacnguoinhan;
         $donhang->tongchiphi = $request->tongchiphi2;
         $donhang->save();
 
