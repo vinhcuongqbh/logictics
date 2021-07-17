@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Donhang;
-use App\Models\Khohang;
+use App\Models\Khachhang;
 use App\Models\Chuyenhang;
 use App\Models\Danhmucmathang;
 use App\Models\Dongiatinhtheokhoiluong;
@@ -34,6 +34,16 @@ class DonhangController extends Controller
 
     public function store(Request $request)
     {
+        //Lưu thông tin khách hàng
+        $khachhang = new Khachhang;
+        $khachhang->tenkhachhang = $request->tennguoigui;
+        $khachhang->sodienthoai = $request->sodienthoainguoigui;
+        $khachhang->diachi = $request->diachinguoigui;
+        $khachhang->id_nhanvienquanly = Auth::id();
+        $khachhang->id_trangthai = 1;
+        $khachhang->save();
+
+
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
 
@@ -123,7 +133,9 @@ class DonhangController extends Controller
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
 
         //Cập nhật thông tin xuất kho cho từng Đơn hàng
-        $donhangs = Donhang::where('id_khogui', $id_khohangquanly)->get();
+        $donhangs = Donhang::where('id_khogui', $id_khohangquanly)
+            ->where('id_trangthai', 2)
+            ->get();
         foreach ($donhangs as $donhang) {
             $donhang->id_khonhan = $chuyenhang->id_khonhan;
             $donhang->id_chuyenhang = $chuyenhang->id;
@@ -211,11 +223,21 @@ class DonhangController extends Controller
         return view('admin.donhang.lichsudonhang', ['lichsudonhangs' => $lichsudonhang]);
     }
 
-    //Xóa đơn hàng
+    //Xóa Đơn hàng
     public function delete($id)
     {
         $donhang = Donhang::find($id);
         $donhang->id_trangthai = 0;
+        $donhang->save();
+
+        return back();
+    }
+
+    //Cập nhật Đơn hàng thất lạc
+    public function thatlac($id)
+    {
+        $donhang = Donhang::find($id);
+        $donhang->id_trangthai = 6;
         $donhang->save();
 
         return back();

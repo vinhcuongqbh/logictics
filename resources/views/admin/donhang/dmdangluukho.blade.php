@@ -171,6 +171,7 @@
                 "pageLength": 25,
                 "autoWidth": false,
                 "searching": true,
+                "order": [[ 0, "desc" ]]
                 //"buttons": ["copy", "excel", "pdf", "print", ]
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });

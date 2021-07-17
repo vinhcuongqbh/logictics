@@ -79,8 +79,8 @@
                                                             style="padding: 3px">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
-                                                        <a href="{{ route('donhang.delete', $donhang->id) }}"
-                                                            onclick="return confirm('Bạn muốn xóa Đơn hàng này?')">
+                                                        <a href="{{ route('donhang.thatlac', $donhang->id) }}"
+                                                            onclick="return confirm('Chuyển Đơn hàng này vào Danh mục Đơn hàng thất lạc?')">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </td>
