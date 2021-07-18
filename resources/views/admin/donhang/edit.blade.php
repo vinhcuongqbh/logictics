@@ -247,235 +247,238 @@
 @stop
 
 @section('js')
-<script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
 <!-- DataTables  & Plugins -->
-<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/vendor/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/vendor/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/vendor/jszip/jszip.min.js"></script>
-<script src="/vendor/pdfmake/pdfmake.min.js"></script>
-<script src="/vendor/pdfmake/vfs_fonts.js"></script>
-<script src="/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="/vendor/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- jquery-validation -->
-<script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
-<script src="/vendor/jquery-validation/additional-methods.min.js"></script>
+    <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/vendor/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/vendor/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/vendor/jszip/jszip.min.js"></script>
+    <script src="/vendor/pdfmake/pdfmake.min.js"></script>
+    <script src="/vendor/pdfmake/vfs_fonts.js"></script>
+    <script src="/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/vendor/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/vendor/jquery-validation/additional-methods.min.js"></script>
 
-<!-- Page specific script -->
-<script>
-    var chiTietDonHang = [];
-        var stt = 0;
+    <!-- Page specific script -->
+    <script>
+        var chiTietDonHang = [];
+            var stt = 0;
 
-        $(document).ready(function() {
-            //Start: Tạo Table Đơn hàng
-            var donhangTable = $('#donhang-table').DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "searching": false,
-                "ordering": false,
-                "paging": false,
-            });
-            //End: Tạo Table Đơn hàng
-
-
-
-            //Start: Thêm row vào table
-            $('#addRow').on('click', function() {
-                //Start: Lấy dữ liệu từ các input
-                stt++;
-                var mathang = document.querySelector("#mathang").value;
-                var soluong = document.querySelector("#soluong").value;
-                var khoiluong = document.querySelector("#khoiluong").value;
-                var kichthuoc = document.querySelector("#kichthuoc").value;
-                var giatriuoctinh = document.querySelector("#giatriuoctinh").value;
-                var chiphi = document.querySelector("#chiphi").value;
-
-                donhangTable.row.add([
-                    stt,
-                    mathang,
-                    soluong,
-                    khoiluong,
-                    kichthuoc,
-                    //giatriuoctinh,
-                    chiphi,
-                ]).draw(false);
-
-                //Thêm row vào input hidden datatable
-                const row = {
-                    "stt": stt,
-                    "mathang": mathang,
-                    //"noidunghang": noidunghang,
-                    "soluong": soluong,
-                    "khoiluong": khoiluong,
-                    "kichthuoc": kichthuoc,
-                    "giatriuoctinh": giatriuoctinh,
-                    "chiphi": chiphi,
-                }
-                chiTietDonHang.push(row);
-                document.querySelector("#chiTietDonHang").value = JSON.stringify(chiTietDonHang);
-                //End: Lấy dữ liệu từ các input
+            $(document).ready(function() {
+                //Start: Tạo Table Đơn hàng
+                var donhangTable = $('#donhang-table').DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "searching": false,
+                    "ordering": false,
+                    "paging": false,
+                    "select": true,
+                });
+                //End: Tạo Table Đơn hàng
 
 
 
-                //Hiển thị Tổng chi phí
-                document.querySelector("#tongchiphi").innerHTML = Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).format(donhangTable.column(5).data().sum());
-                document.querySelector("#tongchiphi2").value = donhangTable.column(5).data().sum();
-                //End: Tính Tổng chi phí
+                //Start: Thêm row vào table
+                $('#addRow').on('click', function() {
+                    //Start: Lấy dữ liệu từ các input
+                    stt++;
+                    var mathang = document.querySelector("#mathang").value;
+                    var soluong = document.querySelector("#soluong").value;
+                    var khoiluong = document.querySelector("#khoiluong").value;
+                    var kichthuoc = document.querySelector("#kichthuoc").value;
+                    var giatriuoctinh = document.querySelector("#giatriuoctinh").value;
+                    var chiphi = document.querySelector("#chiphi").value;
 
+                    donhangTable.row.add([
+                        stt,
+                        mathang,
+                        soluong,
+                        khoiluong,
+                        kichthuoc,
+                        //giatriuoctinh,
+                        chiphi,
+                    ]).draw(false);
 
-
-                //Start: Làm trống dữ liệu input
-                document.querySelector("#mathang").value = "";
-                document.querySelector("#soluong").value = "";
-                document.querySelector("#khoiluong").value = "";
-                document.querySelector("#kichthuoc").value = "";
-                document.querySelector("#giatriuoctinh").value = "";
-                document.querySelector("#chiphi").value = "";
-                //End: Làm trống dữ liệu input
-            });
-
-
-
-            //Start: Lựa chọn row
-            donhangTable.on('click', 'tbody tr', function() {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                } else {
-                    donhangTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            }); //End: Lựa chọn row
-
-
-
-            //Start: Xóa Row
-            $('#deleteRow').click(function() {
-                donhangTable.row('.selected').remove().draw(false);
-
-                //Hiển thị Tổng chi phí
-                document.querySelector("#tongchiphi").innerHTML = Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).format(donhangTable.column(5).data().sum());
-                document.querySelector("#tongchiphi2").value = donhangTable.column(5).data().sum();
-                //End: Tính Tổng chi phí
-            }); //End: Xóa row
-
-
-
-            //Start: Tính chi chí
-            const dongiatinhtheokhoiluong = @json($dongiatinhtheokhoiluong);
-            const dongiatinhtheosoluong = @json($dongiatinhtheosoluong);
-            const dongiahangcongkenh = @json($dongiahangcongkenh);
-
-            const tinhChiPhi = function() {
-                let soluong = document.querySelector("#soluong").value;
-                let khoiluong = document.querySelector("#khoiluong").value;
-                document.querySelector("#chiphi").value = "";
-
-                if (soluong != 0 && khoiluong == "") {
-                    let tenmathang = document.querySelector("#mathang").value;
-                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                            tenmathang)?.dongia ||
-                        0);
-                    document.querySelector("#chiphi").value = chiphi;
-                }
-
-                if (khoiluong != 0 && soluong == "") {
-                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                            dongia = dongiatinhtheokhoiluong[i].dongia;
-                        }
+                    //Thêm row vào input hidden datatable
+                    const row = {
+                        "stt": stt,
+                        "mathang": mathang,
+                        //"noidunghang": noidunghang,
+                        "soluong": soluong,
+                        "khoiluong": khoiluong,
+                        "kichthuoc": kichthuoc,
+                        "giatriuoctinh": giatriuoctinh,
+                        "chiphi": chiphi,
                     }
-                    let chiphi = khoiluong * parseInt(dongia || 0);
-                    document.querySelector("#chiphi").value = chiphi;
+                    chiTietDonHang.push(row);
+                    document.querySelector("#chiTietDonHang").value = JSON.stringify(chiTietDonHang);
+                    //End: Lấy dữ liệu từ các input
+
+
+
+                    //Hiển thị Tổng chi phí
+                    document.querySelector("#tongchiphi").innerHTML = Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    }).format(donhangTable.column(5).data().sum());
+                    document.querySelector("#tongchiphi2").value = donhangTable.column(5).data().sum();
+                    //End: Tính Tổng chi phí
+
+
+
+                    //Start: Làm trống dữ liệu input
+                    document.querySelector("#mathang").value = "";
+                    document.querySelector("#soluong").value = "";
+                    document.querySelector("#khoiluong").value = "";
+                    document.querySelector("#kichthuoc").value = "";
+                    document.querySelector("#giatriuoctinh").value = "";
+                    document.querySelector("#chiphi").value = "";
+                    //End: Làm trống dữ liệu input
+                });
+
+
+
+                //Start: Lựa chọn row
+                donhangTable.on('click', 'tbody tr', function() {
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    } else {
+                        donhangTable.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                }); //End: Lựa chọn row
+
+
+
+                //Start: Xóa Row
+                $('#deleteRow').click(function() {
+                    donhangTable.row('.selected').remove().draw(false);
+
+                    //Hiển thị Tổng chi phí
+                    document.querySelector("#tongchiphi").innerHTML = Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    }).format(donhangTable.column(5).data().sum());
+                    document.querySelector("#tongchiphi2").value = donhangTable.column(5).data().sum();
+                    //End: Tính Tổng chi phí
+                }); //End: Xóa row
+
+
+
+                //Start: Tính chi chí
+                const dongiatinhtheokhoiluong = @json($dongiatinhtheokhoiluong);
+                const dongiatinhtheosoluong = @json($dongiatinhtheosoluong);
+                const dongiahangcongkenh = @json($dongiahangcongkenh);
+
+                const tinhChiPhi = function() {
+                    let soluong = document.querySelector("#soluong").value;
+                    let khoiluong = document.querySelector("#khoiluong").value;
+                    document.querySelector("#chiphi").value = "";
+
+                    if (soluong != 0 && khoiluong == "") {
+                        let tenmathang = document.querySelector("#mathang").value;
+                        let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                                tenmathang)?.dongia ||
+                            0);
+                        document.querySelector("#chiphi").value = chiphi;
+                    }
+
+                    if (khoiluong != 0 && soluong == "") {
+                        for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                            if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                                dongia = dongiatinhtheokhoiluong[i].dongia;
+                            }
+                        }
+                        let chiphi = khoiluong * parseInt(dongia || 0);
+                        document.querySelector("#chiphi").value = chiphi;
+                    }
                 }
-            }
 
-            document.querySelector("#mathang").addEventListener('blur', tinhChiPhi);
-            document.querySelector("#soluong").addEventListener('blur', tinhChiPhi);
-            document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
-            //End: Tính Chi phí
-
+                document.querySelector("#mathang").addEventListener('blur', tinhChiPhi);
+                document.querySelector("#soluong").addEventListener('blur', tinhChiPhi);
+                document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
+                //End: Tính Chi phí
 
 
-            //Start: Hàm tính Tổng chi phí
-            $.fn.dataTable.Api.register('column().data().sum()', function() {
-                return this.reduce(function(a, b) {
-                    var x = parseFloat(a) || 0;
-                    var y = parseFloat(b) || 0;
-                    return x + y;
+
+                //Start: Hàm tính Tổng chi phí
+                $.fn.dataTable.Api.register('column().data().sum()', function() {
+                    return this.reduce(function(a, b) {
+                        var x = parseFloat(a) || 0;
+                        var y = parseFloat(b) || 0;
+                        return x + y;
+                    });
+                });
+                //End: Hàm tính Tổng chi phí
+            });
+    </script>
+
+    <script>
+        //Kiểm tra dữ liệu đầu vào
+            $(function() {
+                $('#donhang-create').validate({
+                    rules: {
+                        sodienthoainguoigui: {
+                            required: true,
+                        },
+                        tennguoigui: {
+                            required: true,
+                        },
+                        diachinguoigui: {
+                            required: true,
+                        },
+                        sodienthoainguoinhan: {
+                            required: true,
+                        },
+                        tennguoinhan: {
+                            required: true,
+                        },
+                        diachinguoinhan: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        sodienthoainguoigui: {
+                            required: "Nhập Số điện thoại của Người gửi",
+                        },
+                        tennguoigui: {
+                            required: "Nhập Họ tên của Người gửi",
+                        },
+                        diachinguoigui: {
+                            required: "Nhập Địa chỉ của Người gửi",
+                        },
+                        sodienthoainguoinhan: {
+                            required: "Nhập Số điện thoại của Người nhận",
+                        },
+                        tennguoinhan: {
+                            required: "Nhập Họ tên của Người nhận",
+                        },
+                        diachinguoinhan: {
+                            required: "Nhập Địa chỉ của Người nhận",
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function(error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.col-sm-9').append(error);
+
+                    },
+                    highlight: function(element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function(element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    }
                 });
             });
-            //End: Hàm tính Tổng chi phí
-        });
-</script>
-
-<script>
-    //Kiểm tra dữ liệu đầu vào
-        $(function() {
-            $('#donhang-create').validate({
-                rules: {
-                    sodienthoainguoigui: {
-                        required: true,
-                    },
-                    tennguoigui: {
-                        required: true,
-                    },
-                    diachinguoigui: {
-                        required: true,
-                    },
-                    sodienthoainguoinhan: {
-                        required: true,
-                    },
-                    tennguoinhan: {
-                        required: true,
-                    },
-                    diachinguoinhan: {
-                        required: true,
-                    },
-                },
-                messages: {
-                    sodienthoainguoigui: {
-                        required: "Nhập Số điện thoại của Người gửi",
-                    },
-                    tennguoigui: {
-                        required: "Nhập Họ tên của Người gửi",
-                    },
-                    diachinguoigui: {
-                        required: "Nhập Địa chỉ của Người gửi",
-                    },
-                    sodienthoainguoinhan: {
-                        required: "Nhập Số điện thoại của Người nhận",
-                    },
-                    tennguoinhan: {
-                        required: "Nhập Họ tên của Người nhận",
-                    },
-                    diachinguoinhan: {
-                        required: "Nhập Địa chỉ của Người nhận",
-                    },
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.col-sm-9').append(error);
-
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
-        });
-</script>
+    </script>
 @stop

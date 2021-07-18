@@ -66,7 +66,7 @@ class DonhangController extends Controller
         foreach ($chiTietDonHangclient as $value) {
             $chitietdonhang = new Chitietdonhang;
             $chitietdonhang->id_donhang = $donhang->id;
-            $chitietdonhang->tenmathang = $value['mathang'] . " ";
+            $chitietdonhang->tenmathang = $value['tenmathang'];
             if ($value['soluong'] <> null) $chitietdonhang->soluong = $value['soluong'];
             if ($value['khoiluong'] <> null) $chitietdonhang->khoiluong = $value['khoiluong'];
             if ($value['kichthuoc'] <> null) $chitietdonhang->kichthuoc = $value['kichthuoc'];
