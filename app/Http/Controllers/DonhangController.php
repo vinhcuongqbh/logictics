@@ -88,6 +88,15 @@ class DonhangController extends Controller
         return redirect()->route('donhang.dmdangluukho');
     }
 
+    public function show($id)
+    {
+        //Hiển thị thông tin Đơn hàng
+        $donhang = Donhang::find($id);
+        $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
+
+        return view('admin.donhang.show', ['donhang' => $donhang, 'chitietdonhangs' => $chitietdonhang]);
+    }
+
     public function xuatkho(Request $request)
     {
         //Tạo chuyến hàng mới

@@ -30,7 +30,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-sm-6" style="float: left">
+                                <div class="col-sm-6" style="float: left; padding: 0px 30px;">
                                     <div class="form-group row" style="text-align: center">
                                         <label for="nguoigui" class="col-sm-12 col-form-label">THÔNG TIN NGƯỜI GỬI</label>
                                     </div>
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6" style="float: left">
+                                <div class="col-sm-6" style="float: left; padding: 0px 30px;">
                                     <div class="form-group row" style="text-align: center">
                                         <label for="nguoinhan" class="col-sm-12 col-form-label">THÔNG TIN NGƯỜI NHẬN</label>
                                     </div>
