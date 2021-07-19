@@ -119,8 +119,8 @@
                                                     <label for="tenmathang" class="col-sm-3 col-form-label">Mặt
                                                         hàng</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="tenmathang" name="tenmathang"
-                                                            list="danhmucmathang" class="form-control">
+                                                        <input type="text" id="tenmathang" list="danhmucmathang"
+                                                            class="form-control">
                                                         <datalist id="danhmucmathang">
                                                             @foreach ($danhmucmathangs as $danhmucmathang)
                                                             <option value="{{ $danhmucmathang->tenmathang }}" />
@@ -132,39 +132,34 @@
                                                     <label for="soluong" class="col-sm-3 col-form-label">Số
                                                         lượng</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="soluong" name="soluong"
-                                                            class="form-control">
+                                                        <input type="text" id="soluong" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="khoiluong" class="col-sm-3 col-form-label">Khối
                                                         lượng</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="khoiluong" name="khoiluong"
-                                                            class="form-control">
+                                                        <input type="text" id="khoiluong" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="kichthuoc" class="col-sm-3 col-form-label">Kích
                                                         thước</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="kichthuoc" name="kichthuoc"
-                                                            class="form-control">
+                                                        <input type="text" id="kichthuoc" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="giatriuoctinh" class="col-sm-3 col-form-label">Giá trị
                                                         ước tính</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="giatriuoctinh" name="giatriuoctinh"
-                                                            class="form-control">
+                                                        <input type="text" id="giatriuoctinh" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="chiphi" class="col-sm-3 col-form-label">Chi phí</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="chiphi" name="chiphi"
-                                                            class="form-control">
+                                                        <input type="text" id="chiphi" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,10 +188,10 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group row">
-                                                    <label for="tenmathang" class="col-sm-3 col-form-label">Mặt
+                                                    <label for="tenmathangEdit" class="col-sm-3 col-form-label">Mặt
                                                         hàng</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="tenmathang" list="danhmucmathang"
+                                                        <input type="text" id="tenmathangEdit" list="danhmucmathang"
                                                             class="form-control">
                                                         <datalist id="danhmucmathang">
                                                             @foreach ($danhmucmathangs as $danhmucmathang)
@@ -206,49 +201,46 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="soluong" class="col-sm-3 col-form-label">Số
+                                                    <label for="soluongEdit" class="col-sm-3 col-form-label">Số
                                                         lượng</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="soluong" name="soluong"
-                                                            class="form-control">
+                                                        <input type="text" id="soluongEdit" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="khoiluong" class="col-sm-3 col-form-label">Khối
+                                                    <label for="khoiluongEdit" class="col-sm-3 col-form-label">Khối
                                                         lượng</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="khoiluong" name="khoiluong"
-                                                            class="form-control">
+                                                        <input type="text" id="khoiluongEdit" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="kichthuoc" class="col-sm-3 col-form-label">Kích
+                                                    <label for="kichthuocEdit" class="col-sm-3 col-form-label">Kích
                                                         thước</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="kichthuoc" name="kichthuoc"
-                                                            class="form-control">
+                                                        <input type="text" id="kichthuocEdit" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="giatriuoctinh" class="col-sm-3 col-form-label">Giá trị
+                                                    <label for="giatriuoctinhEdit" class="col-sm-3 col-form-label">Giá
+                                                        trị
                                                         ước tính</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="giatriuoctinh" name="giatriuoctinh"
-                                                            class="form-control">
+                                                        <input type="text" id="giatriuoctinhEdit" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="chiphi" class="col-sm-3 col-form-label">Chi phí</label>
+                                                    <label for="chiphiEdit" class="col-sm-3 col-form-label">Chi
+                                                        phí</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" id="chiphi" name="chiphi"
-                                                            class="form-control">
+                                                        <input type="text" id="chiphiEdit" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-default"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id="addRow"
+                                                <button type="button" class="btn btn-primary" id="editRow"
                                                     data-dismiss="modal">Cập nhật</button>
                                             </div>
                                         </div>
@@ -270,24 +262,6 @@
                                                 <th>Chi phí</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>AirPods</td>
-                                                <td>2</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>200000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Apple Watch</td>
-                                                <td>3</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>300000</td>
-                                            </tr>
-                                        </tbody>
                                         <tfoot>
                                             <tr style="text-align: center">
                                                 <th colspan="5">Tổng chi phí</th>
@@ -353,7 +327,6 @@
 <!-- Page specific script -->
 <script>
     var chiTietDonHang = [];
-        var stt = 0;
 
         $(document).ready(function() {
             //Start: Tạo Table Đơn hàng
@@ -361,26 +334,50 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "searching": false,
-                "ordering": false,
+                 "searching": false,
                 "paging": false,
                 "columns": [
-                    { "data": "stt" },
-                    { "data": "tenmathang" },
-                    { "data": "soluong" },
-                    { "data": "khoiluong" },
-                    { "data": "kichthuoc" },
-                    { "data": "chiphi" }
-                ]
+                    { "name": "stt" },
+                    { "name": "tenmathang" },
+                    { "name": "soluong" },
+                    { "name": "khoiluong" },
+                    { "name": "kichthuoc" },
+                    { "name": "chiphi" }
+                ],                
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": "_all",
+                 },     
+                 {
+                    "targets" : 1,
+                    "className": "dt-body-left",
+                 },          
+                 {
+                    "targets" : 5,
+                    "className": "dt-body-right",
+                 },
+                 {
+                    "targets" : "_all",
+                    "className": "dt-body-center",
+                 },  
+                ],
+                "order": [[ 0, 'desc' ]],
             });
             //End: Tạo Table Đơn hàng
+
+
+            donhangTable.on( 'order.dt search.dt', function () {
+                donhangTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
 
 
 
             //Start: Thêm row vào table
             $('#addRow').on('click', function() {
                 //Start: Lấy dữ liệu từ các input
-                stt++;
                 var tenmathang = document.querySelector("#tenmathang").value;
                 var soluong = document.querySelector("#soluong").value;
                 var khoiluong = document.querySelector("#khoiluong").value;
@@ -389,18 +386,20 @@
                 var chiphi = document.querySelector("#chiphi").value;
 
                 donhangTable.row.add([
-                    
+                    null,
+                    tenmathang, 
+                    soluong,
+                    khoiluong,
+                    kichthuoc,
+                    chiphi
                 ]).draw(false);
 
                 //Thêm row vào input hidden datatable
                 const row = {
-                    "stt": stt,
                     "tenmathang": tenmathang,
-                    //"noidunghang": noidunghang,
                     "soluong": soluong,
                     "khoiluong": khoiluong,
                     "kichthuoc": kichthuoc,
-                    "giatriuoctinh": giatriuoctinh,
                     "chiphi": chiphi,
                 }
                 chiTietDonHang.push(row);
@@ -440,7 +439,11 @@
                     $(this).addClass('selected');
                 }
 
-                alert(donhangTable.$('input, select').serialize());        
+                alert(donhangTable.data().toArray());        
+                // var newData = [ null, "2", "3", "4", "5", "6" ] //Array, data here must match structure of table data
+                // donhangTable.row(this).data( newData ).draw();
+               
+                
             }); 
             //End: Lựa chọn row
 
