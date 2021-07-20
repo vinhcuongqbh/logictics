@@ -98,6 +98,7 @@
                                                 <th>Số lượng (Cái)</th>
                                                 <th>Khối lượng (Kg)</th>
                                                 <th>Kích thước</th>
+                                                <th>Giá trị ước tính</th>
                                                 <th>Chi phí</th>
                                             </tr>
                                         </thead>
@@ -109,13 +110,14 @@
                                                     <td style="text-align: center">{{ $chitietdonhang->soluong }}</td>
                                                     <td style="text-align: center">{{ $chitietdonhang->khoiluong }}</td>
                                                     <td style="text-align: center">{{ $chitietdonhang->kichthuoc }}</td>
+                                                    <td style="text-align: center">{{ $chitietdonhang->giatriuoctinh }}</td>
                                                     <td style="text-align: right">{{ $chitietdonhang->chiphi }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr style="text-align: center">
-                                                <th colspan="5">Tổng chi phí</th>
+                                                <th colspan="6">Tổng chi phí</th>
                                                 <th id="tongchiphi">{{ $donhang->tongchiphi }}</th>
                                             </tr>
                                         </tfoot>

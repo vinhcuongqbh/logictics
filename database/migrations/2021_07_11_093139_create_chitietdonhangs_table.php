@@ -17,8 +17,9 @@ class CreateChitietdonhangsTable extends Migration
             $table->foreignId('id_donhang');
             $table->text('tenmathang');
             $table->integer('soluong')->nullable();
-            $table->integer('khoiluong')->nullable();
+            $table->float('khoiluong')->nullable();
             $table->integer('kichthuoc')->nullable();
+            $table->bigInteger('giatriuoctinh')->nullable();
             $table->bigInteger('chiphi');
             $table->timestamps();
         });
