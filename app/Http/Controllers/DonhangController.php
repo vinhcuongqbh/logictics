@@ -86,7 +86,7 @@ class DonhangController extends Controller
         //Lưu sự kiện "Nhập kho" cho Đơn hàng
         $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
 
-        return redirect()->route('donhang.dmdangluukho');
+        return redirect()->action([DonhangController::class, 'show'], ['id' => $donhang->id]);
     }
 
     public function show($id)
@@ -94,8 +94,16 @@ class DonhangController extends Controller
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::find($id);
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
+        $qrcode = "Mã đơn hàng: ".$donhang->id.
+        "\nNgười gửi: ".$donhang->tennguoigui.
+        "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
+        "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
+        "\nNgười nhận: ".$donhang->tennguoinhan.
+        "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
+        "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
+        
 
-        return view('admin.donhang.show', ['donhang' => $donhang, 'chitietdonhangs' => $chitietdonhang]);
+        return view('admin.donhang.show', ['donhang' => $donhang, 'chitietdonhangs' => $chitietdonhang, 'qrcode' => $qrcode]);
     }
 
     public function xuatkho(Request $request)

@@ -560,7 +560,7 @@
 
 
             //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
-            $('#updateRow').on('click', function() {
+            $('#submitForm').on('click', function() {
                 document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
                 document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
             });
