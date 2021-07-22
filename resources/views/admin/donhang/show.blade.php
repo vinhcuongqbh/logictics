@@ -115,14 +115,14 @@
                                             <td style="text-align: center">{{ $chitietdonhang->khoiluong }}</td>
                                             <td style="text-align: center">{{ $chitietdonhang->kichthuoc }}</td>
                                             <td style="text-align: center">{{ $chitietdonhang->giatriuoctinh }}</td>
-                                            <td style="text-align: right">{{ $chitietdonhang->chiphi }}</td>
+                                            <td style="text-align: right">{{ number_format($chitietdonhang->chiphi, 0, '', '.') }} đ</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr style="text-align: center">
                                             <th colspan="6">Tổng chi phí</th>
-                                            <th id="tongchiphi">{{ $donhang->tongchiphi }}</th>
+                                            <th id="tongchiphi" style="text-align: right">{{ number_format($donhang->tongchiphi, 0, '', '.') }} đ</th>
                                         </tr>
                                     </tfoot>
                                 </table>
