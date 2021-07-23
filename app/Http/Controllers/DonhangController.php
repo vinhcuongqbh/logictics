@@ -70,8 +70,8 @@ class DonhangController extends Controller
             if ($value['soluong'] <> null) $chitietdonhang->soluong = $value['soluong'];
             if ($value['khoiluong'] <> null) $chitietdonhang->khoiluong = $value['khoiluong'];
             if ($value['kichthuoc'] <> null) $chitietdonhang->kichthuoc = $value['kichthuoc'];
-            if ($value['giatriuoctinh'] <> null) $chitietdonhang->giatriuoctinh = $value['giatriuoctinh'];
-            $chitietdonhang->chiphi = $value['chiphi'];
+            if ($value['giatriuoctinh'] <> null) $chitietdonhang->giatriuoctinh = str_replace(".","",$value['giatriuoctinh']);
+            $chitietdonhang->chiphi = str_replace(".","",$value['chiphi']);
             $chitietdonhang->save();
         }
 

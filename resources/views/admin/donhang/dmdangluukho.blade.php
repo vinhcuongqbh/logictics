@@ -87,9 +87,8 @@
                                                     <td style="text-align: center"><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
                                                     </td>
-                                                    <td><a
-                                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tongchiphi }}</a>
-                                                    </td>
+                                                    <td style="text-align: right"><a
+                                                            href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</td>
                                                     <td style="text-align: center">
                                                         <a href="{{ route('donhang.lichsudonhang', $donhang->id) }}"
                                                             style="padding: 3px">
