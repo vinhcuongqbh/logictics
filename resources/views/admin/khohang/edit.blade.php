@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="tenkhohang">Tên Kho hàng</label>
                                 <input type="text" id="tenkhohang" name="tenkhohang"
-                                    value="{{ $khohang->tenkhohang }}" class="form-control">
+                                    value="{{ $khohang->tenkhohang }}" class="form-control" @if ($khohang->id <= 2) echo disabled @endif>
                             </div>
                             <div class="form-group">
                                 <label for="sodienthoai">Số điện thoại</label>
