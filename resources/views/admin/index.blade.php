@@ -91,8 +91,6 @@
                   <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruong }}%
                 </span>
                 @endif
-
-
                 <span class="text-muted">So với cùng kỳ năm trước</span>
               </p>
             </div>
@@ -282,12 +280,13 @@
 
   var $visitorsChart = $('#visitors-chart')
   // eslint-disable-next-line no-unused-vars
+  var tuanHienTai = @json($tuanHienTai); 
   var visitorsChart = new Chart($visitorsChart, {
     data: {
       labels: ['Thứ 2', 'Thứ 3', 'Thú 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
       datasets: [{
         type: 'line',
-        data: [100, 120, 170, 167, 180, 177, 160],
+        data: [tuanHienTai[1], tuanHienTai[2], tuanHienTai[3], tuanHienTai[4], tuanHienTai[5], tuanHienTai[6], tuanHienTai[0]],
         backgroundColor: 'transparent',
         borderColor: '#007bff',
         pointBorderColor: '#007bff',

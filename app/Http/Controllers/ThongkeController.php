@@ -57,22 +57,18 @@ class ThongkeController extends Controller
         $newDay = new Carbon("2021-7-28");
         $ngayHienTai = $newDay->copy()->startOfDay();
         $ngayKetThuc = $newDay->copy()->endOfDay();
-        echo $ngayHienTai."<br>";
-        echo $ngayKetThuc."<br>";
         //Tìm thứ trong tuần của Ngày Hiện tại
         $thuHienTai = $ngayHienTai->dayOfWeek;
-        echo $thuHienTai."<br>";
-
         
         for ($thuTrongTuan = 0; $thuTrongTuan <= 6; $thuTrongTuan++) {
             if ($thuHienTai > $thuTrongTuan)
-                $tuanNay[$thuTrongTuan] = $this->thongkedonhang($ngayKetThuc->copy()->startOfDay()->subDays($thuHienTai-$thuTrongTuan), $ngayKetThuc->copy()->endOfDay()->subDays($thuHienTai-$thuTrongTuan));
+                $tuanHienTai[$thuTrongTuan] = $this->thongkedonhang($ngayKetThuc->copy()->startOfDay()->subDays($thuHienTai-$thuTrongTuan), $ngayKetThuc->copy()->endOfDay()->subDays($thuHienTai-$thuTrongTuan));
             elseif ($thuHienTai == $thuTrongTuan)
-                $tuanNay[$thuTrongTuan] = $this->thongkedonhang($ngayHienTai, $ngayKetThuc);
+                $tuanHienTai[$thuTrongTuan] = $this->thongkedonhang($ngayHienTai, $ngayKetThuc);
             else
-                $tuanNay[$thuTrongTuan] = $this->thongkedonhang($ngayKetThuc->copy()->startOfDay()->addDays($thuTrongTuan-$thuHienTai), $ngayKetThuc->copy()->endOfDay()->addDays($thuTrongTuan-$thuHienTai));
+                $tuanHienTai[$thuTrongTuan] = $this->thongkedonhang($ngayKetThuc->copy()->startOfDay()->addDays($thuTrongTuan-$thuHienTai), $ngayKetThuc->copy()->endOfDay()->addDays($thuTrongTuan-$thuHienTai));
         }
 
-        return view('admin.index', ['tuanNay' => $tuanNay]);
+        return view('admin.index', ['tuanHienTai' => $tuanHienTai]);
     }
 }
