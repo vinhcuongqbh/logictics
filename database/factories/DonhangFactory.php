@@ -32,8 +32,8 @@ class DonhangFactory extends Factory
             'diachinguoinhan' => $this->faker->address(),
             'id_khogui' => rand(2,5),
             'tongchiphi' => rand(100,10000)*1000,
-            'created_at' => $this->faker->dateTimeBetween('-2 months', 'now'),
-            'updated_at' => $this->faker->dateTimeBetween('-2 months', 'now'),
+            'created_at' => $this->faker->dateTimeBetween('-24 months', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-24 months', 'now'),
         ];
     }
 }

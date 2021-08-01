@@ -15,22 +15,22 @@ class DonhangSeeder extends Seeder
     public function run()
     {
 
-        $donhang = Donhang::factory()->count(300)->create([
+        $donhang = Donhang::factory()->count(6000)->create([
             'id_nhanvienquanly' => 2,
             'id_trangthai' => 2,
             'id_khogui' => 2,
         ]);
-        $donhang = Donhang::factory()->count(600)->create([
+        $donhang = Donhang::factory()->count(6000)->create([
             'id_nhanvienquanly' => 3,
             'id_trangthai' => 2,
             'id_khogui' => 3,
         ]);
-        $donhang = Donhang::factory()->count(700)->create([
+        $donhang = Donhang::factory()->count(6000)->create([
             'id_nhanvienquanly' => 4,
             'id_trangthai' => 2,
             'id_khogui' => 4,
         ]);
-        $donhang = Donhang::factory()->count(1000)->create([
+        $donhang = Donhang::factory()->count(6000)->create([
             'id_nhanvienquanly' => 5,
             'id_trangthai' => 2,
             'id_khogui' => 5,

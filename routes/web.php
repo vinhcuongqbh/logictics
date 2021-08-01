@@ -6,6 +6,8 @@ use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\KhohangController;
 use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\ChuyenhangController;
+use App\Http\Controllers\ThongkeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,11 +88,16 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/donhangdaxuatkho', [ChuyenhangController::class, 'donhangdaxuatkho'])->name('chuyenhang.donhangdaxuatkho');
         Route::get('{id}/donhangchonhapkho', [ChuyenhangController::class, 'donhangchonhapkho'])->name('chuyenhang.donhangchonhapkho');
 
-
         Route::get('{id}/daxuatkho', [ChuyenhangController::class, 'daxuatkho'])->name('chuyenhang.daxuatkho');
         Route::get('{id}/danhapkho', [ChuyenhangController::class, 'danhapkho'])->name('chuyenhang.danhapkho');
         Route::post('{id}/lichsuchuyenhang', [ChuyenhangController::class, 'lichsuchuyenhang'])->name('chuyenhang.lichsuchuyenhang');
     });
+
+    Route::group(['prefix' => 'thongke'], function () {
+        Route::get('thongkedonhangtheonam', [ThongkeController::class, 'thongkedonhangtheonam'])->name('thongke.thongkedonhangtheonam');       
+        Route::get('thongkedonhangtheotuan', [ThongkeController::class, 'thongkedonhangtheotuan'])->name('thongke.thongkedonhangtheotuan');       
+    });
+
 });
 
 
