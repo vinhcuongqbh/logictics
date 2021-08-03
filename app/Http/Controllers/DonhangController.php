@@ -14,6 +14,7 @@ use App\Models\Dongiatinhtheosoluong;
 use App\Models\Dongiahangcongkenh;
 use App\Models\Chitietdonhang;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DonhangController extends Controller
 {
@@ -226,11 +227,13 @@ class DonhangController extends Controller
     //Danh sách Đơn hàng đã xuất Kho
     public function dmdaxuatkho()
     {
-        $donhang = Lichsudonhang::where('id_trangthai', 3)
-            ->where('id_khogui', User::find(Auth::id())->id_khohangquanly)
-            ->orderBy('created_at', 'desc')
+        $donhang = Lichsudonhang::where('lichsudonhangs.id_trangthai', 3)
+            ->where('lichsudonhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
+            ->whereBetween('lichsudonhangs.created_at', [Carbon::now()->subDays(60), Carbon::now()])
+            ->leftjoin('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
+            ->orderBy('lichsudonhangs.created_at', 'desc')
             ->get();
-
+        
         return view('admin.donhang.dmdaxuatkho', ['donhangs' => $donhang]);
     }
 

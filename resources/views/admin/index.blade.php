@@ -33,13 +33,23 @@
           <div class="card-body">
             <div class="d-flex">
               <p class="d-flex flex-column">
-                <span class="text-bold text-lg">820</span>
+                <span class="text-bold text-lg">{{ $tongDonHangTuanHienTai }}</span>
                 <span>Đơn hàng</span>
               </p>
               <p class="ml-auto d-flex flex-column text-right">
+                @if ($tiLeTangTruongTuan >0)
                 <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> 12.5%
+                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongTuan }}%
                 </span>
+                @elseif ($tiLeTangTruongTuan ==0)
+                <span class="text-warning">
+                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongTuan }}%
+                </span>
+                @else
+                <span class="text-danger">
+                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongTuan }}%
+                </span>
+                @endif
                 <span class="text-muted">So với tuần trước</span>
               </p>
             </div>
@@ -78,20 +88,20 @@
                 <span>Đơn hàng</span>
               </p>
               <p class="ml-auto d-flex flex-column text-right">                
-                @if ($tiLeTangTruong >0)
+                @if ($tiLeTangTruongNam >0)
                 <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruong }}%
+                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongNam }}%
                 </span>
-                @elseif ($tiLeTangTruong ==0)
+                @elseif ($tiLeTangTruongNam ==0)
                 <span class="text-warning">
-                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruong }}%
+                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongNam }}%
                 </span>
                 @else
                 <span class="text-danger">
-                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruong }}%
+                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongNam }}%
                 </span>
                 @endif
-                <span class="text-muted">So với cùng kỳ năm trước</span>
+                <span class="text-muted">So với năm trước</span>
               </p>
             </div>
             <!-- /.d-flex -->
@@ -281,12 +291,13 @@
   var $visitorsChart = $('#visitors-chart')
   // eslint-disable-next-line no-unused-vars
   var tuanHienTai = @json($tuanHienTai); 
+  var tuanTruoc = @json($tuanTruoc); 
   var visitorsChart = new Chart($visitorsChart, {
     data: {
-      labels: ['Thứ 2', 'Thứ 3', 'Thú 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'],
+      labels: ['CN', 'Thứ 2', 'Thứ 3', 'Thú 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'],
       datasets: [{
         type: 'line',
-        data: [tuanHienTai[1], tuanHienTai[2], tuanHienTai[3], tuanHienTai[4], tuanHienTai[5], tuanHienTai[6], tuanHienTai[0]],
+        data: [tuanHienTai[0], tuanHienTai[1], tuanHienTai[2], tuanHienTai[3], tuanHienTai[4], tuanHienTai[5], tuanHienTai[6] ],
         backgroundColor: 'transparent',
         borderColor: '#007bff',
         pointBorderColor: '#007bff',
@@ -295,19 +306,18 @@
         // pointHoverBackgroundColor: '#007bff',
         // pointHoverBorderColor    : '#007bff'
       },
-      // {
-      //   type: 'line',
-      //   data: [60, null, null, null, null, null, null],
-      //   backgroundColor: 'tansparent',
-      //   borderColor: '#ced4da',
-      //   pointBorderColor: '#ced4da',
-      //   pointBackgroundColor: '#ced4da',
-      //   fill: false
-      //   // pointHoverBackgroundColor: '#ced4da',
-      //   // pointHoverBorderColor    : '#ced4da'
-      // }
-    ]
-    },
+      {
+        type: 'line',
+        data: [tuanTruoc[0], tuanTruoc[1], tuanTruoc[2], tuanTruoc[3], tuanTruoc[4], tuanTruoc[5], tuanTruoc[6] ],
+        backgroundColor: 'tansparent',
+        borderColor: '#ced4da',
+        pointBorderColor: '#ced4da',
+        pointBackgroundColor: '#ced4da',
+        fill: false
+        // pointHoverBackgroundColor: '#ced4da',
+        // pointHoverBorderColor    : '#ced4da'
+      }
+    ]},
     options: {
       maintainAspectRatio: false,
       tooltips: {
@@ -332,7 +342,7 @@
           },
           ticks: $.extend({
             beginAtZero: true,
-            suggestedMax: 20
+            suggestedMax: 8
           }, ticksStyle)
         }],
         xAxes: [{

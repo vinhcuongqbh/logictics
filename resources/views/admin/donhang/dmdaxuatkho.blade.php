@@ -57,7 +57,7 @@
                                                     <td style="text-align: center"><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
                                                     </td>
-                                                    <td style="text-align: center"><a
+                                                    <td style="text-align: right"><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
                                                     </td>
                                                     <td style="text-align: center">
@@ -125,6 +125,7 @@
                 "pageLength": 25,
                 "autoWidth": false,
                 "searching": true,
+                "order": [[ 0, "desc" ]]
                 //"buttons": ["copy", "excel", "pdf", "print", ]
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
