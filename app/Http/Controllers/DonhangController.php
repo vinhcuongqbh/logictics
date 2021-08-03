@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Donhang;
 use App\Models\Khachhang;
+use App\Models\Lichsudonhang;
 use App\Models\Chuyenhang;
 use App\Models\Danhmucmathang;
 use App\Models\Dongiatinhtheokhoiluong;
@@ -225,8 +226,8 @@ class DonhangController extends Controller
     //Danh sách Đơn hàng đã xuất Kho
     public function dmdaxuatkho()
     {
-        $donhang = Donhang::where('donhangs.id_trangthai', 3)
-            ->where('donhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
+        $donhang = Lichsudonhang::where('id_trangthai', 3)
+            ->where('id_khogui', User::find(Auth::id())->id_khohangquanly)
             ->orderBy('created_at', 'desc')
             ->get();
 

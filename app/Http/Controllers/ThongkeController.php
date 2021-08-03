@@ -13,8 +13,7 @@ class ThongkeController extends Controller
     public function dashboard() {
         $thongkedonhangtheonam = $this->thongkedonhangtheonam();
        
-        $thongkedonhangtheotuan = $this->thongkedonhangtheotuan();
-        
+        $thongkedonhangtheotuan = $this->thongkedonhangtheotuan();        
 
         return view('admin.index', ['namHienTai' => $thongkedonhangtheonam[0], 'namTruoc' => $thongkedonhangtheonam[1],
          'tongDonHangNamHienTai' => $thongkedonhangtheonam[2], 'tiLeTangTruong' => $thongkedonhangtheonam[3] , 
@@ -23,7 +22,7 @@ class ThongkeController extends Controller
 
     public function thongkedonhang($ngayBatDau, $ngayKetThuc)
     {
-        $soluongdonhang = Donhang::where('id_trangthai', '<>', '0')
+        $soluongdonhang = Lichsudonhang::where('id_trangthai', '<>', '0')
             ->where('id_nhanvienquanly', Auth::id())
             ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
             ->count();
