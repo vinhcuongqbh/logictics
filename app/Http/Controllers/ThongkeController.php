@@ -4,11 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donhang;
+use App\Models\LichsuDonhang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class ThongkeController extends Controller
-{
+{   
+    public function dashboard() {
+        $thongkedonhangtheonam = $this->thongkedonhangtheonam();
+       
+        $thongkedonhangtheotuan = $this->thongkedonhangtheotuan();
+        
+
+        return view('admin.index', ['namHienTai' => $thongkedonhangtheonam[0], 'namTruoc' => $thongkedonhangtheonam[1],
+         'tongDonHangNamHienTai' => $thongkedonhangtheonam[2], 'tiLeTangTruong' => $thongkedonhangtheonam[3] , 
+         'tuanHienTai' => $thongkedonhangtheotuan]);
+    }
+
     public function thongkedonhang($ngayBatDau, $ngayKetThuc)
     {
         $soluongdonhang = Donhang::where('id_trangthai', '<>', '0')
@@ -47,14 +59,14 @@ class ThongkeController extends Controller
         else
             $tiLeTangTruong = round($tongDonHangNamHienTai * 100, 2);
 
-        return view('admin.index', ['namHienTai' => $namHienTai, 'namTruoc' => $namTruoc, 'tongDonHangNamHienTai' => $tongDonHangNamHienTai, 'tiLeTangTruong' => $tiLeTangTruong]);
+        return [$namHienTai, $namTruoc, $tongDonHangNamHienTai, $tiLeTangTruong];
     }
 
 
     public function thongkedonhangtheotuan()
     {
         //Tìm Ngày Hiện tại
-        $newDay = new Carbon("2021-7-28");
+        $newDay = new Carbon("2021-05-01");
         $ngayHienTai = $newDay->copy()->startOfDay();
         $ngayKetThuc = $newDay->copy()->endOfDay();
         //Tìm thứ trong tuần của Ngày Hiện tại
@@ -69,6 +81,6 @@ class ThongkeController extends Controller
                 $tuanHienTai[$thuTrongTuan] = $this->thongkedonhang($ngayKetThuc->copy()->startOfDay()->addDays($thuTrongTuan-$thuHienTai), $ngayKetThuc->copy()->endOfDay()->addDays($thuTrongTuan-$thuHienTai));
         }
 
-        return view('admin.index', ['tuanHienTai' => $tuanHienTai]);
+        return $tuanHienTai;
     }
 }

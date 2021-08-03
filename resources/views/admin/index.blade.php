@@ -295,17 +295,18 @@
         // pointHoverBackgroundColor: '#007bff',
         // pointHoverBorderColor    : '#007bff'
       },
-      {
-        type: 'line',
-        data: [60, 80, 70, 67, 80, 77, 100],
-        backgroundColor: 'tansparent',
-        borderColor: '#ced4da',
-        pointBorderColor: '#ced4da',
-        pointBackgroundColor: '#ced4da',
-        fill: false
-        // pointHoverBackgroundColor: '#ced4da',
-        // pointHoverBorderColor    : '#ced4da'
-      }]
+      // {
+      //   type: 'line',
+      //   data: [60, null, null, null, null, null, null],
+      //   backgroundColor: 'tansparent',
+      //   borderColor: '#ced4da',
+      //   pointBorderColor: '#ced4da',
+      //   pointBackgroundColor: '#ced4da',
+      //   fill: false
+      //   // pointHoverBackgroundColor: '#ced4da',
+      //   // pointHoverBorderColor    : '#ced4da'
+      // }
+    ]
     },
     options: {
       maintainAspectRatio: false,
@@ -331,7 +332,7 @@
           },
           ticks: $.extend({
             beginAtZero: true,
-            suggestedMax: 200
+            suggestedMax: 20
           }, ticksStyle)
         }],
         xAxes: [{

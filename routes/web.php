@@ -20,15 +20,11 @@ use App\Http\Controllers\ThongkeController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
-})->middleware(['auth']);
-
-Route::get('admin', function () {
-    return view('admin.index');
-})->middleware(['auth']);
+Route::get('/', [ThongkeController::class, 'dashboard'])->middleware(['auth']);
 
 Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('', [ThongkeController::class, 'dashboard'])->name('thongke.dashboard');       
+
     Route::group(['prefix' => 'nhanvien'], function () {
         Route::get('', [NhanvienController::class, 'index'])->name('nhanvien');
         Route::get('danghiviec', [NhanvienController::class, 'danghiviec'])->name('nhanvien.danghiviec');
@@ -93,10 +89,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('{id}/lichsuchuyenhang', [ChuyenhangController::class, 'lichsuchuyenhang'])->name('chuyenhang.lichsuchuyenhang');
     });
 
-    Route::group(['prefix' => 'thongke'], function () {
-        Route::get('thongkedonhangtheonam', [ThongkeController::class, 'thongkedonhangtheonam'])->name('thongke.thongkedonhangtheonam');       
-        Route::get('thongkedonhangtheotuan', [ThongkeController::class, 'thongkedonhangtheotuan'])->name('thongke.thongkedonhangtheotuan');       
-    });
+    
 
 });
 

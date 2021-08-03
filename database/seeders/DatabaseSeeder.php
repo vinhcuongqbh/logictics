@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             DongiatinhtheosoluongSeeder::class,
             DongiatinhtheokhoiluongSeeder::class,
             DanhmucmathangSeeder::class,
+            LichsudonhangSeeder::class,
         ]);
     }
 }
