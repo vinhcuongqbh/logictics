@@ -21,8 +21,8 @@ class LichsudonhangSeeder extends Seeder
     public function run()
     {
         $id_donhang = 0;        
-        for ($id_nhanvienquanly = 3; $id_nhanvienquanly <= 4; $id_nhanvienquanly++) {
-            $soluongdonhang = rand(4000, 6000);
+        for ($id_nhanvienquanly = 3; $id_nhanvienquanly <= 5; $id_nhanvienquanly++) {
+            $soluongdonhang = rand(2000, 6000);
             for ($i = 1; $i <= $soluongdonhang; $i++) {
                 $id_donhang++;
                 $day = Carbon::now()->subDays(rand(0, 730));

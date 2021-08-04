@@ -20,7 +20,7 @@ use App\Http\Controllers\ThongkeController;
 |
 */
 
-Route::get('/', [ThongkeController::class, 'dashboard'])->middleware(['auth']);
+Route::get('/', [ThongkeController::class, 'thongKeDonHangDashBoard'])->middleware(['auth']);
 
 Route::prefix('admin')->middleware('auth')->group(function () {    
 
