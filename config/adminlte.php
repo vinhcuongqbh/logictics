@@ -307,7 +307,12 @@ return [
         ],
         [
             'text'        => 'Đơn hàng',
-            'url'         => '#',
+            'url'         => 'admin/thongke/thongkedonhang',
+            'icon' => 'fas fa-fw fa-angle-right',
+        ],
+        [
+            'text'        => 'Doanh thu',
+            'url'         => 'admin/thongke/thongkedoanhthu',
             'icon' => 'fas fa-fw fa-angle-right',
         ],
 

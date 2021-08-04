@@ -22,8 +22,7 @@ use App\Http\Controllers\ThongkeController;
 
 Route::get('/', [ThongkeController::class, 'dashboard'])->middleware(['auth']);
 
-Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('', [ThongkeController::class, 'dashboard'])->name('thongke.dashboard');       
+Route::prefix('admin')->middleware('auth')->group(function () {    
 
     Route::group(['prefix' => 'nhanvien'], function () {
         Route::get('', [NhanvienController::class, 'index'])->name('nhanvien');
@@ -89,8 +88,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('{id}/lichsuchuyenhang', [ChuyenhangController::class, 'lichsuchuyenhang'])->name('chuyenhang.lichsuchuyenhang');
     });
 
+    Route::group(['prefix' => 'thongke'], function () {
+        Route::get('thongkedonhang', [ThongkeController::class, 'thongKeDonHangDashBoard'])->name('thongke.thongKeDonHangDashBoard');
+        Route::get('thongkedoanhthu', [ThongkeController::class, 'thongKeDoanhThuDashBoard'])->name('thongke.thongKeDoanhThuDashBoard');       
+    });
     
-
+    Route::get('', [ThongkeController::class, 'thongKeDonHangDashBoard']);       
 });
 
 

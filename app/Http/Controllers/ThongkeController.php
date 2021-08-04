@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ThongkeController extends Controller
 {
-    public function dashboard()
+    
+   
+    public function thongKeDonHangDashBoard()
     {
         //Tính tổng số đơn hàng năm hiện tại (theo từng tháng)
-        $namHienTai = $this->thongkedonhangtheonam(Carbon::now()->year);
+        $namHienTai = $this->thongKeDonHangTheoNam(Carbon::now()->year);
         //Tính tổng số đơn hàng năm trước (theo từng tháng)
-        $namTruoc = $this->thongkedonhangtheonam(Carbon::now()->year - 1);
+        $namTruoc = $this->thongKeDonHangTheoNam(Carbon::now()->year - 1);
 
         //Tính tỉ lệ đơn hàng Năm hiện tại so với Năm trước
         $ngayHienTai = Carbon::now()->endOfDay();
@@ -29,34 +31,20 @@ class ThongkeController extends Controller
         } else {
             $tiLeTangTruongNam = round($tongDonHangNamHienTai * 100, 2);
         }
+        
+        //Tỉ lệ Tăng trưởng Tuần   
+        $ngayCuaTuanA = Carbon::now()->subDays(7);     
+        $ngayCuaTuanB = Carbon::now();
+        $tinhTiLeTangTruongTuan = $this->tinhTiLeTangTruongTuan( $ngayCuaTuanA, $ngayCuaTuanB);
+        $donHangTuanA = $tinhTiLeTangTruongTuan[0];
+        $donHangTuanB = $tinhTiLeTangTruongTuan[1];
+        $tongDonHangTuanB = $tinhTiLeTangTruongTuan[2];
+        $tiLeTangTruongTuan = $tinhTiLeTangTruongTuan[3];
 
-        //Tính tổng số đơn hàng tuần hiện tại (theo từng ngày)
-        $tuanHienTai = $this->thongkedonhangtheotuan(Carbon::now());
-        //Tính tổng số đơn hàng tuần trước (theo từng ngày)
-        $tuanTruoc = $this->thongkedonhangtheotuan(Carbon::now()->subDays(7));
-
-        //Tính tỉ lệ đơn hàng Tuần hiện tại so với Tuần trước
-        $thuHienTai = Carbon::now()->dayOfWeek;
-        $tongDonHangTuanHienTai = 0;
-        for ($i = 0; $i <= $thuHienTai; $i++) {
-            $tongDonHangTuanHienTai = $tongDonHangTuanHienTai + $tuanHienTai[$i];
-        }
-
-        $tongDonHangTuanTruoc = 0;
-        for ($i = 0; $i <= $thuHienTai; $i++) {
-            $tongDonHangTuanTruoc = $tongDonHangTuanTruoc + $tuanTruoc[$i];
-        }
-
-        if ($tongDonHangTuanTruoc <> 0) {
-            $tiLeTangTruongTuan = round(($tongDonHangTuanHienTai - $tongDonHangTuanTruoc) / $tongDonHangTuanTruoc * 100, 2);
-        } else {
-            $tiLeTangTruongTuan = round($tongDonHangTuanHienTai * 100, 2);
-        }
-
-        return view('admin.index', [
+        return view('admin.thongke.thongkedonhang', [
             'namHienTai' =>  $namHienTai, 'namTruoc' => $namTruoc,
-            'tongDonHangNamHienTai' => $tongDonHangNamHienTai, 'tiLeTangTruongNam' => $tiLeTangTruongNam,
-            'tuanHienTai' => $tuanHienTai, 'tuanTruoc' => $tuanTruoc, 'tongDonHangTuanHienTai' => $tongDonHangTuanHienTai,
+            'tongDonHangNamHienTai' => $tongDonHangNamHienTai, 'tiLeTangTruongNam' => $tiLeTangTruongNam, 
+            'donHangTuanTruoc' => $donHangTuanA, 'donHangTuanHienTai' => $donHangTuanB, 'tongDonHangTuanHienTai' => $tongDonHangTuanB,
             'tiLeTangTruongTuan' => $tiLeTangTruongTuan,
         ]);
     }
@@ -70,7 +58,7 @@ class ThongkeController extends Controller
         return $soluongdonhang;
     }
 
-    public function thongkedonhangtheonam($nam)
+    public function thongKeDonHangTheoNam($nam)
     {
         $tongSoDonHang = array();
         $tongSoDonHang[0] = $nam;
@@ -86,7 +74,7 @@ class ThongkeController extends Controller
     }
 
 
-    public function thongkedonhangtheotuan($ngay)
+    public function thongKeDonHangTheoTuan($ngay)
     {
         //Tìm thứ trong tuần của Ngày Hiện tại
         $thuHienTai = $ngay->dayOfWeek;
@@ -113,4 +101,37 @@ class ThongkeController extends Controller
 
         return $tongSoDonHang;
     }
+
+
+    public function tinhTiLeTangTruongTuan($tuanA, $tuanB)
+    {
+        //Tính số đơn hàng tuần A (theo từng ngày)
+        $donHangTuanA = $this->thongKeDonHangTheoTuan($tuanA);
+        //Tính số đơn hàng tuần B (theo từng ngày)
+        $donHangTuanB = $this->thongKeDonHangTheoTuan($tuanB);
+
+        //Tính tỉ lệ đơn hàng Tuần B so với Tuần A
+        //Tính thứ trong Tuần
+        $thuHienTai = $tuanA->dayOfWeek;
+
+        //Tính tổng số đơn hàng tuần A
+        $tongDonHangTuanA = 0;
+        for ($i = 0; $i <= $thuHienTai; $i++) {
+            $tongDonHangTuanA = $tongDonHangTuanA + $donHangTuanA[$i];
+        }
+        //Tính tổng số đơn hàng tuần B
+        $tongDonHangTuanB = 0;
+        for ($i = 0; $i <= $thuHienTai; $i++) {
+            $tongDonHangTuanB = $tongDonHangTuanB + $donHangTuanB[$i];
+        }
+
+        if ($tongDonHangTuanA <> 0) {
+            $tiLeTangTruongTuan = round(($tongDonHangTuanB - $tongDonHangTuanA) / $tongDonHangTuanA * 100, 2);
+        } else {
+            $tiLeTangTruongTuan = round($tongDonHangTuanB * 100, 2);
+        }
+
+        return [$donHangTuanA, $donHangTuanB, $tongDonHangTuanB, $tiLeTangTruongTuan];
+    }
+
 }

@@ -13,7 +13,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>THỐNG KÊ</h1>
+        <h1>THỐNG KÊ ĐƠN HÀNG</h1>
       </div>
     </div>
   </div><!-- /.container-fluid -->
@@ -238,14 +238,14 @@
 
   var $visitorsChart = $('#visitors-chart')
   // eslint-disable-next-line no-unused-vars
-  var tuanHienTai = @json($tuanHienTai); 
-  var tuanTruoc = @json($tuanTruoc); 
+  var donHangTuanHienTai = @json($donHangTuanHienTai); 
+  var donHangTuanTruoc = @json($donHangTuanTruoc); 
   var visitorsChart = new Chart($visitorsChart, {
     data: {
       labels: ['CN', 'Thứ 2', 'Thứ 3', 'Thú 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'],
       datasets: [{
         type: 'line',
-        data: [tuanHienTai[0], tuanHienTai[1], tuanHienTai[2], tuanHienTai[3], tuanHienTai[4], tuanHienTai[5], tuanHienTai[6] ],
+        data: [donHangTuanHienTai[0], donHangTuanHienTai[1], donHangTuanHienTai[2], donHangTuanHienTai[3], donHangTuanHienTai[4], donHangTuanHienTai[5], donHangTuanHienTai[6] ],
         backgroundColor: 'transparent',
         borderColor: '#007bff',
         pointBorderColor: '#007bff',
@@ -256,7 +256,7 @@
       },
       {
         type: 'line',
-        data: [tuanTruoc[0], tuanTruoc[1], tuanTruoc[2], tuanTruoc[3], tuanTruoc[4], tuanTruoc[5], tuanTruoc[6] ],
+        data: [donHangTuanTruoc[0], donHangTuanTruoc[1], donHangTuanTruoc[2], donHangTuanTruoc[3], donHangTuanTruoc[4], donHangTuanTruoc[5], donHangTuanTruoc[6] ],
         backgroundColor: 'tansparent',
         borderColor: '#ced4da',
         pointBorderColor: '#ced4da',
