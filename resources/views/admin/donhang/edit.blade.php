@@ -26,7 +26,8 @@
                 <div class="card-header">
                     <h3 class="card-title">Thông tin Đơn hàng</h3>
                 </div>
-                <form class="form-horizontal" action="{{ route('donhang.update', $donhang->id) }}" method="post" id="donhang-update">
+                <form class="form-horizontal" action="{{ route('donhang.update', $donhang->id) }}" method="post"
+                    id="donhang-update">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -280,7 +281,9 @@
                                                 <td style="text-align: center">{{ $chitietdonhang->khoiluong }}</td>
                                                 <td style="text-align: center">{{ $chitietdonhang->kichthuoc }}</td>
                                                 <td style="text-align: center">
+                                                    @if ($chitietdonhang->giatriuoctinh)
                                                     {{ number_format($chitietdonhang->giatriuoctinh, 0, '.', '.') }}
+                                                    @endif
                                                 </td>
                                                 <td style="text-align: right">
                                                     {{ number_format($chitietdonhang->chiphi, 0, '.', '.') }}</td>
@@ -658,7 +661,6 @@
 
             //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
             $('#submitForm').on('click', function() {
-                alert("hahaha");
                 document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
                 document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
             });

@@ -113,8 +113,12 @@
                                             <td style="text-align: center">{{ $chitietdonhang->soluong }}</td>
                                             <td style="text-align: center">{{ $chitietdonhang->khoiluong }}</td>
                                             <td style="text-align: center">{{ $chitietdonhang->kichthuoc }}</td>
+
                                             <td style="text-align: center">
-                                                {{ number_format($chitietdonhang->giatriuoctinh, 0, '.', '.') }}</td>
+                                                @if ($chitietdonhang->giatriuoctinh <> 0)
+                                                    {{ number_format($chitietdonhang->giatriuoctinh, 0, '.', '.') }}
+                                                @endif
+                                            </td>
                                             <td style="text-align: right">
                                                 {{ number_format($chitietdonhang->chiphi, 0, '.', '.') }}</td>
                                         </tr>

@@ -300,11 +300,11 @@ return [
             ],
         ],
         ['header' => 'THỐNG KÊ'],
-        [
-            'text'        => 'Nhân viên',
-            'url'         => '#',
-            'icon' => 'fas fa-fw fa-angle-right',
-        ],
+        // [
+        //     'text'        => 'Nhân viên',
+        //     'url'         => '#',
+        //     'icon' => 'fas fa-fw fa-angle-right',
+        // ],
         [
             'text'        => 'Đơn hàng',
             'url'         => 'admin/thongke/thongkedonhang',
