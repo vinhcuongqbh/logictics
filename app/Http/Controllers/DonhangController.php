@@ -26,12 +26,15 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
 
-        return view('admin.donhang.create', [
-            'danhmucmathangs' => $danhmucmathang,
-            'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
-            'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
-            'dongiahangcongkenh' => $dongiahangcongkenh
-        ]);
+        return view(
+            'admin.donhang.create',
+            [
+                'danhmucmathangs' => $danhmucmathang,
+                'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
+                'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
+                'dongiahangcongkenh' => $dongiahangcongkenh
+            ]
+        );
     }
 
     public function store(Request $request)
@@ -72,21 +75,21 @@ class DonhangController extends Controller
             if ($value['soluong'] <> null) $chitietdonhang->soluong = $value['soluong'];
             if ($value['khoiluong'] <> null) $chitietdonhang->khoiluong = $value['khoiluong'];
             if ($value['kichthuoc'] <> null) $chitietdonhang->kichthuoc = $value['kichthuoc'];
-            if ($value['giatriuoctinh'] <> null) $chitietdonhang->giatriuoctinh = str_replace(".","",$value['giatriuoctinh']);
-            $chitietdonhang->chiphi = str_replace(".","",$value['chiphi']);
+            if ($value['giatriuoctinh'] <> null) $chitietdonhang->giatriuoctinh = str_replace(".", "", $value['giatriuoctinh']);
+            $chitietdonhang->chiphi = str_replace(".", "", $value['chiphi']);
             $chitietdonhang->save();
         }
 
         //Lưu sự kiện "Khởi tạo" cho Đơn hàng
         $lichsudonhangController = new LichsudonhangController;
-        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
 
         //Nhập Đơn hàng vào kho
         $donhang->id_trangthai = 2;
         $donhang->save();
 
         //Lưu sự kiện "Nhập kho" cho Đơn hàng
-        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
 
         return redirect()->action([DonhangController::class, 'show'], ['id' => $donhang->id]);
     }
@@ -96,17 +99,123 @@ class DonhangController extends Controller
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::find($id);
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "Mã đơn hàng: ".$donhang->id.
-        "\nNgười gửi: ".$donhang->tennguoigui.
-        "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
-        "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
-        "\nNgười nhận: ".$donhang->tennguoinhan.
-        "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
-        "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
-        
+        $qrcode = $donhang->id;
+        // $qrcode = "Mã đơn hàng: ".$donhang->id.
+        // "\nNgười gửi: ".$donhang->tennguoigui.
+        // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
+        // "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
+        // "\nNgười nhận: ".$donhang->tennguoinhan.
+        // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
+        // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
 
-        return view('admin.donhang.show', ['donhang' => $donhang, 'chitietdonhangs' => $chitietdonhang, 'qrcode' => $qrcode]);
+        //Hiển thị lịch sử đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
+
+
+        return view(
+            'admin.donhang.show',
+            [
+                'donhang' => $donhang,
+                'chitietdonhangs' => $chitietdonhang,
+                'lichsudonhangs' => $lichsudonhang,
+                'qrcode' => $qrcode
+            ]
+        );
     }
+
+
+
+    public function edit($id)
+    {
+        //Hiển thị thông tin Đơn hàng
+        $donhang = Donhang::find($id);
+        $danhmucmathang = Danhmucmathang::all();
+        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
+        $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
+        $dongiahangcongkenh = Dongiahangcongkenh::all();
+        $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
+        $qrcode = $donhang->id;
+        // $qrcode = "Mã đơn hàng: ".$donhang->id.
+        // "\nNgười gửi: ".$donhang->tennguoigui.
+        // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
+        // "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
+        // "\nNgười nhận: ".$donhang->tennguoinhan.
+        // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
+        // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
+
+        //Hiển thị lịch sử đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
+
+
+        return view(
+            'admin.donhang.edit',
+            [
+                'donhang' => $donhang,
+                'danhmucmathangs' => $danhmucmathang,
+                'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
+                'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
+                'dongiahangcongkenh' => $dongiahangcongkenh,
+                'chitietdonhangs' => $chitietdonhang,
+                'lichsudonhangs' => $lichsudonhang,
+                'qrcode' => $qrcode
+            ]
+        );
+    }
+
+
+
+    public function update(Request $request, $id)
+    {
+        //  //Cập nhật thông tin khách hàng
+        //  $khachhang = Khachhang::find($request->sodienthoainguoigui);
+        //  $khachhang->tenkhachhang = $request->tennguoigui;
+        //  $khachhang->sodienthoai = $request->sodienthoainguoigui;
+        //  $khachhang->diachi = $request->diachinguoigui;
+        //  $khachhang->id_nhanvienquanly = Auth::id();
+        //  $khachhang->id_trangthai = 1;
+        //  $khachhang->save();
+ 
+ 
+         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
+         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
+ 
+         //Cập nhật thông tin đơn hàng
+         $donhang = Donhang::find($id);
+         $donhang->id_nhanvienquanly = Auth::id();
+         $donhang->id_khogui = $id_khohangquanly;
+         $donhang->id_trangthai = 2;
+         $donhang->tennguoigui = $request->tennguoigui;
+         $donhang->sodienthoainguoigui = $request->sodienthoainguoigui;
+         $donhang->diachinguoigui = $request->diachinguoigui;
+         $donhang->tennguoinhan = $request->tennguoinhan;
+         $donhang->sodienthoainguoinhan = $request->sodienthoainguoinhan;
+         $donhang->diachinguoinhan = $request->diachinguoinhan;
+         $donhang->tongchiphi = $request->tongchiphi2;
+         $donhang->save();
+ 
+        //Xóa Chi tiết đơn hàng trước khi tạo mới
+        $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->delete();
+
+         //Tạo Chi tiết đơn hàng
+         $chiTietDonHangclient = json_decode($request->chiTietDonHang, true);
+         foreach ($chiTietDonHangclient as $value) {
+             $chitietdonhang = new Chitietdonhang;
+             $chitietdonhang->id_donhang = $donhang->id;
+             $chitietdonhang->tenmathang = $value['tenmathang'];
+             if ($value['soluong'] <> null) $chitietdonhang->soluong = $value['soluong'];
+             if ($value['khoiluong'] <> null) $chitietdonhang->khoiluong = $value['khoiluong'];
+             if ($value['kichthuoc'] <> null) $chitietdonhang->kichthuoc = $value['kichthuoc'];
+             if ($value['giatriuoctinh'] <> null) $chitietdonhang->giatriuoctinh = str_replace(".", "", $value['giatriuoctinh']);
+             $chitietdonhang->chiphi = str_replace(".", "", $value['chiphi']);
+             $chitietdonhang->save();
+         }
+ 
+         return redirect()->action([DonhangController::class, 'show'], ['id' => $donhang->id]);
+    }
+
+
 
     public function xuatkho(Request $request)
     {
@@ -127,7 +236,7 @@ class DonhangController extends Controller
 
                 //Lưu sự kiện cho từng Đơn hàng
                 $lichsudonhangController = new LichsudonhangController;
-                $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+                $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
             }
 
             //Cập nhật thông tin xuất kho cho Chuyến hàng
@@ -164,7 +273,7 @@ class DonhangController extends Controller
 
             //Lưu sự kiện cho từng Đơn hàng
             $lichsudonhangController = new LichsudonhangController;
-            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
         }
 
         //Cập nhật thông tin xuất kho cho Chuyến hàng
@@ -172,7 +281,8 @@ class DonhangController extends Controller
 
         //Lưu sự kiện cho Chuyến hàng
         $lichsuchuyenhangController = new LichsuchuyenhangController;
-        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);        return back();
+        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+        return back();
         //return redirect()->route('donhang.dmdangluukho');
     }
 
@@ -201,12 +311,12 @@ class DonhangController extends Controller
 
             //Lưu sự kiện cho từng Đơn hàng
             $lichsudonhangController = new LichsudonhangController;
-            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
         }
 
         //Lưu sự kiện cho Chuyến hàng
         $lichsuchuyenhangController = new LichsuchuyenhangController;
-        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai, $donhang->tongchiphi);
 
         return back();
         //return redirect()->route('donhang.dmdangluukho');
@@ -229,11 +339,11 @@ class DonhangController extends Controller
     {
         $donhang = Lichsudonhang::where('lichsudonhangs.id_trangthai', 3)
             ->where('lichsudonhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
-            ->whereBetween('lichsudonhangs.created_at', [Carbon::now()->subDays(60), Carbon::now()])
+            ->whereBetween('lichsudonhangs.created_at', [Carbon::now()->subMonth(), Carbon::now()])
             ->leftjoin('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
             ->orderBy('lichsudonhangs.created_at', 'desc')
             ->get();
-        
+
         return view('admin.donhang.dmdaxuatkho', ['donhangs' => $donhang]);
     }
 

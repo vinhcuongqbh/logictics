@@ -573,7 +573,6 @@
 
             //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
             $('#submitForm').on('click', function() {
-                console.log(JSON.stringify(donhangTable.data().toArray()));
                 document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
                 document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
             });

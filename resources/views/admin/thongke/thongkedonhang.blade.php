@@ -217,9 +217,6 @@
 <!-- jQuery -->
 <script src="/vendor/jquery/jquery.min.js"></script>
 
-<!-- AdminLTE -->
-<script src="/vendor/adminlte/dist/js/adminlte.js"></script>
-
 <!-- OPTIONAL SCRIPTS -->
 <script src="/vendor/chart.js/Chart.min.js"></script>
 <!-- AdminLTE dashboard -->
@@ -312,7 +309,7 @@
   var donHangTuanTruoc = @json($donHangTuanTruoc); 
   var visitorsChart = new Chart($visitorsChart, {
     data: {
-      labels: ['Thứ 2', 'Thứ 3', 'Thú 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
+      labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
       datasets: [{
         type: 'line',
         data: [donHangTuanHienTai[2], donHangTuanHienTai[3], donHangTuanHienTai[4], donHangTuanHienTai[5], donHangTuanHienTai[6], donHangTuanHienTai[7], donHangTuanHienTai[8] ],

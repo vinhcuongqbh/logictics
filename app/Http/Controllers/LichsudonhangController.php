@@ -7,18 +7,25 @@ use Illuminate\Http\Request;
 
 class LichsudonhangController extends Controller
 {
-    //Hiển thị Lịch sử đơn hàng
-    public function index($id)    {
-
-        $lichsudonhang = Lichsudonhang::where('id_donhang', $id)
-            ->orderBy('id', 'desc')
+    // //Hiển thị Lịch sử đơn hàng
+    public function lichsudonhang($id_donhang)
+    {
+        $lichsudonhang = Lichsudonhang::where('lichsudonhangs.id_donhang', $id_donhang)
+            ->join('users', 'users.id', 'lichsudonhangs.id_nhanvienquanly')
+            ->join('trangthais', 'trangthais.id', 'lichsudonhangs.id_trangthai')
+            ->join('khohangs as khogui', 'khogui.id', 'lichsudonhangs.id_khogui')
+            ->leftJoin('khohangs as khonhan', 'khonhan.id', 'lichsudonhangs.id_khonhan')
+            ->select('lichsudonhangs.*', 'trangthais.tentrangthai', 'khogui.tenkhohang as khogui', 'khogui.diachi as diachikhogui', 'khonhan.tenkhohang as khonhan', 'khonhan.diachi as diachikhonhan', 'users.name')
+            ->orderBy('id', 'asc')
             ->get();
 
-        return view('admin.lichsudonhang.index', ['lichsudonhangs' => $lichsudonhang]);
+        return $lichsudonhang;
     }
 
+
+
     //Lưu sự kiện của đơn hàng
-    public function luusukien($id_donhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
+    public function luusukien($id_donhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai, $tongchiphi)
     {
 
         $lichsudonhang = new Lichsudonhang;
@@ -27,19 +34,7 @@ class LichsudonhangController extends Controller
         $lichsudonhang->id_khogui = $id_khogui;
         $lichsudonhang->id_khonhan = $id_khonhan;
         $lichsudonhang->id_trangthai = $id_trangthai;
+        $lichsudonhang->tongchiphi = $tongchiphi;
         $lichsudonhang->save();
-    }
-
-    public function lichsudonhang($id_donhang)
-    {
-        $lichsudonhang = Lichsudonhang::where('lichsudonhangs.id_donhang', $id_donhang)
-            ->join('trangthais', 'trangthais.id', 'lichsudonhangs.id_trangthai')
-            ->join('khohangs as khogui', 'khogui.id', 'lichsudonhangs.id_khogui')
-            ->leftJoin('khohangs as khonhan', 'khonhan.id', 'lichsudonhangs.id_khonhan')
-            ->select('lichsudonhangs.*', 'trangthais.tentrangthai', 'khogui.tenkhohang as khogui', 'khogui.diachi as diachikhogui', 'khonhan.tenkhohang as khonhan', 'khonhan.diachi as diachikhonhan')
-            ->orderBy('id', 'asc')
-            ->get();
-
-        return $lichsudonhang;
-    }
+    }    
 }

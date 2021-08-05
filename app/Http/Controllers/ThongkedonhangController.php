@@ -8,7 +8,7 @@ use App\Models\LichsuDonhang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class ThongkeController extends Controller
+class ThongkedonhangController extends Controller
 {
     public function thongKeDonHangDashBoard()
     {
@@ -40,7 +40,7 @@ class ThongkeController extends Controller
         //Tính tỉ lệ tăng trưởng tuần hiện tại so với tuần trước (tính đến ngày hiện tại)
         $tiLeTangTruongTuan = $this->tiLeTangTruong(Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek(), Carbon::now()->startOfWeek(), Carbon::now());
 
-        return view('admin.thongke.thongKeDonHang', [
+        return view('admin.thongke.thongkedonhang', [
             'donHangTrongNgay' =>  $donHangTrongNgay,
             'donHangTrongTuan' => $donHangTrongTuan,
             'donHangTrongThang' => $donHangTrongThang,
@@ -131,8 +131,8 @@ class ThongkeController extends Controller
     {
         $ngayBatDauNam = $nam->copy()->startOfYear();
         $ngayKetThucNam = $nam->copy()->endOfYear();
-        $tongDonhang = $this->thongKeDonHang($ngayBatDauNam, $ngayKetThucNam);
-        return $tongDonhang;
+        $tongDonHang = $this->thongKeDonHang($ngayBatDauNam, $ngayKetThucNam);
+        return $tongDonHang;
     }
 
 

@@ -6,7 +6,8 @@ use App\Http\Controllers\KhachhangController;
 use App\Http\Controllers\KhohangController;
 use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\ChuyenhangController;
-use App\Http\Controllers\ThongkeController;
+use App\Http\Controllers\ThongkedonhangController;
+use App\Http\Controllers\ThongkedoanhthuController;
 
 
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\ThongkeController;
 |
 */
 
-Route::get('/', [ThongkeController::class, 'thongKeDonHangDashBoard'])->middleware(['auth']);
+Route::get('/', [ThongkedonhangController::class, 'thongKeDonHangDashBoard'])->middleware(['auth']);
 
 Route::prefix('admin')->middleware('auth')->group(function () {    
 
@@ -71,6 +72,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('store', [DonhangController::class, 'store'])->name('donhang.store');
         Route::get('{id}/show', [DonhangController::class, 'show'])->name('donhang.show');
         Route::get('{id}/edit', [DonhangController::class, 'edit'])->name('donhang.edit');
+        Route::post('{id}/update', [DonhangController::class, 'update'])->name('donhang.update');
         Route::get('{id}/delete', [DonhangController::class, 'delete'])->name('donhang.delete');
         Route::get('{id}/restore', [DonhangController::class, 'restore'])->name('donhang.restore');
         Route::get('{id}/lichsudonhang', [DonhangController::class, 'lichsudonhang'])->name('donhang.lichsudonhang');
@@ -89,11 +91,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => 'thongke'], function () {
-        Route::get('thongkedonhang', [ThongkeController::class, 'thongKeDonHangDashBoard'])->name('thongke.thongKeDonHangDashBoard');
-        Route::get('thongkedoanhthu', [ThongkeController::class, 'thongKeDoanhThuDashBoard'])->name('thongke.thongKeDoanhThuDashBoard');       
+        Route::get('thongkedonhang', [ThongkedonhangController::class, 'thongKeDonHangDashBoard'])->name('thongke.thongKeDonHangDashBoard');
+        Route::get('thongkedoanhthu', [ThongkedoanhthuController::class, 'thongKeDoanhThuDashBoard'])->name('thongke.thongKeDoanhThuDashBoard');       
     });
     
-    Route::get('', [ThongkeController::class, 'thongKeDonHangDashBoard']);       
+    Route::get('', [ThongkedonhangController::class, 'thongKeDonHangDashBoard']);       
 });
 
 

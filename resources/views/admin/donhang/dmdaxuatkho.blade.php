@@ -35,8 +35,7 @@
                                                 <th>Số điện thoại Người gửi</th>
                                                 <th>Người nhận</th>
                                                 <th>Số điện thoại Người nhận</th>
-                                                <th>Tổng chi phí</th>
-                                                <th>Lịch sử Đơn hàng</th>
+                                                <th>Tổng chi phí</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,13 +58,7 @@
                                                     </td>
                                                     <td style="text-align: right"><a
                                                             href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
-                                                    </td>
-                                                    <td style="text-align: center">
-                                                        <a href="{{ route('donhang.lichsudonhang', $donhang->id) }}"
-                                                            style="padding: 3px">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                    </td>
+                                                    </td>                                                   
                                                 </tr>
                                             @endforeach
                                         </tbody>
