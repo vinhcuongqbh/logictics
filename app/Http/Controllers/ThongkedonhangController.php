@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donhang;
-use App\Models\LichsuDonhang;
+use App\Models\Lichsudonhang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 

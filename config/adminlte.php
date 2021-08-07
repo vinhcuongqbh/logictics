@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '&#8192;',
-    'logo_img' => 'img/Logo2.png',
+    'logo_img' => 'img/logo2.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
