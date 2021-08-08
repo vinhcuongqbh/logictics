@@ -3,19 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Khohang;
 use App\Models\User;
 
 
 class KhohangController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Khohang::class, 'khohang');
+    // }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
+        $this->authorize('viewAny', Khohang::class);
         //Hiển thị danh sách kho hàng đang sử dụng
         $khohang = Khohang::where('khohangs.id_trangthai', 1)
             ->orderBy('id', 'asc')
@@ -27,6 +35,7 @@ class KhohangController extends Controller
 
     public function tamdung()
     {
+        $this->authorize('viewAny', Khohang::class);
         //Hiển thị danh sách kho hàng đang sử dụng
         $khohang = Khohang::where('khohangs.id_trangthai', 0)
             ->orderBy('id', 'asc')
@@ -42,11 +51,12 @@ class KhohangController extends Controller
      */
     public function create()
     {
-        $nhanvien = User::select('id','name')
+        $this->authorize('create', Khohang::class);
+        $nhanvien = User::select('id', 'name')
             ->where('id_loainhanvien', '>', 1)
             ->where('id_trangthai', 1)
             ->get();
-        return view('admin.khohang.create',['nhanviens' => $nhanvien]);
+        return view('admin.khohang.create', ['nhanviens' => $nhanvien]);
     }
 
     /**
@@ -57,6 +67,7 @@ class KhohangController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Khohang::class);
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenkhohang' => 'required',
@@ -83,6 +94,7 @@ class KhohangController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Khohang::class);
         //Hiển thị thông tin Kho hàng
         $khohang = Khohang::where('khohangs.id', $id)
             ->orderBy('khohangs.id', 'asc')
@@ -97,8 +109,9 @@ class KhohangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Khohang $khohang)
     {
+        $this->authorize('update', $khohang);
         $khohang = Khohang::find($id);
         $nhanvien = User::select('id', 'name')
             ->where('id_loainhanvien', '>', 1)
@@ -115,8 +128,9 @@ class KhohangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, Khohang $khohang)
     {
+        $this->authorize('update', $khohang);
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenkhohang' => 'required',
@@ -139,8 +153,9 @@ class KhohangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id, Khohang $khohang)
     {
+        $this->authorize('delete', $khohang);
         $khohang = Khohang::find($id);
         $khohang->id_trangthai = 0;
         $khohang->save();
@@ -148,8 +163,9 @@ class KhohangController extends Controller
         return back();
     }
 
-    public function restore($id)
+    public function restore($id, Khohang $khohang)
     {
+        $this->authorize('restore', $khohang);
         $khohang = Khohang::find($id);
         $khohang->id_trangthai = 1;
         $khohang->save();

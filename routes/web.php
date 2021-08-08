@@ -33,7 +33,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}', [NhanvienController::class, 'show'])->name('nhanvien.show');
         Route::get('{id}/edit', [NhanvienController::class, 'edit'])->name('nhanvien.edit');
         Route::post('{id}/update', [NhanvienController::class, 'update'])->name('nhanvien.update');
-        Route::get('{id}/delete', [NhanvienController::class, 'delete'])->name('nhanvien.delete');
+        Route::get('{id}/delete', [NhanvienController::class, 'destroy'])->name('nhanvien.delete');
         Route::get('{id}/restore', [NhanvienController::class, 'restore'])->name('nhanvien.restore');
     });
     Route::group(['prefix' => 'khachhang'], function () {
@@ -44,7 +44,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/', [KhachhangController::class, 'show'])->name('khachhang.show');
         Route::get('{id}/edit', [KhachhangController::class, 'edit'])->name('khachhang.edit');
         Route::post('{id}/update', [KhachhangController::class, 'update'])->name('khachhang.update');
-        Route::get('{id}/delete', [KhachhangController::class, 'delete'])->name('khachhang.delete');
+        Route::get('{id}/delete', [KhachhangController::class, 'destroy'])->name('khachhang.delete');
         Route::get('{id}/restore', [KhachhangController::class, 'restore'])->name('khachhang.restore');
     });
 
@@ -56,7 +56,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/', [KhohangController::class, 'show'])->name('khohang.show');
         Route::get('{id}/edit', [KhohangController::class, 'edit'])->name('khohang.edit');
         Route::post('{id}/update', [KhohangController::class, 'update'])->name('khohang.update');
-        Route::get('{id}/delete', [KhohangController::class, 'delete'])->name('khohang.delete');
+        Route::get('{id}/delete', [KhohangController::class, 'destroy'])->name('khohang.delete');
         Route::get('{id}/restore', [KhohangController::class, 'restore'])->name('khohang.restore');
     });
 
@@ -73,7 +73,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/show', [DonhangController::class, 'show'])->name('donhang.show');
         Route::get('{id}/edit', [DonhangController::class, 'edit'])->name('donhang.edit');
         Route::post('{id}/update', [DonhangController::class, 'update'])->name('donhang.update');
-        Route::get('{id}/delete', [DonhangController::class, 'delete'])->name('donhang.delete');
+        Route::get('{id}/delete', [DonhangController::class, 'destroy'])->name('donhang.delete');
         Route::get('{id}/restore', [DonhangController::class, 'restore'])->name('donhang.restore');
         Route::get('{id}/lichsudonhang', [DonhangController::class, 'lichsudonhang'])->name('donhang.lichsudonhang');
 

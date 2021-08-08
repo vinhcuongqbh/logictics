@@ -305,8 +305,8 @@
   //Biểu đồ đơn hàng thống kê theo tuần
   var $visitorsChart = $('#bieudotuan-donhang')
   // eslint-disable-next-line no-unused-vars
-  var donHangTuanHienTai = @json($donHangTuanHienTai); 
-  var donHangTuanTruoc = @json($donHangTuanTruoc); 
+  var donHangTuanHienTai = @json($donHangTuanHienTai);
+  var donHangTuanTruoc = @json($donHangTuanTruoc);
   var visitorsChart = new Chart($visitorsChart, {
     data: {
       labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
@@ -324,7 +324,7 @@
       {
         type: 'line',
         data: [donHangTuanTruoc[2], donHangTuanTruoc[3], donHangTuanTruoc[4], donHangTuanTruoc[5], donHangTuanTruoc[6], donHangTuanTruoc[7], donHangTuanTruoc[8] ],
-        backgroundColor: 'tansparent',
+        backgroundColor: 'transparent',
         borderColor: '#ced4da',
         pointBorderColor: '#ced4da',
         pointBackgroundColor: '#ced4da',

@@ -12,29 +12,29 @@ class ThongkedoanhthuController extends Controller
 {
     public function thongKeDoanhThuDashBoard()
     {
-        //Tính số đơn hàng trong ngày
+        //Tính doanh thu số đơn hàng trong ngày
         $doanhThuTrongNgay = $this->thongKeDoanhThuTheoNgay(Carbon::now());
 
-        //Tính số đơn hàng trong tuần
+        //Tính doanh thu số đơn hàng trong tuần
         $doanhThuTrongTuan = $this->thongKeDoanhThuTheoTuan(Carbon::now());
 
-        //Tính số đơn hàng trong tháng
+        //Tính doanh thu số đơn hàng trong tháng
         $doanhThuTrongThang = $this->thongKeDoanhThuTheoThang(Carbon::now()->month, Carbon::now()->year);
 
-        //Tính số đơn hàng trong năm
+        //Tính doanh thu số đơn hàng trong năm
         $doanhThuTrongNam = $this->thongKeDoanhThuTheoNam(Carbon::now());
 
-        //Tính tổng số đơn hàng năm hiện tại (theo từng tháng)
+        //Tính doanh thu tổng số đơn hàng năm hiện tại (theo từng tháng)
         $doanhThuNamHienTai = $this->thongKeChiTietDoanhThuTheoThangTrongNam(Carbon::now()->year);
-        //Tính tổng số đơn hàng năm trước (theo từng tháng)
+        //Tính doanh thu tổng số đơn hàng năm trước (theo từng tháng)
         $doanhThuNamTruoc = $this->thongKeChiTietDoanhThuTheoThangTrongNam(Carbon::now()->year - 1);
 
         //Tính tỉ lệ tăng trưởng năm hiện tại so với năm trước (tính đến ngày hiện tại)   
         $tiLeTangTruongNam = $this->tiLeTangTruong(Carbon::now()->subYear()->startOfYear(), Carbon::now()->subYear(), Carbon::now()->startOfYear(), Carbon::now());
 
-        //Tính tổng số đơn hàng tuần hiện tại (theo từng ngày)
+        //Tính doanh thu tổng số đơn hàng tuần hiện tại (theo từng ngày)
         $doanhThuTuanHienTai = $this->thongKeChiTietDoanhThuTheoNgayTrongTuan(Carbon::now());
-        //Tính tổng số đơn hàng tuần trước (theo từng ngày)
+        //Tính doanh thu tổng số đơn hàng tuần trước (theo từng ngày)
         $doanhThuTuanTruoc = $this->thongKeChiTietDoanhThuTheoNgayTrongTuan(Carbon::now()->subWeek());
 
         //Tính tỉ lệ tăng trưởng tuần hiện tại so với tuần trước (tính đến ngày hiện tại)
@@ -172,9 +172,9 @@ class ThongkedoanhthuController extends Controller
     {
         $tongDoanhThu = array();
         $tongDoanhThu[0] = $nam;
-        //Tính Tổng số đơn hàng theo tháng
+        //Tính doanh thu tổng số đơn hàng theo tháng
         for ($thang = 1; $thang <= 12; $thang++) {
-            //Tính Tổng số đơn hàng theo tháng Năm hiện tại            
+            //Tính doanh thu tổng số đơn hàng theo tháng của Năm hiện tại            
             $tongDoanhThu[$thang] = $this->thongKeDoanhThuTheoThang($thang, $nam);
         }
         return $tongDoanhThu;
@@ -186,29 +186,17 @@ class ThongkedoanhthuController extends Controller
     public function thongKeChiTietDoanhThuTheoNgayTrongTuan($ngay)
     {
         $tongDoanhThu = array();
-
-        //Tìm thứ trong tuần của Ngày Hiện tại
-        $thuHienTai = $ngay->copy()->dayOfWeek + 1;
-
-        for ($thuTrongTuan = 2; $thuTrongTuan <= 8; $thuTrongTuan++) {
-            if ($thuHienTai > $thuTrongTuan) {
-                $tongDoanhThu[$thuTrongTuan] = $this->thongKeDoanhThu(
-                    $ngay->copy()->subDays($thuHienTai - $thuTrongTuan),
-                    $ngay->copy()->subDays($thuHienTai - $thuTrongTuan)
-                );
-            } elseif ($thuHienTai == $thuTrongTuan) {
-                $tongDoanhThu[$thuTrongTuan] = $this->thongKeDoanhThu($ngay, $ngay);
+        $ngayBatDauTuan = $ngay->copy()->startOfWeek();
+        for ($thu = 2; $thu <= 8; $thu++) {
+            //Tính Tổng số đơn hàng theo ngày của Tuần hiện tại   
+            if ($ngayBatDauTuan->lte(Carbon::now())) { 
+                $tongDoanhThu[$thu] = $this->thongKeDoanhThuTheoNgay($ngayBatDauTuan);
+                $ngayBatDauTuan->addDay(); 
             } else {
-                if ($ngay->copy()->addWeek()->lessThan(Carbon::now())) {
-                    $tongDoanhThu[$thuTrongTuan] = $this->thongKeDoanhThu(
-                        $ngay->copy()->addDays($thuTrongTuan - $thuHienTai),
-                        $ngay->copy()->addDays($thuTrongTuan - $thuHienTai)
-                    );                    
-                } else {
-                    $tongDoanhThu[$thuTrongTuan] = null;
-                }
+                $tongDoanhThu[$thu] = null;
             }
         }
+
         return $tongDoanhThu;
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\User;
+use App\Models\Khohang;
+use App\Policies\KhohangPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Khohang::class => KhohangPolicy::class,
     ];
 
     /**
@@ -24,6 +26,23 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        //Bộ lọc sidebar của AdminLTE 3
+        Gate::define('khohang', function (User $user) {
+            return $user->id_loainhanvien === 1;
+        });
+        Gate::define('nhanvien', function (User $user) {
+            return $user->id_loainhanvien === 1;
+        });
+        Gate::define('khachhang', function (User $user) {
+            return $user->id_loainhanvien === 1;
+        });
+        Gate::define('caidat', function (User $user) {
+            return $user->id_loainhanvien === 1;
+        });
+        Gate::define('danhmuc', function (User $user) {
+            return $user->id_loainhanvien === 1;
+        });
 
         //
     }

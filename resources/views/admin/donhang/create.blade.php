@@ -267,7 +267,7 @@
                                             <tr style="text-align: center">
                                                 <th colspan="5"></th>
                                                 <th>Tổng chi phí</th>
-                                                <td id="tongchiphi" style="text-align: right; padding-right:10px;"></td>
+                                                <td id="tongchiphi" style="text-align: right; padding-right:10px; text; font-weight: bold;"></td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -295,6 +295,7 @@
 @stop
 
 @section('css')
+<!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">

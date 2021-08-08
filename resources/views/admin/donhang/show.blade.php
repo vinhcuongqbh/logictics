@@ -117,7 +117,7 @@
                                             <td style="text-align: center">
                                                 @if ($chitietdonhang->giatriuoctinh <> 0)
                                                     {{ number_format($chitietdonhang->giatriuoctinh, 0, '.', '.') }}
-                                                @endif
+                                                    @endif
                                             </td>
                                             <td style="text-align: right">
                                                 {{ number_format($chitietdonhang->chiphi, 0, '.', '.') }}</td>
@@ -185,26 +185,18 @@
                                         </td>
                                         <td>
                                             @if ($lichsudonhang->id_trangthai == 1)
-                                            Đơn hàng được khởi tạo
+                                                Đơn hàng được khởi tạo
                                             @elseif ($lichsudonhang->id_trangthai == 2)
-                                            {{ $lichsudonhang->tentrangthai }} vào
-                                            <b>{{ $lichsudonhang->khogui }}</b>
-                                            ({{ $lichsudonhang->diachikhogui }})
+                                                {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }})
                                             @elseif ($lichsudonhang->id_trangthai == 3)
-                                            @if ($lichsudonhang->id_khonhan == 0)
-                                            {{ $lichsudonhang->tentrangthai }} từ
-                                            <b>{{ $lichsudonhang->khogui }}</b>
-                                            ({{ $lichsudonhang->diachikhogui }}) đến địa chỉ <b>Người
+                                                @if ($lichsudonhang->id_khonhan == 0)
+                                                    {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }}) đến địa chỉ <b>Người
                                                 nhận</b>
+                                                @else
+                                                    {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> ({{ $lichsudonhang->diachikhogui }}) đến <b>{{ $lichsudonhang->khonhan }}</b> ({{ $lichsudonhang->diachikhonhan }})
+                                                @endif
                                             @else
-                                            {{ $lichsudonhang->tentrangthai }} từ
-                                            <b>{{ $lichsudonhang->khogui }}</b>
-                                            ({{ $lichsudonhang->diachikhogui }}) đến
-                                            <b>{{ $lichsudonhang->khonhan }}</b>
-                                            ({{ $lichsudonhang->diachikhonhan }})
-                                            @endif
-                                            @else
-                                            {{ $lichsudonhang->tentrangthai }}
+                                                {{ $lichsudonhang->tentrangthai }}
                                             @endif
                                         </td>
                                         <td style="text-align: center">{{ $lichsudonhang->name }}</td>
@@ -228,6 +220,7 @@
 @stop
 
 @section('css')
+<!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">

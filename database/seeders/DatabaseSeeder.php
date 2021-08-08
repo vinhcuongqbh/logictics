@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
             LoaihangSeeder::class,
             UserSeeder::class,
             KhachhangSeeder::class,
-            KhohangSeeder::class,
-            //DonhangSeeder::class,
+            KhohangSeeder::class,            
             DongiahangcongkenhSeeder::class,
             DongiatinhtheosoluongSeeder::class,
             DongiatinhtheokhoiluongSeeder::class,
             DanhmucmathangSeeder::class,
             LichsudonhangSeeder::class,
+            //DonhangSeeder::class,
         ]);
     }
 }

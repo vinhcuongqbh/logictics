@@ -146,7 +146,7 @@ class KhachhangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
         $khachhang = Khachhang::find($id);
         $khachhang->id_trangthai = 0;

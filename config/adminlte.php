@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '&#8192;',
-    'logo_img' => 'img/logo2.png',
+    'logo_img' => 'img/logo.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -242,16 +242,19 @@ return [
             'text'        => 'Kho hàng',
             'url'         => 'admin/khohang',
             'icon'        => 'fas fa-fw fa-warehouse',
+            'can'         => 'khohang',
         ],
         [
             'text'        => 'Nhân viên',
             'url'         => 'admin/nhanvien',
             'icon'        => 'far fa-fw fa-user',
+            'can'         => 'nhanvien',
         ],
         [
             'text'        => 'Khách hàng',
             'url'         => 'admin/khachhang',
             'icon'        => 'fas fa-fw fa-user-tie',
+            'can'         => 'khachhang',
         ],
         [
             'text'    => 'Đơn hàng',
@@ -316,10 +319,14 @@ return [
             'icon' => 'fas fa-fw fa-angle-right',
         ],
 
-        ['header' => 'CÀI ĐẶT'],
+        [
+            'header' => 'CÀI ĐẶT',
+            'can'         => 'caidat',
+        ],
         [
             'text'    => 'Danh mục',
             'icon'    => 'fas fa-fw fa-sliders-h',
+            'can'         => 'danhmuc',
             'submenu' => [
                 [
                     'text' => 'Loại nhân viên',

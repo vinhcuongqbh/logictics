@@ -158,7 +158,7 @@ class NhanvienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
         $nhanvien = User::find($id);
         $nhanvien->id_trangthai = 0;

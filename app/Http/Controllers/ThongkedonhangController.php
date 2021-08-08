@@ -63,7 +63,7 @@ class ThongkedonhangController extends Controller
         //Tính tổng đơn hàng từ đầu năm cho đến ngày B
         $tongDonHangB = $this->thongKeDonHang($ngayBatDauB, $ngayKetThucB);
         //Tính tỉ lệ của $tongDonHangB so với $tongDonHangA
-        if ($tongDonHangB <> 0) {
+        if ($tongDonHangA <> 0) {
             $tiLeTangTruong = round(($tongDonHangB - $tongDonHangA) / $tongDonHangA * 100, 2);
         } else {
             $tiLeTangTruong = round($tongDonHangB * 100, 2);
@@ -116,8 +116,8 @@ class ThongkedonhangController extends Controller
     //Hàm thống kê Đơn hàng
     public function thongKeDonHang($ngayBatDau, $ngayKetThuc)
     {
-        $ngayBatDau = $ngayBatDau->copy()->startOfDay();
-        $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        $ngayBatDau = $ngayBatDau->copy()->startOfDay(); 
+        $ngayKetThuc = $ngayKetThuc->copy()->endOfDay(); 
         $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
             ->where('id_nhanvienquanly', Auth::id())
             ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
@@ -150,9 +150,9 @@ class ThongkedonhangController extends Controller
     //Hàm thống kê Đơn hàng theo Tuần
     public function thongKeDonHangTheoTuan($ngay)
     {
-        $ngayBatDauTuan = $ngay->copy()->startOfWeek();
-        $ngayKetThucTuan = $ngay->copy()->endOfWeek();
-        $tongDonHang = $this->thongKeDonHang($ngayBatDauTuan, $ngayKetThucTuan);
+        $ngayBatDauTuan = $ngay->copy()->startOfWeek(); 
+        $ngayKetThucTuan = $ngay->copy()->endOfWeek(); 
+        $tongDonHang = $this->thongKeDonHang($ngayBatDauTuan, $ngayKetThucTuan); 
         return $tongDonHang;
     }
 
@@ -170,10 +170,11 @@ class ThongkedonhangController extends Controller
     public function thongKeChiTietDonHangTheoThangTrongNam($nam)
     {
         $tongDonHang = array();
+        //Array[0] để chứa tên năm
         $tongDonHang[0] = $nam;
         //Tính Tổng số đơn hàng theo tháng
         for ($thang = 1; $thang <= 12; $thang++) {
-            //Tính Tổng số đơn hàng theo tháng Năm hiện tại            
+            //Tính Tổng số đơn hàng theo tháng của Năm hiện tại            
             $tongDonHang[$thang] = $this->thongKeDonHangTheoThang($thang, $nam);
         }
         return $tongDonHang;
@@ -185,29 +186,17 @@ class ThongkedonhangController extends Controller
     public function thongKeChiTietDonHangTheoNgayTrongTuan($ngay)
     {
         $tongDonHang = array();
-
-        //Tìm thứ trong tuần của Ngày Hiện tại
-        $thuHienTai = $ngay->copy()->dayOfWeek + 1;
-
-        for ($thuTrongTuan = 2; $thuTrongTuan <= 8; $thuTrongTuan++) {
-            if ($thuHienTai > $thuTrongTuan) {
-                $tongDonHang[$thuTrongTuan] = $this->thongKeDonHang(
-                    $ngay->copy()->subDays($thuHienTai - $thuTrongTuan),
-                    $ngay->copy()->subDays($thuHienTai - $thuTrongTuan)
-                );
-            } elseif ($thuHienTai == $thuTrongTuan) {
-                $tongDonHang[$thuTrongTuan] = $this->thongKeDonHang($ngay, $ngay);
+        $ngayBatDauTuan = $ngay->copy()->startOfWeek();
+        for ($thu = 2; $thu <= 8; $thu++) {
+            //Tính Tổng số đơn hàng theo ngày của Tuần hiện tại   
+            if ($ngayBatDauTuan->lte(Carbon::now())) { 
+                $tongDonHang[$thu] = $this->thongKeDonHangTheoNgay($ngayBatDauTuan);
+                $ngayBatDauTuan->addDay(); 
             } else {
-                if ($ngay->copy()->addWeek()->lessThan(Carbon::now())) {
-                    $tongDonHang[$thuTrongTuan] = $this->thongKeDonHang(
-                        $ngay->copy()->addDays($thuTrongTuan - $thuHienTai),
-                        $ngay->copy()->addDays($thuTrongTuan - $thuHienTai)
-                    );                    
-                } else {
-                    $tongDonHang[$thuTrongTuan] = null;
-                }
+                $tongDonHang[$thu] = null;
             }
         }
+
         return $tongDonHang;
     }
 }
