@@ -267,7 +267,9 @@
                                             <tr style="text-align: center">
                                                 <th colspan="5"></th>
                                                 <th>Tổng chi phí</th>
-                                                <td id="tongchiphi" style="text-align: right; padding-right:10px; text; font-weight: bold;"></td>
+                                                <td id="tongchiphi"
+                                                    style="text-align: right; padding-right:10px; text; font-weight: bold;">
+                                                </td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -306,7 +308,6 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-
 @stop
 
 @section('js')
@@ -327,271 +328,264 @@
 <!-- jquery-validation -->
 <script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="/vendor/jquery-validation/additional-methods.min.js"></script>
-{{-- <script src="https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script> --}}
-
-
 <!-- Page specific script -->
 <script>
     var chiTietDonHang = [];
-        var rowIndex;
-         //
-         jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
-                return this.flatten().reduce( function ( a, b ) {
-                    // if ( typeof a === 'string' ) {
-                    //     a = a.replace(/[^\d.-]/g, '') * 1;
-                    // }
-                    // if ( typeof b === 'string' ) {
-                    //     b = b.replace(/[^\d.-]/g, '') * 1;
-                    // }
-                    x = a.toString().replaceAll(".","");
-                    y = b.toString().replaceAll(".","");                    
-                    return parseInt(x) + parseInt(y);
-                }, 0 );
-            } );
+    
+    var rowIndex;
+         
+    jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
+        return this.flatten().reduce( function ( a, b ) {                   
+            x = a.toString().replaceAll(".","");
+            y = b.toString().replaceAll(".","");                    
+            return parseInt(x) + parseInt(y);
+        }, 0 );
+    } );
 
-        $(document).ready(function() {
-            //Start: Tạo Table Đơn hàng
-            var donhangTable = $('#donhang-table').DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "searching": false,
-                "paging": false,
-                "columns": [{
-                        "data": "stt",
-                        "className": "dt-body-center",
-                    },
-                    {
-                        "data": "tenmathang",
-                        "className": "dt-body-left",
-                    },
-                    {
-                        "data": "soluong",
-                        "className": "dt-body-center",
-                    },
-                    {
-                        "data": "khoiluong",
-                        "className": "dt-body-center",
-                    },
-                    {
-                        "data": "kichthuoc",
-                        "className": "dt-body-center",
-                    },
-                    {
-                        "data": "giatriuoctinh",
-                        "className": "dt-body-center",
-                    },
-                    {
-                        "data": "chiphi",
-                        "className": "dt-body-right",
-                    }
-                ],
-                "columnDefs": [{
-                    "searchable": false,
-                    "orderable": false,
-                    "targets": "_all",
-                }, ],
-                "order": [
-                    [0, 'desc']
-                ],
-            });
-            //End: Tạo Table Đơn hàng
-
-
-
-            //Start: Tạo cột Số thứ tự
-            donhangTable.on('order.dt search.dt', function() {
-                donhangTable.column(0, {
-                    search: 'applied',
-                    order: 'applied'
-                }).nodes().each(function(cell, i) {
-                    cell.innerHTML = i + 1;
-                });
-            }).draw();
-            //End: Tạo cột Số thứ tự
-
-
-
-            //Start: Lựa chọn row
-            donhangTable.on('click', 'tbody tr', function() {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                    document.querySelector("#editRow").disabled = true;
-                    document.querySelector("#deleteRow").disabled = true;
-                } else {
-                    donhangTable.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                    document.querySelector("#editRow").disabled = false;
-                    document.querySelector("#deleteRow").disabled = false;
-                    rowIndex = donhangTable.row(this).index();
+    $(document).ready(function() {
+        //Start: Tạo Table Đơn hàng
+        var donhangTable = $('#donhang-table').DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "searching": false,
+            "paging": false,
+            "columns": [
+                {
+                    "data": "stt",
+                    "className": "dt-body-center",
+                },
+                {
+                    "data": "tenmathang",
+                    "className": "dt-body-left",
+                },
+                {
+                    "data": "soluong",
+                    "className": "dt-body-center",
+                },
+                {
+                    "data": "khoiluong",
+                    "className": "dt-body-center",
+                },
+                {
+                    "data": "kichthuoc",
+                    "className": "dt-body-center",
+                },
+                {
+                    "data": "giatriuoctinh",
+                    "className": "dt-body-center",
+                },
+                {
+                    "data": "chiphi",
+                    "className": "dt-body-right",
                 }
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": "_all",
+            }],
+            "order": [
+                [0, 'desc']
+            ],
+        });
+        //End: Tạo Table Đơn hàng
+
+
+
+        //Start: Tạo cột Số thứ tự
+        donhangTable.on('order.dt search.dt', function() {
+            donhangTable.column(0, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = i + 1;
             });
-            //End: Lựa chọn row
+        }).draw();
+        //End: Tạo cột Số thứ tự
 
 
 
-            //Start: Thêm Row
-            $('#addRow').on('click', function() {
-                //Start: Lấy dữ liệu từ các input
-                donhangTable.row.add({
-                    "stt": null,
-                    "tenmathang": document.querySelector("#tenmathang").value,
-                    "soluong": document.querySelector("#soluong").value,
-                    "khoiluong": document.querySelector("#khoiluong").value,
-                    "kichthuoc": document.querySelector("#kichthuoc").value,
-                    "giatriuoctinh": document.querySelector("#giatriuoctinh").value,
-                    "chiphi": document.querySelector("#chiphi").value,
-                }).draw();
-
-                lamtrongdulieu();
-            });
-            //End: Thêm Row
-
-
-
-            //Start: Sửa Row
-            $('#editRow').on('click', function() {
-                document.querySelector("#tenmathangEdit").value = donhangTable.row(rowIndex).data()
-                    .tenmathang;
-                document.querySelector("#soluongEdit").value = donhangTable.row(rowIndex).data().soluong;
-                document.querySelector("#khoiluongEdit").value = donhangTable.row(rowIndex).data()
-                    .khoiluong;
-                document.querySelector("#kichthuocEdit").value = donhangTable.row(rowIndex).data()
-                    .kichthuoc;
-                document.querySelector("#giatriuoctinhEdit").value = donhangTable.row(rowIndex).data()
-                    .giatriuoctinh;
-                document.querySelector("#chiphiEdit").value = donhangTable.row(rowIndex).data().chiphi;
-            });
-            //End: Sửa Row
-
-
-            //Start: Cập nhật Row
-            $('#updateRow').on('click', function() {
-                donhangTable.row(rowIndex).data({
-                    "stt": null,
-                    "tenmathang": document.querySelector("#tenmathangEdit").value,
-                    "soluong": document.querySelector("#soluongEdit").value,
-                    "khoiluong": document.querySelector("#khoiluongEdit").value,
-                    "kichthuoc": document.querySelector("#kichthuocEdit").value,
-                    "giatriuoctinh": document.querySelector("#giatriuoctinhEdit").value || null,
-                    "chiphi": document.querySelector("#chiphiEdit").value,
-                }).draw();
-            });
-            //End: Cập nhật Row
-
-
-            //Start: Xóa Row
-            $('#deleteRow').click(function() {
-                donhangTable.row('.selected').remove().draw(false);
+        //Start: Lựa chọn row
+        donhangTable.on('click', 'tbody tr', function() {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
                 document.querySelector("#editRow").disabled = true;
                 document.querySelector("#deleteRow").disabled = true;
-            }); //End: Xóa row
-
-
-
-            //Start: Tính chi chí
-            var dongiatinhtheokhoiluong = @json($dongiatinhtheokhoiluong);
-            var dongiatinhtheosoluong = @json($dongiatinhtheosoluong);
-            var dongiahangcongkenh = @json($dongiahangcongkenh);
-
-            var tinhChiPhi = function() {
-                let soluong = document.querySelector("#soluong").value;
-                let khoiluong = document.querySelector("#khoiluong").value;
-                document.querySelector("#chiphi").value = "";
-
-                if (soluong != 0 && khoiluong == "") {
-                    let tenmathang = document.querySelector("#tenmathang").value;
-                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                            tenmathang)?.dongia ||
-                        0);
-                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
-                }
-
-                if (khoiluong != 0 && soluong == "") {
-                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                            dongia = dongiatinhtheokhoiluong[i].dongia;
-                        }
-                    }
-                    let chiphi = khoiluong * parseInt(dongia || 0);
-                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
-                }
+            } else {
+                donhangTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                document.querySelector("#editRow").disabled = false;
+                document.querySelector("#deleteRow").disabled = false;
+                rowIndex = donhangTable.row(this).index();
             }
-
-            document.querySelector("#tenmathang").addEventListener('blur', tinhChiPhi);
-            document.querySelector("#soluong").addEventListener('blur', tinhChiPhi);
-            document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
-            //End: Tính Chi Phí
-
-
-
-            //Start: Tính Chi phí Edit
-            var tinhChiPhiEdit = function() {
-                let soluong = document.querySelector("#soluongEdit").value;
-                let khoiluong = document.querySelector("#khoiluongEdit").value;
-                document.querySelector("#chiphiEdit").value = "";
-
-                if (soluong != 0 && khoiluong == "") {
-                    let tenmathang = document.querySelector("#tenmathangEdit").value;
-                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                            tenmathang)?.dongia ||
-                        0);
-                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
-                }
-
-                if (khoiluong != 0 && soluong == "") {
-                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                            dongia = dongiatinhtheokhoiluong[i].dongia;
-                        }
-                    }
-                    let chiphi = khoiluong * parseInt(dongia || 0);
-                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
-                }
-            }
-
-            document.querySelector("#tenmathangEdit").addEventListener('blur', tinhChiPhiEdit);
-            document.querySelector("#soluongEdit").addEventListener('blur', tinhChiPhiEdit);
-            document.querySelector("#khoiluongEdit").addEventListener('blur', tinhChiPhiEdit);
-            //End: Tính Chi phí Edit
-
-
-
-            //Start: Hàm tính tổng chi phí
-            const tongchiphi = function() {
-                document.querySelector("#tongchiphi").innerHTML = (donhangTable.column(6).data().sum()).toLocaleString();
-            }
-            //End: Hàm tính tổng chi phí
-
-
-
-            //Start: Cập nhật lại Tổng Chi phí khi Table thay đổi
-            donhangTable.on('draw', function() {
-                tongchiphi();
-            }).draw();
-            //End: Cập nhật lại Tổng Chi phí khi Table thay đổi
-
-
-            //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
-            $('#submitForm').on('click', function() {
-                document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
-                document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
-            });
-
-
-
-            //Start: Hàm làm trống dữ liệu input
-            const lamtrongdulieu = function() {
-                document.querySelector("#tenmathang").value = "";
-                document.querySelector("#soluong").value = "";
-                document.querySelector("#khoiluong").value = "";
-                document.querySelector("#kichthuoc").value = "";
-                document.querySelector("#giatriuoctinh").value = "";
-                document.querySelector("#chiphi").value = "";
-            }
-            //End: Hàm làm trống dữ liệu input
-           
         });
+        //End: Lựa chọn row
+
+
+
+        //Start: Thêm Row
+        $('#addRow').on('click', function() {
+            //Start: Lấy dữ liệu từ các input
+            donhangTable.row.add({
+                "stt": null,
+                "tenmathang": document.querySelector("#tenmathang").value,
+                "soluong": document.querySelector("#soluong").value,
+                "khoiluong": document.querySelector("#khoiluong").value,
+                "kichthuoc": document.querySelector("#kichthuoc").value,
+                "giatriuoctinh": document.querySelector("#giatriuoctinh").value,
+                "chiphi": document.querySelector("#chiphi").value,
+            }).draw();
+
+            lamtrongdulieu();
+        });
+        //End: Thêm Row
+
+
+
+        //Start: Sửa Row
+        $('#editRow').on('click', function() {
+            document.querySelector("#tenmathangEdit").value = donhangTable.row(rowIndex).data()
+                .tenmathang;
+            document.querySelector("#soluongEdit").value = donhangTable.row(rowIndex).data().soluong;
+            document.querySelector("#khoiluongEdit").value = donhangTable.row(rowIndex).data()
+                .khoiluong;
+            document.querySelector("#kichthuocEdit").value = donhangTable.row(rowIndex).data()
+                .kichthuoc;
+            document.querySelector("#giatriuoctinhEdit").value = donhangTable.row(rowIndex).data()
+                .giatriuoctinh;
+            document.querySelector("#chiphiEdit").value = donhangTable.row(rowIndex).data().chiphi;
+        });
+        //End: Sửa Row
+
+
+        //Start: Cập nhật Row
+        $('#updateRow').on('click', function() {
+            donhangTable.row(rowIndex).data({
+                "stt": null,
+                "tenmathang": document.querySelector("#tenmathangEdit").value,
+                "soluong": document.querySelector("#soluongEdit").value,
+                "khoiluong": document.querySelector("#khoiluongEdit").value,
+                "kichthuoc": document.querySelector("#kichthuocEdit").value,
+                "giatriuoctinh": document.querySelector("#giatriuoctinhEdit").value || null,
+                "chiphi": document.querySelector("#chiphiEdit").value,
+            }).draw();
+        });
+        //End: Cập nhật Row
+
+
+        //Start: Xóa Row
+        $('#deleteRow').click(function() {
+            donhangTable.row('.selected').remove().draw(false);
+            document.querySelector("#editRow").disabled = true;
+            document.querySelector("#deleteRow").disabled = true;
+        }); //End: Xóa row
+
+
+
+        //Start: Tính chi chí
+        var dongiatinhtheokhoiluong = @json($dongiatinhtheokhoiluong);
+        var dongiatinhtheosoluong = @json($dongiatinhtheosoluong);
+        var dongiahangcongkenh = @json($dongiahangcongkenh);
+
+        var tinhChiPhi = function() {
+            let soluong = document.querySelector("#soluong").value;
+            let khoiluong = document.querySelector("#khoiluong").value;
+            document.querySelector("#chiphi").value = "";
+
+            if (soluong != 0 && khoiluong == "") {
+                let tenmathang = document.querySelector("#tenmathang").value;
+                let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                        tenmathang)?.dongia ||
+                    0);
+                document.querySelector("#chiphi").value = chiphi.toLocaleString();
+            }
+
+            if (khoiluong != 0 && soluong == "") {
+                for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                    if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                        dongia = dongiatinhtheokhoiluong[i].dongia;
+                    }
+                }
+                let chiphi = khoiluong * parseInt(dongia || 0);
+                document.querySelector("#chiphi").value = chiphi.toLocaleString();
+            }
+        }
+
+        document.querySelector("#tenmathang").addEventListener('blur', tinhChiPhi);
+        document.querySelector("#soluong").addEventListener('blur', tinhChiPhi);
+        document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
+        //End: Tính Chi Phí
+
+
+
+        //Start: Tính Chi phí Edit
+        var tinhChiPhiEdit = function() {
+            let soluong = document.querySelector("#soluongEdit").value;
+            let khoiluong = document.querySelector("#khoiluongEdit").value;
+            document.querySelector("#chiphiEdit").value = "";
+
+            if (soluong != 0 && khoiluong == "") {
+                let tenmathang = document.querySelector("#tenmathangEdit").value;
+                let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                        tenmathang)?.dongia ||
+                    0);
+                document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+            }
+
+            if (khoiluong != 0 && soluong == "") {
+                for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                    if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                        dongia = dongiatinhtheokhoiluong[i].dongia;
+                    }
+                }
+                let chiphi = khoiluong * parseInt(dongia || 0);
+                document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+            }
+        }
+
+        document.querySelector("#tenmathangEdit").addEventListener('blur', tinhChiPhiEdit);
+        document.querySelector("#soluongEdit").addEventListener('blur', tinhChiPhiEdit);
+        document.querySelector("#khoiluongEdit").addEventListener('blur', tinhChiPhiEdit);
+        //End: Tính Chi phí Edit
+
+
+
+        //Start: Hàm tính tổng chi phí
+        const tongchiphi = function() {
+            document.querySelector("#tongchiphi").innerHTML = (donhangTable.column(6).data().sum()).toLocaleString();
+        }
+        //End: Hàm tính tổng chi phí
+
+
+
+        //Start: Cập nhật lại Tổng Chi phí khi Table thay đổi
+        donhangTable.on('draw', function() {
+            tongchiphi();
+        }).draw();
+        //End: Cập nhật lại Tổng Chi phí khi Table thay đổi
+
+
+        //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
+        $('#submitForm').on('click', function() {
+            document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
+            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
+        });
+
+
+
+        //Start: Hàm làm trống dữ liệu input
+        const lamtrongdulieu = function() {
+            document.querySelector("#tenmathang").value = "";
+            document.querySelector("#soluong").value = "";
+            document.querySelector("#khoiluong").value = "";
+            document.querySelector("#kichthuoc").value = "";
+            document.querySelector("#giatriuoctinh").value = "";
+            document.querySelector("#chiphi").value = "";
+        }
+        //End: Hàm làm trống dữ liệu input
+           
+    });
 </script>
 
 <script>

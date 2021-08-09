@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Thông tin Kho hàng')
+@section('title', 'Cập nhật thông tin Kho hàng')
 
 @section('content_header')
 
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <label for="tenkhohang">Tên Kho hàng</label>
                                 <input type="text" id="tenkhohang" name="tenkhohang"
-                                    value="{{ $khohang->tenkhohang }}" class="form-control" @if ($khohang->id <= 2) echo disabled @endif>
+                                    value="{{ $khohang->tenkhohang }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="sodienthoai">Số điện thoại</label>
@@ -100,13 +100,13 @@
             },
             messages: {
                 tenkhohang: {
-                    required: "Nhập Họ tên của Nhân viên",
+                    required: "Nhập Tên Kho hàng",
                 },
                 sodienthoai: {
-                    required: "Nhập Số điện thoại của Nhân viên",
+                    required: "Nhập Số điện thoại của Kho hàng",
                 },
                 diachi: {
-                    required: "Nhập Địa chỉ của Nhân viên",
+                    required: "Nhập Địa chỉ của Kho hàng",
                 },
             },
             errorElement: 'span',

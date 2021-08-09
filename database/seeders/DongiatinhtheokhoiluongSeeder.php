@@ -15,7 +15,7 @@ class DongiatinhtheokhoiluongSeeder extends Seeder
     public function run()
     {
         DB::table('dongiatinhtheokhoiluongs')->insert([
-            [          
+            [    
                 'khoiluongmax' => 11,      
                 'dongia' => 215000,                   
             ],

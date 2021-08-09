@@ -243,7 +243,7 @@ return [
             'url'         => 'admin/khohang',
             'icon'        => 'fas fa-fw fa-warehouse',
             'can'         => 'khohang',
-        ],
+        ],     
         [
             'text'        => 'Nhân viên',
             'url'         => 'admin/nhanvien',
@@ -255,7 +255,24 @@ return [
             'url'         => 'admin/khachhang',
             'icon'        => 'fas fa-fw fa-user-tie',
             'can'         => 'khachhang',
-        ],
+        ],       
+        [
+            'text'    => 'Đơn giá',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'         => 'dongia',
+            'submenu' => [
+                [
+                    'text' => 'Tính theo khối lượng',
+                    'url'  => 'admin/dongia/dongiatinhtheokhoiluong',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
+                [
+                    'text' => 'Tính theo số lượng',
+                    'url'  => 'admin/dongia/dongiatinhtheosoluong',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],                
+            ],
+        ], 
         [
             'text'    => 'Đơn hàng',
             'icon'    => 'fas fa-fw fa-shopping-cart',
@@ -269,14 +286,7 @@ return [
                     'text' => 'Đã xuất Kho',
                     'url'  => 'admin/donhang/dmdaxuatkho',
                     'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                /*
-                [
-                    'text' => 'Lịch sử đơn hàng',
-                    'url'  => 'admin/donhang/lichsudonhang',
-                    'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                */
+                ],                
             ],
         ],
         [
@@ -292,14 +302,7 @@ return [
                     'text' => 'Đã xuất Kho',
                     'url'  => 'admin/chuyenhang/dmdaxuatkho',
                     'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                /*
-                [
-                    'text' => 'Lịch sử Chuyến hàng',
-                    'url'  => 'admin/donhchuyenhang/lichsuchuyenhang',
-                    'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                */
+                ],               
             ],
         ],
         ['header' => 'THỐNG KÊ'],
@@ -319,116 +322,32 @@ return [
             'icon' => 'fas fa-fw fa-angle-right',
         ],
 
-        [
-            'header' => 'CÀI ĐẶT',
-            'can'         => 'caidat',
-        ],
-        [
-            'text'    => 'Danh mục',
-            'icon'    => 'fas fa-fw fa-sliders-h',
-            'can'         => 'danhmuc',
-            'submenu' => [
-                [
-                    'text' => 'Loại nhân viên',
-                    'url'  => '#',
-                    'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                [
-                    'text' => 'Loại hàng hóa',
-                    'url'  => '#',
-                    'icon' => 'fas fa-fw fa-angle-right',
-                ],
-                [
-                    'text' => 'Trạng thái đơn hàng',
-                    'url'  => '#',
-                    'icon' => 'fas fa-fw fa-angle-right',
-                ],
-            ],
-        ],
-        /*
-        // Example
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
-        */
+        // [
+        //     'header' => 'CÀI ĐẶT',
+        //     'can'         => 'caidat',
+        // ],
+        // [
+        //     'text'    => 'Danh mục',
+        //     'icon'    => 'fas fa-fw fa-sliders-h',
+        //     'can'         => 'danhmuc',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Loại nhân viên',
+        //             'url'  => '#',
+        //             'icon' => 'fas fa-fw fa-angle-right',
+        //         ],
+        //         [
+        //             'text' => 'Loại hàng hóa',
+        //             'url'  => '#',
+        //             'icon' => 'fas fa-fw fa-angle-right',
+        //         ],
+        //         [
+        //             'text' => 'Trạng thái đơn hàng',
+        //             'url'  => '#',
+        //             'icon' => 'fas fa-fw fa-angle-right',
+        //         ],
+        //     ],
+        // ],       
     ],
 
     /*

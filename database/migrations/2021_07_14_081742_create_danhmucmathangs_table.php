@@ -16,7 +16,6 @@ class CreateDanhmucmathangsTable extends Migration
         Schema::create('danhmucmathangs', function (Blueprint $table) {
             $table->id();
             $table->string('tenmathang');
-            $table->tinyInteger('cachtinhdongia');
             $table->timestamps();
         });
     }

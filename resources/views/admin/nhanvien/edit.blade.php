@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Thông tin Nhân viên')
+@section('title', 'Cập nhật thông tin Nhân viên')
 
 @section('content_header')
 

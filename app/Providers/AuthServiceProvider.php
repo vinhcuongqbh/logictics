@@ -30,20 +30,18 @@ class AuthServiceProvider extends ServiceProvider
         //Bộ lọc sidebar của AdminLTE 3
         Gate::define('khohang', function (User $user) {
             return $user->id_loainhanvien === 1;
-        });
+        });       
         Gate::define('nhanvien', function (User $user) {
             return $user->id_loainhanvien === 1;
         });
         Gate::define('khachhang', function (User $user) {
             return $user->id_loainhanvien === 1;
         });
+        Gate::define('dongia', function (User $user) {
+            return $user->id_loainhanvien === 1;
+        });
         Gate::define('caidat', function (User $user) {
             return $user->id_loainhanvien === 1;
         });
-        Gate::define('danhmuc', function (User $user) {
-            return $user->id_loainhanvien === 1;
-        });
-
-        //
     }
 }

@@ -116,12 +116,19 @@ class ThongkedonhangController extends Controller
     //Hàm thống kê Đơn hàng
     public function thongKeDonHang($ngayBatDau, $ngayKetThuc)
     {
-        $ngayBatDau = $ngayBatDau->copy()->startOfDay(); 
-        $ngayKetThuc = $ngayKetThuc->copy()->endOfDay(); 
-        $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
-            ->where('id_nhanvienquanly', Auth::id())
-            ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-            ->count();
+        $ngayBatDau = $ngayBatDau->copy()->startOfDay();
+        $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        if (Auth::user()->id_loainhanvien == 1) {
+            $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
+                ->where('id_nhanvienquanly', 3)
+                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->count();
+        } else {
+            $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
+                ->where('id_nhanvienquanly', Auth::id())
+                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->count();
+        }
         return $soluongdonhang;
     }
 
@@ -150,9 +157,9 @@ class ThongkedonhangController extends Controller
     //Hàm thống kê Đơn hàng theo Tuần
     public function thongKeDonHangTheoTuan($ngay)
     {
-        $ngayBatDauTuan = $ngay->copy()->startOfWeek(); 
-        $ngayKetThucTuan = $ngay->copy()->endOfWeek(); 
-        $tongDonHang = $this->thongKeDonHang($ngayBatDauTuan, $ngayKetThucTuan); 
+        $ngayBatDauTuan = $ngay->copy()->startOfWeek();
+        $ngayKetThucTuan = $ngay->copy()->endOfWeek();
+        $tongDonHang = $this->thongKeDonHang($ngayBatDauTuan, $ngayKetThucTuan);
         return $tongDonHang;
     }
 
@@ -189,9 +196,9 @@ class ThongkedonhangController extends Controller
         $ngayBatDauTuan = $ngay->copy()->startOfWeek();
         for ($thu = 2; $thu <= 8; $thu++) {
             //Tính Tổng số đơn hàng theo ngày của Tuần hiện tại   
-            if ($ngayBatDauTuan->lte(Carbon::now())) { 
+            if ($ngayBatDauTuan->lte(Carbon::now())) {
                 $tongDonHang[$thu] = $this->thongKeDonHangTheoNgay($ngayBatDauTuan);
-                $ngayBatDauTuan->addDay(); 
+                $ngayBatDauTuan->addDay();
             } else {
                 $tongDonHang[$thu] = null;
             }
