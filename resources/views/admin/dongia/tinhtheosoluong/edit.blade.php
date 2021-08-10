@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>ĐƠN GIÁ TÍNH THEO KHỐI LƯỢNG</h1>
+                    <h1>ĐƠN GIÁ TÍNH THEO SỐ LƯỢNG</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -35,17 +35,17 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('dongiatinhtheokhoiluong.update', $dongiatinhtheokhoiluong->id ) }}" method="post" id="dongia-create">
+                    <form action="{{ route('dongiatinhtheosoluong.update', $dongiatinhtheosoluong->id ) }}" method="post" id="dongia-create">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="khoiluongmax">Khối lượng max (kg)</label>
-                                <input type="text" id="khoiluongmax" name="khoiluongmax" value="{{ $dongiatinhtheokhoiluong->khoiluongmax }}"
+                                <label for="tenmathang">Khối lượng max (kg)</label>
+                                <input type="text" id="tenmathang" name="tenmathang" value="{{ $dongiatinhtheosoluong->tenmathang }}"
                                     class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="dongia">Đơn giá (VNĐ)</label>
-                                <input type="text" id="dongia" name="dongia" value="{{ number_format($dongiatinhtheokhoiluong->dongia, 0, '.', '.') }}" class="form-control">
+                                <input type="text" id="dongia" name="dongia" value="{{ number_format($dongiatinhtheosoluong->dongia, 0, '.', '.') }}" class="form-control">
                             </div>    
                             <div class="form-group">
                                 <div class="col-12">
@@ -82,9 +82,8 @@
 
             $('#dongia-create').validate({
                 rules: {
-                    khoiluongmax: {
+                    tenmathang: {
                         required: true,
-                        number: true,
                     },
                     dongia: {
                         required: true,
@@ -92,13 +91,12 @@
                     },
                 },
                 messages: {
-                    khoiluongmax: {
-                        required: "Nhập Khối lượng lớn nhất tính theo Đơn giá này",
-                        number: "Nhập kiểu số",  
+                    tenmathang: {
+                        required: "Nhập Tên mặt hàng",
                     },
                     dongia: {
-                        required: "Nhập Đơn giá",
-                        number: "Nhập kiểu số",   
+                        required: "Nhập Đơn giá",    
+                        number: "Nhập kiểu số",                
                     },
                 },
                 errorElement: 'span',

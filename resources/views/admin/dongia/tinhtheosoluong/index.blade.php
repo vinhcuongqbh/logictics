@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-xs-12">
-                    <h1>ĐƠN GIÁ TÍNH THEO KHỐI LƯỢNG</h1>
+                    <h1>ĐƠN GIÁ TÍNH THEO SỐ LƯỢNG</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div>
                                     <div class="col-auto">
-                                        <a href="{{ route('dongiatinhtheokhoiluong.create') }}"><button type="button"
+                                        <a href="{{ route('dongiatinhtheosoluong.create') }}"><button type="button"
                                                 class="btn btn-primary float-left"
                                                 style="width: 100px; margin-right: 10px;">THÊM
                                                 MỚI</button></a>
@@ -44,25 +44,25 @@
                                 <thead style="text-align: center">
                                     <tr>
                                         <th>STT</th>
-                                        <th>Khối lượng max (kg)</th>
+                                        <th>Tên mặt hàng</th>
                                         <th>Đơn giá (VNĐ)</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($dongiatinhtheokhoiluongs as $dongiatinhtheokhoiluong)
+                                    @foreach ($dongiatinhtheosoluongs as $dongiatinhtheosoluong)
                                     <tr>
                                         <td style="text-align: center"></td>
-                                        <td>{{ $dongiatinhtheokhoiluong->khoiluongmax }}
+                                        <td>{{ $dongiatinhtheosoluong->tenmathang }}
                                         </td>
                                         <td style="text-align: right">
-                                            {{ number_format($dongiatinhtheokhoiluong->dongia, 0, '.', '.') }}</td>
+                                            {{ number_format($dongiatinhtheosoluong->dongia, 0, '.', '.') }}</td>
                                         <td style="text-align: center">
-                                            <a href="{{ route('dongiatinhtheokhoiluong.edit', $dongiatinhtheokhoiluong->id) }}"
+                                            <a href="{{ route('dongiatinhtheosoluong.edit', $dongiatinhtheosoluong->id) }}"
                                                 style="padding: 3px">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('dongiatinhtheokhoiluong.delete', $dongiatinhtheokhoiluong->id) }}"
+                                            <a href="{{ route('dongiatinhtheosoluong.delete', $dongiatinhtheosoluong->id) }}"
                                                 onclick="return confirm('Bạn muốn xóa Đơn giá này?')">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
@@ -121,15 +121,11 @@
     $(document).ready(function() {
         var dongiaTable = $("#dongia-table").DataTable({
                 "responsive": true,
+                "searching": true, 
+                "paging": true, 
                 "lengthChange": false,
-                "autoWidth": false,
-                "searching": false,                
-                "paging": false,                
-                "columnDefs": [{
-                    "searchable": false,
-                    "orderable": false,
-                    "targets": "_all",
-                }],
+                "pageLength": 25,
+                "autoWidth": false,               
                 "order": [
                     [0, 'desc']
                 ],

@@ -84,17 +84,21 @@
                 rules: {
                     khoiluongmax: {
                         required: true,
+                        number: true,
                     },
                     dongia: {
                         required: true,
+                        number: true,
                     },
                 },
                 messages: {
                     khoiluongmax: {
                         required: "Nhập Khối lượng lớn nhất tính theo Đơn giá này",
+                        number: "Nhập kiểu số",  
                     },
                     dongia: {
                         required: "Nhập Đơn giá",
+                        number: "Nhập kiểu số",  
                     },
                 },
                 errorElement: 'span',
