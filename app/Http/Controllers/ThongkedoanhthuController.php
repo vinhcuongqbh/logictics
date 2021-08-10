@@ -118,12 +118,24 @@ class ThongkedoanhthuController extends Controller
     public function thongKeDoanhThu($ngayBatDau, $ngayKetThuc)
     {
         $ngayBatDau = $ngayBatDau->copy()->startOfDay();
-        $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
-        $soluongdoanhthu = Lichsudonhang::where('id_trangthai', '2')
-            ->where('id_nhanvienquanly', Auth::id())
-            ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-            ->sum('tongchiphi');
-        return round($soluongdoanhthu/1000000, 2);
+        if ($ngayKetThuc->greaterThan(Carbon::now())) {
+            $ngayKetThuc = Carbon::now()->endOfDay();
+        } else {
+            $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        }
+        
+        if (Auth::user()->id_loainhanvien == 1) {
+            $soluongdoanhthu = Lichsudonhang::where('id_trangthai', '2')
+                ->where('id_nhanvienquanly', 3)
+                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->sum('tongchiphi');
+        } else {
+            $soluongdoanhthu = Lichsudonhang::where('id_trangthai', '2')
+                ->where('id_nhanvienquanly', Auth::id())
+                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->sum('tongchiphi');
+        }
+        return round($soluongdoanhthu / 1000000, 2);
     }
 
 
@@ -189,9 +201,9 @@ class ThongkedoanhthuController extends Controller
         $ngayBatDauTuan = $ngay->copy()->startOfWeek();
         for ($thu = 2; $thu <= 8; $thu++) {
             //Tính Tổng số đơn hàng theo ngày của Tuần hiện tại   
-            if ($ngayBatDauTuan->lte(Carbon::now())) { 
+            if ($ngayBatDauTuan->lte(Carbon::now())) {
                 $tongDoanhThu[$thu] = $this->thongKeDoanhThuTheoNgay($ngayBatDauTuan);
-                $ngayBatDauTuan->addDay(); 
+                $ngayBatDauTuan->addDay();
             } else {
                 $tongDoanhThu[$thu] = null;
             }

@@ -76,6 +76,7 @@
                                 <label for="id_khohangquanly">Kho hàng quản lý</label>
                                 <div>
                                     <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
+                                        {{-- <option value="0"></option> --}}
                                         @foreach ($khohangs as $khohang)
                                             <option value="{{ $khohang->id }}" @if ($nhanvien->id_khohangquanly == $khohang->id) {{ 'selected' }} @endif>
                                                 {{ $khohang->tenkhohang }}</option>

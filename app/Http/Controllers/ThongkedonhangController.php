@@ -116,8 +116,13 @@ class ThongkedonhangController extends Controller
     //Hàm thống kê Đơn hàng
     public function thongKeDonHang($ngayBatDau, $ngayKetThuc)
     {
-        $ngayBatDau = $ngayBatDau->copy()->startOfDay();
-        $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        $ngayBatDau = $ngayBatDau->copy()->startOfDay();        
+        if ($ngayKetThuc->greaterThan(Carbon::now())) {
+            $ngayKetThuc = Carbon::now()->endOfDay();
+        } else {
+            $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        }
+
         if (Auth::user()->id_loainhanvien == 1) {
             $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
                 ->where('id_nhanvienquanly', 3)

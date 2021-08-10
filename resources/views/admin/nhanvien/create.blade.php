@@ -81,6 +81,7 @@
                                 <label for="id_khohangquanly">Kho hàng quản lý</label>
                                 <div>
                                     <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
+                                        {{-- <option value="0"></option> --}}
                                         @foreach ($khohangs as $khohang)
                                             <option value="{{ $khohang->id }}">
                                                 {{ $khohang->tenkhohang }}</option>
