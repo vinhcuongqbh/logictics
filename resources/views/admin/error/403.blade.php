@@ -22,9 +22,9 @@
                         <div class="modal-body">
                             <p>Bạn không đủ thẩm quyền để thực hiện chức năng này.</p>
                         </div>
-                        <div class="modal-footer">                            
+                        <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            
+
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -33,8 +33,11 @@
             </div>
             <!-- /.modal -->
         </div>
+        <!-- /.col -->
     </div>
+    <!-- /.row -->
 </div>
+<!-- /.container-fluid -->
 @stop
 
 @section('css')

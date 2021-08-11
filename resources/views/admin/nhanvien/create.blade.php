@@ -3,124 +3,117 @@
 @section('title', 'Thêm mới Nhân viên')
 
 @section('content_header')
-
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1>NHÂN VIÊN</h1>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('content')
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>NHÂN VIÊN</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Thêm mới Nhân viên</h3>
                 </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Thêm mới Nhân viên</h3>
-                    </div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                <form action="{{ route('nhanvien.store') }}" method="post" id="nhanvien-create">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputStatus">Loại nhân viên</label>
+                            <select id="id_loainhanvien" name="id_loainhanvien" class="form-control custom-select">
+                                <option selected disabled></option>
+                                @foreach ($loainhanvien as $i)
+                                <option value="{{ $i->id }}">{{ $i->tenloainhanvien }}</option>
                                 @endforeach
-                            </ul>
+                            </select>
                         </div>
-                    @endif
-                    <form action="{{ route('nhanvien.store') }}" method="post" id="nhanvien-create">
-                        @csrf
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="inputStatus">Loại nhân viên</label>
-                                <select id="id_loainhanvien" name="id_loainhanvien" class="form-control custom-select">
-                                    <option selected disabled></option>
-                                    @foreach ($loainhanvien as $i)
-                                        <option value="{{ $i->id }}">{{ $i->tenloainhanvien }}</option>
+                        <div class="form-group">
+                            <label for="name">Họ và tên</label>
+                            <input type="text" id="name" name="name" value="{{ old('name') }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="sodienthoai">Số điện thoại</label>
+                            <input type="tel" id="sodienthoai" name="sodienthoai" placeholder="(+81)123-456-789"
+                                value="{{ old('sodienthoai') }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật mã</label>
+                            <input type="text" id="password" name="password" value="{{ $password }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="diachi">Địa chỉ</label>
+                            <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="lienhekhac">Liên hệ khác</label>
+                            <input type="text" id="lienhekhac" name="lienhekhac" value="{{ old('lienhekhac') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_khohangquanly">Kho hàng quản lý</label>
+                            <div>
+                                <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
+                                    {{-- <option value="0"></option> --}}
+                                    @foreach ($khohangs as $khohang)
+                                    <option value="{{ $khohang->id }}">
+                                        {{ $khohang->tenkhohang }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="name">Họ và tên</label>
-                                <input type="text" id="name" name="name" value="{{ old('name') }}"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="sodienthoai">Số điện thoại</label>
-                                <input type="tel" id="sodienthoai" name="sodienthoai" placeholder="(+81)123-456-789"
-                                    value="{{ old('sodienthoai') }}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Mật mã</label>
-                                <input type="text" id="password" name="password" value="{{ $password }}"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="diachi">Địa chỉ</label>
-                                <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="lienhekhac">Liên hệ khác</label>
-                                <input type="text" id="lienhekhac" name="lienhekhac" value="{{ old('lienhekhac') }}"
-                                    class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="id_khohangquanly">Kho hàng quản lý</label>
-                                <div>
-                                    <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
-                                        {{-- <option value="0"></option> --}}
-                                        @foreach ($khohangs as $khohang)
-                                            <option value="{{ $khohang->id }}">
-                                                {{ $khohang->tenkhohang }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-12">
-                                    <input type="submit" value="TẠO MỚI" class="btn btn-primary float-right"
-                                        style="width: 100px;">
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-12">
+                                <input type="submit" value="TẠO MỚI" class="btn btn-primary float-right"
+                                    style="width: 100px;">
                             </div>
                         </div>
-                        <!-- /.card-body -->
-                    </form>
-                </div>
-                <!-- /.card -->
+                    </div>
+                    <!-- /.card-body -->
+                </form>
             </div>
+            <!-- /.card -->
         </div>
-    </section>
-    <!-- /.content -->
+    </div>
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
 @stop
 
 @section('js')
-    <!-- jquery-validation -->
-    <script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/vendor/jquery-validation/additional-methods.min.js"></script>
-    <!-- Page specific script -->
-    <script>
-        $(function() {
+<!-- jquery-validation -->
+<script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/vendor/jquery-validation/additional-methods.min.js"></script>
+<!-- Page specific script -->
+<script>
+    $(function() {
 
             $('#nhanvien-create').validate({
                 rules: {
@@ -177,5 +170,5 @@
                 }
             });
         });
-    </script>
+</script>
 @stop

@@ -276,6 +276,7 @@ return [
         [
             'text'    => 'Đơn hàng',
             'icon'    => 'fas fa-fw fa-shopping-cart',
+            'can'         => 'donhang',
             'submenu' => [
                 [
                     'text' => 'Đang lưu Kho',
@@ -292,6 +293,7 @@ return [
         [
             'text'    => 'Chuyến hàng',
             'icon'    => 'fas fa-fw fa-plane',
+            'can'         => 'chuyenhang',
             'submenu' => [
                 [
                     'text' => 'Chờ nhập Kho',
@@ -305,21 +307,24 @@ return [
                 ],               
             ],
         ],
-        ['header' => 'THỐNG KÊ'],
-        // [
-        //     'text'        => 'Nhân viên',
-        //     'url'         => '#',
-        //     'icon' => 'fas fa-fw fa-angle-right',
-        // ],
+        ['header' => 'THỐNG KÊ'],        
         [
             'text'        => 'Đơn hàng',
             'url'         => 'admin/thongke/thongkedonhang',
             'icon' => 'fas fa-fw fa-angle-right',
+            'can'         => 'thongke-donhang',
         ],
         [
             'text'        => 'Doanh thu',
             'url'         => 'admin/thongke/thongkedoanhthu',
             'icon' => 'fas fa-fw fa-angle-right',
+            'can'         => 'thongke-doanhthu',
+        ],
+        [
+            'text'        => 'Lợi nhuận',
+            'url'         => 'admin/thongke/loinhuan',
+            'icon' => 'fas fa-fw fa-angle-right',
+            'can'         => 'thongke-loinhuan',
         ],
 
         // [

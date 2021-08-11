@@ -3,88 +3,76 @@
 @section('title', 'Đơn giá')
 
 @section('content_header')
-
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-xs-12">
+            <h1>ĐƠN GIÁ TÍNH THEO SỐ LƯỢNG</h1>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-xs-12">
-                    <h1>ĐƠN GIÁ TÍNH THEO SỐ LƯỢNG</h1>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div>
-                                    <div class="col-auto">
-                                        <a href="{{ route('dongiatinhtheosoluong.create') }}"><button type="button"
-                                                class="btn btn-primary float-left"
-                                                style="width: 100px; margin-right: 10px;">THÊM
-                                                MỚI</button></a>
-                                    </div>
-                                </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div>
+                            <div class="col-auto">
+                                <a href="{{ route('dongiatinhtheosoluong.create') }}"><button type="button"
+                                        class="btn btn-primary float-left"
+                                        style="width: 100px; margin-right: 10px;">THÊM
+                                        MỚI</button></a>
                             </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="dongia-table" class="table table-bordered table-striped">
-                                <thead style="text-align: center">
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên mặt hàng</th>
-                                        <th>Đơn giá (VNĐ)</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dongiatinhtheosoluongs as $dongiatinhtheosoluong)
-                                    <tr>
-                                        <td style="text-align: center"></td>
-                                        <td>{{ $dongiatinhtheosoluong->tenmathang }}
-                                        </td>
-                                        <td style="text-align: right">
-                                            {{ number_format($dongiatinhtheosoluong->dongia, 0, '.', '.') }}</td>
-                                        <td style="text-align: center">
-                                            <a href="{{ route('dongiatinhtheosoluong.edit', $dongiatinhtheosoluong->id) }}"
-                                                style="padding: 3px">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('dongiatinhtheosoluong.delete', $dongiatinhtheosoluong->id) }}"
-                                                onclick="return confirm('Bạn muốn xóa Đơn giá này?')">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="dongia-table" class="table table-bordered table-striped">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên mặt hàng</th>
+                                <th>Đơn giá (VNĐ)</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($dongiatinhtheosoluongs as $dongiatinhtheosoluong)
+                            <tr>
+                                <td style="text-align: center"></td>
+                                <td>{{ $dongiatinhtheosoluong->tenmathang }}
+                                </td>
+                                <td style="text-align: right">
+                                    {{ number_format($dongiatinhtheosoluong->dongia, 0, '.', '.') }}</td>
+                                <td style="text-align: center">
+                                    <a href="{{ route('dongiatinhtheosoluong.edit', $dongiatinhtheosoluong->id) }}"
+                                        style="padding: 3px">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{ route('dongiatinhtheosoluong.delete', $dongiatinhtheosoluong->id) }}"
+                                        onclick="return confirm('Bạn muốn xóa Đơn giá này?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
             </div>
-            <!-- /.row -->
+            <!-- /.card -->
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.container-fluid -->
 @stop
 
 @section('css')

@@ -3,115 +3,101 @@
 @section('title', 'Kho hàng')
 
 @section('content_header')
-
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1>KHO HÀNG</h1>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>KHO HÀNG</h1>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-auto">
+                                <a href="{{ route('khohang.create') }}"><button type="button"
+                                        class="btn btn-primary float-left"
+                                        style="width: 100px; margin-right: 10px;">THÊM
+                                        MỚI</button></a>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ route('khohang') }}"><button type="button"
+                                        class="btn btn-outline-primary float-left" style="margin-right: 10px;">ĐANG SỬ
+                                        DỤNG</button></a>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="col-auto">
-                                        <a href="{{ route('khohang.create') }}"><button type="button"
-                                                class="btn btn-primary float-left"
-                                                style="width: 100px; margin-right: 10px;">THÊM
-                                                MỚI</button></a>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="{{ route('khohang') }}"><button type="button"
-                                                class="btn btn-outline-primary float-left"
-                                                style="margin-right: 10px;">ĐANG SỬ DỤNG</button></a>
-
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="{{ route('khohang.tamdung') }}"><button type="button"
-                                                class="btn btn-outline-danger float-left"
-                                                style="width: 100px; margin-right: 10px;">TẠM DỪNG</button></a>
-                                    </div>
-                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ route('khohang.tamdung') }}"><button type="button"
+                                        class="btn btn-outline-danger float-left"
+                                        style="width: 100px; margin-right: 10px;">TẠM DỪNG</button></a>
                             </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="khohang-table" class="table table-bordered table-striped">
-                                <thead style="text-align: center">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Tên Kho hàng</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($khohangs as $khohang)
-                                    <tr>
-                                        <td style="text-align: center"><a
-                                                href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->id }}</a>
-                                        </td>
-                                        <td><a
-                                                href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->tenkhohang }}</a>
-                                        </td>
-                                        <td style="text-align: center"><a
-                                                href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->sodienthoai }}</a>
-                                        </td>
-                                        <td><a
-                                                href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->diachi }}</a>
-                                        </td>
-                                        <td style="text-align: center">
-                                            <a href="{{ route('khohang.edit', $khohang->id) }}" style="padding: 3px">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            @if ($khohang->id > 2)
-                                                @if ($khohang->id_trangthai == 1)
-                                                <a href="{{ route('khohang.delete', $khohang->id) }}"
-                                                    onclick="return confirm('Bạn muốn xóa Kho hàng này?')">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </a>
-                                                @else
-                                                <a href="{{ route('khohang.restore', $khohang->id) }}"
-                                                    onclick="return confirm('Bạn muốn phục hồi Kho hàng này?')">
-                                                    <i class="fas fa-undo"></i>
-                                                </a>
-                                                @endif
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="khohang-table" class="table table-bordered table-striped">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên Kho hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($khohangs as $khohang)
+                            <tr>
+                                <td style="text-align: center"><a
+                                        href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->id }}</a>
+                                </td>
+                                <td><a href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->tenkhohang }}</a>
+                                </td>
+                                <td style="text-align: center"><a
+                                        href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->sodienthoai }}</a>
+                                </td>
+                                <td><a href="{{ route('khohang.show', $khohang->id) }}">{{ $khohang->diachi }}</a>
+                                </td>
+                                <td style="text-align: center">
+                                    <a href="{{ route('khohang.edit', $khohang->id) }}" style="padding: 3px">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @if ($khohang->id > 2)
+                                    @if ($khohang->id_trangthai == 1)
+                                    <a href="{{ route('khohang.delete', $khohang->id) }}"
+                                        onclick="return confirm('Bạn muốn xóa Kho hàng này?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    @else
+                                    <a href="{{ route('khohang.restore', $khohang->id) }}"
+                                        onclick="return confirm('Bạn muốn phục hồi Kho hàng này?')">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
+                                    @endif
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
             </div>
-            <!-- /.row -->
+            <!-- /.card -->
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
 </div>
-<!-- /.content-wrapper -->
+<!-- /.container-fluid -->
 @stop
 
 @section('css')

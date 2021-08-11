@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //Bộ lọc sidebar của AdminLTE 3
+        //Menu sidebar của AdminLTE 3
         Gate::define('khohang', function (User $user) {
             return $user->id_loainhanvien === 1;
         });       
@@ -38,10 +38,22 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id_loainhanvien === 1;
         });
         Gate::define('dongia', function (User $user) {
-            return $user->id_loainhanvien === 1;
+            return $user->id_loainhanvien == 1;
         });
-        Gate::define('caidat', function (User $user) {
-            return $user->id_loainhanvien === 1;
+        Gate::define('donhang', function (User $user) {
+            return $user->id_loainhanvien !== 1;
+        });
+        Gate::define('chuyenhang', function (User $user) {
+            return $user->id_loainhanvien !== 1;
+        });
+        Gate::define('thongke-donhang', function (User $user) {
+            return true;
+        });
+        Gate::define('thongke-doanhthu', function (User $user) {
+            return true;
+        });
+        Gate::define('thongke-loinhuan', function (User $user) {
+            return true;
         });
     }
 }

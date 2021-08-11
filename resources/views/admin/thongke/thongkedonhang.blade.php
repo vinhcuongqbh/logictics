@@ -3,203 +3,213 @@
 @section('title', 'AdminPage')
 
 @section('content_header')
-
+<div class="container-fluid">
+  <form action="{{ route('thongke.thongKeDonHangDashBoard') }}" method="get">
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <h1>THỐNG KÊ ĐƠN HÀNG</h1>
+      </div>
+      <div class="col-md-3">
+        <!-- select -->
+        <div class="form-group">
+          <select class="form-control" id="nhanvien" name="nhanvien">
+            <option value="2">Tổng hợp</option>
+            @foreach ($nhanviens as $nhanvien)
+            <option value="{{ $nhanvien->id }}" @if ($id_nhanvien == $nhanvien->id) selected @endif>
+              {{ $nhanvien->name }}
+            </option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-primary">Xem</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('content')
 <!-- Main content -->
 <!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>THỐNG KÊ ĐƠN HÀNG</h1>
+<div class="container-fluid">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3>{{  $donHangTrongNgay }}</h3>
+
+          <p>Đơn hàng trong ngày</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
-</section>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3>{{  $donHangTrongTuan }}</sup></h3>
 
-<div class="content">
-  <div class="container-fluid">
-    <!-- Small boxes (Stat box) -->
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3>{{  $donHangTrongNgay }}</h3>
-
-            <p>Đơn hàng trong ngày</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
+          <p>Đơn hàng trong tuần</p>
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>{{  $donHangTrongTuan }}</sup></h3>
-
-            <p>Đơn hàng trong tuần</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
         </div>
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
       </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
-            <h3>{{  $donHangTrongThang }}</h3>
-
-            <p>Đơn hàng trong tháng</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-            <h3>{{  $donHangTrongNam }}</h3>
-
-            <p>Đơn hàng trong năm</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
-        </div>
-      </div>
-      <!-- ./col -->
     </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3>{{  $donHangTrongThang }}</h3>
 
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Theo tuần</h3>
-              <a href="javascript:void(0);">Báo cáo chi tiết</a>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">{{ $donHangTrongTuan }}</span>
-                <span>Đơn hàng</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                @if ($tiLeTangTruongTuan >0)
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongTuan }}%
-                </span>
-                @elseif ($tiLeTangTruongTuan ==0)
-                <span class="text-warning">
-                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongTuan }}%
-                </span>
-                @else
-                <span class="text-danger">
-                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongTuan }}%
-                </span>
-                @endif
-                <span class="text-muted">So với tuần trước</span>
-              </p>
-            </div>
-            <!-- /.d-flex -->
-
-            <div class="position-relative mb-4">
-              <canvas id="bieudotuan-donhang" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> Tuần này
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> Tuần trước
-              </span>
-            </div>
-          </div>
+          <p>Đơn hàng trong tháng</p>
         </div>
-        <!-- /.card -->
-      </div>
-      <!-- /.col-md-6 -->
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Theo năm</h3>
-              <a href="javascript:void(0);">Báo cáo chi tiết</a>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">{{ $donHangTrongNam }}</span>
-                <span>Đơn hàng</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                @if ($tiLeTangTruongNam >0)
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongNam }}%
-                </span>
-                @elseif ($tiLeTangTruongNam ==0)
-                <span class="text-warning">
-                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongNam }}%
-                </span>
-                @else
-                <span class="text-danger">
-                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongNam }}%
-                </span>
-                @endif
-                <span class="text-muted">So với năm trước</span>
-              </p>
-            </div>
-            <!-- /.d-flex -->
-
-            <div class="position-relative mb-4">
-              <canvas id="bieudonam-donhang" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> {{ $donHangNamHienTai[0]}}
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> {{ $donHangNamTruoc[0] }}
-              </span>
-            </div>
-          </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
         </div>
-        <!-- /.card -->
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
       </div>
-      <!-- /.col-md-6 -->
     </div>
-    <!-- /.row -->
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3>{{  $donHangTrongNam }}</h3>
+
+          <p>Đơn hàng trong năm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
+      </div>
+    </div>
+    <!-- ./col -->
   </div>
-  <!-- /.container-fluid -->
-</div>
-<!-- /.content -->
-</div>
 
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="d-flex justify-content-between">
+            <h3 class="card-title">Theo tuần</h3>
+            <a href="javascript:void(0);">Báo cáo chi tiết</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="d-flex">
+            <p class="d-flex flex-column">
+              <span class="text-bold text-lg">{{ $donHangTrongTuan }}</span>
+              <span>Đơn hàng</span>
+            </p>
+            <p class="ml-auto d-flex flex-column text-right">
+              @if ($tiLeTangTruongTuan >0)
+              <span class="text-success">
+                <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongTuan }}%
+              </span>
+              @elseif ($tiLeTangTruongTuan ==0)
+              <span class="text-warning">
+                <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongTuan }}%
+              </span>
+              @else
+              <span class="text-danger">
+                <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongTuan }}%
+              </span>
+              @endif
+              <span class="text-muted">So với tuần trước</span>
+            </p>
+          </div>
+          <!-- /.d-flex -->
+
+          <div class="position-relative mb-4">
+            <canvas id="bieudotuan-donhang" height="200"></canvas>
+          </div>
+
+          <div class="d-flex flex-row justify-content-end">
+            <span class="mr-2">
+              <i class="fas fa-square text-primary"></i> Tuần này
+            </span>
+
+            <span>
+              <i class="fas fa-square text-gray"></i> Tuần trước
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col-md-6 -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="d-flex justify-content-between">
+            <h3 class="card-title">Theo năm</h3>
+            <a href="javascript:void(0);">Báo cáo chi tiết</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="d-flex">
+            <p class="d-flex flex-column">
+              <span class="text-bold text-lg">{{ $donHangTrongNam }}</span>
+              <span>Đơn hàng</span>
+            </p>
+            <p class="ml-auto d-flex flex-column text-right">
+              @if ($tiLeTangTruongNam >0)
+              <span class="text-success">
+                <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongNam }}%
+              </span>
+              @elseif ($tiLeTangTruongNam ==0)
+              <span class="text-warning">
+                <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongNam }}%
+              </span>
+              @else
+              <span class="text-danger">
+                <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongNam }}%
+              </span>
+              @endif
+              <span class="text-muted">So với năm trước</span>
+            </p>
+          </div>
+          <!-- /.d-flex -->
+
+          <div class="position-relative mb-4">
+            <canvas id="bieudonam-donhang" height="200"></canvas>
+          </div>
+
+          <div class="d-flex flex-row justify-content-end">
+            <span class="mr-2">
+              <i class="fas fa-square text-primary"></i> {{ $donHangNamHienTai[0]}}
+            </span>
+
+            <span>
+              <i class="fas fa-square text-gray"></i> {{ $donHangNamTruoc[0] }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col-md-6 -->
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('css')

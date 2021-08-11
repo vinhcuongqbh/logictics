@@ -3,199 +3,196 @@
 @section('title', 'AdminPage')
 
 @section('content_header')
-
+<div class="container-fluid">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>THỐNG KÊ DOANH THU</h1>
+    </div>
+  </div>
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('content')
 <!-- Main content -->
 <!-- Content Header (Page header) -->
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>THỐNG KÊ DOANH THU</h1>
+<div class="container-fluid">
+  <!-- Small boxes (Stat box) -->
+  <div class="row">
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-info">
+        <div class="inner">
+          <h3 style="display: inline;">{{  $doanhThuTrongNgay }} <p style="font-size: 20px; display: inline;">triệu</<p>
+          </h3>
+          <p>Doanh thu trong ngày</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-cash"></i>
+        </div>
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
       </div>
     </div>
-  </div><!-- /.container-fluid -->
-</section>
-
-<div class="content">
-  <div class="container-fluid">
-    <!-- Small boxes (Stat box) -->
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3 style="display: inline;">{{  $doanhThuTrongNgay }} <p style="font-size: 20px; display: inline;">triệu</<p></h3>
-            <p>Doanh thu trong ngày</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-cash"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-success">
+        <div class="inner">
+          <h3 style="display: inline;">{{  $doanhThuTrongTuan }} <p style="font-size: 20px; display: inline;">triệu</<p>
+          </h3>
+          <p>Doanh thu trong tuần</p>
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3 style="display: inline;">{{  $doanhThuTrongTuan }} <p style="font-size: 20px; display: inline;">triệu</<p></h3>
-            <p>Doanh thu trong tuần</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-cash"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
+        <div class="icon">
+          <i class="ion ion-cash"></i>
         </div>
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
       </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
-            <h3 style="display: inline;">{{  $doanhThuTrongThang }} <p style="font-size: 20px; display: inline;">triệu</<p></h3>
-            <p>Doanh thu trong tháng</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-cash"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-            <h3 style="display: inline;">{{  $doanhThuTrongNam }} <p style="font-size: 20px; display: inline;">triệu</<p></h3>
-            <p>Doanh thu trong năm</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-cash"></i>
-          </div>
-          {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
-          <div class="small-box-footer">&#8192;</div>
-        </div>
-      </div>
-      <!-- ./col -->
     </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Theo tuần</h3>
-              <a href="javascript:void(0);">Báo cáo chi tiết</a>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">{{ $doanhThuTrongTuan }} <sup style="font-size: 15px;">triệu</<sup></span>
-                <span>Doanh thu</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                @if ($tiLeTangTruongTuan >0)
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongTuan }}%
-                </span>
-                @elseif ($tiLeTangTruongTuan ==0)
-                <span class="text-warning">
-                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongTuan }}%
-                </span>
-                @else
-                <span class="text-danger">
-                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongTuan }}%
-                </span>
-                @endif
-                <span class="text-muted">So với tuần trước</span>
-              </p>
-            </div>
-            <!-- /.d-flex -->
-
-            <div class="position-relative mb-4">
-              <canvas id="bieudotuan-doanhthu" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> Tuần này
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> Tuần trước
-              </span>
-            </div>
-          </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-warning">
+        <div class="inner">
+          <h3 style="display: inline;">{{  $doanhThuTrongThang }} <p style="font-size: 20px; display: inline;">triệu
+              </<p>
+          </h3>
+          <p>Doanh thu trong tháng</p>
         </div>
-        <!-- /.card -->
-      </div>
-      <!-- /.col-md-6 -->
-      <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header border-0">
-            <div class="d-flex justify-content-between">
-              <h3 class="card-title">Theo năm</h3>
-              <a href="javascript:void(0);">Báo cáo chi tiết</a>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">{{ $doanhThuTrongNam }} <sup style="font-size: 15px;">triệu</<sup></span>
-                <span>Doanh thu</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                @if ($tiLeTangTruongNam >0)
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongNam }}%
-                </span>
-                @elseif ($tiLeTangTruongNam ==0)
-                <span class="text-warning">
-                  <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongNam }}%
-                </span>
-                @else
-                <span class="text-danger">
-                  <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongNam }}%
-                </span>
-                @endif
-                <span class="text-muted">So với năm trước</span>
-              </p>
-            </div>
-            <!-- /.d-flex -->
-
-            <div class="position-relative mb-4">
-              <canvas id="bieudonam-doanhthu" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> {{ $doanhThuNamHienTai[0]}}
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> {{ $doanhThuNamTruoc[0] }}
-              </span>
-            </div>
-          </div>
+        <div class="icon">
+          <i class="ion ion-cash"></i>
         </div>
-        <!-- /.card -->
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
       </div>
-      <!-- /.col-md-6 -->
     </div>
-    <!-- /.row -->
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+      <!-- small box -->
+      <div class="small-box bg-danger">
+        <div class="inner">
+          <h3 style="display: inline;">{{  $doanhThuTrongNam }} <p style="font-size: 20px; display: inline;">triệu</<p>
+          </h3>
+          <p>Doanh thu trong năm</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-cash"></i>
+        </div>
+        {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+        <div class="small-box-footer">&#8192;</div>
+      </div>
+    </div>
+    <!-- ./col -->
   </div>
-  <!-- /.container-fluid -->
-</div>
-<!-- /.content -->
-</div>
 
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="d-flex justify-content-between">
+            <h3 class="card-title">Theo tuần</h3>
+            <a href="javascript:void(0);">Báo cáo chi tiết</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="d-flex">
+            <p class="d-flex flex-column">
+              <span class="text-bold text-lg">{{ $doanhThuTrongTuan }} <sup style="font-size: 15px;">triệu</<sup></span>
+              <span>Doanh thu</span>
+            </p>
+            <p class="ml-auto d-flex flex-column text-right">
+              @if ($tiLeTangTruongTuan >0)
+              <span class="text-success">
+                <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongTuan }}%
+              </span>
+              @elseif ($tiLeTangTruongTuan ==0)
+              <span class="text-warning">
+                <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongTuan }}%
+              </span>
+              @else
+              <span class="text-danger">
+                <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongTuan }}%
+              </span>
+              @endif
+              <span class="text-muted">So với tuần trước</span>
+            </p>
+          </div>
+          <!-- /.d-flex -->
+
+          <div class="position-relative mb-4">
+            <canvas id="bieudotuan-doanhthu" height="200"></canvas>
+          </div>
+
+          <div class="d-flex flex-row justify-content-end">
+            <span class="mr-2">
+              <i class="fas fa-square text-primary"></i> Tuần này
+            </span>
+
+            <span>
+              <i class="fas fa-square text-gray"></i> Tuần trước
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col-md-6 -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="d-flex justify-content-between">
+            <h3 class="card-title">Theo năm</h3>
+            <a href="javascript:void(0);">Báo cáo chi tiết</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="d-flex">
+            <p class="d-flex flex-column">
+              <span class="text-bold text-lg">{{ $doanhThuTrongNam }} <sup style="font-size: 15px;">triệu</<sup></span>
+              <span>Doanh thu</span>
+            </p>
+            <p class="ml-auto d-flex flex-column text-right">
+              @if ($tiLeTangTruongNam >0)
+              <span class="text-success">
+                <i class="fas fa-arrow-up"></i> {{ $tiLeTangTruongNam }}%
+              </span>
+              @elseif ($tiLeTangTruongNam ==0)
+              <span class="text-warning">
+                <i class="fas fa-arrow-left"></i> {{ $tiLeTangTruongNam }}%
+              </span>
+              @else
+              <span class="text-danger">
+                <i class="fas fa-arrow-down"></i> {{ $tiLeTangTruongNam }}%
+              </span>
+              @endif
+              <span class="text-muted">So với năm trước</span>
+            </p>
+          </div>
+          <!-- /.d-flex -->
+
+          <div class="position-relative mb-4">
+            <canvas id="bieudonam-doanhthu" height="200"></canvas>
+          </div>
+
+          <div class="d-flex flex-row justify-content-end">
+            <span class="mr-2">
+              <i class="fas fa-square text-primary"></i> {{ $doanhThuNamHienTai[0]}}
+            </span>
+
+            <span>
+              <i class="fas fa-square text-gray"></i> {{ $doanhThuNamTruoc[0] }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col-md-6 -->
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('css')
