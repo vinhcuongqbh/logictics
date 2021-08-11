@@ -9,13 +9,14 @@
       <div class="col-md-6">
         <h1>THỐNG KÊ ĐƠN HÀNG</h1>
       </div>
+      @if (Auth::user()->id_loainhanvien == 1)
       <div class="col-md-3">
         <!-- select -->
         <div class="form-group">
           <select class="form-control" id="nhanvien" name="nhanvien">
             <option value="2">Tổng hợp</option>
             @foreach ($nhanviens as $nhanvien)
-            <option value="{{ $nhanvien->id }}" @if ($id_nhanvien == $nhanvien->id) selected @endif>
+            <option value="{{ $nhanvien->id }}" @if ($id_nhanvien==$nhanvien->id) selected @endif>
               {{ $nhanvien->name }}
             </option>
             @endforeach
@@ -25,6 +26,7 @@
       <div class="col-md-3">
         <button type="submit" class="btn btn-primary">Xem</button>
       </div>
+      @endif
     </div>
   </form>
 </div>

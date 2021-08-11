@@ -11,10 +11,16 @@ use Illuminate\Http\Request;
 class ThongkedonhangController extends Controller
 {
     public function thongKeDonHangDashBoard(Request $request)
-    {      
+    {
         //Kiểm tra xem $id_nhanvien có tồn tại
-        if ($request->nhanvien == null) $request->nhanvien = 2;
-        
+        if ($request->nhanvien == null) {
+            if (Auth::user()->id_loainhanvien != 1) {
+                $request->nhanvien = Auth::user()->id;
+            } else {
+                $request->nhanvien = 2;
+            }
+        }
+
         $id_nhanvien = $request->nhanvien;
 
         //Tính số đơn hàng trong ngày
