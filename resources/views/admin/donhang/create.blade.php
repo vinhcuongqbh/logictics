@@ -104,77 +104,81 @@
                                         Xóa
                                     </button>
                                 </div>
-                                <div class="modal fade" id="create-modal">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Thêm mới Mặt hàng</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                <form class="form-horizontal" id="chitietdonhang-create">
+                                    <div class="modal fade" id="create-modal">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Thêm mới Mặt hàng</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group row">
+                                                        <label for="tenmathang" class="col-sm-3 col-form-label">Mặt
+                                                            hàng</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="tenmathang" list="danhmucmathang"
+                                                                class="form-control">
+                                                            <datalist id="danhmucmathang">
+                                                                @foreach ($danhmucmathangs as $danhmucmathang)
+                                                                <option value="{{ $danhmucmathang->tenmathang }}" />
+                                                                @endforeach
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="soluong" class="col-sm-3 col-form-label">Số
+                                                            lượng</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="soluong" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="khoiluong" class="col-sm-3 col-form-label">Khối
+                                                            lượng</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="khoiluong" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="kichthuoc" class="col-sm-3 col-form-label">Kích
+                                                            thước</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="kichthuoc" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="giatriuoctinh" class="col-sm-3 col-form-label">Giá
+                                                            trị
+                                                            ước tính</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="giatriuoctinh" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="chiphi" class="col-sm-3 col-form-label">Chi
+                                                            phí</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="chiphi" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" id="addRow"
+                                                        data-dismiss="modal">Thêm mới</button>
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="form-group row">
-                                                    <label for="tenmathang" class="col-sm-3 col-form-label">Mặt
-                                                        hàng</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="tenmathang" list="danhmucmathang"
-                                                            class="form-control">
-                                                        <datalist id="danhmucmathang">
-                                                            @foreach ($danhmucmathangs as $danhmucmathang)
-                                                            <option value="{{ $danhmucmathang->tenmathang }}" />
-                                                            @endforeach
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="soluong" class="col-sm-3 col-form-label">Số
-                                                        lượng</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="soluong" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="khoiluong" class="col-sm-3 col-form-label">Khối
-                                                        lượng</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="khoiluong" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="kichthuoc" class="col-sm-3 col-form-label">Kích
-                                                        thước</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="kichthuoc" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="giatriuoctinh" class="col-sm-3 col-form-label">Giá trị
-                                                        ước tính</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="giatriuoctinh" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="chiphi" class="col-sm-3 col-form-label">Chi phí</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="chiphi" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id="addRow"
-                                                    data-dismiss="modal">Thêm mới</button>
-                                            </div>
+                                            <!-- /.modal-content -->
                                         </div>
-                                        <!-- /.modal-content -->
+                                        <!-- /.modal-dialog -->
                                     </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
+                                    <!-- /.modal -->
+                                </form>
 
                                 <div class="modal fade" id="edit-modal">
                                     <div class="modal-dialog modal-lg">
@@ -590,61 +594,96 @@
 
 <script>
     //Kiểm tra dữ liệu đầu vào
-        $(function() {
-            $('#donhang-create').validate({
-                rules: {
-                    sodienthoainguoigui: {
-                        required: true,
-                    },
-                    tennguoigui: {
-                        required: true,
-                    },
-                    diachinguoigui: {
-                        required: true,
-                    },
-                    sodienthoainguoinhan: {
-                        required: true,
-                    },
-                    tennguoinhan: {
-                        required: true,
-                    },
-                    diachinguoinhan: {
-                        required: true,
-                    },
+    $(function() {
+        $('#donhang-create').validate({
+            rules: {
+                sodienthoainguoigui: {
+                    required: true,
                 },
-                messages: {
-                    sodienthoainguoigui: {
-                        required: "Nhập Số điện thoại của Người gửi",
-                    },
-                    tennguoigui: {
-                        required: "Nhập Họ tên của Người gửi",
-                    },
-                    diachinguoigui: {
-                        required: "Nhập Địa chỉ của Người gửi",
-                    },
-                    sodienthoainguoinhan: {
-                        required: "Nhập Số điện thoại của Người nhận",
-                    },
-                    tennguoinhan: {
-                        required: "Nhập Họ tên của Người nhận",
-                    },
-                    diachinguoinhan: {
-                        required: "Nhập Địa chỉ của Người nhận",
-                    },
+                tennguoigui: {
+                    required: true,
                 },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.col-sm-9').append(error);
+                diachinguoigui: {
+                    required: true,
+                },
+                sodienthoainguoinhan: {
+                    required: true,
+                },
+                tennguoinhan: {
+                    required: true,
+                },
+                diachinguoinhan: {
+                    required: true,
+                },
+            },
+            messages: {
+                sodienthoainguoigui: {
+                    required: "Nhập Số điện thoại của Người gửi",
+                },
+                tennguoigui: {
+                    required: "Nhập Họ tên của Người gửi",
+                },
+                diachinguoigui: {
+                    required: "Nhập Địa chỉ của Người gửi",
+                },
+                sodienthoainguoinhan: {
+                    required: "Nhập Số điện thoại của Người nhận",
+                },
+                tennguoinhan: {
+                    required: "Nhập Họ tên của Người nhận",
+                },
+                diachinguoinhan: {
+                    required: "Nhập Địa chỉ của Người nhận",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.col-sm-9').append(error);
 
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
         });
+    });
+
+    $(function() {
+        $('#chitietdonhang-create').validate({
+            rules: {
+                tenmathang: {
+                    required: true,
+                },                    
+                chiphi: {
+                    required: true,
+                    number: true,
+                },
+            },
+            messages: {
+                tenmathang: {
+                    required: "Nhập tên mặt hàng",
+                },                    
+                chiphi: {
+                    required: "Nhập chi phí",
+                    number: "Nhập kiểu số",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.col-sm-9').append(error);
+
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
 </script>
 @stop

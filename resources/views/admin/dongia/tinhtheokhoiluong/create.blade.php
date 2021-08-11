@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="khoiluongmax">Khối lượng max (kg)</label>
-                                <input type="text" id="khoiluongmax" name="khoiluongmax" value="{{ old('khoiluongmax') }}"
+                                <input type="number" id="khoiluongmax" name="khoiluongmax" value="{{ old('khoiluongmax') }}"
                                     class="form-control">
                             </div>
                             <div class="form-group">
@@ -88,7 +88,6 @@
                     },
                     dongia: {
                         required: true,
-                        number: true,
                     },
                 },
                 messages: {
@@ -98,7 +97,6 @@
                     },
                     dongia: {
                         required: "Nhập Đơn giá",
-                        number: "Nhập kiểu số",  
                     },
                 },
                 errorElement: 'span',

@@ -87,7 +87,6 @@
                     },
                     dongia: {
                         required: true,
-                        number: true,
                     },
                 },
                 messages: {
@@ -96,7 +95,6 @@
                     },
                     dongia: {
                         required: "Nhập Đơn giá",    
-                        number: "Nhập kiểu số",                
                     },
                 },
                 errorElement: 'span',
