@@ -10,7 +10,7 @@
         <h1>THỐNG KÊ ĐƠN HÀNG</h1>
       </div>
       @if (Auth::user()->id_loainhanvien == 1)
-      <div class="col-md-3">
+      <div class="col-lg-3 col-6">
         <!-- select -->
         <div class="form-group">
           <select class="form-control" id="nhanvien" name="nhanvien">
@@ -23,7 +23,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-lg-3 col-6">
         <button type="submit" class="btn btn-primary">Xem</button>
       </div>
       @endif

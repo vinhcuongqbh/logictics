@@ -101,7 +101,7 @@ class DonhangController extends Controller
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::find($id);
         if (!Gate::allows('show-donhang', $donhang)) {
-            return view('admin.error.saithamquyen');
+            return view('admin.error.403');
         } else {
             $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
             $qrcode = $donhang->id;
