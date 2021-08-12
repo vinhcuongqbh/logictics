@@ -52,6 +52,13 @@
                                             value="{{ $donhang->diachinguoigui }}" class="form-control">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="emailnguoigui" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="emailnguoigui" name="emailnguoigui"
+                                            value="{{ $donhang->emailnguoigui }}" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-5" style="float: left; padding: 0px 30px;">
                                 <div class="form-group row" style="text-align: center">
@@ -77,6 +84,13 @@
                                     <div class="col-sm-9">
                                         <input type="text" id="diachinguoinhan" name="diachinguoinhan"
                                             value="{{ $donhang->diachinguoinhan }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="emailnguoinhan" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="emailnguoinhan" name="emailnguoinhan"
+                                            value="{{ $donhang->emailnguoinhan }}" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -423,7 +437,7 @@
                     //     b = b.replace(/[^\d.-]/g, '') * 1;
                     // }
                     x = a.toString().replaceAll(".","");
-                    y = b.toString().replaceAll(".","");                    
+                    y = b.toString().replaceAll(".","");
                     return parseInt(x) + parseInt(y);
                 }, 0 );
             } );
@@ -669,22 +683,22 @@
                 document.querySelector("#chiphi").value = "";
             }
             //End: Hàm làm trống dữ liệu input
-           
+
         });
 </script>
 
 <script>
-    $(document).ready(function() {       
+    $(document).ready(function() {
         //Bảng Lịch sử đơn hàng
         var lichsudonhangTable = $('#lichsudonhang-table').DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
             "searching": false,
-            "paging": false,      
+            "paging": false,
             "order": [
                 [0, 'desc']
-            ],      
+            ],
         });
         //End: Tạo Table Đơn hàng
 
@@ -697,7 +711,7 @@
                 cell.innerHTML = i + 1;
             });
         }).draw();
-    });      
+    });
 </script>
 
 <script>

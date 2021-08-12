@@ -40,7 +40,7 @@ class ThongkedonhangController extends Controller
         //Tính tổng số đơn hàng năm trước (theo từng tháng)
         $donHangNamTruoc = $this->thongKeChiTietDonHangTheoThangTrongNam($id_nhanvien, Carbon::now()->year - 1);
 
-        //Tính tỉ lệ tăng trưởng năm hiện tại so với năm trước (tính đến ngày hiện tại)   
+        //Tính tỉ lệ tăng trưởng năm hiện tại so với năm trước (tính đến ngày hiện tại)
         $tiLeTangTruongNam = $this->tiLeTangTruong($id_nhanvien, Carbon::now()->subYear()->startOfYear(), Carbon::now()->subYear(), Carbon::now()->startOfYear(), Carbon::now());
 
         //Tính tổng số đơn hàng tuần hiện tại (theo từng ngày)
@@ -90,7 +90,8 @@ class ThongkedonhangController extends Controller
         }
 
         if ($id_nhanvien == 2) {
-            $soluongdonhang = Lichsudonhang::where('id_trangthai', '4')
+            $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
+                ->where('id_nhanvienquanly', 3)
                 ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->count();
         } else {
@@ -152,7 +153,7 @@ class ThongkedonhangController extends Controller
         $tongDonHang[0] = $nam;
         //Tính Tổng số đơn hàng theo tháng
         for ($thang = 1; $thang <= 12; $thang++) {
-            //Tính Tổng số đơn hàng theo tháng của Năm hiện tại            
+            //Tính Tổng số đơn hàng theo tháng của Năm hiện tại
             $tongDonHang[$thang] = $this->thongKeDonHangTheoThang($id_nhanvien, $thang, $nam);
         }
         return $tongDonHang;
@@ -166,7 +167,7 @@ class ThongkedonhangController extends Controller
         $tongDonHang = array();
         $ngayBatDauTuan = $ngay->copy()->startOfWeek();
         for ($thu = 2; $thu <= 8; $thu++) {
-            //Tính Tổng số đơn hàng theo ngày của Tuần hiện tại   
+            //Tính Tổng số đơn hàng theo ngày của Tuần hiện tại
             if ($ngayBatDauTuan->lte(Carbon::now())) {
                 $tongDonHang[$thu] = $this->thongKeDonHangTheoNgay($id_nhanvien, $ngayBatDauTuan);
                 $ngayBatDauTuan->addDay();

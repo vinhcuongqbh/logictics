@@ -4,12 +4,32 @@
 
 @section('content_header')
 <div class="container-fluid">
-  <div class="row mb-2">
-    <div class="col-sm-6">
-      <h1>THỐNG KÊ DOANH THU</h1>
-    </div>
+    <form action="{{ route('thongke.thongKeDoanhThuDashBoard') }}" method="get">
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <h1>THỐNG KÊ DOANHTHU</h1>
+        </div>
+        @if (Auth::user()->id_loainhanvien == 1)
+        <div class="col-lg-3 col-6">
+          <!-- select -->
+          <div class="form-group">
+            <select class="form-control" id="nhanvien" name="nhanvien">
+              <option value="2">Tổng hợp</option>
+              @foreach ($nhanviens as $nhanvien)
+              <option value="{{ $nhanvien->id }}" @if ($id_nhanvien==$nhanvien->id) selected @endif>
+                {{ $nhanvien->name }}
+              </option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6">
+          <button type="submit" class="btn btn-primary">Xem</button>
+        </div>
+        @endif
+      </div>
+    </form>
   </div>
-</div>
 <!-- /.container-fluid -->
 @stop
 
@@ -298,8 +318,8 @@
   //Biểu đồ doanh thu thống kê theo tuần
   var $visitorsChart = $('#bieudotuan-doanhthu')
   // eslint-disable-next-line no-unused-vars
-  var doanhThuTuanHienTai = @json($doanhThuTuanHienTai); 
-  var doanhThuTuanTruoc = @json($doanhThuTuanTruoc); 
+  var doanhThuTuanHienTai = @json($doanhThuTuanHienTai);
+  var doanhThuTuanTruoc = @json($doanhThuTuanTruoc);
   var visitorsChart = new Chart($visitorsChart, {
     data: {
       labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],

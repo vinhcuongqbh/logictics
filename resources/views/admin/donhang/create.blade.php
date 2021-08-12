@@ -52,6 +52,13 @@
                                             value="{{ old('diachinguoigui') }}" class="form-control">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="emailnguoigui" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="emailnguoigui" name="emailnguoigui"
+                                            value="{{ old('emailnguoigui') }}" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-6" style="float: left; padding: 0px 30px;">
                                 <div class="form-group row" style="text-align: center">
@@ -78,6 +85,13 @@
                                     <div class="col-sm-9">
                                         <input type="text" id="diachinguoinhan" name="diachinguoinhan"
                                             value="{{ old('diachinguoinhan') }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="emailnguoinhan" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" id="emailnguoinhan" name="emailnguoinhan"
+                                            value="{{ old('emailnguoinhan') }}" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -327,13 +341,13 @@
 <!-- Page specific script -->
 <script>
     var chiTietDonHang = [];
-    
+
     var rowIndex;
-         
+
     jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
-        return this.flatten().reduce( function ( a, b ) {                   
+        return this.flatten().reduce( function ( a, b ) {
             x = a.toString().replaceAll(".","");
-            y = b.toString().replaceAll(".","");                    
+            y = b.toString().replaceAll(".","");
             return parseInt(x) + parseInt(y);
         }, 0 );
     } );
@@ -580,7 +594,7 @@
             document.querySelector("#chiphi").value = "";
         }
         //End: Hàm làm trống dữ liệu input
-           
+
     });
 </script>
 

@@ -60,7 +60,6 @@ class KhachhangController extends Controller
         $validated = $request->validate([
             'tenkhachhang' => 'required',
             'sodienthoai' => 'required|unique:App\Models\Khachhang,sodienthoai',
-            'email' => 'required',
             'diachi' => 'required',
         ]);
 
@@ -128,7 +127,7 @@ class KhachhangController extends Controller
             'diachi' => 'required',
         ]);
 
-        //Cập nhật thông tin Nhân viên
+        //Cập nhật thông tin Khách hàng
         $khachhang = Khachhang::find($id);
         $khachhang->tenkhachhang = $request->tenkhachhang;
         $khachhang->sodienthoai = $request->sodienthoai;

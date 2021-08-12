@@ -44,13 +44,13 @@
                                 value="{{ $khachhang->sodienthoai }}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" value="{{ $khachhang->email }}"
+                            <label for="diachi">Địa chỉ</label>
+                            <input type="text" id="diachi" name="diachi" value="{{ $khachhang->diachi }}"
                                 class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="diachi">Địa chỉ</label>
-                            <input type="text" id="diachi" name="diachi" value="{{ $khachhang->diachi }}"
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="{{ $khachhang->email }}"
                                 class="form-control">
                         </div>
                         <div class="form-group">
@@ -106,19 +106,10 @@
 
         $('#khachhang-edit').validate({
             rules: {
-                id_loaikhachhang: {
-                    required: true,
-                },
                 tenkhachhang: {
                     required: true,
                 },
                 sodienthoai: {
-                    required: true,
-                },
-                email: {
-                    required: true,
-                },
-                password: {
                     required: true,
                 },
                 diachi: {
@@ -126,20 +117,11 @@
                 },
             },
             messages: {
-                id_loaikhachhang: {
-                    required: "Chọn Loại nhân viên",
-                },
                 tenkhachhang: {
                     required: "Nhập Họ tên của Nhân viên",
                 },
                 sodienthoai: {
                     required: "Nhập Số điện thoại của Nhân viên",
-                },
-                email: {
-                    required: "Nhập Email của Nhân viên",
-                },
-                password: {
-                    required: "Nhập Mật mã cho tài khoản của Nhân viên",
                 },
                 diachi: {
                     required: "Nhập Địa chỉ của Nhân viên",

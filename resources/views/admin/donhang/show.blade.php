@@ -49,6 +49,13 @@
                                         value="{{ $donhang->diachinguoigui }}" class="form-control" disabled>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="emailnguoigui" class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="emailnguoigui" name="emailnguoigui"
+                                        value="{{ $donhang->emailnguoigui }}" class="form-control" disabled>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-5" style="float: left; padding: 0px 30px;">
                             <div class="form-group row" style="text-align: center">
@@ -74,6 +81,13 @@
                                 <div class="col-sm-9">
                                     <input type="text" id="diachinguoinhan" name="diachinguoinhan"
                                         value="{{ $donhang->diachinguoinhan }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="emailnguoinhan" class="col-sm-3 col-form-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="emailnguoinhan" name="emailnguoinhan"
+                                        value="{{ $donhang->emailnguoinhan }}" class="form-control" disabled>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +259,7 @@
 <script src="/vendor/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
-    $(document).ready(function() {       
+    $(document).ready(function() {
         var donhangTable = $('#donhang-table').DataTable({
             "responsive": true,
             "lengthChange": false,
@@ -275,10 +289,10 @@
             "lengthChange": false,
             "autoWidth": false,
             "searching": false,
-            "paging": false,      
+            "paging": false,
             "order": [
                 [0, 'desc']
-            ],      
+            ],
         });
         //End: Tạo Table Đơn hàng
 
@@ -291,6 +305,6 @@
                 cell.innerHTML = i + 1;
             });
         }).draw();
-    });      
+    });
 </script>
 @stop

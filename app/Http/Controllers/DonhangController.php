@@ -41,11 +41,22 @@ class DonhangController extends Controller
 
     public function store(Request $request)
     {
-        //Lưu thông tin khách hàng
+        //Lưu thông tin người gửi
         $khachhang = new Khachhang;
         $khachhang->tenkhachhang = $request->tennguoigui;
         $khachhang->sodienthoai = $request->sodienthoainguoigui;
         $khachhang->diachi = $request->diachinguoigui;
+        $khachhang->email = $request->emailnguoigui;
+        $khachhang->id_nhanvienquanly = Auth::id();
+        $khachhang->id_trangthai = 1;
+        $khachhang->save();
+
+        //Lưu thông tin người nhận
+        $khachhang = new Khachhang;
+        $khachhang->tenkhachhang = $request->tennguoinhan;
+        $khachhang->sodienthoai = $request->sodienthoainguoinhan;
+        $khachhang->diachi = $request->diachinguoinhan;
+        $khachhang->email = $request->emailnguoinhan;
         $khachhang->id_nhanvienquanly = Auth::id();
         $khachhang->id_trangthai = 1;
         $khachhang->save();
@@ -100,34 +111,29 @@ class DonhangController extends Controller
     {
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::find($id);
-        if (!Gate::allows('show-donhang', $donhang)) {
-            return view('admin.error.403');
-        } else {
-            $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-            $qrcode = $donhang->id;
-            // $qrcode = "Mã đơn hàng: ".$donhang->id.
-            // "\nNgười gửi: ".$donhang->tennguoigui.
-            // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
-            // "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
-            // "\nNgười nhận: ".$donhang->tennguoinhan.
-            // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
-            // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
+        $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
+        $qrcode = $donhang->id;
+        // $qrcode = "Mã đơn hàng: ".$donhang->id.
+        // "\nNgười gửi: ".$donhang->tennguoigui.
+        // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
+        // "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
+        // "\nNgười nhận: ".$donhang->tennguoinhan.
+        // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
+        // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
 
-            //Hiển thị lịch sử đơn hàng
-            $lichsudonhangController = new LichsudonhangController;
-            $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
+        //Hiển thị lịch sử đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
 
-
-            return view(
-                'admin.donhang.show',
-                [
-                    'donhang' => $donhang,
-                    'chitietdonhangs' => $chitietdonhang,
-                    'lichsudonhangs' => $lichsudonhang,
-                    'qrcode' => $qrcode
-                ]
-            );
-        }
+        return view(
+            'admin.donhang.show',
+            [
+                'donhang' => $donhang,
+                'chitietdonhangs' => $chitietdonhang,
+                'lichsudonhangs' => $lichsudonhang,
+                'qrcode' => $qrcode
+            ]
+        );
     }
 
 
@@ -135,44 +141,42 @@ class DonhangController extends Controller
     public function edit($id)
     {
         $donhang = Donhang::find($id);
-        if (!Gate::allows('edit-donhang', $donhang)) {
-            return view('admin.error.saithamquyen');
-        } else {
-            //Hiển thị thông tin Đơn hàng            
-            $danhmucmathang = Danhmucmathang::all();
-            $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
-            $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
-            $dongiahangcongkenh = Dongiahangcongkenh::all();
-            $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-            $qrcode = $donhang->id;
-            // $qrcode = "Mã đơn hàng: ".$donhang->id.
-            // "\nNgười gửi: ".$donhang->tennguoigui.
-            // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
-            // "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
-            // "\nNgười nhận: ".$donhang->tennguoinhan.
-            // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
-            // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
 
-            //Hiển thị lịch sử đơn hàng
-            $lichsudonhangController = new LichsudonhangController;
-            $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
+        //Hiển thị thông tin Đơn hàng
+        $danhmucmathang = Danhmucmathang::all();
+        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
+        $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
+        $dongiahangcongkenh = Dongiahangcongkenh::all();
+        $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
+        $qrcode = $donhang->id;
+        // $qrcode = "Mã đơn hàng: ".$donhang->id.
+        // "\nNgười gửi: ".$donhang->tennguoigui.
+        // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
+        // "\nĐịa chỉ Người gửi: ".$donhang->diachinguoigui.
+        // "\nNgười nhận: ".$donhang->tennguoinhan.
+        // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
+        // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
+
+        //Hiển thị lịch sử đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
 
 
-            return view(
-                'admin.donhang.edit',
-                [
-                    'donhang' => $donhang,
-                    'danhmucmathangs' => $danhmucmathang,
-                    'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
-                    'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
-                    'dongiahangcongkenh' => $dongiahangcongkenh,
-                    'chitietdonhangs' => $chitietdonhang,
-                    'lichsudonhangs' => $lichsudonhang,
-                    'qrcode' => $qrcode
-                ]
-            );
-        }
+        return view(
+            'admin.donhang.edit',
+            [
+                'donhang' => $donhang,
+                'danhmucmathangs' => $danhmucmathang,
+                'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
+                'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
+                'dongiahangcongkenh' => $dongiahangcongkenh,
+                'chitietdonhangs' => $chitietdonhang,
+                'lichsudonhangs' => $lichsudonhang,
+                'qrcode' => $qrcode
+            ]
+        );
     }
+
 
 
 

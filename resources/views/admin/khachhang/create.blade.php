@@ -44,13 +44,13 @@
                                 value="{{ old('sodienthoai') }}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="diachi">Địa chỉ</label>
                             <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
                                 class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="lienhekhac">Liên hệ khác</label>
@@ -96,9 +96,6 @@
                     sodienthoai: {
                         required: true,
                     },
-                    email: {
-                        required: true,
-                    },
                     diachi: {
                         required: true,
                     },
@@ -110,11 +107,8 @@
                     sodienthoai: {
                         required: "Nhập Số điện thoại của Khách hàng",
                     },
-                    email: {
-                        required: "Nhập Email của Khách hàng",
-                    },
                     diachi: {
-                        required: "Nhập địa chỉ của Khách hàng",
+                        required: "Nhập Địa chỉ của Khách hàng",
                     },
                 },
                 errorElement: 'span',

@@ -24,11 +24,11 @@ class CreateDonhangsTable extends Migration
             $table->string('tennguoigui');
             $table->string('sodienthoainguoigui');
             $table->string('diachinguoigui');
-            $table->string('lienhekhacnguoigui')->nullable();
+            $table->string('emailnguoigui')->nullable();
             $table->string('tennguoinhan');
             $table->string('sodienthoainguoinhan');
             $table->string('diachinguoinhan');
-            $table->string('lienhekhacnguoinhan')->nullable();
+            $table->string('emailnguoinhan')->nullable();
             $table->bigInteger('tongchiphi');
         });
     }

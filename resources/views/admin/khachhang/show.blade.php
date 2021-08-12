@@ -33,14 +33,14 @@
                             value="{{ $khachhang->sodienthoai }}" class="form-control" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{ $khachhang->email }}" class="form-control"
-                            disabled>
-                    </div>
-                    <div class="form-group">
                         <label for="diachi">Địa chỉ</label>
                         <input type="text" id="diachi" name="diachi" value="{{ $khachhang->diachi }}"
                             class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ $khachhang->email }}" class="form-control"
+                            disabled>
                     </div>
                     <div class="form-group">
                         <label for="lienhekhac">Liên hệ khác</label>
