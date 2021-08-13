@@ -32,10 +32,13 @@ class NhanvienController extends Controller
 
     public function danghiviec()
     {
-        //Hiển thị danh sách Tài khoản đã nghĩ việc
+        //Hiển thị danh sách Tài khoản đã nghỉ việc
         $nhanvien = User::where('users.id_trangthai', 0)
-            ->orderBy('id', 'asc')
-            ->get();
+        ->join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
+        ->join('khohangs', 'khohangs.id', 'users.id_khohangquanly')
+        ->select('users.*', 'loainhanviens.tenloainhanvien', 'khohangs.tenkhohang')
+        ->orderBy('id', 'asc')
+        ->get();
 
         return view('admin.nhanvien.index', ['nhanviens' => $nhanvien]);
     }
@@ -77,11 +80,12 @@ class NhanvienController extends Controller
         $nhanvien->id_loainhanvien = $request->id_loainhanvien;
         $nhanvien->name = $request->name;
         $nhanvien->sodienthoai = $request->sodienthoai;
+        $nhanvien->diachi = $request->diachi;
         $nhanvien->email = $request->email;
         $nhanvien->password = Hash::make($request->password);
-        $nhanvien->diachi = $request->diachi;
         $nhanvien->lienhekhac = $request->lienhekhac;
         $nhanvien->id_khohangquanly = $request->id_khohangquanly;
+        $nhanvien->tilechietkhau = $request->tilechietkhau;
         $nhanvien->id_trangthai = 1;
         $nhanvien->save();
 
@@ -146,6 +150,7 @@ class NhanvienController extends Controller
         $nhanvien->sodienthoai = $request->sodienthoai;
         $nhanvien->diachi = $request->diachi;
         $nhanvien->lienhekhac = $request->lienhekhac;
+        $nhanvien->tilechietkhau = $request->tilechietkhau;
         $nhanvien->id_khohangquanly = $request->id_khohangquanly;
         $nhanvien->save();
 

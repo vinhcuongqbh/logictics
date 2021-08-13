@@ -49,6 +49,7 @@
                                 <th>Họ và tên</th>
                                 <th>Số điện thoại</th>
                                 <th>Cấp bậc</th>
+                                <th>Tỉ lệ chiết khấu (%)</th>
                                 <th>Kho quản lý</th>
                                 <th>Thao tác</th>
                             </tr>
@@ -64,9 +65,12 @@
                                 <td style="text-align: center"><a
                                         href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
                                 </td>
-                                <td><a
+                                <td style="text-align: center"><a
                                         href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenloainhanvien }}</a>
                                 </td>
+                                <td style="text-align: center"><a
+                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tilechietkhau }}</a>
+                            </td>
                                 <td><a
                                         href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
                                 </td>

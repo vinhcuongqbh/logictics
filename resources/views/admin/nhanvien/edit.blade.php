@@ -64,10 +64,15 @@
                                 class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="tilechietkhau">Tỉ lệ chiết khấu</label>
+                            <input type="number" id="tilechietkhau" name="tilechietkhau" value="{{ $nhanvien->tilechietkhau }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="lienhekhac">Liên hệ khác</label>
                             <input type="text" id="lienhekhac" name="lienhekhac" value="{{ $nhanvien->lienhekhac }}"
                                 class="form-control">
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <label for="id_khohangquanly">Kho hàng quản lý</label>
                             <div>

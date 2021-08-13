@@ -10,6 +10,7 @@ use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\ChuyenhangController;
 use App\Http\Controllers\ThongkedonhangController;
 use App\Http\Controllers\ThongkedoanhthuController;
+use App\Http\Controllers\ThongkeloinhuanController;
 
 
 /*
@@ -121,6 +122,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::group(['prefix' => 'thongke'], function () {
         Route::get('thongkedonhang', [ThongkedonhangController::class, 'thongKeDonHangDashBoard'])->name('thongke.thongKeDonHangDashBoard');
         Route::get('thongkedoanhthu', [ThongkedoanhthuController::class, 'thongKeDoanhThuDashBoard'])->name('thongke.thongKeDoanhThuDashBoard');
+        Route::get('thongkeloinhuan', [ThongkeloinhuanController::class, 'thongKeLoiNhuanDashBoard'])->name('thongke.thongKeLoiNhuanDashBoard');
     });
 });
 

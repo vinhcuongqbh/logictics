@@ -322,7 +322,7 @@ return [
         ],
         [
             'text'        => 'Lợi nhuận',
-            'url'         => 'admin/thongke/loinhuan',
+            'url'         => 'admin/thongke/thongkeloinhuan',
             'icon' => 'fas fa-fw fa-angle-right',
             'can'         => 'thongke-loinhuan',
         ],

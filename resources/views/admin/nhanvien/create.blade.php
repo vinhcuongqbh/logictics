@@ -52,6 +52,11 @@
                                 value="{{ old('sodienthoai') }}" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="diachi">Địa chỉ</label>
+                            <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control">
                         </div>
@@ -59,15 +64,15 @@
                             <label for="password">Mật mã</label>
                             <input type="text" id="password" name="password" value="{{ $password }}"
                                 class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="diachi">Địa chỉ</label>
-                            <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
-                                class="form-control">
-                        </div>
+                        </div>                        
                         <div class="form-group">
                             <label for="lienhekhac">Liên hệ khác</label>
                             <input type="text" id="lienhekhac" name="lienhekhac" value="{{ old('lienhekhac') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="tilechietkhau">Tỉ lệ chiết khấu</label>
+                            <input type="number" id="tilechietkhau" name="tilechietkhau" value="{{ old('tilechietkhau') }}"
                                 class="form-control">
                         </div>
                         <div class="form-group">
@@ -125,14 +130,14 @@
                     },
                     sodienthoai: {
                         required: true,
+                    },                    
+                    diachi: {
+                        required: true,
                     },
                     email: {
                         required: true,
                     },
                     password: {
-                        required: true,
-                    },
-                    diachi: {
                         required: true,
                     },
                 },
@@ -145,15 +150,15 @@
                     },
                     sodienthoai: {
                         required: "Nhập Số điện thoại của Nhân viên",
+                    },                    
+                    diachi: {
+                        required: "Nhập Địa chỉ của Nhân viên",
                     },
                     email: {
                         required: "Nhập Email của Nhân viên",
                     },
                     password: {
                         required: "Nhập Mật mã cho tài khoản của Nhân viên",
-                    },
-                    diachi: {
-                        required: "Nhập Địa chỉ của Nhân viên",
                     },
                 },
                 errorElement: 'span',

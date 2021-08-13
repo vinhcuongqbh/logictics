@@ -31,6 +31,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Việt Nam',
                 'id_khohangquanly' => null,
                 'id_trangthai' => 1,
+                'tilechietkhau' => null,
             ],
             [
                 
@@ -43,6 +44,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Nhật Bản',
                 'id_khohangquanly' => null,
                 'id_trangthai' => 1,
+                'tilechietkhau' => null,
             ],
             [
                 'id' => 3,
@@ -54,6 +56,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Việt Nam',
                 'id_khohangquanly' => 1,
                 'id_trangthai' => 1,
+                'tilechietkhau' => null,
             ],
             [
                 'id' => 4,
@@ -65,6 +68,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Tokyo',
                 'id_khohangquanly' => 2,
                 'id_trangthai' => 1,
+                'tilechietkhau' => null,
             ],
             [
                 'id' => 5,
@@ -76,6 +80,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Hiroshima',
                 'id_khohangquanly' => 3,
                 'id_trangthai' => 1,
+                'tilechietkhau' => rand(5,10),
             ],
             [
                 'id' => 6,
@@ -87,6 +92,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Kyoto',
                 'id_khohangquanly' => 4,
                 'id_trangthai' => 1,
+                'tilechietkhau' => rand(5,10),
             ],
             [
                 'id' => 7,
@@ -98,6 +104,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Osaka',
                 'id_khohangquanly' => 5,
                 'id_trangthai' => 1,
+                'tilechietkhau' => rand(5,10),
             ],
         ]);
 

@@ -24,10 +24,13 @@ class LichsudonhangSeeder extends Seeder
         $id_khogui = 2;       
         for ($id_nhanvienquanly = 5; $id_nhanvienquanly <= 7; $id_nhanvienquanly++) {
             $soluongdonhang = rand(2000, 6000);     
-            $id_khogui++;       
+            $id_khogui++;   
+            $tilechietkhau = rand(50,100)/10;     
             for ($i = 1; $i <= $soluongdonhang; $i++) {
                 $id_donhang++;
                 $tongchiphi = rand(100,3000)*1000;
+                $chietkhau = $tongchiphi*$tilechietkhau/100;
+
                 $day = Carbon::now()->subDays(rand(0, 730));
                 $donhang = Donhang::factory()->count(1)->create([
                     'id' => $id_donhang,
@@ -36,6 +39,7 @@ class LichsudonhangSeeder extends Seeder
                     'id_khonhan' => 0,
                     'id_trangthai' => 4,
                     'tongchiphi' =>  $tongchiphi,
+                    'chietkhau' => $chietkhau,
                     'created_at' => $day->copy()->addDays(15),
                     'updated_at' => $day->copy()->addDays(15),
                 ]);
@@ -49,6 +53,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => null,
                         'id_trangthai' => 1,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day,
                         'updated_at' => $day,
                     ],
@@ -59,6 +64,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => null,
                         'id_trangthai' => 2,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day,
                         'updated_at' => $day,
                     ],
@@ -69,6 +75,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => 2,
                         'id_trangthai' => 3,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day->copy()->addDays(2),
                         'updated_at' => $day->copy()->addDays(2),
                     ],
@@ -79,6 +86,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => null,
                         'id_trangthai' => 2,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day->copy()->addDays(3),
                         'updated_at' => $day->copy()->addDays(3),
                     ],
@@ -89,6 +97,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => 1,
                         'id_trangthai' => 3,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day->copy()->addDays(5),
                         'updated_at' => $day->copy()->addDays(5),
                     ],
@@ -99,6 +108,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => null,
                         'id_trangthai' => 2,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day->copy()->addDays(10),
                         'updated_at' => $day->copy()->addDays(10),
                     ],
@@ -109,6 +119,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => 0,
                         'id_trangthai' => 3,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day->copy()->addDays(12),
                         'updated_at' => $day->copy()->addDays(12),
                     ],
@@ -119,6 +130,7 @@ class LichsudonhangSeeder extends Seeder
                         'id_khonhan' => 0,
                         'id_trangthai' => 4,
                         'tongchiphi' =>  $tongchiphi,
+                        'chietkhau' => $chietkhau,
                         'created_at' => $day->copy()->addDays(15),
                         'updated_at' => $day->copy()->addDays(15),
                     ],

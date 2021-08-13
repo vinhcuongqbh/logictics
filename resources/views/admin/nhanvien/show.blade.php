@@ -38,18 +38,23 @@
                             value="{{ $nhanvien->sodienthoai }}" class="form-control" disabled>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="{{ $nhanvien->email }}" class="form-control"
-                            disabled>
-                    </div>
-                    <div class="form-group">
                         <label for="diachi">Địa chỉ</label>
                         <input type="text" id="diachi" name="diachi" value="{{ $nhanvien->diachi }}"
                             class="form-control" disabled>
                     </div>
                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ $nhanvien->email }}" class="form-control"
+                            disabled>
+                    </div>                    
+                    <div class="form-group">
                         <label for="lienhekhac">Liên hệ khác</label>
                         <input type="text" id="lienhekhac" name="lienhekhac" value="{{ $nhanvien->lienhekhac }}"
+                            class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="tilechietkhau">Tỉ lệ chiết khấu</label>
+                        <input type="number" id="tilechietkhau" name="tilechietkhau" value="{{ $nhanvien->tilechietkhau }}"
                             class="form-control" disabled>
                     </div>
                     <div class="form-group">

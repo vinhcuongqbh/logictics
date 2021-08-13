@@ -30,6 +30,7 @@ class CreateDonhangsTable extends Migration
             $table->string('diachinguoinhan');
             $table->string('emailnguoinhan')->nullable();
             $table->bigInteger('tongchiphi');
+            $table->bigInteger('chietkhau');
         });
     }
 

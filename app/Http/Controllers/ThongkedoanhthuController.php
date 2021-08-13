@@ -180,7 +180,7 @@ class ThongkedoanhthuController extends Controller
         //Tính tổng đơn hàng từ đầu năm cho đến ngày B
         $tongDoanhThuB = $this->thongKeDoanhThu($id_nhanvien, $ngayBatDauB, $ngayKetThucB);
         //Tính tỉ lệ của $tongDoanhThuB so với $tongDoanhThuA
-        if ($tongDoanhThuB <> 0) {
+        if ($tongDoanhThuA <> 0) {
             $tiLeTangTruong = round(($tongDoanhThuB - $tongDoanhThuA) / $tongDoanhThuA * 100, 2);
         } else {
             $tiLeTangTruong = round($tongDoanhThuB * 100, 2);
