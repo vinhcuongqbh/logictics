@@ -11,7 +11,6 @@ use App\Models\Donhang;
 use App\Models\Khachhang;
 use App\Models\Lichsudonhang;
 use App\Models\Chuyenhang;
-use App\Models\Danhmucmathang;
 use App\Models\Dongiatinhtheokhoiluong;
 use App\Models\Dongiatinhtheosoluong;
 use App\Models\Dongiahangcongkenh;
@@ -23,7 +22,6 @@ class DonhangController extends Controller
 
     public function create()
     {
-        $danhmucmathang = Danhmucmathang::all();
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
@@ -31,7 +29,6 @@ class DonhangController extends Controller
         return view(
             'admin.donhang.create',
             [
-                'danhmucmathangs' => $danhmucmathang,
                 'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
                 'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
                 'dongiahangcongkenh' => $dongiahangcongkenh
@@ -143,7 +140,6 @@ class DonhangController extends Controller
         $donhang = Donhang::find($id);
 
         //Hiển thị thông tin Đơn hàng
-        $danhmucmathang = Danhmucmathang::all();
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
@@ -166,7 +162,6 @@ class DonhangController extends Controller
             'admin.donhang.edit',
             [
                 'donhang' => $donhang,
-                'danhmucmathangs' => $danhmucmathang,
                 'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
                 'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
                 'dongiahangcongkenh' => $dongiahangcongkenh,

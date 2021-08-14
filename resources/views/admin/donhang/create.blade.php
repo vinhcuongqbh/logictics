@@ -131,7 +131,7 @@
                                                         <input type="text" id="tenmathang" list="danhmucmathang"
                                                             class="form-control">
                                                         <datalist id="danhmucmathang">
-                                                            @foreach ($danhmucmathangs as $danhmucmathang)
+                                                            @foreach ($dongiatinhtheosoluong as $danhmucmathang)
                                                             <option value="{{ $danhmucmathang->tenmathang }}" />
                                                             @endforeach
                                                         </datalist>
@@ -205,7 +205,7 @@
                                                         <input type="text" id="tenmathangEdit" list="danhmucmathang"
                                                             class="form-control">
                                                         <datalist id="danhmucmathang">
-                                                            @foreach ($danhmucmathangs as $danhmucmathang)
+                                                            @foreach ($dongiatinhtheosoluong as $danhmucmathang)
                                                             <option value="{{ $danhmucmathang->tenmathang }}" />
                                                             @endforeach
                                                         </datalist>
