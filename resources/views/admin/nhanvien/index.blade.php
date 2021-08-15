@@ -27,10 +27,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-2">
-                            <a href="{{ route('nhanvien.create') }}"><button type="button" class="btn btn-primary">THÊM
+                            <a href="{{ route('nhanvien.create') }}"><button type="button"
+                                    class="btn btn-primary">THÊM
                                     MỚI</button></a>
                         </div>
-                        {{--<div class="col-3">
+                        {{-- <div class="col-3">
                             <a href="{{ route('nhanvien') }}">
                         <button type="button" class="btn btn-block btn-outline-primary">Đang làm</button>
                         </a>
@@ -39,70 +40,72 @@
                         <a href="{{ route('nhanvien.danghiviec') }}">
                             <button type="button" class="btn btn-block btn-outline-danger">Đã nghỉ</button>
                         </a>
-                    </div>--}}
+                    </div> --}}
+                    </div>
                 </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="nhanvien-table" class="table table-bordered table-striped">
+                        <thead style="text-align: center">
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ và tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Cấp bậc</th>
+                                <th>Tỉ lệ chiết khấu (%)</th>
+                                <th>Kho quản lý</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($nhanviens as $nhanvien)
+                                <tr>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->id }}</a>
+                                    </td>
+                                    <td><a
+                                            href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->name }}</a>
+                                    </td>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
+                                    </td>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenloainhanvien }}</a>
+                                    </td>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tilechietkhau }}</a>
+                                    </td>
+                                    <td><a
+                                            href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a href="{{ route('nhanvien.edit', $nhanvien->id) }}" style="padding: 3px">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        @if ($nhanvien->id_trangthai == 1)
+                                            <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
+                                                onclick="return confirm('Bạn muốn xóa Nhân viên này?')">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('nhanvien.restore', $nhanvien->id) }}"
+                                                onclick="return confirm('Bạn muốn phục hồi Nhân viên này?')">
+                                                <i class="fas fa-undo"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table id="nhanvien-table" class="table table-bordered table-striped">
-                    <thead style="text-align: center">
-                        <tr>
-                            <th>ID</th>
-                            <th>Họ và tên</th>
-                            <th>Số điện thoại</th>
-                            <th>Cấp bậc</th>
-                            <th>Tỉ lệ chiết khấu (%)</th>
-                            <th>Kho quản lý</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($nhanviens as $nhanvien)
-                        <tr>
-                            <td style="text-align: center"><a
-                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->id }}</a>
-                            </td>
-                            <td><a href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->name }}</a>
-                            </td>
-                            <td style="text-align: center"><a
-                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
-                            </td>
-                            <td style="text-align: center"><a
-                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenloainhanvien }}</a>
-                            </td>
-                            <td style="text-align: center"><a
-                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tilechietkhau }}</a>
-                            </td>
-                            <td><a href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
-                            </td>
-                            <td style="text-align: center">
-                                <a href="{{ route('nhanvien.edit', $nhanvien->id) }}" style="padding: 3px">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                @if ($nhanvien->id_trangthai == 1)
-                                <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
-                                    onclick="return confirm('Bạn muốn xóa Nhân viên này?')">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                                @else
-                                <a href="{{ route('nhanvien.restore', $nhanvien->id) }}"
-                                    onclick="return confirm('Bạn muốn phục hồi Nhân viên này?')">
-                                    <i class="fas fa-undo"></i>
-                                </a>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
+            <!-- /.card -->
         </div>
-        <!-- /.card -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+    <!-- /.row -->
 </div>
 <!-- /.container-fluid -->
 @stop
@@ -137,14 +140,28 @@
 <!-- Page specific script -->
 <script>
     $(function() {
-            $("#nhanvien-table").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "pageLength": 25,
-                "searching": true,
-                "autoWidth": false,                
-                "buttons": ["copy", "excel", "pdf", "print", ]
-            }).buttons().container().appendTo('#nhanvien-table_wrapper .col-md-6:eq(0)');
-        });
+        $("#nhanvien-table").DataTable({
+            "language": {
+                "search": "Tìm kiếm:",
+                "emptyTable": "Không có dữ liệu phù hợp",
+                "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                "infoEmpty": "",
+                "infoFiltered": "Tìm kiếm trong tổng _MAX_ bản ghi",
+                "paginate": {
+                    "first": "Đầu tiên",
+                    "last": "Cuối cùng",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },
+            "responsive": true,
+            "lengthChange": false,
+            "pageLength": 25,
+            "searching": true,
+            "autoWidth": false,
+            "buttons": ["copy", "excel", "pdf", "print", ]
+        }).buttons().container().appendTo('#nhanvien-table_wrapper .col-md-6:eq(0)');
+    });
 </script>
 @stop
