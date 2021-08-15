@@ -6,7 +6,7 @@
 <div class="container-fluid">
   <form action="{{ route('thongke.thongKeDonHangDashBoard') }}" method="get">
     <div class="row mb-2">
-      <div class="col-md-6">
+      <div class="col-sm-6">
         <h1>THỐNG KÊ ĐƠN HÀNG</h1>
       </div>
       @if (Auth::user()->id_loainhanvien == 1)
@@ -43,8 +43,7 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>{{  $donHangTrongNgay }}</h3>
-
+          <h3 style="display: inline;">{{  $donHangTrongNgay }}</h3>
           <p>Đơn hàng trong ngày</p>
         </div>
         <div class="icon">
@@ -59,8 +58,7 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>{{  $donHangTrongTuan }}</sup></h3>
-
+          <h3 style="display: inline;">{{  $donHangTrongTuan }}</sup></h3>
           <p>Đơn hàng trong tuần</p>
         </div>
         <div class="icon">
@@ -75,8 +73,7 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3>{{  $donHangTrongThang }}</h3>
-
+          <h3 style="display: inline;">{{  $donHangTrongThang }}</h3>
           <p>Đơn hàng trong tháng</p>
         </div>
         <div class="icon">
@@ -91,8 +88,7 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3>{{  $donHangTrongNam }}</h3>
-
+          <h3 style="display: inline;">{{  $donHangTrongNam }}</h3>
           <p>Đơn hàng trong năm</p>
         </div>
         <div class="icon">

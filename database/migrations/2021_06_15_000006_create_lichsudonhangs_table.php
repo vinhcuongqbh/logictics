@@ -20,8 +20,6 @@ class CreateLichsudonhangsTable extends Migration
             $table->foreignId('id_khogui');
             $table->foreignId('id_khonhan')->nullable();
             $table->foreignId('id_trangthai');
-            $table->bigInteger('tongchiphi');
-            $table->bigInteger('chietkhau');
             $table->timestamps();
         });
     }

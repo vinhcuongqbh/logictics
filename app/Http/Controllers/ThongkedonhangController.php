@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Lichsudonhang;
+use App\Models\Donhang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -90,13 +90,9 @@ class ThongkedonhangController extends Controller
         }
 
         if ($id_nhanvien == 2) {
-            $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
-                ->where('id_nhanvienquanly', 3)
-                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-                ->count();
+            $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])->count();
         } else {
-            $soluongdonhang = Lichsudonhang::where('id_trangthai', '2')
-                ->where('id_nhanvienquanly', $id_nhanvien)
+            $soluongdonhang = Donhang::where('id_nhanvienkhoitao', $id_nhanvien)
                 ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->count();
         }

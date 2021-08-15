@@ -16,6 +16,7 @@ class CreateDonhangsTable extends Migration
         Schema::create('donhangs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('id_nhanvienkhoitao');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_khogui')->nullable();
             $table->foreignId('id_khonhan')->nullable();

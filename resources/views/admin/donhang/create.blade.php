@@ -55,7 +55,7 @@
                                 <div class="form-group row">
                                     <label for="emailnguoigui" class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="emailnguoigui" name="emailnguoigui"
+                                        <input type="email" id="emailnguoigui" name="emailnguoigui"
                                             value="{{ old('emailnguoigui') }}" class="form-control">
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="form-group row">
                                     <label for="emailnguoinhan" class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
-                                        <input type="text" id="emailnguoinhan" name="emailnguoinhan"
+                                        <input type="email" id="emailnguoinhan" name="emailnguoinhan"
                                             value="{{ old('emailnguoinhan') }}" class="form-control">
                                     </div>
                                 </div>
@@ -139,14 +139,14 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="soluong" class="col-sm-3 col-form-label">Số
-                                                        lượng</label>
+                                                        lượng (cái)</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" id="soluong" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="khoiluong" class="col-sm-3 col-form-label">Khối
-                                                        lượng</label>
+                                                        lượng (kg)</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" id="khoiluong" class="form-control">
                                                     </div>
@@ -161,14 +161,14 @@
                                                 <div class="form-group row">
                                                     <label for="giatriuoctinh" class="col-sm-3 col-form-label">Giá
                                                         trị
-                                                        ước tính</label>
+                                                        ước tính (VNĐ)</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" id="giatriuoctinh" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="chiphi" class="col-sm-3 col-form-label">Chi
-                                                        phí</label>
+                                                        phí (VNĐ)</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" id="chiphi" class="form-control">
                                                     </div>
@@ -213,14 +213,14 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="soluongEdit" class="col-sm-3 col-form-label">Số
-                                                        lượng</label>
+                                                        lượng (cái)</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" id="soluongEdit" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="khoiluongEdit" class="col-sm-3 col-form-label">Khối
-                                                        lượng</label>
+                                                        lượng (kg)</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" id="khoiluongEdit" class="form-control">
                                                     </div>
@@ -235,14 +235,14 @@
                                                 <div class="form-group row">
                                                     <label for="giatriuoctinhEdit" class="col-sm-3 col-form-label">Giá
                                                         trị
-                                                        ước tính</label>
+                                                        ước tính (VNĐ)</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" id="giatriuoctinhEdit" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="chiphiEdit" class="col-sm-3 col-form-label">Chi
-                                                        phí</label>
+                                                        phí (VNĐ)</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" id="chiphiEdit" class="form-control">
                                                     </div>
@@ -267,11 +267,11 @@
                                             <tr style="text-align: center">
                                                 <th>STT</th>
                                                 <th>Tên Mặt hàng</th>
-                                                <th>Số lượng (Cái)</th>
-                                                <th>Khối lượng (Kg)</th>
+                                                <th>Số lượng (cái)</th>
+                                                <th>Khối lượng (kg)</th>
                                                 <th>Kích thước</th>
-                                                <th>Giá trị ước tính</th>
-                                                <th>Chi phí</th>
+                                                <th>Giá trị ước tính (VNĐ)</th>
+                                                <th>Chi phí (VNĐ)</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -296,6 +296,7 @@
                     </div>
                     <!-- /.card-body -->
                     <input type="hidden" id="tongchiphi2" name="tongchiphi2">
+                    <input type="hidden" id="chietkhau" name="chietkhau">
                     <input type="hidden" id="chiTietDonHang" name="chiTietDonHang">
                 </form>
             </div>
@@ -578,8 +579,11 @@
 
         //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
         $('#submitForm').on('click', function() {
+            var tilechietkhau = @json($tilechietkhau); console.log(tilechietkhau);
+            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum(); 
+            document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100; 
             document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
-            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
+
         });
 
 

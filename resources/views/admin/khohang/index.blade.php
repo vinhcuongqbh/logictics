@@ -8,6 +8,12 @@
         <div class="col-sm-6">
             <h1>KHO HÀNG</h1>
         </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Kho hàng</li>
+            </ol>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->
@@ -27,7 +33,7 @@
                                         style="width: 100px; margin-right: 10px;">THÊM
                                         MỚI</button></a>
                             </div>
-                            <div class="col-auto">
+                            {{-- <div class="col-auto">
                                 <a href="{{ route('khohang') }}"><button type="button"
                                         class="btn btn-outline-primary float-left" style="margin-right: 10px;">ĐANG SỬ
                                         DỤNG</button></a>
@@ -37,7 +43,7 @@
                                 <a href="{{ route('khohang.tamdung') }}"><button type="button"
                                         class="btn btn-outline-danger float-left"
                                         style="width: 100px; margin-right: 10px;">TẠM DỪNG</button></a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -73,7 +79,7 @@
                                     @if ($khohang->id > 2)
                                     @if ($khohang->id_trangthai == 1)
                                     <a href="{{ route('khohang.delete', $khohang->id) }}"
-                                        onclick="return confirm('Bạn muốn xóa Kho hàng này?')">
+                                        onclick="return confirm('Bạn muốn đóng Kho hàng này?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     @else
@@ -133,10 +139,10 @@
             $("#khohang-table").DataTable({
                 "responsive": true,
                 "lengthChange": false,
-                "lengthChange": true,
+                "lengthChange": false,
                 "pageLength": 25,
                 "autoWidth": false,
-                "searching": true,
+                "searching": false,
                 //"buttons": ["copy", "excel", "pdf", "print", ]
             }).buttons().container().appendTo('#khohang-table_wrapper .col-md-6:eq(0)');
         });

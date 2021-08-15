@@ -15,34 +15,27 @@ class KhohangController extends Controller
     // {
     //     $this->authorizeResource(Khohang::class, 'khohang');
     // }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function index()
     {
         $this->authorize('viewAny', Khohang::class);
         //Hiển thị danh sách kho hàng đang sử dụng
-        $khohang = Khohang::where('khohangs.id_trangthai', 1)
-            ->orderBy('id', 'asc')
-            ->get();
+        $khohang = Khohang::orderBy('id', 'asc')->get();
 
         return view('admin.khohang.index', ['khohangs' => $khohang]);
     }
 
 
-    public function tamdung()
-    {
-        $this->authorize('viewAny', Khohang::class);
-        //Hiển thị danh sách kho hàng đang sử dụng
-        $khohang = Khohang::where('khohangs.id_trangthai', 0)
-            ->orderBy('id', 'asc')
-            ->get();
+    // public function tamdung()
+    // {
+    //     $this->authorize('viewAny', Khohang::class);
+    //     //Hiển thị danh sách kho hàng đang sử dụng
+    //     $khohang = Khohang::where('khohangs.id_trangthai', 0)
+    //         ->orderBy('id', 'asc')
+    //         ->get();
 
-        return view('admin.khohang.index', ['khohangs' => $khohang]);
-    }
+    //     return view('admin.khohang.index', ['khohangs' => $khohang]);
+    // }
 
     /**
      * Show the form for creating a new resource.

@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="col-auto">
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="khachhang-table" class="table table-bordered table-striped">
@@ -76,7 +76,7 @@
                                     <a href="{{ route('khachhang.edit', $khachhang->id) }}" style="padding: 3px">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    @if ($khachhang->id_trangthai == 1)
+                                    {{-- @if ($khachhang->id_trangthai == 1)
                                     <a href="{{ route('khachhang.delete', $khachhang->id) }}"
                                         onclick="return confirm('Bạn muốn xóa Khách hàng này?')">
                                         <i class="fas fa-trash-alt"></i>
@@ -86,7 +86,7 @@
                                         onclick="return confirm('Bạn muốn phục hồi Khách hàng này?')">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    @endif
+                                    @endif --}}
                                 </td>
                             </tr>
                             @endforeach

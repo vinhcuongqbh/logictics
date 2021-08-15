@@ -22,8 +22,6 @@ class DonhangFactory extends Factory
     public function definition()
     {
         return [
-            'id_nhanvienquanly' => rand(3,6),
-            'id_trangthai' => 2,
             'tennguoigui' => $this->faker->name(),
             'sodienthoainguoigui' => $this->faker->phoneNumber(),
             'diachinguoigui' => $this->faker->address(),
@@ -32,10 +30,6 @@ class DonhangFactory extends Factory
             'sodienthoainguoinhan' => $this->faker->phoneNumber(),
             'diachinguoinhan' => $this->faker->address(),
             'emailnguoinhan' => $this->faker->unique()->safeEmail(),
-            'id_khogui' => rand(2,5),
-            'tongchiphi' => rand(100,10000)*1000,
-            'created_at' => $this->faker->dateTimeBetween('-24 months', 'now'),
-            'updated_at' => $this->faker->dateTimeBetween('-24 months', 'now'),
         ];
     }
 }

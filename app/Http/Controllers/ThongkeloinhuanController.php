@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Lichsudonhang;
+use App\Models\Donhang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -83,17 +83,15 @@ class ThongkeloinhuanController extends Controller
         }
 
         if ($id_nhanvien == 2) {
-            $soluongloinhuan = Lichsudonhang::where('id_trangthai', '1')
-                ->where('id_nhanvienquanly', 3)
-                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-                ->sum('tongchiphi');
+            $tongDoanhThu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])->sum('tongchiphi');
+            $tongChietKhau = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])->sum('chietkhau');
+            $tongLoiNhuan = $tongDoanhThu - $tongChietKhau;
         } else {
-            $soluongloinhuan = Lichsudonhang::where('id_trangthai', '1')
-                ->where('id_nhanvienquanly', $id_nhanvien)
+            $tongLoiNhuan = Donhang::where('id_nhanvienkhoitao', $id_nhanvien)
                 ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->sum('chietkhau');
         }
-        return round($soluongloinhuan / 1000000, 2);
+        return round($tongLoiNhuan / 1000000, 2);
     }
 
 

@@ -8,6 +8,13 @@
         <div class="col-sm-6">
             <h1>NHÂN VIÊN</h1>
         </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/admin/nhanvien">Nhân viên</a></li>
+                <li class="breadcrumb-item active">{{ $nhanvien->name }}</li>
+            </ol>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->
@@ -64,7 +71,7 @@
                                 class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="tilechietkhau">Tỉ lệ chiết khấu</label>
+                            <label for="tilechietkhau">Tỉ lệ chiết khấu (%)</label>
                             <input type="number" id="tilechietkhau" name="tilechietkhau" value="{{ $nhanvien->tilechietkhau }}"
                                 class="form-control">
                         </div>

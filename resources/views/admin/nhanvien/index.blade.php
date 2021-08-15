@@ -8,6 +8,12 @@
         <div class="col-sm-6">
             <h1>NHÂN VIÊN</h1>
         </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Nhân viên</li>
+            </ol>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->
@@ -20,88 +26,83 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="col-auto">
-                                <a href="{{ route('nhanvien.create') }}"><button type="button"
-                                        class="btn btn-primary float-left" style="width: 100px; margin-right: 10px">THÊM
-                                        MỚI</button></a>
-                            </div>
-                            <div class="col-auto">
-                                <a href="{{ route('nhanvien') }}"><button type="button"
-                                        class="btn btn-outline-primary float-left" style="margin-right: 10px">ĐANG SỬ
-                                        DỤNG</button></a>
-
-                            </div>
-                            <div class="col-auto">
-                                <a href="{{ route('nhanvien.danghiviec') }}"><button type="button"
-                                        class="btn btn-outline-danger float-left" style="margin-right: 10px">ĐÃ
-                                        NGHỈ VIỆC</button></a>
-                            </div>
+                        <div class="col-md-2">
+                            <a href="{{ route('nhanvien.create') }}"><button type="button" class="btn btn-primary">THÊM
+                                    MỚI</button></a>
                         </div>
+                        {{--<div class="col-3">
+                            <a href="{{ route('nhanvien') }}">
+                        <button type="button" class="btn btn-block btn-outline-primary">Đang làm</button>
+                        </a>
                     </div>
+                    <div class="col-3">
+                        <a href="{{ route('nhanvien.danghiviec') }}">
+                            <button type="button" class="btn btn-block btn-outline-danger">Đã nghỉ</button>
+                        </a>
+                    </div>--}}
                 </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="nhanvien-table" class="table table-bordered table-striped">
-                        <thead style="text-align: center">
-                            <tr>
-                                <th>ID</th>
-                                <th>Họ và tên</th>
-                                <th>Số điện thoại</th>
-                                <th>Cấp bậc</th>
-                                <th>Tỉ lệ chiết khấu (%)</th>
-                                <th>Kho quản lý</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($nhanviens as $nhanvien)
-                            <tr>
-                                <td style="text-align: center"><a
-                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->id }}</a>
-                                </td>
-                                <td><a href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->name }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenloainhanvien }}</a>
-                                </td>
-                                <td style="text-align: center"><a
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="nhanvien-table" class="table table-bordered table-striped">
+                    <thead style="text-align: center">
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ và tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Cấp bậc</th>
+                            <th>Tỉ lệ chiết khấu (%)</th>
+                            <th>Kho quản lý</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($nhanviens as $nhanvien)
+                        <tr>
+                            <td style="text-align: center"><a
+                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->id }}</a>
+                            </td>
+                            <td><a href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->name }}</a>
+                            </td>
+                            <td style="text-align: center"><a
+                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->sodienthoai }}</a>
+                            </td>
+                            <td style="text-align: center"><a
+                                    href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenloainhanvien }}</a>
+                            </td>
+                            <td style="text-align: center"><a
                                     href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tilechietkhau }}</a>
                             </td>
-                                <td><a
-                                        href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
-                                </td>
-                                <td style="text-align: center">
-                                    <a href="{{ route('nhanvien.edit', $nhanvien->id) }}" style="padding: 3px">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    @if ($nhanvien->id_trangthai == 1)
-                                    <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
-                                        onclick="return confirm('Bạn muốn xóa Nhân viên này?')">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                    @else
-                                    <a href="{{ route('nhanvien.restore', $nhanvien->id) }}"
-                                        onclick="return confirm('Bạn muốn phục hồi Nhân viên này?')">
-                                        <i class="fas fa-undo"></i>
-                                    </a>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.card-body -->
+                            <td><a href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
+                            </td>
+                            <td style="text-align: center">
+                                <a href="{{ route('nhanvien.edit', $nhanvien->id) }}" style="padding: 3px">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                @if ($nhanvien->id_trangthai == 1)
+                                <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
+                                    onclick="return confirm('Bạn muốn xóa Nhân viên này?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                                @else
+                                <a href="{{ route('nhanvien.restore', $nhanvien->id) }}"
+                                    onclick="return confirm('Bạn muốn phục hồi Nhân viên này?')">
+                                    <i class="fas fa-undo"></i>
+                                </a>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
         </div>
-        <!-- /.col -->
+        <!-- /.card -->
     </div>
-    <!-- /.row -->
+    <!-- /.col -->
+</div>
+<!-- /.row -->
 </div>
 <!-- /.container-fluid -->
 @stop
@@ -139,11 +140,10 @@
             $("#nhanvien-table").DataTable({
                 "responsive": true,
                 "lengthChange": false,
-                "lengthChange": true,
                 "pageLength": 25,
-                "autoWidth": false,
                 "searching": true,
-                //"buttons": ["copy", "excel", "pdf", "print", ]
+                "autoWidth": false,                
+                "buttons": ["copy", "excel", "pdf", "print", ]
             }).buttons().container().appendTo('#nhanvien-table_wrapper .col-md-6:eq(0)');
         });
 </script>

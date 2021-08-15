@@ -13,12 +13,7 @@ class DonhangSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        // $donhang = Donhang::factory()->count(100)->create([
-        //     'id_nhanvienquanly' => 2,
-        //     'id_trangthai' => 2,
-        //     'id_khogui' => 2,
-        // ]);
+    {       
         $donhang = Donhang::factory()->count(100)->create([
             'id_nhanvienquanly' => 3,
             'id_trangthai' => 2,

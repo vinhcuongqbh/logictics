@@ -8,52 +8,37 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class KhachhangController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{    
     public function index()
     {
         //Hiển thị danh sách Tài khoản đang sử dụng
-        $khachhang = Khachhang::where('khachhangs.id_trangthai', 1)
-            ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
+        $khachhang = Khachhang::join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
             ->select('khachhangs.*', 'users.name')
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->get();
 
         return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
     }
 
-    public function daxoa()
-    {
-        //Hiển thị danh sách Tài khoản đã xóa
-        $khachhang = Khachhang::where('khachhangs.id_trangthai', 0)
-            ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-            ->select('khachhangs.*', 'users.name')
-            ->orderBy('id', 'asc')
-            ->get();
+    // public function daxoa()
+    // {
+    //     //Hiển thị danh sách Tài khoản đã xóa
+    //     $khachhang = Khachhang::where('khachhangs.id_trangthai', 0)
+    //         ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
+    //         ->select('khachhangs.*', 'users.name')
+    //         ->orderBy('id', 'asc')
+    //         ->get();
 
-        return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
-    }
+    //     return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
+    // }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.khachhang.create');
-    }
+    
+    // public function create()
+    // {
+    //     return view('admin.khachhang.create');
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //Kiểm tra thông tin đầu vào
@@ -78,12 +63,8 @@ class KhachhangController extends Controller
         return redirect()->action([KhachhangController::class, 'show'], ['id' => $khachhang->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+   
     public function show($id)
     {
         //Hiển thị thông tin Khách hàng
@@ -94,12 +75,8 @@ class KhachhangController extends Controller
         return view('admin.khachhang.show', ['khachhang' => $khachhang]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function edit($id)
     {
         $khachhang = Khachhang::find($id);
@@ -111,19 +88,14 @@ class KhachhangController extends Controller
         return view('admin.khachhang.edit', ['khachhang' => $khachhang, 'nhanviens' => $nhanvien]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function update(Request $request, $id)
     {
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenkhachhang' => 'required',
-            'sodienthoai' => 'required',    //|unique:App\Models\Khachhang,sodienthoai
+            'sodienthoai' => 'required',
             'diachi' => 'required',
         ]);
 
@@ -132,6 +104,7 @@ class KhachhangController extends Controller
         $khachhang->tenkhachhang = $request->tenkhachhang;
         $khachhang->sodienthoai = $request->sodienthoai;
         $khachhang->diachi = $request->diachi;
+        $khachhang->email = $request->email;
         $khachhang->lienhekhac = $request->lienhekhac;
         $khachhang->id_nhanvienquanly = $request->id_nhanvienquanly;
         $khachhang->save();
@@ -139,27 +112,25 @@ class KhachhangController extends Controller
         return redirect()->action([KhachhangController::class, 'show'], ['id' => $id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $khachhang = Khachhang::find($id);
-        $khachhang->id_trangthai = 0;
-        $khachhang->save();
+  
 
-        return back();
-    }
+    // public function destroy($id)
+    // {
+    //     $khachhang = Khachhang::find($id);
+    //     $khachhang->id_trangthai = 0;
+    //     $khachhang->save();
 
-    public function restore($id)
-    {
-        $khachhang = Khachhang::find($id);
-        $khachhang->id_trangthai = 1;
-        $khachhang->save();
+    //     return back();
+    // }
 
-        return back();
-    }
+
+
+    // public function restore($id)
+    // {
+    //     $khachhang = Khachhang::find($id);
+    //     $khachhang->id_trangthai = 1;
+    //     $khachhang->save();
+
+    //     return back();
+    // }
 }
