@@ -5,10 +5,10 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>NHÂN VIÊN</h1>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/nhanvien">Nhân viên</a></li>
@@ -22,7 +22,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-xl-8">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Thông tin Nhân viên</h3>
@@ -90,15 +90,15 @@
                         </div>
                     </div>
                     <div class="row justify-content-end">
-                        <div class="col-3">
+                        <div class="col-3 col-md-2">
                             <a href="{{ route('nhanvien.create') }}"><button type="button"
                                     class="btn btn-block btn-primary">THÊM</button></a>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 col-md-2">
                             <a href="{{ route('nhanvien.edit', $nhanvien->id) }}"><button type="button"
                                     class="btn btn-block btn-secondary">SỬA</button></a>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 col-md-2">
                             @if ($nhanvien->id_trangthai == 1)
                             <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
                                 onclick="return confirm('Bạn muốn xóa Nhân viên này?')"><button type="button"
