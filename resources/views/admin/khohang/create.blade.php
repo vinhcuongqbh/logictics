@@ -5,10 +5,10 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>Kho hàng</h1>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/khohang">Kho hàng</a></li>
@@ -23,19 +23,19 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-xl-6">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Thêm mới Kho hàng</h3>
                 </div>
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
                 <form action="{{ route('khohang.store') }}" method="post" id="khohang-create">
                     @csrf
@@ -52,13 +52,12 @@
                         </div>
                         <div class="form-group">
                             <label for="diachi">Địa chỉ</label>
-                            <input type="text" id="diachi" name="diachi" value="{{ old('diachi') }}"
-                                class="form-control">
+                            <textarea id="diachi" name="diachi" rows="2" style="resize: none;"
+                                class="form-control">{{ old('diachi') }}</textarea>
                         </div>
-                        <div class="form-group">
-                            <div class="col-12">
-                                <input type="submit" value="TẠO MỚI" class="btn btn-primary float-right"
-                                    style="width: 100px;">
+                        <div class="form-group row justify-content-end">
+                            <div class="col-4 col-md-3">
+                                <button type="submit" class="btn btn-block btn-primary">TẠO MỚI</button>
                             </div>
                         </div>
                     </div>
@@ -88,42 +87,42 @@
 <script>
     $(function() {
 
-            $('#khohang-create').validate({
-                rules: {
-                    tenkhohang: {
-                        required: true,
-                    },
-                    sodienthoai: {
-                        required: true,
-                    },
-                    diachi: {
-                        required: true,
-                    },
+        $('#khohang-create').validate({
+            rules: {
+                tenkhohang: {
+                    required: true,
                 },
-                messages: {
-                    tenkhohang: {
-                        required: "Nhập Tên của Kho hàng",
-                    },
-                    sodienthoai: {
-                        required: "Nhập Số điện thoại của Kho hàng",
-                    },
-                    diachi: {
-                        required: "Nhập Địa chỉ của Kho hàng",
-                    },
+                sodienthoai: {
+                    required: true,
                 },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
+                diachi: {
+                    required: true,
+                },
+            },
+            messages: {
+                tenkhohang: {
+                    required: "Nhập Tên của Kho hàng",
+                },
+                sodienthoai: {
+                    required: "Nhập Số điện thoại của Kho hàng",
+                },
+                diachi: {
+                    required: "Nhập Địa chỉ của Kho hàng",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
 
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
         });
+    });
 </script>
 @stop

@@ -5,10 +5,10 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>NHÂN VIÊN</h1>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item active">Nhân viên</li>
@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-auto">
                             <a href="{{ route('nhanvien.create') }}"><button type="button"
                                     class="btn btn-primary">THÊM
                                     MỚI</button></a>
@@ -48,13 +48,13 @@
                     <table id="nhanvien-table" class="table table-bordered table-striped">
                         <thead style="text-align: center">
                             <tr>
-                                <th>ID</th>
-                                <th>Họ và tên</th>
+                                <th data-priority="1">ID</th>
+                                <th data-priority="2">Họ và tên</th>
                                 <th>Số điện thoại</th>
                                 <th>Cấp bậc</th>
-                                <th>Tỉ lệ chiết khấu (%)</th>
-                                <th>Kho quản lý</th>
-                                <th>Thao tác</th>
+                                <th>Chiết khấu (%)</th>
+                                <th data-priority="3">Kho quản lý</th>
+                                <th data-priority="4">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,6 +111,7 @@
 @stop
 
 @section('css')
+<!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
@@ -119,7 +120,12 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
+{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
+<style>
+.toolbar {
+    float: left;
+}
+</style>
 @stop
 
 @section('js')
@@ -141,13 +147,19 @@
 <script>
     $(function() {
         $("#nhanvien-table").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "pageLength": 25,
+            "searching": true,
+            "autoWidth": false,
+            "buttons": ["copy", "excel", "pdf", "print"],
             "language": {
                 "search": "Tìm kiếm:",
                 "emptyTable": "Không có dữ liệu phù hợp",
                 "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
                 "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
                 "infoEmpty": "",
-                "infoFiltered": "Tìm kiếm trong tổng _MAX_ bản ghi",
+                "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
                 "paginate": {
                     "first": "Đầu tiên",
                     "last": "Cuối cùng",
@@ -155,12 +167,6 @@
                     "previous": "Trước"
                 },
             },
-            "responsive": true,
-            "lengthChange": false,
-            "pageLength": 25,
-            "searching": true,
-            "autoWidth": false,
-            "buttons": ["copy", "excel", "pdf", "print", ]
         }).buttons().container().appendTo('#nhanvien-table_wrapper .col-md-6:eq(0)');
     });
 </script>

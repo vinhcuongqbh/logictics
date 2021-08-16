@@ -276,8 +276,12 @@
                                         </thead>
                                         <tfoot>
                                             <tr style="text-align: center">
-                                                <th colspan="5"></th>
+                                                <th></th>
                                                 <th>Tổng chi phí</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                                 <td id="tongchiphi"
                                                     style="text-align: right; padding-right:10px; text; font-weight: bold;">
                                                 </td>
@@ -365,30 +369,37 @@
                 {
                     "data": "stt",
                     "className": "dt-body-center",
+                    "responsivePriority": 7,
                 },
                 {
                     "data": "tenmathang",
                     "className": "dt-body-left",
+                    "responsivePriority": 1,
                 },
                 {
                     "data": "soluong",
                     "className": "dt-body-center",
+                    "responsivePriority": 2,
                 },
                 {
                     "data": "khoiluong",
                     "className": "dt-body-center",
+                    "responsivePriority": 3,
                 },
                 {
                     "data": "kichthuoc",
                     "className": "dt-body-center",
+                    "responsivePriority": 5,
                 },
                 {
                     "data": "giatriuoctinh",
                     "className": "dt-body-center",
+                    "responsivePriority": 6,
                 },
                 {
                     "data": "chiphi",
                     "className": "dt-body-right",
+                    "responsivePriority": 4,
                 }
             ],
             "columnDefs": [{
@@ -580,8 +591,8 @@
         //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
         $('#submitForm').on('click', function() {
             var tilechietkhau = @json($tilechietkhau); console.log(tilechietkhau);
-            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum(); 
-            document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100; 
+            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
+            document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100;
             document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
 
         });

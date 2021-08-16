@@ -5,10 +5,10 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>Kho hàng</h1>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/khohang">Kho hàng</a></li>
@@ -23,7 +23,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-xl-6">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Thông tin Kho hàng</h3>
@@ -41,37 +41,35 @@
                     </div>
                     <div class="form-group">
                         <label for="diachi">Địa chỉ</label>
-                        <input type="text" id="diachi" name="diachi" value="{{ $khohang->diachi }}" class="form-control"
-                            disabled>
+                        <textarea id="diachi" name="diachi" class="form-control" rows="2" style="resize: none" disabled>{{ $khohang->diachi }}</textarea>
                     </div>
-                    <div class="form-group">
-                        <div class="col-12">
-                            @if ($khohang->id_trangthai == 1)
-                            <a href="{{ route('khohang.delete', $khohang->id) }}"
-                                onclick="return confirm('Bạn muốn xóa Kho hàng này?')"><button type="button"
-                                    class="btn btn-danger float-right"
-                                    style="width: 100px; margin: 5px;">XÓA</button></a>
-                            @else
-                            <a href="{{ route('khohang.restore', $khohang->id) }}"
-                                onclick="return confirm('Bạn muốn phục hồi Kho hàng này?')"><button type="button"
-                                    class="btn btn-success float-right" style="width: 100px; margin: 5px;">PHỤC
-                                    HỒI</button></a>
-                            @endif
+                    <div class="form-group row justify-content-end">
+                        {{-- <div class="col-3 col-md-2">
+                            <a href="{{ route('khohang.create') }}"><button type="button" class="btn btn-block btn-primary">THÊM</button></a>
+                        </div> --}}
+                        <div class="col-3 col-md-2">
                             <a href="{{ route('khohang.edit', $khohang->id) }}"><button type="button"
-                                    class="btn btn-secondary float-right"
-                                    style="width: 100px; margin: 5px;">SỬA</button></a>
-                            <a href="{{ route('khohang.create') }}"><button type="button"
-                                    class="btn btn-primary float-right" style="width: 100px; margin: 5px;">THÊM
-                                    MỚI</button></a>
-
+                                    class="btn btn-block btn-secondary">SỬA</button></a>
+                        </div>
+                        <div class="col-3 col-md-2">
+                            @if ($khohang->id_trangthai == 1)
+                                <a href="{{ route('khohang.delete', $khohang->id) }}"
+                                    onclick="return confirm('Bạn muốn xóa Kho hàng này?')"><button type="button"
+                                        class="btn btn-block btn-danger">XÓA</button></a>
+                            @else
+                                <a href="{{ route('khohang.restore', $khohang->id) }}"
+                                    onclick="return confirm('Bạn muốn phục hồi Kho hàng này?')"><button type="button"
+                                        class="btn btn-block btn-success">PHỤC HỒI</button></a>
+                            @endif
                         </div>
                     </div>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
     </div>
+</div>
 </div>
 <!-- /.container-fluid -->
 @stop
