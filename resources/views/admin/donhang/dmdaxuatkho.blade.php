@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>ĐƠN HÀNG</h1>
         </div>
         <div class="col-sm-9">

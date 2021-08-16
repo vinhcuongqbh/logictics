@@ -47,13 +47,13 @@
                         <table id="donhang-table" class="table table-bordered table-striped">
                             <thead style="text-align: center">
                                 <tr>
-                                    <th>ID</th>
-                                    <th data-priority="1">Chọn</th>
-                                    <th data-priority="2">Người gửi</th>
+                                    <th data-priority="1">ID</th>
+                                    <th data-priority="2">Chọn</th>
+                                    <th data-priority="3">Người gửi</th>
                                     <th>Số ĐT Người gửi</th>
                                     <th>Người nhận</th>
                                     <th>Số ĐT Người nhận</th>
-                                    <th data-priority="3">Tổng chi phí</th>
+                                    <th>Tổng chi phí</th>
                                     <th data-priority="4">Thao tác</th>
                                 </tr>
                             </thead>

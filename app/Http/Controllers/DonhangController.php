@@ -180,7 +180,6 @@ class DonhangController extends Controller
 
 
 
-
     public function update(Request $request, $id)
     {
         //  //Cập nhật thông tin khách hàng
@@ -260,7 +259,6 @@ class DonhangController extends Controller
         }
 
         return back();
-        //return redirect()->route('donhang.dmdangluukho');
     }
 
     public function xuattoanbokho()
@@ -295,7 +293,6 @@ class DonhangController extends Controller
         $lichsuchuyenhangController = new LichsuchuyenhangController;
         $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
         return back();
-        //return redirect()->route('donhang.dmdangluukho');
     }
 
 
@@ -331,9 +328,7 @@ class DonhangController extends Controller
         $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
 
         return back();
-        //return redirect()->route('donhang.dmdangluukho');
     }
-
 
     //Danh sách Đơn hàng đang lưu Kho
     public function dmdangluukho()
@@ -371,10 +366,14 @@ class DonhangController extends Controller
     public function destroy($id)
     {
         $donhang = Donhang::find($id);
-        $donhang->id_trangthai = 0;
-        $donhang->save();
+        $donhang->id_trangthai = 8;
+        $donhang->delete();
 
-        return back();
+        //Lưu sự kiện "Xóa" cho Đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+
+        return redirect()->action([DonhangController::class, 'dmdangluukho']);
     }
 
     //Cập nhật Đơn hàng thất lạc

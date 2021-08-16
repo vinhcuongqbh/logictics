@@ -31,6 +31,7 @@
                         <h3 class="card-title">Thêm mới Đơn hàng</h3>
                     </div>
                     <div class="card-body">
+                        {{-- Thông tin Người gửi và Người nhận --}}
                         <div class="row justify-content-between">
                             {{-- Thông tin người nhận --}}
                             <div class="col-sm-5">
@@ -49,7 +50,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label for="tennguoigui" class="col-form-label">Họ và tên</label>
+                                        <label for="tennguoigui" class="col-form-label">Họ tên</label>
                                     </div>
                                     <div class="col-9">
                                         <input type="text" id="tennguoigui" name="tennguoigui"
@@ -61,8 +62,8 @@
                                         <label for="diachinguoigui" class="col-form-label">Địa chỉ</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="text" id="diachinguoigui" name="diachinguoigui"
-                                            value="{{ old('diachinguoigui') }}" class="form-control">
+                                        <textarea id="diachinguoigui" name="diachinguoigui" class="form-control"
+                                            cols="2" style="resize: none">{{ old('diachinguoigui') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -92,7 +93,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label for="tennguoinhan" class="col-form-label">Họ và tên</label>
+                                        <label for="tennguoinhan" class="col-form-label">Họ tên</label>
                                     </div>
                                     <div class="col-9">
                                         <input type="text" id="tennguoinhan" name="tennguoinhan"
@@ -104,8 +105,8 @@
                                         <label for="diachinguoinhan" class="col-form-label">Địa chỉ</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="text" id="diachinguoinhan" name="diachinguoinhan"
-                                            value="{{ old('diachinguoinhan') }}" class="form-control">
+                                        <textarea id="diachinguoinhan" name="diachinguoinhan" class="form-control"
+                                            rows="2" style="resize: none">{{ old('diachinguoinhan') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -122,29 +123,30 @@
                         <hr>
                         {{-- Thêm mới đơn hàng --}}
                         <div class="d-block">
-                            <div class="form-group row" style="margin-bottom: 5px;">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#create-modal" style="width: 80px;">THÊM
+                            {{-- Các nút Thêm, Sửa, Xóa --}}
+                            <div class="form-group" style="margin-bottom: 5px;">
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#create-modal" style="width: 60px;">THÊM
                                 </button>
-                                <button type="button" class="btn btn-secondary" id="editRow" data-toggle="modal"
-                                    data-target="#edit-modal" style="width: 80px; margin-left: 10px;" disabled>SỬA
+                                <button type="button" class="btn btn-sm btn-secondary" id="editRow" data-toggle="modal"
+                                    data-target="#edit-modal" style="width: 60px; margin-left: 10px;" disabled>SỬA
                                 </button>
-                                <button type="button" class="btn btn-danger" id="deleteRow"
-                                    style="width: 80px; margin-left: 10px;" disabled>XÓA
+                                <button type="button" class="btn btn-sm btn-danger" id="deleteRow"
+                                    style="width: 60px; margin-left: 10px;" disabled>XÓA
                                 </button>
                             </div>
-
-                            <div id="donhang-table-div" class="form-group row table-responsive">
+                            {{-- Table Danh sách mặt hàng --}}
+                            <div id="donhang-table-div" class="form-group">
                                 <table id="donhang-table" class="table table-bordered table-striped">
                                     <thead>
                                         <tr style="text-align: center">
                                             <th>STT</th>
-                                            <th>Tên Mặt hàng</th>
-                                            <th>Số lượng (cái)</th>
-                                            <th>Khối lượng (kg)</th>
+                                            <th data-priority="1">Tên Mặt hàng</th>
+                                            <th data-priority="2">Số lượng (cái)</th>
+                                            <th data-priority="3">Khối lượng (kg)</th>
                                             <th>Kích thước</th>
                                             <th>Giá trị ước tính (VNĐ)</th>
-                                            <th>Chi phí (VNĐ)</th>
+                                            <th data-priority="4">Chi phí (VNĐ)</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -162,7 +164,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            <div class="form-group row justify-content-end" style="margin-top: 20px;">
+                            <div class="form-group justify-content-end">
                                 <button type="submit" id="submitForm" class="btn btn-primary float-right">TẠO
                                     MỚI</button>
                             </div>
@@ -291,7 +293,7 @@
                             (cái)</label>
                     </div>
                     <div class="col-8">
-                        <input type="text" id="soluongEdit" class="form-control">
+                        <input type="number" id="soluongEdit" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -300,7 +302,7 @@
                             (kg)</label>
                     </div>
                     <div class="col-8">
-                        <input type="text" id="khoiluongEdit" class="form-control">
+                        <input type="number" id="khoiluongEdit" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -309,7 +311,7 @@
                             thước</label>
                     </div>
                     <div class="col-8">
-                        <input type="text" id="kichthuocEdit" class="form-control">
+                        <input type="number" id="kichthuocEdit" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -354,7 +356,7 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
+{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 @stop
 
@@ -398,40 +400,37 @@
             "autoWidth": false,
             "searching": false,
             "paging": false,
+            "info": false,
             "language": {
-                    "search": "Tìm kiếm:",
-                    "emptyTable": "Không có dữ liệu phù hợp",
-                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
-                    "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
-                    "infoEmpty": "",
-                    "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                },     
+                "search": "Tìm kiếm:",
+                "emptyTable": "Không có dữ liệu phù hợp",
+                "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                "": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                "infoEmpty": "",
+                "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
+                "paginate": {
+                    "first": "Đầu tiên",
+                    "last": "Cuối cùng",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },     
             "columns": [
                 {
                     "data": "stt",
                     "className": "dt-body-center",
-                    "responsivePriority": 7,
                 },
                 {
                     "data": "tenmathang",
                     "className": "dt-body-left",
-                    "responsivePriority": 1,
                 },
                 {
                     "data": "soluong",
                     "className": "dt-body-center",
-                    "responsivePriority": 2,
                 },
                 {
                     "data": "khoiluong",
                     "className": "dt-body-center",
-                    "responsivePriority": 3,
                 },
                 {
                     "data": "kichthuoc",
@@ -441,12 +440,10 @@
                 {
                     "data": "giatriuoctinh",
                     "className": "dt-body-center",
-                    "responsivePriority": 6,
                 },
                 {
                     "data": "chiphi",
                     "className": "dt-body-right",
-                    "responsivePriority": 4,
                 }
             ],
             "columnDefs": [{
@@ -635,9 +632,10 @@
         //End: Cập nhật lại Tổng Chi phí khi Table thay đổi
 
 
-        //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
+
+        //Gán giá trị cho #chiTietDonHang, #chietkhau và #tongChiPhi2
         $('#submitForm').on('click', function() {
-            var tilechietkhau = @json($tilechietkhau); console.log(tilechietkhau);
+            var tilechietkhau = @json($tilechietkhau);
             document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
             document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100;
             document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
@@ -707,7 +705,7 @@
             errorElement: 'span',
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
-                element.closest('.col-sm-9').append(error);
+                element.closest('.col-9').append(error);
 
             },
             highlight: function(element, errorClass, validClass) {
