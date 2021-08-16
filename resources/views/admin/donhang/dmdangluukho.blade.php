@@ -5,8 +5,14 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>ĐƠN HÀNG</h1>
+        </div>
+        <div class="col-sm-9">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Đơn hàng</li>
+            </ol>
         </div>
     </div>
 </div>
@@ -22,22 +28,17 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="col-auto">
-                                    <a href="{{ route('donhang.create') }}"><button type="button"
-                                            class="btn btn-primary float-left"
-                                            style="width: 100px; margin-right: 10px">THÊM
-                                            MỚI</button></a>
-                                </div>
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-outline-success float-left"
-                                        style="width: 100px; margin-right: 10px">XUẤT KHO</button>
-                                </div>
-                                <div class="col-auto">
-                                    <a href="{{ route('donhang.xuattoanbokho') }}"><button type="button"
-                                            class="btn btn-outline-success float-left" style="margin-right: 10px">XUẤT
-                                            TOÀN BỘ KHO</button></a>
-                                </div>
+                            <div class="col-auto">
+                                <a href="{{ route('donhang.create') }}"><button type="button"
+                                        class="btn btn-primary">THÊM
+                                        MỚI</button></a>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-outline-success">XUẤT KHO</button>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ route('donhang.xuattoanbokho') }}"><button type="button"
+                                        class="btn btn-outline-success">XUẤT HẾT</button></a>
                             </div>
                         </div>
                     </div>
@@ -47,13 +48,13 @@
                             <thead style="text-align: center">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Chọn</th>
-                                    <th>Người gửi</th>
-                                    <th>Số điện thoại Người gửi</th>
+                                    <th data-priority="1">Chọn</th>
+                                    <th data-priority="2">Người gửi</th>
+                                    <th>Số ĐT Người gửi</th>
                                     <th>Người nhận</th>
-                                    <th>Số điện thoại Người nhận</th>
-                                    <th>Tổng chi phí</th>
-                                    <th>Thao tác</th>
+                                    <th>Số ĐT Người nhận</th>
+                                    <th data-priority="3">Tổng chi phí</th>
+                                    <th data-priority="4">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -118,6 +119,7 @@
 @stop
 
 @section('css')
+<!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
@@ -126,7 +128,7 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
+{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
 @stop
 
 @section('js')
@@ -150,12 +152,26 @@
             $("#donhang-table").DataTable({
                 "responsive": true,
                 "lengthChange": false,
-                "lengthChange": true,
                 "pageLength": 25,
-                "autoWidth": false,
                 "searching": true,
-                "order": [[ 0, "desc" ]]
-                //"buttons": ["copy", "excel", "pdf", "print", ]
+                "autoWidth": false,
+                "buttons": ["copy", "excel", "pdf", "print"],
+                "language": {
+                    "search": "Tìm kiếm:",
+                    "emptyTable": "Không có dữ liệu phù hợp",
+                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                    "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                    "infoEmpty": "",
+                    "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                },     
+                "ordering": false,                 
+                "order": [[ 0, "desc" ]],                
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
 </script>

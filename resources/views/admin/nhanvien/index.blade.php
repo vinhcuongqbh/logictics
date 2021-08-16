@@ -121,11 +121,6 @@
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
 {{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
-<style>
-.toolbar {
-    float: left;
-}
-</style>
 @stop
 
 @section('js')

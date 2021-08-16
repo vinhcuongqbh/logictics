@@ -135,7 +135,12 @@
                                     </tbody>
                                     <tfoot>
                                         <tr style="text-align: center">
-                                            <th colspan="6">Tổng chi phí</th>
+                                            <th></th>
+                                                <th>Tổng</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                             <th id="tongchiphi" style="text-align: right">
                                                 {{ number_format($donhang->tongchiphi, 0, '.', '.') }}</th>
                                         </tr>

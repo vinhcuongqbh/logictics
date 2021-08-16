@@ -5,8 +5,15 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             <h1>ĐƠN HÀNG</h1>
+        </div>
+        <div class="col-sm-9">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="/admin/donhang/dmdangluukho">Đơn hàng</a></li>
+                <li class="breadcrumb-item active">Tạo mới</li>
+            </ol>
         </div>
     </div>
 </div>
@@ -18,78 +25,94 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Thêm mới Đơn hàng</h3>
-                </div>
                 <form class="form-horizontal" action="{{ route('donhang.store') }}" method="post" id="donhang-create">
                     @csrf
+                    <div class="card-header">
+                        <h3 class="card-title">Thêm mới Đơn hàng</h3>
+                    </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6" style="float: left; padding: 0px 30px;">
-                                <div class="form-group row" style="text-align: center">
-                                    <label for="nguoigui" class="col-sm-12 col-form-label">THÔNG TIN NGƯỜI GỬI</label>
+                        <div class="row justify-content-between">
+                            {{-- Thông tin người nhận --}}
+                            <div class="col-sm-5">
+                                <div style="text-align: center">
+                                    <label for="nguoigui">THÔNG TIN NGƯỜI GỬI</label>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="sodienthoainguoigui" class="col-sm-3 col-form-label">Số điện
-                                        thoại</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="sodienthoainguoigui" class="col-form-label">Số ĐT</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="tel" id="sodienthoainguoigui" name="sodienthoainguoigui"
                                             placeholder="(+81)123-456-789" value="{{ old('sodienthoainguoigui') }}"
                                             class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tennguoigui" class="col-sm-3 col-form-label">Họ và tên</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="tennguoigui" class="col-form-label">Họ và tên</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="text" id="tennguoigui" name="tennguoigui"
                                             value="{{ old('tennguoigui') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="diachinguoigui" class="col-sm-3 col-form-label">Địa chỉ</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="diachinguoigui" class="col-form-label">Địa chỉ</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="text" id="diachinguoigui" name="diachinguoigui"
                                             value="{{ old('diachinguoigui') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="emailnguoigui" class="col-sm-3 col-form-label">Email</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="emailnguoigui" class="col-form-label">Email</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="email" id="emailnguoigui" name="emailnguoigui"
                                             value="{{ old('emailnguoigui') }}" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6" style="float: left; padding: 0px 30px;">
-                                <div class="form-group row" style="text-align: center">
-                                    <label for="nguoinhan" class="col-sm-12 col-form-label">THÔNG TIN NGƯỜI NHẬN</label>
+                            {{-- Thông tin người gửi --}}
+                            <div class="col-sm-5">
+                                <div style="text-align: center">
+                                    <label for="nguoigui">THÔNG TIN NGƯỜI NHẬN</label>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="sodienthoainguoinhan" class="col-sm-3 col-form-label">Số điện
-                                        thoại</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="sodienthoainguoinhan" class="col-form-label">Số ĐT</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="tel" id="sodienthoainguoinhan" name="sodienthoainguoinhan"
                                             placeholder="(+81)123-456-789" value="{{ old('sodienthoainguoinhan') }}"
                                             class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tennguoinhan" class="col-sm-3 col-form-label">Họ và tên</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="tennguoinhan" class="col-form-label">Họ và tên</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="text" id="tennguoinhan" name="tennguoinhan"
                                             value="{{ old('tennguoinhan') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="diachinguoinhan" class="col-sm-3 col-form-label">Địa chỉ</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="diachinguoinhan" class="col-form-label">Địa chỉ</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="text" id="diachinguoinhan" name="diachinguoinhan"
                                             value="{{ old('diachinguoinhan') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="emailnguoinhan" class="col-sm-3 col-form-label">Email</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-3">
+                                        <label for="emailnguoinhan" class="col-form-label">Email</label>
+                                    </div>
+                                    <div class="col-9">
                                         <input type="email" id="emailnguoinhan" name="emailnguoinhan"
                                             value="{{ old('emailnguoinhan') }}" class="form-control">
                                     </div>
@@ -97,204 +120,51 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div style="margin-bottom: 20px;">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#create-modal" style="width: 80px;">
-                                        Thêm
-                                    </button>
-                                    <button type="button" class="btn btn-secondary" id="editRow" data-toggle="modal"
-                                        data-target="#edit-modal" style="width: 80px; margin-left: 10px;" disabled>
-                                        Sửa
-                                    </button>
-                                    <button type="button" class="btn btn-danger" id="deleteRow"
-                                        style="width: 80px; margin-left: 10px;" disabled>
-                                        Xóa
-                                    </button>
-                                </div>
-                                <div class="modal fade" id="create-modal">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Thêm mới Mặt hàng</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group row">
-                                                    <label for="tenmathang" class="col-sm-3 col-form-label">Mặt
-                                                        hàng</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="tenmathang" list="danhmucmathang"
-                                                            class="form-control">
-                                                        <datalist id="danhmucmathang">
-                                                            @foreach ($dongiatinhtheosoluong as $danhmucmathang)
-                                                            <option value="{{ $danhmucmathang->tenmathang }}" />
-                                                            @endforeach
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="soluong" class="col-sm-3 col-form-label">Số
-                                                        lượng (cái)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="number" id="soluong" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="khoiluong" class="col-sm-3 col-form-label">Khối
-                                                        lượng (kg)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="number" id="khoiluong" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="kichthuoc" class="col-sm-3 col-form-label">Kích
-                                                        thước</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="number" id="kichthuoc" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="giatriuoctinh" class="col-sm-3 col-form-label">Giá
-                                                        trị
-                                                        ước tính (VNĐ)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="giatriuoctinh" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="chiphi" class="col-sm-3 col-form-label">Chi
-                                                        phí (VNĐ)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="chiphi" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary" id="addRow"
-                                                    data-dismiss="modal">Thêm mới</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
+                        {{-- Thêm mới đơn hàng --}}
+                        <div class="d-block">
+                            <div class="form-group row" style="margin-bottom: 5px;">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#create-modal" style="width: 80px;">THÊM
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="editRow" data-toggle="modal"
+                                    data-target="#edit-modal" style="width: 80px; margin-left: 10px;" disabled>SỬA
+                                </button>
+                                <button type="button" class="btn btn-danger" id="deleteRow"
+                                    style="width: 80px; margin-left: 10px;" disabled>XÓA
+                                </button>
+                            </div>
 
-                                <div class="modal fade" id="edit-modal">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Sửa Mặt hàng</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group row">
-                                                    <label for="tenmathangEdit" class="col-sm-3 col-form-label">Mặt
-                                                        hàng</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="tenmathangEdit" list="danhmucmathang"
-                                                            class="form-control">
-                                                        <datalist id="danhmucmathang">
-                                                            @foreach ($dongiatinhtheosoluong as $danhmucmathang)
-                                                            <option value="{{ $danhmucmathang->tenmathang }}" />
-                                                            @endforeach
-                                                        </datalist>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="soluongEdit" class="col-sm-3 col-form-label">Số
-                                                        lượng (cái)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="soluongEdit" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="khoiluongEdit" class="col-sm-3 col-form-label">Khối
-                                                        lượng (kg)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="khoiluongEdit" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="kichthuocEdit" class="col-sm-3 col-form-label">Kích
-                                                        thước</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="kichthuocEdit" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="giatriuoctinhEdit" class="col-sm-3 col-form-label">Giá
-                                                        trị
-                                                        ước tính (VNĐ)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="giatriuoctinhEdit" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="chiphiEdit" class="col-sm-3 col-form-label">Chi
-                                                        phí (VNĐ)</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="chiphiEdit" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer justify-content-between">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary" id="updateRow"
-                                                    data-dismiss="modal">Cập nhật</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
-                                <div id="donhang-table-div">
-                                    <table id="donhang-table" class="table table-bordered table-striped"
-                                        style="width:100%">
-                                        <thead>
-                                            <tr style="text-align: center">
-                                                <th>STT</th>
-                                                <th>Tên Mặt hàng</th>
-                                                <th>Số lượng (cái)</th>
-                                                <th>Khối lượng (kg)</th>
-                                                <th>Kích thước</th>
-                                                <th>Giá trị ước tính (VNĐ)</th>
-                                                <th>Chi phí (VNĐ)</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr style="text-align: center">
-                                                <th></th>
-                                                <th>Tổng chi phí</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <td id="tongchiphi"
-                                                    style="text-align: right; padding-right:10px; text; font-weight: bold;">
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <div class="col-12">
-                                        <input type="submit" id="submitForm" value="TẠO MỚI"
-                                            class="btn btn-primary float-right">
-                                    </div>
-                                </div>
+                            <div id="donhang-table-div" class="form-group row table-responsive">
+                                <table id="donhang-table" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr style="text-align: center">
+                                            <th>STT</th>
+                                            <th>Tên Mặt hàng</th>
+                                            <th>Số lượng (cái)</th>
+                                            <th>Khối lượng (kg)</th>
+                                            <th>Kích thước</th>
+                                            <th>Giá trị ước tính (VNĐ)</th>
+                                            <th>Chi phí (VNĐ)</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr style="text-align: center">
+                                            <th></th>
+                                            <th>Tổng</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <td id="tongchiphi"
+                                                style="text-align: right; padding-right:10px; text; font-weight: bold;">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="form-group row justify-content-end" style="margin-top: 20px;">
+                                <button type="submit" id="submitForm" class="btn btn-primary float-right">TẠO
+                                    MỚI</button>
                             </div>
                         </div>
                     </div>
@@ -309,6 +179,169 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+{{-- Thêm mới mặt hàng --}}
+<div class="modal fade" id="create-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm mới Mặt hàng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="tenmathang" class="col-form-label">Tên Mặt
+                            hàng</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="tenmathang" list="danhmucmathang" class="form-control">
+                        <datalist id="danhmucmathang">
+                            @foreach ($dongiatinhtheosoluong as $danhmucmathang)
+                            <option value="{{ $danhmucmathang->tenmathang }}" />
+                            @endforeach
+                        </datalist>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="soluong" class="col-form-label">Số lượng
+                            (cái)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" id="soluong" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="khoiluong" class="col-form-label">Khối lượng
+                            (kg)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" id="khoiluong" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="kichthuoc" class="col-form-label">Kích thước</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="number" id="kichthuoc" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="giatriuoctinh" class="col-form-label">Giá trị ước
+                            tính (VNĐ)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="giatriuoctinh" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="chiphi" class="col-form-label">Chi phí (VNĐ)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="chiphi" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary" id="addRow" data-dismiss="modal">Thêm mới</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+{{-- Sửa Mặt hàng --}}
+<div class="modal fade" id="edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sửa Mặt hàng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="tenmathangEdit" class="col-form-label">Tên Mặt
+                            hàng</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="tenmathangEdit" list="danhmucmathang" class="form-control">
+                        <datalist id="danhmucmathang">
+                            @foreach ($dongiatinhtheosoluong as $danhmucmathang)
+                            <option value="{{ $danhmucmathang->tenmathang }}" />
+                            @endforeach
+                        </datalist>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="soluongEdit" class="col-form-label">Số lượng
+                            (cái)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="soluongEdit" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="khoiluongEdit" class="col-form-label">Khối lượng
+                            (kg)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="khoiluongEdit" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="kichthuocEdit" class="col-form-label">Kích
+                            thước</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="kichthuocEdit" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="giatriuoctinhEdit" class="col-form-label">Giá trị
+                            ước
+                            tính (VNĐ)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="giatriuoctinhEdit" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label for="chiphiEdit" class="col-form-label">Chi phí
+                            (VNĐ)</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" id="chiphiEdit" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="updateRow" data-dismiss="modal">Cập nhật</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @stop
 
 @section('css')
@@ -365,6 +398,20 @@
             "autoWidth": false,
             "searching": false,
             "paging": false,
+            "language": {
+                    "search": "Tìm kiếm:",
+                    "emptyTable": "Không có dữ liệu phù hợp",
+                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                    "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                    "infoEmpty": "",
+                    "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                },     
             "columns": [
                 {
                     "data": "stt",
