@@ -5,8 +5,14 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <h1>CHUYẾN HÀNG ĐÃ XUẤT KHO</h1>
+        </div>
+        <div class="col-sm-8">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Chuyến hàng</li>
+            </ol>
         </div>
     </div>
 </div><!-- /.container-fluid -->
@@ -85,6 +91,7 @@
 @stop
 
 @section('css')
+<!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
@@ -117,11 +124,26 @@
             $("#chuyenhang-table").DataTable({
                 "responsive": true,
                 "lengthChange": false,
-                "lengthChange": true,
                 "pageLength": 25,
-                "autoWidth": false,
                 "searching": true,
-                //"buttons": ["copy", "excel", "pdf", "print", ]
+                "autoWidth": false,
+                "buttons": ["copy", "excel", "pdf", "print"],
+                "language": {
+                    "search": "Tìm kiếm:",
+                    "emptyTable": "Không có dữ liệu phù hợp",
+                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                    "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                    "infoEmpty": "",
+                    "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
+                    "paginate": {
+                        "first": "Đầu tiên",
+                        "last": "Cuối cùng",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                },     
+                "ordering": false,                 
+                "order": [[ 0, "desc" ]], 
             }).buttons().container().appendTo('#chuyenhang-table_wrapper .col-md-6:eq(0)');
         });
 </script>
