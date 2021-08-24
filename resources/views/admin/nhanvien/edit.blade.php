@@ -89,6 +89,15 @@
                                 <textarea id="diachi" name="diachi" class="form-control" rows="2"
                                     style="resize: none;">{{ $nhanvien->diachi }}</textarea>
                             </div>
+                        </div>                        
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="lienhekhac">Liên hệ khác</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" id="lienhekhac" name="lienhekhac"
+                                    value="{{ $nhanvien->lienhekhac }}" class="form-control">
+                            </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-3">
@@ -97,15 +106,6 @@
                             <div class="col-sm-9">
                                 <input type="number" id="tilechietkhau" name="tilechietkhau"
                                     value="{{ $nhanvien->tilechietkhau }}" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-3">
-                                <label for="lienhekhac">Liên hệ khác</label>
-                            </div>
-                            <div class="col-sm-9">
-                                <input type="text" id="lienhekhac" name="lienhekhac"
-                                    value="{{ $nhanvien->lienhekhac }}" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">

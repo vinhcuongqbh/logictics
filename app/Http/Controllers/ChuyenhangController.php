@@ -91,7 +91,7 @@ class ChuyenhangController extends Controller
             ->where('id_trangthai', 3)
             ->get();
 
-        return view('admin.chuyenhang.donhangdaxuatkho', ['donhangs' => $donhang]);
+        return view('admin.chuyenhang.donhangdaxuatkho', ['donhangs' => $donhang, 'id_chuyenhang' => $id]);
     }
 
     //Danh mục Đơn hàng thuộc Chuyến hàng chờ nhập Kho

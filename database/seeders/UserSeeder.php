@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Việt Nam',
                 'id_khohangquanly' => 1,
                 'id_trangthai' => 1,
-                'tilechietkhau' => null,
+                'tilechietkhau' => 10,
             ],
             [
                 'id' => 4,
@@ -68,7 +68,7 @@ class UserSeeder extends Seeder
                 'diachi' => 'Tokyo',
                 'id_khohangquanly' => 2,
                 'id_trangthai' => 1,
-                'tilechietkhau' => null,
+                'tilechietkhau' => 10,
             ],
             [
                 'id' => 5,
