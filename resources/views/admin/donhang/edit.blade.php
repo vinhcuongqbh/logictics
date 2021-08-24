@@ -35,7 +35,7 @@
                         {{-- Thông tin Người gửi và Người nhận --}}
                         <div class="row">
                             {{-- Mã QR Code --}}
-                            <div class="col-sm-2" style="display: inline-block; text-align: center;">
+                            <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
                                 <div>
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
                                     QRCODE

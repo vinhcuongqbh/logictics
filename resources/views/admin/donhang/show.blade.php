@@ -33,7 +33,7 @@
                     {{-- Thông tin Người gửi và Người nhận --}}
                     <div class="row">
                         {{-- Mã QR Code --}}
-                        <div class="col-sm-2" style="display: inline-block; text-align: center;">
+                        <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div>
                                 {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
                                 QRCODE
@@ -179,14 +179,16 @@
                             <button type="button" onClick="window.print()" value="IN"
                                 class="btn btn-block btn-primary">IN</button>
                         </div>
-                        <div class="col-3 col-md-1">
+                        @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly == $donhang->id_nhanvienkhoitao))
+                        <div class="col-3 col-md-1">                            
                             <a href="{{ route('donhang.edit', $donhang->id) }}"><button type="button" value="SỬA"
-                                    class="btn btn-block btn-secondary">SỬA</button></a>
-                        </div>
+                                    class="btn btn-block btn-secondary">SỬA</button></a>                            
+                        </div>                        
                         <div class="col-3 col-md-1">
                             <a href="{{ route('donhang.delete', $donhang->id) }}"><button type="button" value="XÓA"
                                     class="btn btn-block btn-danger">XÓA</button></a>
                         </div>
+                        @endif
                         {{-- <div class="col-3 col-md-1">
                             <a href="{{ route('donhang.create') }}"><button type="button" value="TẠO MỚI" class="btn btn-block btn-primary">TẠO
                                     MỚI</button></a>
