@@ -25,12 +25,13 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-primary">
-                <form class="form-horizontal" action="{{ route('donhang.store') }}" method="post" id="donhang-create">
-                    @csrf
-                    <div class="card-header">
-                        <h3 class="card-title">Thêm mới Đơn hàng</h3>
-                    </div>
-                    <div class="card-body">
+                <div class="card-header">
+                    <h3 class="card-title">Thêm mới Đơn hàng</h3>
+                </div>
+                <div class="card-body">
+                    <form class="form-horizontal" action="{{ route('donhang.store') }}" method="post"
+                        id="donhang-create">
+                        @csrf
                         {{-- Thông tin Người gửi và Người nhận --}}
                         <div class="row justify-content-between">
                             {{-- Thông tin người nhận --}}
@@ -169,12 +170,12 @@
                                     MỚI</button>
                             </div>
                         </div>
-                    </div>
-                    <!-- /.card-body -->
-                    <input type="hidden" id="tongchiphi2" name="tongchiphi2">
-                    <input type="hidden" id="chietkhau" name="chietkhau">
-                    <input type="hidden" id="chiTietDonHang" name="chiTietDonHang">
-                </form>
+                        <input type="hidden" id="tongchiphi2" name="tongchiphi2">
+                        <input type="hidden" id="chietkhau" name="chietkhau">
+                        <input type="hidden" id="chiTietDonHang" name="chiTietDonHang">
+                    </form>
+                </div>
+                <!-- /.card-body -->
             </div>
             <!-- /.card -->
         </div>
