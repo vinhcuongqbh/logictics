@@ -287,7 +287,12 @@ return [
                     'text' => 'Đã xuất Kho',
                     'url'  => 'admin/donhang/dmdaxuatkho',
                     'icon' => 'fas fa-fw fa-angle-right',
-                ],                
+                ],
+                [
+                    'text' => 'Tra cứu',
+                    'url'  => 'admin/donhang/tracuu',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],                   
             ],
         ],
         [
@@ -299,6 +304,7 @@ return [
                     'text' => 'Chờ nhập Kho',
                     'url'  => 'admin/chuyenhang/dmchonhapkho',
                     'icon' => 'fas fa-fw fa-angle-right',
+                    'can'  => 'chuyenhangchonhapkho',
                 ],
                 [
                     'text' => 'Đã xuất Kho',

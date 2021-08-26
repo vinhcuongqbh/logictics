@@ -376,6 +376,8 @@ class DonhangController extends Controller
         return redirect()->action([DonhangController::class, 'dmdangluukho']);
     }
 
+
+
     //Cập nhật Đơn hàng thất lạc
     public function thatlac($id)
     {
@@ -384,5 +386,28 @@ class DonhangController extends Controller
         $donhang->save();
 
         return back();
+    }
+
+
+    //Trang Tra cứu Đơn hàng
+    public function tracuu()
+    {
+        return view('admin.donhang.tracuu');
+    }
+
+
+    //Tra cứu Đơn hàng
+    public function ketquatracuu(Request $request)
+    {
+        $donhang = Donhang::where('id', $request->thongtintimkiem)
+                            ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                            ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                            ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                            //->orwhere('tennguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                            //->orwhere('sodienthoainguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                            //->orwhere('emailnguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                            ->orderby('created_at','desc')
+                            ->get();
+        return view('admin.donhang.ketquatracuu',['thongtintimkiem' => $request->thongtintimkiem, 'donhangs' => $donhang]);
     }
 }

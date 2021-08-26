@@ -36,7 +36,7 @@
                         <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div>
                                 {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                QRCODE
+                                {{ $donhang->id }}
                             </div>
                         </div>
                         {{-- Thông tin Người gửi --}}

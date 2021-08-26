@@ -46,6 +46,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('chuyenhang', function (User $user) {
             return $user->id_loainhanvien !== 1;
         });
+        Gate::define('chuyenhangchonhapkho', function (User $user) {
+            return $user->id_loainhanvien == 2;
+        });
         Gate::define('thongke-donhang', function (User $user) {
             return true;
         });
