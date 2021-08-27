@@ -7,10 +7,11 @@ use App\Models\Lichsuchuyenhang;
 
 class LichsuchuyenhangController extends Controller
 {
-    public function luusukien($id_chuyenhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
+    public function luusukien($id_chuyenhang, $tongdonhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
     {
         //Lưu sự kiện của đơn hàng
         $lichsuchuyenhang = new Lichsuchuyenhang;
+        $lichsuchuyenhang->tongdonhang = $tongdonhang;
         $lichsuchuyenhang->id_chuyenhang = $id_chuyenhang;
         $lichsuchuyenhang->id_nhanvienquanly = $id_nhanvienquanly;
         $lichsuchuyenhang->id_khogui = $id_khogui;

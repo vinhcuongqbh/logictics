@@ -15,6 +15,7 @@ class CreateChuyenhangsTable extends Migration
     {
         Schema::create('chuyenhangs', function (Blueprint $table) {
             $table->id();
+            $table->integer('tongdonhang');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_khogui');
             $table->foreignId('id_khonhan');

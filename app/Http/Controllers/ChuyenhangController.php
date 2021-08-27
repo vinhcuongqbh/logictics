@@ -36,15 +36,17 @@ class ChuyenhangController extends Controller
     }
 
     //Xuất kho Chuyến hàng
-    public function xuatkho($chuyenhang)
+    public function xuatkho($chuyenhang, $tongdonhang)
     {
+        $chuyenhang->tongdonhang = $tongdonhang;
         $chuyenhang->id_trangthai = 3;
         $chuyenhang->save();
     }
 
     //Nhập kho Chuyến hàng
-    public function nhapkho($chuyenhang)
+    public function nhapkho($chuyenhang, $tongdonhang)
     {
+        $chuyenhang->tongdonhang = $tongdonhang;
         $chuyenhang->id_trangthai = 2;
         $chuyenhang->save();
     }

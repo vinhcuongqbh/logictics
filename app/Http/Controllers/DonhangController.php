@@ -236,6 +236,7 @@ class DonhangController extends Controller
 
         //Cập nhật thông tin xuất kho cho Đơn hàng
         $id_donhangsduocchon = $request->input('id_donhangduocchon');
+        $tongdonhang = 0;
         if ($id_donhangsduocchon <> null) {
             foreach ($id_donhangsduocchon as $id_donhangduocchon) {
                 //Cập nhật thông tin xuất kho cho từng Đơn hàng
@@ -248,14 +249,15 @@ class DonhangController extends Controller
                 //Lưu sự kiện cho từng Đơn hàng
                 $lichsudonhangController = new LichsudonhangController;
                 $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+                $tongdonhang++;
             }
 
             //Cập nhật thông tin xuất kho cho Chuyến hàng
-            $chuyenhangController->xuatkho($chuyenhang);
+            $chuyenhangController->xuatkho($chuyenhang, $tongdonhang);
 
             //Lưu sự kiện cho Chuyến hàng
             $lichsuchuyenhangController = new LichsuchuyenhangController;
-            $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+            $lichsuchuyenhangController->luusukien($chuyenhang->id, $tongdonhang, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
         }
 
         return back();
@@ -275,6 +277,7 @@ class DonhangController extends Controller
         $donhangs = Donhang::where('id_khogui', $id_khohangquanly)
             ->where('id_trangthai', 2)
             ->get();
+        $tongdonhang = 0;
         foreach ($donhangs as $donhang) {
             $donhang->id_khonhan = $chuyenhang->id_khonhan;
             $donhang->id_chuyenhang = $chuyenhang->id;
@@ -284,14 +287,16 @@ class DonhangController extends Controller
             //Lưu sự kiện cho từng Đơn hàng
             $lichsudonhangController = new LichsudonhangController;
             $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+
+            $tongdonhang++;
         }
 
         //Cập nhật thông tin xuất kho cho Chuyến hàng
-        $chuyenhangController->xuatkho($chuyenhang);
+        $chuyenhangController->xuatkho($chuyenhang, $tongdonhang);
 
         //Lưu sự kiện cho Chuyến hàng
         $lichsuchuyenhangController = new LichsuchuyenhangController;
-        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+        $lichsuchuyenhangController->luusukien($chuyenhang->id, $tongdonhang, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
         return back();
     }
 
@@ -299,17 +304,14 @@ class DonhangController extends Controller
     public function nhapkho(Request $request)
     {
         //Tìm Chuyến hàng
-        $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
-
-        //Cập nhật thông tin nhập kho cho Chuyến hàng
-        $chuyenhangController = new ChuyenhangController;
-        $chuyenhangController->nhapkho($chuyenhang);
+        $chuyenhang = Chuyenhang::find($request->id_chuyenhang);        
 
         $donhangs = Donhang::where('id_chuyenhang', $request->id_chuyenhang)
             ->where('id_trangthai', 3)
             ->get();
 
         //Cập nhật thông tin nhập kho cho từng Đơn hàng
+        $tongdonhang = 0;
         foreach ($donhangs as $donhang) {
             $donhang->id_nhanvienquanly = Auth::id();
             $donhang->id_chuyenhang = null;
@@ -321,11 +323,17 @@ class DonhangController extends Controller
             //Lưu sự kiện cho từng Đơn hàng
             $lichsudonhangController = new LichsudonhangController;
             $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
+
+            $tongdonhang++;
         }
+
+        //Cập nhật thông tin nhập kho cho Chuyến hàng
+        $chuyenhangController = new ChuyenhangController;
+        $chuyenhangController->nhapkho($chuyenhang, $tongdonhang);
 
         //Lưu sự kiện cho Chuyến hàng
         $lichsuchuyenhangController = new LichsuchuyenhangController;
-        $lichsuchuyenhangController->luusukien($chuyenhang->id, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+        $lichsuchuyenhangController->luusukien($chuyenhang->id, $tongdonhang, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
 
         return back();
     }

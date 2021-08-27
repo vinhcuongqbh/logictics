@@ -44,8 +44,8 @@
                                 <th>Kho nhận</th>
                                 <th>Ngày gửi</th>
                                 <th>Ngày nhận</th>
+                                <th>Tổng số đơn hàng</th>
                                 <th>Nhân viên quản lý</th>
-                                <th>Lịch sử chuyến hàng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,16 +63,12 @@
                                 <td style="text-align: center"><a
                                         href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->created_at }}</a>
                                 </td>
-                                <td><a href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}"></a>
+                                <td style="text-align: center"><a href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->updated_at }}</a>
                                 </td>
-                                <td><a
+                                <td style="text-align: center"><a href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->tongdonhang }}</a>
+                                </td>
+                                <td style="text-align: center"><a
                                         href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->name }}</a>
-                                </td>
-                                <td style="text-align: center">
-                                    <a href="{{ route('chuyenhang.lichsuchuyenhang', $chuyenhang->id) }}"
-                                        style="padding: 3px">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
                                 </td>
                             </tr>
                             @endforeach

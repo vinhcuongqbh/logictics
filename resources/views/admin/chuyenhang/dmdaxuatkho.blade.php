@@ -44,8 +44,8 @@
                                 <th>Kho nhận</th>
                                 <th>Ngày gửi</th>
                                 <th>Ngày nhận</th>
+                                <th>Tổng số đơn hàng</th>
                                 <th>Nhân viên quản lý</th>
-                                <th>Lịch sử chuyến hàng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,22 +57,20 @@
                                 <td><a
                                         href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->khogui }}</a>
                                 </td>
-                                <td style="text-align: center"><a
+                                <td><a
                                         href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->khonhan }}</a>
                                 </td>
-                                <td><a
+                                <td style="text-align: center"><a
                                         href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->created_at }}</a>
                                 </td>
-                                <td><a href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}"></a>
+                                <td style="text-align: center"><a
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->updated_at }}</a>
                                 </td>
-                                <td><a
+                                <td style="text-align: center"><a
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->tongdonhang }}</a>
+                                </td>
+                                <td style="text-align: center"><a
                                         href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->name }}</a>
-                                </td>
-                                <td style="text-align: center">
-                                    <a href="{{ route('chuyenhang.lichsuchuyenhang', $chuyenhang->id) }}"
-                                        style="padding: 3px">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
                                 </td>
                             </tr>
                             @endforeach
