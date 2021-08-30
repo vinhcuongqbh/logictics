@@ -40,13 +40,18 @@
                                     <label for="nguoigui">THÔNG TIN NGƯỜI GỬI</label>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-3">
+                                    <div class="col-3 col-md-3">
                                         <label for="sodienthoainguoigui" class="col-form-label">Số ĐT</label>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-6 col-md-7">
                                         <input type="tel" id="sodienthoainguoigui" name="sodienthoainguoigui"
                                             placeholder="(+81)123-456-789" value="{{ old('sodienthoainguoigui') }}"
                                             class="form-control">
+                                    </div>
+                                    <div class="col-3 col-md-2">
+                                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal"
+                                            data-target="#timKiemNguoiGui-modal">TÌM
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -182,6 +187,50 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+{{-- Tìm kiếm Người gửi --}}
+<div class="modal fade" id="timKiemNguoiGui-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm mới Mặt hàng</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="donhang-table-div" class="form-group">
+                    <table id="nguoiGui-table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr style="text-align: center">
+                                <th>STT</th>
+                                <th data-priority="1">Họ và tên</th>
+                                <th data-priority="2">Số điện thoại</th>
+                                <th data-priority="3">Địa chỉ</th>
+                                <th>Email</th>                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 {{-- Thêm mới mặt hàng --}}
 <div class="modal fade" id="create-modal">

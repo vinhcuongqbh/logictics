@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
@@ -41,26 +40,38 @@ class DonhangController extends Controller
     public function store(Request $request)
     {
         //Lưu thông tin người gửi
-        $khachhang = new Khachhang;
-        $khachhang->tenkhachhang = $request->tennguoigui;
-        $khachhang->id_loaikhachhang = 0;
-        $khachhang->sodienthoai = $request->sodienthoainguoigui;
-        $khachhang->diachi = $request->diachinguoigui;
-        $khachhang->email = $request->emailnguoigui;
-        $khachhang->id_nhanvienquanly = Auth::id();
-        $khachhang->id_trangthai = 1;
-        $khachhang->save();
+        //Kiểm tra Thông tin Khách hàng đã có trong cơ sở dữ liệu hay chưa
+        $count = Khachhang::where('sodienthoai', $request->sodienthoainguoigui)->count();
+
+        //Nếu chưa thì thêm mới dữ liệu
+        if ($count == 0) {
+            $khachhang = new Khachhang;
+            $khachhang->tenkhachhang = $request->tennguoigui;
+            $khachhang->id_loaikhachhang = 0;
+            $khachhang->sodienthoai = $request->sodienthoainguoigui;
+            $khachhang->diachi = $request->diachinguoigui;
+            $khachhang->email = $request->emailnguoigui;
+            $khachhang->id_nhanvienquanly = Auth::id();
+            $khachhang->id_trangthai = 1;
+            $khachhang->save();
+        }
 
         //Lưu thông tin người nhận
-        $khachhang = new Khachhang;
-        $khachhang->tenkhachhang = $request->tennguoinhan;
-        $khachhang->id_loaikhachhang = 1;
-        $khachhang->sodienthoai = $request->sodienthoainguoinhan;
-        $khachhang->diachi = $request->diachinguoinhan;
-        $khachhang->email = $request->emailnguoinhan;
-        $khachhang->id_nhanvienquanly = Auth::id();
-        $khachhang->id_trangthai = 1;
-        $khachhang->save();
+        //Kiểm tra Thông tin Khách hàng đã có trong cơ sở dữ liệu hay chưa
+        $count = Khachhang::where('sodienthoai', $request->sodienthoainguoinhan)->count();
+
+        //Nếu chưa thì thêm mới dữ liệu
+        if ($count == 0) {
+            $khachhang = new Khachhang;
+            $khachhang->tenkhachhang = $request->tennguoinhan;
+            $khachhang->id_loaikhachhang = 1;
+            $khachhang->sodienthoai = $request->sodienthoainguoinhan;
+            $khachhang->diachi = $request->diachinguoinhan;
+            $khachhang->email = $request->emailnguoinhan;
+            $khachhang->id_nhanvienquanly = Auth::id();
+            $khachhang->id_trangthai = 1;
+            $khachhang->save();
+        }
 
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;

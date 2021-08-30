@@ -8,23 +8,23 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class KhachhangController extends Controller
-{    
+{
     public function index()
     {
         //Hiển thị danh sách Tài khoản đang sử dụng
         if (Auth::user()->id_loainhanvien == 1) {
             $khachhang = Khachhang::join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-            ->select('khachhangs.*', 'users.name')
-            ->orderBy('id', 'desc')
-            ->get();    
+                ->select('khachhangs.*', 'users.name')
+                ->orderBy('id', 'desc')
+                ->get();
         } else {
-        $khachhang = Khachhang::where('id_nhanvienquanly', Auth::id())
-            ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-            ->select('khachhangs.*', 'users.name')
-            ->orderBy('id', 'desc')
-            ->get();
+            $khachhang = Khachhang::where('id_nhanvienquanly', Auth::id())
+                ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
+                ->select('khachhangs.*', 'users.name')
+                ->orderBy('id', 'desc')
+                ->get();
         }
-        
+
         return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
     }
 
@@ -40,13 +40,13 @@ class KhachhangController extends Controller
     //     return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
     // }
 
-    
+
     // public function create()
     // {
     //     return view('admin.khachhang.create');
     // }
 
-    
+
     public function store(Request $request)
     {
         //Kiểm tra thông tin đầu vào
@@ -56,23 +56,30 @@ class KhachhangController extends Controller
             'diachi' => 'required',
         ]);
 
-
         //Tạo Khách hàng mới
-        $khachhang = new Khachhang;
-        $khachhang->tenkhachhang = $request->tenkhachhang;
-        $khachhang->sodienthoai = $request->sodienthoai;
-        $khachhang->email = $request->email;
-        $khachhang->diachi = $request->diachi;
-        $khachhang->lienhekhac = $request->lienhekhac;
-        $khachhang->id_nhanvienquanly = Auth::id();
-        $khachhang->id_trangthai = 1;
-        $khachhang->save();
+        //Kiểm tra Thông tin Khách hàng đã có trong cơ sở dữ liệu hay chưa
+        $count = Khachhang::where('sodienthoai', $request->sodienthoai)->count();
 
-        return redirect()->action([KhachhangController::class, 'show'], ['id' => $khachhang->id]);
+        //Nếu chưa thì thêm mới dữ liệu
+        if ($count == 0) {
+            $khachhang = new Khachhang;
+            $khachhang->tenkhachhang = $request->tenkhachhang;
+            $khachhang->sodienthoai = $request->sodienthoai;
+            $khachhang->email = $request->email;
+            $khachhang->diachi = $request->diachi;
+            $khachhang->lienhekhac = $request->lienhekhac;
+            $khachhang->id_nhanvienquanly = Auth::id();
+            $khachhang->id_trangthai = 1;
+            $khachhang->save();
+        }
+
+        //return redirect()->action([KhachhangController::class, 'show'], ['id' => $khachhang->id]);
     }
 
+    
 
-   
+
+
     public function show($id)
     {
         //Hiển thị thông tin Khách hàng
@@ -83,7 +90,7 @@ class KhachhangController extends Controller
         return view('admin.khachhang.show', ['khachhang' => $khachhang]);
     }
 
-    
+
 
     public function edit($id)
     {
@@ -96,7 +103,7 @@ class KhachhangController extends Controller
         return view('admin.khachhang.edit', ['khachhang' => $khachhang, 'nhanviens' => $nhanvien]);
     }
 
-    
+
 
     public function update(Request $request, $id)
     {
@@ -120,7 +127,7 @@ class KhachhangController extends Controller
         return redirect()->action([KhachhangController::class, 'show'], ['id' => $id]);
     }
 
-  
+
 
     // public function destroy($id)
     // {
