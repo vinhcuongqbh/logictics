@@ -12,11 +12,19 @@ class KhachhangController extends Controller
     public function index()
     {
         //Hiển thị danh sách Tài khoản đang sử dụng
-        $khachhang = Khachhang::join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
+        if (Auth::user()->id_loainhanvien == 1) {
+            $khachhang = Khachhang::join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
+            ->select('khachhangs.*', 'users.name')
+            ->orderBy('id', 'desc')
+            ->get();    
+        } else {
+        $khachhang = Khachhang::where('id_nhanvienquanly', Auth::id())
+            ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
             ->select('khachhangs.*', 'users.name')
             ->orderBy('id', 'desc')
             ->get();
-
+        }
+        
         return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
     }
 
@@ -106,7 +114,7 @@ class KhachhangController extends Controller
         $khachhang->diachi = $request->diachi;
         $khachhang->email = $request->email;
         $khachhang->lienhekhac = $request->lienhekhac;
-        $khachhang->id_nhanvienquanly = $request->id_nhanvienquanly;
+        //$khachhang->id_nhanvienquanly = $request->id_nhanvienquanly;
         $khachhang->save();
 
         return redirect()->action([KhachhangController::class, 'show'], ['id' => $id]);

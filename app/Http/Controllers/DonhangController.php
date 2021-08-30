@@ -43,6 +43,7 @@ class DonhangController extends Controller
         //Lưu thông tin người gửi
         $khachhang = new Khachhang;
         $khachhang->tenkhachhang = $request->tennguoigui;
+        $khachhang->id_loaikhachhang = 0;
         $khachhang->sodienthoai = $request->sodienthoainguoigui;
         $khachhang->diachi = $request->diachinguoigui;
         $khachhang->email = $request->emailnguoigui;
@@ -50,16 +51,16 @@ class DonhangController extends Controller
         $khachhang->id_trangthai = 1;
         $khachhang->save();
 
-        // //Lưu thông tin người nhận
-        // $khachhang = new Khachhang;
-        // $khachhang->tenkhachhang = $request->tennguoinhan;
-        // $khachhang->sodienthoai = $request->sodienthoainguoinhan;
-        // $khachhang->diachi = $request->diachinguoinhan;
-        // $khachhang->email = $request->emailnguoinhan;
-        // $khachhang->id_nhanvienquanly = Auth::id();
-        // $khachhang->id_trangthai = 1;
-        // $khachhang->save();
-
+        //Lưu thông tin người nhận
+        $khachhang = new Khachhang;
+        $khachhang->tenkhachhang = $request->tennguoinhan;
+        $khachhang->id_loaikhachhang = 1;
+        $khachhang->sodienthoai = $request->sodienthoainguoinhan;
+        $khachhang->diachi = $request->diachinguoinhan;
+        $khachhang->email = $request->emailnguoinhan;
+        $khachhang->id_nhanvienquanly = Auth::id();
+        $khachhang->id_trangthai = 1;
+        $khachhang->save();
 
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
@@ -182,15 +183,27 @@ class DonhangController extends Controller
 
     public function update(Request $request, $id)
     {
-        //  //Cập nhật thông tin khách hàng
-        //  $khachhang = Khachhang::find($request->sodienthoainguoigui);
-        //  $khachhang->tenkhachhang = $request->tennguoigui;
-        //  $khachhang->sodienthoai = $request->sodienthoainguoigui;
-        //  $khachhang->diachi = $request->diachinguoigui;
-        //  $khachhang->id_nhanvienquanly = Auth::id();
-        //  $khachhang->id_trangthai = 1;
-        //  $khachhang->save();
+        //Cập nhật thông tin Người gửi
+        $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoigui)->first();
+        $khachhang->tenkhachhang = $request->tennguoigui;
+        $khachhang->id_loaikhachhang = 0;
+        $khachhang->sodienthoai = $request->sodienthoainguoigui;
+        $khachhang->diachi = $request->diachinguoigui;
+        $khachhang->email = $request->emailnguoigui;
+        $khachhang->id_nhanvienquanly = Auth::id();
+        $khachhang->id_trangthai = 1;
+        $khachhang->save();
 
+        //Cập nhật thông tin Người nhận
+        $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoinhan)->first();
+        $khachhang->tenkhachhang = $request->tennguoinhan;
+        $khachhang->id_loaikhachhang = 1;
+        $khachhang->sodienthoai = $request->sodienthoainguoinhan;
+        $khachhang->diachi = $request->diachinguoinhan;
+        $khachhang->email = $request->emailnguoinhan;
+        $khachhang->id_nhanvienquanly = Auth::id();
+        $khachhang->id_trangthai = 1;
+        $khachhang->save();
 
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
@@ -304,7 +317,7 @@ class DonhangController extends Controller
     public function nhapkho(Request $request)
     {
         //Tìm Chuyến hàng
-        $chuyenhang = Chuyenhang::find($request->id_chuyenhang);        
+        $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
 
         $donhangs = Donhang::where('id_chuyenhang', $request->id_chuyenhang)
             ->where('id_trangthai', 3)
@@ -408,14 +421,14 @@ class DonhangController extends Controller
     public function ketquatracuu(Request $request)
     {
         $donhang = Donhang::where('id', $request->thongtintimkiem)
-                            ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
-                            ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
-                            ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
-                            //->orwhere('tennguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
-                            //->orwhere('sodienthoainguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
-                            //->orwhere('emailnguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
-                            ->orderby('created_at','desc')
-                            ->get();
-        return view('admin.donhang.ketquatracuu',['thongtintimkiem' => $request->thongtintimkiem, 'donhangs' => $donhang]);
+            ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+            ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+            ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+            //->orwhere('tennguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+            //->orwhere('sodienthoainguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+            //->orwhere('emailnguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+            ->orderby('created_at', 'desc')
+            ->get();
+        return view('admin.donhang.ketquatracuu', ['thongtintimkiem' => $request->thongtintimkiem, 'donhangs' => $donhang]);
     }
 }

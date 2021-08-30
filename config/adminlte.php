@@ -254,7 +254,6 @@ return [
             'text'        => 'Khách hàng',
             'url'         => 'admin/khachhang',
             'icon'        => 'fas fa-fw fa-user-tie',
-            'can'         => 'khachhang',
         ],       
         [
             'text'    => 'Đơn giá',
@@ -332,6 +331,12 @@ return [
             'icon' => 'fas fa-fw fa-angle-right',
             'can'         => 'thongke-loinhuan',
         ],
+        // ['header' => 'LỐI TẮT'], 
+        // [
+        //     'text'        => 'Thêm mới Đơn hàng',
+        //     'url'         => 'admin/donhang/create',
+        //     'icon' => 'fas fa-fw fa-angle-right',
+        // ],
 
         // [
         //     'header' => 'CÀI ĐẶT',

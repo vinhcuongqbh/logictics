@@ -16,6 +16,7 @@ class CreateKhachhangsTable extends Migration
         Schema::create('khachhangs', function (Blueprint $table) {
             $table->id();
             $table->string('tenkhachhang');
+            $table->foreignId('id_loaikhachhang');
             $table->string('sodienthoai')/*->unique()*/;
             $table->string('diachi');
             $table->string('email')->nullable();

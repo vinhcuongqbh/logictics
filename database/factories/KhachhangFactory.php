@@ -23,10 +23,11 @@ class KhachhangFactory extends Factory
     {
         return [
             'tenkhachhang' => $this->faker->name(),
+            'id_loaikhachhang' => rand(0,1),
             'sodienthoai' => $this->faker->phoneNumber(),
             'diachi' => $this->faker->address(),
             'email' => $this->faker->unique()->safeEmail(),
-            'id_nhanvienquanly' => rand(3,6),
+            'id_nhanvienquanly' => rand(3,7),
             'id_trangthai' => 1,
         ];
     }

@@ -90,7 +90,7 @@
                                 <label for="lienhekhac">Nhân viên quản lý</label>
                             </div>
                             <div class="col-sm-9">
-                                <select class="custom-select" id="id_nhanvienquanly" name="id_nhanvienquanly">
+                                <select class="custom-select" id="id_nhanvienquanly" name="id_nhanvienquanly" disabled>
                                     @foreach ($nhanviens as $nhanvien)
                                         <option value="{{ $nhanvien->id }}" @if ($khachhang->id_nhanvienquanly == $nhanvien->id) selected @endif>
                                             {{ $nhanvien->name }}</option>
