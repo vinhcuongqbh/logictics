@@ -21,6 +21,7 @@ class DonhangController extends Controller
 
     public function create()
     {
+        $khachhang = Khachhang::where('id_nhanvienquanly', Auth::id())->get();
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
@@ -29,6 +30,7 @@ class DonhangController extends Controller
         return view(
             'admin.donhang.create',
             [
+                'khachhang' => $khachhang,
                 'dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong,
                 'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
                 'dongiahangcongkenh' => $dongiahangcongkenh,
