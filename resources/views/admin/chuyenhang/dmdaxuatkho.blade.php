@@ -40,10 +40,10 @@
                         <thead style="text-align: center">
                             <tr>
                                 <th>ID</th>
-                                <th>Kho gửi</th>
-                                <th>Kho nhận</th>
                                 <th>Ngày gửi</th>
                                 <th>Ngày nhận</th>
+                                <th>Kho gửi</th>
+                                <th>Kho nhận</th>
                                 <th>Tổng số đơn hàng</th>
                                 <th>Nhân viên quản lý</th>
                             </tr>
@@ -52,25 +52,25 @@
                             @foreach ($chuyenhangs as $chuyenhang)
                             <tr>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->id }}</a>
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->id_chuyenhang }}</a>
+                                </td>
+                                <td style="text-align: center"><a
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">@if ($chuyenhang->ngaygui <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaygui)) }} @endif</a>
+                                </td>
+                                <td style="text-align: center"><a
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">@if ($chuyenhang->ngaynhan <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaynhan)) }} @endif</a>
                                 </td>
                                 <td><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->khogui }}</a>
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->khogui }}</a>
                                 </td>
                                 <td><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->khonhan }}</a>
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->khonhan }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->created_at }}</a>
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->tongdonhang }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->updated_at }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->tongdonhang }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id) }}">{{ $chuyenhang->name }}</a>
+                                        href="{{ route('chuyenhang.donhangdaxuatkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->name }}</a>
                                 </td>
                             </tr>
                             @endforeach

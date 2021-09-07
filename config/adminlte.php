@@ -224,17 +224,17 @@ return [
     |
     */
 
-    'menu' => [
-        // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
+    'menu' => [        
+        [           
+            'text'        => '',
+            'url'         => 'admin/donhang/create',
+            'icon'    => 'fas fa-fw fa-shopping-cart',
+            'topnav_right' => true,
+        ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
-        ],
+        ],         
 
         // Sidebar items:
         ['header' => 'QUẢN LÝ'],
@@ -306,6 +306,12 @@ return [
                     'can'  => 'chuyenhangchonhapkho',
                 ],
                 [
+                    'text' => 'Đã nhập Kho',
+                    'url'  => 'admin/chuyenhang/dmdanhapkho',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                    'can'  => 'chuyenhangdanhapkho',
+                ],
+                [
                     'text' => 'Đã xuất Kho',
                     'url'  => 'admin/chuyenhang/dmdaxuatkho',
                     'icon' => 'fas fa-fw fa-angle-right',
@@ -330,40 +336,7 @@ return [
             'url'         => 'admin/thongke/thongkeloinhuan',
             'icon' => 'fas fa-fw fa-angle-right',
             'can'         => 'thongke-loinhuan',
-        ],
-        // ['header' => 'LỐI TẮT'], 
-        // [
-        //     'text'        => 'Thêm mới Đơn hàng',
-        //     'url'         => 'admin/donhang/create',
-        //     'icon' => 'fas fa-fw fa-angle-right',
-        // ],
-
-        // [
-        //     'header' => 'CÀI ĐẶT',
-        //     'can'         => 'caidat',
-        // ],
-        // [
-        //     'text'    => 'Danh mục',
-        //     'icon'    => 'fas fa-fw fa-sliders-h',
-        //     'can'         => 'danhmuc',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Loại nhân viên',
-        //             'url'  => '#',
-        //             'icon' => 'fas fa-fw fa-angle-right',
-        //         ],
-        //         [
-        //             'text' => 'Loại hàng hóa',
-        //             'url'  => '#',
-        //             'icon' => 'fas fa-fw fa-angle-right',
-        //         ],
-        //         [
-        //             'text' => 'Trạng thái đơn hàng',
-        //             'url'  => '#',
-        //             'icon' => 'fas fa-fw fa-angle-right',
-        //         ],
-        //     ],
-        // ],       
+        ],     
     ],
 
     /*

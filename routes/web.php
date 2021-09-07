@@ -110,12 +110,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/lichsudonhang', [DonhangController::class, 'lichsudonhang'])->name('donhang.lichsudonhang');
     });
 
-    Route::group(['prefix' => 'chuyenhang'], function () {
-        Route::get('dmdaxuatkho', [ChuyenhangController::class, 'dmdaxuatkho'])->name('chuyenhang.dmdaxuatkho');
+    Route::group(['prefix' => 'chuyenhang'], function () {        
         Route::get('dmchonhapkho', [ChuyenhangController::class, 'dmchonhapkho'])->name('chuyenhang.dmchonhapkho');
-        Route::get('{id}/donhangdaxuatkho', [ChuyenhangController::class, 'donhangdaxuatkho'])->name('chuyenhang.donhangdaxuatkho');
+        Route::get('dmdanhapkho', [ChuyenhangController::class, 'dmdanhapkho'])->name('chuyenhang.dmdanhapkho');
+        Route::get('dmdaxuatkho', [ChuyenhangController::class, 'dmdaxuatkho'])->name('chuyenhang.dmdaxuatkho');
         Route::get('{id}/donhangchonhapkho', [ChuyenhangController::class, 'donhangchonhapkho'])->name('chuyenhang.donhangchonhapkho');
-
+        Route::get('{id}/donhangdaxuatkho', [ChuyenhangController::class, 'donhangdaxuatkho'])->name('chuyenhang.donhangdaxuatkho');
+        Route::get('{id}/donhangdanhapkho', [ChuyenhangController::class, 'donhangdanhapkho'])->name('chuyenhang.donhangdanhapkho');
         Route::get('{id}/daxuatkho', [ChuyenhangController::class, 'daxuatkho'])->name('chuyenhang.daxuatkho');
         Route::get('{id}/danhapkho', [ChuyenhangController::class, 'danhapkho'])->name('chuyenhang.danhapkho');
         Route::post('{id}/lichsuchuyenhang', [ChuyenhangController::class, 'lichsuchuyenhang'])->name('chuyenhang.lichsuchuyenhang');

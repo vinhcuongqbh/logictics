@@ -23,7 +23,7 @@ class LichsudonhangSeeder extends Seeder
         $id_donhang = 0; 
         $id_khogui = 2;       
         for ($id_nhanvienquanly = 5; $id_nhanvienquanly <= 7; $id_nhanvienquanly++) {
-            $soluongdonhang = rand(2000, 6000);     
+            $soluongdonhang = rand(4000, 6000);     
             $id_khogui++;   
             $tilechietkhau = 10;     
             for ($i = 1; $i <= $soluongdonhang; $i++) {

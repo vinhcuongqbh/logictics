@@ -228,7 +228,7 @@
                                     <tr>
                                         <td style="text-align: center"></td>
                                         <td style="text-align: center;">
-                                            {{ $lichsudonhang->created_at }}
+                                            {{ date('d-m-Y H:m:s', strtotime($lichsudonhang->created_at)) }}
                                         </td>
                                         <td>
                                             @if ($lichsudonhang->id_trangthai == 1)
@@ -789,6 +789,7 @@
                 rules: {
                     sodienthoainguoigui: {
                         required: true,
+                        number: true,
                     },
                     tennguoigui: {
                         required: true,
@@ -798,6 +799,7 @@
                     },
                     sodienthoainguoinhan: {
                         required: true,
+                        number: true,
                     },
                     tennguoinhan: {
                         required: true,
@@ -809,6 +811,7 @@
                 messages: {
                     sodienthoainguoigui: {
                         required: "Nhập Số điện thoại của Người gửi",
+                        number: "Nhập kiểu số",
                     },
                     tennguoigui: {
                         required: "Nhập Họ tên của Người gửi",
@@ -818,6 +821,7 @@
                     },
                     sodienthoainguoinhan: {
                         required: "Nhập Số điện thoại của Người nhận",
+                        number: "Nhập kiểu số",
                     },
                     tennguoinhan: {
                         required: "Nhập Họ tên của Người nhận",
@@ -829,7 +833,7 @@
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     error.addClass('invalid-feedback');
-                    element.closest('.col-sm-9').append(error);
+                    element.closest('div').append(error);
 
                 },
                 highlight: function(element, errorClass, validClass) {

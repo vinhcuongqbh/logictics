@@ -18,7 +18,6 @@ use App\Models\Chitietdonhang;
 
 class DonhangController extends Controller
 {
-
     public function create()
     {
         $khachhang = Khachhang::where('id_nhanvienquanly', Auth::id())->get();
@@ -112,14 +111,28 @@ class DonhangController extends Controller
 
         //Lưu sự kiện "Khởi tạo" cho Đơn hàng
         $lichsudonhangController = new LichsudonhangController;
-        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        $lichsudonhangController->luusukien(
+            $donhang->id,
+            $donhang->id_nhanvienquanly,
+            $donhang->id_chuyenhang,
+            $donhang->id_khogui,
+            $donhang->id_khonhan,
+            $donhang->id_trangthai
+        );
 
         //Nhập Đơn hàng vào kho
         $donhang->id_trangthai = 2;
         $donhang->save();
 
         //Lưu sự kiện "Nhập kho" cho Đơn hàng
-        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        $lichsudonhangController->luusukien(
+            $donhang->id,
+            $donhang->id_nhanvienquanly,
+            $donhang->id_chuyenhang,
+            $donhang->id_khogui,
+            $donhang->id_khonhan,
+            $donhang->id_trangthai
+        );
 
         return redirect()->action([DonhangController::class, 'show'], ['id' => $donhang->id]);
     }
@@ -198,25 +211,29 @@ class DonhangController extends Controller
     {
         //Cập nhật thông tin Người gửi
         $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoigui)->first();
-        $khachhang->tenkhachhang = $request->tennguoigui;
-        $khachhang->id_loaikhachhang = 0;
-        $khachhang->sodienthoai = $request->sodienthoainguoigui;
-        $khachhang->diachi = $request->diachinguoigui;
-        $khachhang->email = $request->emailnguoigui;
-        $khachhang->id_nhanvienquanly = Auth::id();
-        $khachhang->id_trangthai = 1;
-        $khachhang->save();
+        if ($khachhang != null) {
+            $khachhang->tenkhachhang = $request->tennguoigui;
+            $khachhang->id_loaikhachhang = 0;
+            $khachhang->sodienthoai = $request->sodienthoainguoigui;
+            $khachhang->diachi = $request->diachinguoigui;
+            $khachhang->email = $request->emailnguoigui;
+            $khachhang->id_nhanvienquanly = Auth::id();
+            $khachhang->id_trangthai = 1;
+            $khachhang->save();
+        }
 
         //Cập nhật thông tin Người nhận
         $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoinhan)->first();
-        $khachhang->tenkhachhang = $request->tennguoinhan;
-        $khachhang->id_loaikhachhang = 1;
-        $khachhang->sodienthoai = $request->sodienthoainguoinhan;
-        $khachhang->diachi = $request->diachinguoinhan;
-        $khachhang->email = $request->emailnguoinhan;
-        $khachhang->id_nhanvienquanly = Auth::id();
-        $khachhang->id_trangthai = 1;
-        $khachhang->save();
+        if ($khachhang != null) {
+            $khachhang->tenkhachhang = $request->tennguoinhan;
+            $khachhang->id_loaikhachhang = 1;
+            $khachhang->sodienthoai = $request->sodienthoainguoinhan;
+            $khachhang->diachi = $request->diachinguoinhan;
+            $khachhang->email = $request->emailnguoinhan;
+            $khachhang->id_nhanvienquanly = Auth::id();
+            $khachhang->id_trangthai = 1;
+            $khachhang->save();
+        }
 
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
@@ -256,26 +273,35 @@ class DonhangController extends Controller
 
     public function xuatkho(Request $request)
     {
-        //Tạo chuyến hàng mới
-        $chuyenhangController = new ChuyenhangController;
-        $chuyenhang = $chuyenhangController->taochuyenhangmoi();
-
         //Cập nhật thông tin xuất kho cho Đơn hàng
-        $id_donhangsduocchon = $request->input('id_donhangduocchon');
-        $tongdonhang = 0;
-        if ($id_donhangsduocchon <> null) {
-            foreach ($id_donhangsduocchon as $id_donhangduocchon) {
+        $id_donhangduocchons = $request->input('id_donhangduocchon');
+        if ($id_donhangduocchons <> null) {
+            //Tạo chuyến hàng mới
+            $chuyenhangController = new ChuyenhangController;
+            $chuyenhang = $chuyenhangController->taochuyenhangmoi();
+            $tongdonhang = 0;
+
+            foreach ($id_donhangduocchons as $id_donhangduocchon) {
                 //Cập nhật thông tin xuất kho cho từng Đơn hàng
                 $donhang = Donhang::find($id_donhangduocchon);
-                $donhang->id_khonhan = $chuyenhang->id_khonhan;
-                $donhang->id_chuyenhang = $chuyenhang->id;
-                $donhang->id_trangthai = 3;
-                $donhang->save();
+                if ($donhang->id_trangthai == 2) {
+                    $donhang->id_khonhan = $chuyenhang->id_khonhan;
+                    $donhang->id_chuyenhang = $chuyenhang->id;
+                    $donhang->id_trangthai = 3;
+                    $donhang->save();
 
-                //Lưu sự kiện cho từng Đơn hàng
-                $lichsudonhangController = new LichsudonhangController;
-                $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
-                $tongdonhang++;
+                    //Lưu sự kiện cho từng Đơn hàng
+                    $lichsudonhangController = new LichsudonhangController;
+                    $lichsudonhangController->luusukien(
+                        $donhang->id,
+                        $donhang->id_nhanvienquanly,
+                        $donhang->id_chuyenhang,
+                        $donhang->id_khogui,
+                        $donhang->id_khonhan,
+                        $donhang->id_trangthai
+                    );
+                    $tongdonhang++;
+                }
             }
 
             //Cập nhật thông tin xuất kho cho Chuyến hàng
@@ -283,7 +309,14 @@ class DonhangController extends Controller
 
             //Lưu sự kiện cho Chuyến hàng
             $lichsuchuyenhangController = new LichsuchuyenhangController;
-            $lichsuchuyenhangController->luusukien($chuyenhang->id, $tongdonhang, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+            $lichsuchuyenhangController->luusukien(
+                $chuyenhang->id,
+                $tongdonhang,
+                $chuyenhang->id_nhanvienquanly,
+                $chuyenhang->id_khogui,
+                $chuyenhang->id_khonhan,
+                $chuyenhang->id_trangthai
+            );
         }
 
         return back();
@@ -291,10 +324,6 @@ class DonhangController extends Controller
 
     public function xuattoanbokho()
     {
-        //Tạo chuyến hàng mới
-        $chuyenhangController = new ChuyenhangController;
-        $chuyenhang = $chuyenhangController->taochuyenhangmoi();
-
         //Cập nhật thông tin xuất kho cho Đơn hàng
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý
         $id_khohangquanly = User::find(Auth::id())->id_khohangquanly;
@@ -303,26 +332,48 @@ class DonhangController extends Controller
         $donhangs = Donhang::where('id_khogui', $id_khohangquanly)
             ->where('id_trangthai', 2)
             ->get();
-        $tongdonhang = 0;
-        foreach ($donhangs as $donhang) {
-            $donhang->id_khonhan = $chuyenhang->id_khonhan;
-            $donhang->id_chuyenhang = $chuyenhang->id;
-            $donhang->id_trangthai = 3;
-            $donhang->save();
 
-            //Lưu sự kiện cho từng Đơn hàng
-            $lichsudonhangController = new LichsudonhangController;
-            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        if ($donhangs->count() <> 0) {
+            //Tạo chuyến hàng mới
+            $chuyenhangController = new ChuyenhangController;
+            $chuyenhang = $chuyenhangController->taochuyenhangmoi();
 
-            $tongdonhang++;
+            $tongdonhang = 0;
+            foreach ($donhangs as $donhang) {
+                $donhang->id_khonhan = $chuyenhang->id_khonhan;
+                $donhang->id_chuyenhang = $chuyenhang->id;
+                $donhang->id_trangthai = 3;
+                $donhang->save();
+
+                //Lưu sự kiện cho từng Đơn hàng
+                $lichsudonhangController = new LichsudonhangController;
+                $lichsudonhangController->luusukien(
+                    $donhang->id,
+                    $donhang->id_nhanvienquanly,
+                    $donhang->id_chuyenhang,
+                    $donhang->id_khogui,
+                    $donhang->id_khonhan,
+                    $donhang->id_trangthai
+                );
+
+                $tongdonhang++;
+            }
+
+            //Cập nhật thông tin xuất kho cho Chuyến hàng
+            $chuyenhangController->xuatkho($chuyenhang, $tongdonhang);
+
+            //Lưu sự kiện cho Chuyến hàng
+            $lichsuchuyenhangController = new LichsuchuyenhangController;
+            $lichsuchuyenhangController->luusukien(
+                $chuyenhang->id,
+                $tongdonhang,
+                $chuyenhang->id_nhanvienquanly,
+                $chuyenhang->id_khogui,
+                $chuyenhang->id_khonhan,
+                $chuyenhang->id_trangthai
+            );
         }
 
-        //Cập nhật thông tin xuất kho cho Chuyến hàng
-        $chuyenhangController->xuatkho($chuyenhang, $tongdonhang);
-
-        //Lưu sự kiện cho Chuyến hàng
-        $lichsuchuyenhangController = new LichsuchuyenhangController;
-        $lichsuchuyenhangController->luusukien($chuyenhang->id, $tongdonhang, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
         return back();
     }
 
@@ -348,7 +399,15 @@ class DonhangController extends Controller
 
             //Lưu sự kiện cho từng Đơn hàng
             $lichsudonhangController = new LichsudonhangController;
-            $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai, $donhang->tongchiphi);
+            $lichsudonhangController->luusukien(
+                $donhang->id,
+                $donhang->id_nhanvienquanly,
+                $donhang->id_chuyenhang,
+                $donhang->id_khogui,
+                $donhang->id_khonhan,
+                $donhang->id_trangthai,
+                $donhang->tongchiphi
+            );
 
             $tongdonhang++;
         }
@@ -359,7 +418,14 @@ class DonhangController extends Controller
 
         //Lưu sự kiện cho Chuyến hàng
         $lichsuchuyenhangController = new LichsuchuyenhangController;
-        $lichsuchuyenhangController->luusukien($chuyenhang->id, $tongdonhang, $chuyenhang->id_nhanvienquanly, $chuyenhang->id_khogui, $chuyenhang->id_khonhan, $chuyenhang->id_trangthai);
+        $lichsuchuyenhangController->luusukien(
+            $chuyenhang->id,
+            $tongdonhang,
+            $chuyenhang->id_nhanvienquanly,
+            $chuyenhang->id_khogui,
+            $chuyenhang->id_khonhan,
+            $chuyenhang->id_trangthai
+        );
 
         return back();
     }
@@ -405,7 +471,14 @@ class DonhangController extends Controller
 
         //Lưu sự kiện "Xóa" cho Đơn hàng
         $lichsudonhangController = new LichsudonhangController;
-        $lichsudonhangController->luusukien($donhang->id, $donhang->id_nhanvienquanly, $donhang->id_khogui, $donhang->id_khonhan, $donhang->id_trangthai);
+        $lichsudonhangController->luusukien(
+            $donhang->id,
+            $donhang->id_nhanvienquanly,
+            $donhang->id_chuyenhang,
+            $donhang->id_khogui,
+            $donhang->id_khonhan,
+            $donhang->id_trangthai
+        );
 
         return redirect()->action([DonhangController::class, 'dmdangluukho']);
     }

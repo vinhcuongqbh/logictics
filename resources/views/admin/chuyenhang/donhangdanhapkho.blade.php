@@ -5,72 +5,59 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-4">
-            <h1>CHUYẾN HÀNG CHỜ NHẬP KHO</h1>
+        <div class="col-sm-3">
+            <h1>CHUYẾN HÀNG</h1>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
-                <li class="breadcrumb-item active">Chuyến hàng</li>
+                <li class="breadcrumb-item"><a href="/admin/chuyenhang/dmdanhapkho">Chuyến hàng</a></li>
+                <li class="breadcrumb-item active">{{ $id_chuyenhang }}</li>
             </ol>
         </div>
     </div>
-</div>
-<!-- /.container-fluid -->
+</div><!-- /.container-fluid -->
 @stop
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="col-auto">
-                            </div>
-                            <div class="col-auto">
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="chuyenhang-table" class="table table-bordered table-striped">
+
+                    <table id="donhang-table" class="table table-bordered table-striped">
+
                         <thead style="text-align: center">
                             <tr>
                                 <th>ID</th>
-                                <th>Ngày gửi</th>
-                                <th>Ngày nhận</th>
-                                <th>Kho gửi</th>
-                                <th>Kho nhận</th>
-                                <th>Tổng số đơn hàng</th>
-                                <th>Nhân viên quản lý</th>
+                                <th>Người gửi</th>
+                                <th>Số điện thoại Người gửi</th>
+                                <th>Người nhận</th>
+                                <th>Số điện thoại Người nhận</th>
+                                <th>Tổng chi phí</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($chuyenhangs as $chuyenhang)
+                            @foreach ($donhangs as $donhang)
                             <tr>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id }}</a>
+                                        href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->id }}</a>
+                                </td>
+                                <td><a href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">@if ($chuyenhang->ngaygui <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaygui)) }} @endif</a>
+                                        href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoigui }}</a>
+                                </td>
+                                <td><a href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoinhan }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">@if ($chuyenhang->ngaynhan <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaynhan)) }} @endif</a>
+                                        href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
                                 </td>
-                                <td><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->khogui }}</a>
-                                </td>
-                                <td><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->khonhan }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->tongdonhang }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->name }}</a>
+                                <td style="text-align: right"><a
+                                        href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -98,7 +85,7 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
+<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
 @stop
 
 @section('js')
@@ -119,7 +106,7 @@
 <!-- Page specific script -->
 <script>
     $(function() {
-            $("#chuyenhang-table").DataTable({
+            $("#donhang-table").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "pageLength": 25,
@@ -142,7 +129,7 @@
                 },     
                 "ordering": false,                 
                 "order": [[ 0, "desc" ]], 
-            }).buttons().container().appendTo('#chuyenhang-table_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
 </script>
 @stop

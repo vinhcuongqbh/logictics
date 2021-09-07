@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-4">
-            <h1>CHUYẾN HÀNG CHỜ NHẬP KHO</h1>
+            <h1>CHUYẾN HÀNG ĐÃ NHẬP KHO</h1>
         </div>
         <div class="col-sm-8">
             <ol class="breadcrumb float-sm-right">
@@ -15,11 +15,11 @@
             </ol>
         </div>
     </div>
-</div>
-<!-- /.container-fluid -->
+</div><!-- /.container-fluid -->
 @stop
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -52,25 +52,25 @@
                             @foreach ($chuyenhangs as $chuyenhang)
                             <tr>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id }}</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->id_chuyenhang }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">@if ($chuyenhang->ngaygui <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaygui)) }} @endif</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">@if ($chuyenhang->ngaygui <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaygui)) }} @endif</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">@if ($chuyenhang->ngaynhan <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaynhan)) }} @endif</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">@if ($chuyenhang->ngaynhan <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaynhan)) }} @endif</a>
                                 </td>
                                 <td><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->khogui }}</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->khogui }}</a>
                                 </td>
                                 <td><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->khonhan }}</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->khonhan }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->tongdonhang }}</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->tongdonhang }}</a>
                                 </td>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->name }}</a>
+                                        href="{{ route('chuyenhang.donhangdanhapkho', $chuyenhang->id_chuyenhang) }}">{{ $chuyenhang->name }}</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -98,7 +98,7 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
+<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
 @stop
 
 @section('js')

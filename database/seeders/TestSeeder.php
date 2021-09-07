@@ -20,7 +20,7 @@ class TestSeeder extends Seeder
 
     public function run()
     {
-        for ($id_nhanvienquanly = 5; $id_nhanvienquanly <= 5; $id_nhanvienquanly++) {
+        for ($id_nhanvienquanly = 5; $id_nhanvienquanly <= 7; $id_nhanvienquanly++) {
             $tilechietkhau = 10;     
             for ($i = 1; $i <= 100; $i++) {
                 $tongchiphi = rand(100,3000)*1000;
@@ -29,7 +29,7 @@ class TestSeeder extends Seeder
                 $donhang = Donhang::factory()->count(1)->create([
                     'id_nhanvienkhoitao' => $id_nhanvienquanly,
                     'id_nhanvienquanly' => $id_nhanvienquanly,
-                    'id_khogui' => 3,
+                    'id_khogui' => $id_nhanvienquanly - 2,
                     'id_khonhan' => null,
                     'id_trangthai' => 2,
                     'tongchiphi' =>  $tongchiphi,

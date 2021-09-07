@@ -17,6 +17,7 @@ class CreateLichsudonhangsTable extends Migration
             $table->id();
             $table->foreignId('id_donhang');
             $table->foreignId('id_nhanvienquanly');
+            $table->foreignId('id_chuyenhang')->nullable();
             $table->foreignId('id_khogui');
             $table->foreignId('id_khonhan')->nullable();
             $table->foreignId('id_trangthai');

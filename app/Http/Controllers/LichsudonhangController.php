@@ -7,7 +7,23 @@ use Illuminate\Http\Request;
 
 class LichsudonhangController extends Controller
 {
-    // //Hiển thị Lịch sử đơn hàng
+    //Lưu sự kiện của đơn hàng
+    public function luusukien($id_donhang, $id_nhanvienquanly, $id_chuyenhang, $id_khogui, $id_khonhan, $id_trangthai)
+    {
+
+        $lichsudonhang = new Lichsudonhang;
+        $lichsudonhang->id_donhang = $id_donhang;
+        $lichsudonhang->id_nhanvienquanly = $id_nhanvienquanly;
+        $lichsudonhang->id_chuyenhang = $id_chuyenhang;
+        $lichsudonhang->id_khogui = $id_khogui;
+        $lichsudonhang->id_khonhan = $id_khonhan;
+        $lichsudonhang->id_trangthai = $id_trangthai;
+        $lichsudonhang->save();
+    }    
+
+
+
+    //Hiển thị Lịch sử đơn hàng
     public function lichsudonhang($id_donhang)
     {
         $lichsudonhang = Lichsudonhang::where('lichsudonhangs.id_donhang', $id_donhang)
@@ -21,19 +37,4 @@ class LichsudonhangController extends Controller
 
         return $lichsudonhang;
     }
-
-
-
-    //Lưu sự kiện của đơn hàng
-    public function luusukien($id_donhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
-    {
-
-        $lichsudonhang = new Lichsudonhang;
-        $lichsudonhang->id_donhang = $id_donhang;
-        $lichsudonhang->id_nhanvienquanly = $id_nhanvienquanly;
-        $lichsudonhang->id_khogui = $id_khogui;
-        $lichsudonhang->id_khonhan = $id_khonhan;
-        $lichsudonhang->id_trangthai = $id_trangthai;
-        $lichsudonhang->save();
-    }    
 }

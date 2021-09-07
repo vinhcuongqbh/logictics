@@ -15,11 +15,13 @@ class CreateLichsuchuyenhangsTable extends Migration
     {
         Schema::create('lichsuchuyenhangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_chuyenhang');
-            $table->integer('tongdonhang');
-            $table->foreignId('id_nhanvienquanly');
+            $table->foreignId('id_chuyenhang');            
+            $table->dateTime('ngaygui')->nullable();
+            $table->dateTime('ngaynhan')->nullable();
             $table->foreignId('id_khogui');
             $table->foreignId('id_khonhan');
+            $table->integer('tongdonhang');
+            $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_trangthai');
             $table->timestamps();
         });

@@ -225,7 +225,7 @@
                                     <tr>
                                         <td style="text-align: center"></td>
                                         <td style="text-align: center;">
-                                            {{ $lichsudonhang->created_at }}
+                                            {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
                                         </td>
                                         <td>
                                             @if ($lichsudonhang->id_trangthai == 1)

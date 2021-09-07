@@ -49,8 +49,7 @@
                                             class="form-control">
                                     </div>
                                     <div class="col-3 col-md-2">
-                                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal"
-                                            data-target="#timKiemNguoiGui-modal">TÌM
+                                        <button type="button" class="btn btn-block btn-primary" id="timKiemNguoiGui">TÌM
                                         </button>
                                     </div>
                                 </div>
@@ -91,10 +90,14 @@
                                     <div class="col-3">
                                         <label for="sodienthoainguoinhan" class="col-form-label">Số ĐT</label>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-6 col-md-7">
                                         <input type="tel" id="sodienthoainguoinhan" name="sodienthoainguoinhan"
                                             placeholder="(+81)123-456-789" value="{{ old('sodienthoainguoinhan') }}"
                                             class="form-control">
+                                    </div>
+                                    <div class="col-3 col-md-2">
+                                        <button type="button" class="btn btn-block btn-primary" id="timKiemNguoiNhan">TÌM
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -187,50 +190,6 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-
-{{-- Tìm kiếm Người gửi --}}
-<div class="modal fade" id="timKiemNguoiGui-modal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Thêm mới Mặt hàng</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="donhang-table-div" class="form-group">
-                    <table id="nguoiGui-table" class="table table-bordered table-striped">
-                        <thead>
-                            <tr style="text-align: center">
-                                <th>STT</th>
-                                <th data-priority="1">Họ và tên</th>
-                                <th data-priority="2">Số điện thoại</th>
-                                <th data-priority="3">Địa chỉ</th>
-                                <th>Email</th>                               
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="text-align: center">
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>                               
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 {{-- Thêm mới mặt hàng --}}
 <div class="modal fade" id="create-modal">
@@ -429,6 +388,36 @@
 <script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="/vendor/jquery-validation/additional-methods.min.js"></script>
 <!-- Page specific script -->
+
+{{-- Tìm thông tin Người gửi --}}
+<script>
+    var khachhang = @json($khachhang);
+    $('#timKiemNguoiGui').on('click', function() {        
+        var sodienthoaikhachhang = document.querySelector("#sodienthoainguoigui").value;
+        if (sodienthoaikhachhang != null) {
+            //var ketqua = khachhang.filter(e => e.sodienthoai.indexOf(sodienthoaikhachhang) > -1) || 0;
+            var ketqua = khachhang.find(e => e.sodienthoai == sodienthoaikhachhang) || 0;   
+            document.querySelector("#tennguoigui").value = ketqua.tenkhachhang || null;
+            document.querySelector("#diachinguoigui").value = ketqua.diachi || null;
+            document.querySelector("#emailnguoigui").value = ketqua.email || null;
+        }
+    });
+</script>
+
+{{-- Tìm thông tin Người gửi --}}
+<script>
+    $('#timKiemNguoiNhan').on('click', function() {        
+        var sodienthoaikhachhang = document.querySelector("#sodienthoainguoinhan").value;
+        if (sodienthoaikhachhang != null) {
+            //var ketqua = khachhang.filter(e => e.sodienthoai.indexOf(sodienthoaikhachhang) > -1) || 0;
+            var ketqua = khachhang.find(e => e.sodienthoai == sodienthoaikhachhang) || 0;   
+            document.querySelector("#tennguoinhan").value = ketqua.tenkhachhang || null;
+            document.querySelector("#diachinguoinhan").value = ketqua.diachi || null;
+            document.querySelector("#emailnguoinhan").value = ketqua.email || null;
+        }
+    });
+</script>
+
 <script>
     var chiTietDonHang = [];
 
@@ -715,6 +704,7 @@
             rules: {
                 sodienthoainguoigui: {
                     required: true,
+                    number: true,
                 },
                 tennguoigui: {
                     required: true,
@@ -724,6 +714,7 @@
                 },
                 sodienthoainguoinhan: {
                     required: true,
+                    number: true,
                 },
                 tennguoinhan: {
                     required: true,
@@ -731,10 +722,15 @@
                 diachinguoinhan: {
                     required: true,
                 },
+                tongchiphi: {
+                    required: true,
+                    min: 1,
+                }
             },
             messages: {
                 sodienthoainguoigui: {
                     required: "Nhập Số điện thoại của Người gửi",
+                    number: "Nhập kiểu số",
                 },
                 tennguoigui: {
                     required: "Nhập Họ tên của Người gửi",
@@ -744,6 +740,7 @@
                 },
                 sodienthoainguoinhan: {
                     required: "Nhập Số điện thoại của Người nhận",
+                    number: "Nhập kiểu số",
                 },
                 tennguoinhan: {
                     required: "Nhập Họ tên của Người nhận",
@@ -751,11 +748,14 @@
                 diachinguoinhan: {
                     required: "Nhập Địa chỉ của Người nhận",
                 },
+                tongchiphi: {
+                    required: "Nhập Mặt hàng",
+                }
             },
             errorElement: 'span',
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
-                element.closest('.col-9').append(error);
+                element.closest('div').append(error);
 
             },
             highlight: function(element, errorClass, validClass) {

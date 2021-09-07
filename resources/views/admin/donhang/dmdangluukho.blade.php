@@ -35,10 +35,10 @@
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-outline-success">XUẤT KHO</button>
-                            </div>
+                            </div>                            
                             <div class="col-auto">
                                 <a href="{{ route('donhang.xuattoanbokho') }}"><button type="button"
-                                        class="btn btn-outline-success">XUẤT HẾT</button></a>
+                                        class="btn btn-outline-success" onclick="return confirm('Bạn muốn Xuất toàn bộ Kho hàng?')">XUẤT HẾT</button></a>
                             </div>
                         </div>
                     </div>
@@ -146,6 +146,9 @@
 <script src="/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- jquery-validation -->
+<script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/vendor/jquery-validation/additional-methods.min.js"></script>
 <!-- Page specific script -->
 <script>
     $(function() {
@@ -174,5 +177,34 @@
                 //"order": [[ 0, "desc" ]],                
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
+</script>
+
+<script>
+    //Kiểm tra dữ liệu đầu vào
+    $(function() {
+        $('#donhang-index').validate({
+            rules: {
+                "id_donhangduocchon[]": {
+                    required: true, 
+                    minlength: 1,
+                },
+            },
+            messages: {
+                "id_donhangduocchon[]": "Chọn ít nhất một đơn hàng",
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('').append(error);
+
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
 </script>
 @stop
