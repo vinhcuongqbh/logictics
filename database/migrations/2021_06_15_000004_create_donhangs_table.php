@@ -14,8 +14,7 @@ class CreateDonhangsTable extends Migration
     public function up()
     {
         Schema::create('donhangs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id();            
             $table->foreignId('id_nhanvienkhoitao');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_khogui')->nullable();
@@ -32,6 +31,8 @@ class CreateDonhangsTable extends Migration
             $table->string('emailnguoinhan')->nullable();
             $table->bigInteger('tongchiphi');
             $table->bigInteger('chietkhau');
+            $table->text('ghichu')->nullable();
+            $table->timestamps();
         });
     }
 

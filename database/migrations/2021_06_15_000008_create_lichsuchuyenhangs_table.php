@@ -23,6 +23,7 @@ class CreateLichsuchuyenhangsTable extends Migration
             $table->integer('tongdonhang');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_trangthai');
+            $table->text('ghichu')->nullable();
             $table->timestamps();
         });
     }

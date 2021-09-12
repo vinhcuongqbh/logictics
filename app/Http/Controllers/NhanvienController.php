@@ -12,11 +12,6 @@ use App\Models\Khohang;
 
 class NhanvienController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //Hiển thị danh sách Tài khoản đang sử dụng
@@ -29,6 +24,8 @@ class NhanvienController extends Controller
 
         return view('admin.nhanvien.index', ['nhanviens' => $nhanvien]);
     }
+
+
 
     public function danghiviec()
     {
@@ -43,11 +40,8 @@ class NhanvienController extends Controller
         return view('admin.nhanvien.index', ['nhanviens' => $nhanvien]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+
     public function create()
     {
         $loainhanvien = Loainhanvien::all();
@@ -56,12 +50,8 @@ class NhanvienController extends Controller
         return view('admin.nhanvien.create',['loainhanvien' => $loainhanvien, 'password' => $password, 'khohangs' => $khohang]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function store(Request $request)
     {
         //Kiểm tra thông tin đầu vào
@@ -92,12 +82,8 @@ class NhanvienController extends Controller
         return redirect()->route('nhanvien.show', $nhanvien->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
+
     public function show($id)
     {
         //Hiển thị thông tin Nhân viên
@@ -110,12 +96,8 @@ class NhanvienController extends Controller
         return view('admin.nhanvien.show', ['nhanvien' => $nhanvien]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function edit($id)
     {
         $nhanvien = User::find($id);
@@ -126,13 +108,8 @@ class NhanvienController extends Controller
         return view('admin.nhanvien.edit', ['nhanvien' => $nhanvien, 'loainhanviens' => $loainhanvien, 'khohangs' => $khohang]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function update(Request $request, $id)
     {
         //Kiểm tra thông tin đầu vào
@@ -157,12 +134,8 @@ class NhanvienController extends Controller
         return redirect()->route('nhanvien.show', $nhanvien->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function destroy($id)
     {
         $nhanvien = User::find($id);
@@ -171,6 +144,8 @@ class NhanvienController extends Controller
 
         return back();
     }
+
+    
 
     public function restore($id)
     {
