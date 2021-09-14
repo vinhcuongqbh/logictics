@@ -177,7 +177,7 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = $donhang->id;
+        $qrcode = "ETRACK".$donhang->id;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
