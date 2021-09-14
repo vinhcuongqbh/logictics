@@ -17,10 +17,6 @@ class TrangthaiSeeder extends Seeder
     {
         DB::table('trangthais')->insert([
             [
-                'id' => 8,
-                'tentrangthai' => 'Đơn hàng đã bị xóa',
-            ],
-            [
                 'id' => 1,
                 'tentrangthai' => 'Đơn hàng được khởi tạo',
             ],
@@ -42,11 +38,11 @@ class TrangthaiSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'tentrangthai' => 'Đơn hàng thất lạc',
+                'tentrangthai' => 'Đơn hàng bị thất lạc',
             ],
             [
                 'id' => 7,
-                'tentrangthai' => 'Đơn hàng trôi nổi',
+                'tentrangthai' => 'Đơn hàng bị xóa',
             ],
         ]);
     }

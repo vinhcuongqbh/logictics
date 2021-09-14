@@ -117,7 +117,7 @@ class DonhangController extends Controller
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
             $donhang->id_khonhan,
-            $donhang->id_trangthai
+            $donhang->id_trangthai,
         );
 
         //Nhập Đơn hàng vào kho
@@ -142,7 +142,7 @@ class DonhangController extends Controller
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::find($id);
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = $donhang->id;
+        $qrcode = "ETRACK".$donhang->id;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -383,6 +383,7 @@ class DonhangController extends Controller
         //Tìm Chuyến hàng
         $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
 
+        //Tìm các đơn hàng thuộc Chuyến hàng
         $donhangs = Donhang::where('id_chuyenhang', $request->id_chuyenhang)
             ->where('id_trangthai', 3)
             ->get();
@@ -406,7 +407,6 @@ class DonhangController extends Controller
                 $donhang->id_khogui,
                 $donhang->id_khonhan,
                 $donhang->id_trangthai,
-                $donhang->tongchiphi
             );
 
             $tongdonhang++;
@@ -466,7 +466,7 @@ class DonhangController extends Controller
     public function destroy($id)
     {
         $donhang = Donhang::find($id);
-        $donhang->id_trangthai = 8;
+        $donhang->id_trangthai = 7;
         $donhang->delete();
 
         //Lưu sự kiện "Xóa" cho Đơn hàng
