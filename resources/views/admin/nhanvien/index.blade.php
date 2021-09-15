@@ -84,8 +84,8 @@
                                         </a>
                                         @if ($nhanvien->id_trangthai == 1)
                                             <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
-                                                onclick="return confirm('Bạn muốn xóa Nhân viên này?')">
-                                                <i class="fas fa-trash-alt"></i>
+                                                onclick="return confirm('Bạn muốn khóa tài khoản Nhân viên này?')">
+                                                <i class="fas fa-minus-circle"></i>
                                             </a>
                                         @else
                                             <a href="{{ route('nhanvien.restore', $nhanvien->id) }}"

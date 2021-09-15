@@ -94,6 +94,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::group(['prefix' => 'donhang'], function () {
         Route::get('dmdangluukho', [DonhangController::class, 'dmdangluukho'])->name('donhang.dmdangluukho');
         Route::get('dmdaxuatkho', [DonhangController::class, 'dmdaxuatkho'])->name('donhang.dmdaxuatkho');
+        Route::get('dmthatlac', [DonhangController::class, 'dmthatlac'])->name('donhang.dmthatlac');
         Route::get('tracuu', [DonhangController::class, 'tracuu'])->name('donhang.tracuu');    
         Route::post('ketquatracuu', [DonhangController::class, 'ketquatracuu'])->name('donhang.ketquatracuu');
         Route::post('xuatkho', [DonhangController::class, 'xuatkho'])->name('donhang.xuatkho');

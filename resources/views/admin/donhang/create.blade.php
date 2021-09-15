@@ -96,7 +96,8 @@
                                             class="form-control">
                                     </div>
                                     <div class="col-3 col-md-2">
-                                        <button type="button" class="btn btn-block btn-primary" id="timKiemNguoiNhan">TÌM
+                                        <button type="button" class="btn btn-block btn-primary"
+                                            id="timKiemNguoiNhan">TÌM
                                         </button>
                                     </div>
                                 </div>
@@ -532,6 +533,7 @@
         //Start: Thêm Row
         $('#addRow').on('click', function() {
             //Start: Lấy dữ liệu từ các input
+            if (document.querySelector("#chiphi").value.replace(".","") > 0) {
             donhangTable.row.add({
                 "stt": null,
                 "tenmathang": document.querySelector("#tenmathang").value,
@@ -543,6 +545,7 @@
             }).draw();
 
             lamtrongdulieu();
+            }
         });
         //End: Thêm Row
 

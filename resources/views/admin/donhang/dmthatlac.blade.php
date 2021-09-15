@@ -1,55 +1,62 @@
 @extends('adminlte::page')
 
-@section('title', 'Chuyến hàng')
+@section('title', 'Đơn hàng')
 
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-3">
-            <h1>CHUYẾN HÀNG</h1>
+            <h1>ĐƠN HÀNG THẤT LẠC</h1>
         </div>
         <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="/admin/chuyenhang/dmchonhapkho">Chuyến hàng</a></li>
-                <li class="breadcrumb-item active">{{ $id_chuyenhang }}</li>
+                <li class="breadcrumb-item active">Đơn hàng</li>
             </ol>
         </div>
     </div>
-</div><!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
 @stop
 
 @section('content')
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('donhang.nhapkho') }}" method="post" id="donhang-index">
+            <form action="{{ route('donhang.xuatkho') }}" method="post" id="donhang-index">
                 @csrf
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="col-auto">
-                                    <button type="submit" class="btn btn-outline-success float-left"
-                                        style="width: 100px; margin-right: 10px">NHẬP KHO</button>
-                                </div>
+                            <div class="col-auto">
+                                <a href="{{ route('donhang.create') }}"><button type="button"
+                                        class="btn btn-primary">THÊM
+                                        MỚI</button></a>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-outline-success">XUẤT KHO</button>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ route('donhang.xuattoanbokho') }}"><button type="button"
+                                        class="btn btn-outline-success"
+                                        onclick="return confirm('Bạn muốn Xuất toàn bộ Kho hàng?')">XUẤT
+                                        HẾT</button></a>
                             </div>
                         </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <input type="hidden" id="id_chuyenhang" name="id_chuyenhang" value="{{ $id_chuyenhang }}">
                         <table id="donhang-table" class="table table-bordered table-striped">
                             <thead style="text-align: center">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Người gửi</th>
-                                    <th>Số điện thoại Người gửi</th>
+                                    <th data-priority="1">ID</th>
+                                    <th data-priority="2">Chọn</th>
+                                    <th data-priority="3">Người gửi</th>
+                                    <th>Số ĐT Người gửi</th>
                                     <th>Người nhận</th>
-                                    <th>Số điện thoại Người nhận</th>
+                                    <th>Số ĐT Người nhận</th>
                                     <th>Tổng chi phí</th>
-                                    <th>Thao tác</th>
+                                    <th data-priority="4">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,6 +64,12 @@
                                 <tr>
                                     <td style="text-align: center"><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->id }}</a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="id_donhangduocchon"
+                                                value="{{ $donhang->id }}" name="id_donhangduocchon[]">
+                                        </div>
                                     </td>
                                     <td><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>
@@ -71,13 +84,13 @@
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
                                     </td>
                                     <td style="text-align: right"><a
-                                            href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}
                                     </td>
-                                    <td style="text-align: center">
-                                        <a href="{{ route('donhang.thatlac', $donhang->id) }}"
-                                            onclick="return confirm('Chuyển Đơn hàng này vào Danh mục Đơn hàng thất lạc?')">
-                                            <i class="fas fa-minus-circle"></i>
-                                        </a>
+                                    <td style="text-align: center">                                        
+                                        <a href="{{ route('donhang.restore', $donhang->id) }}"
+                                            onclick="return confirm('Bạn muốn phục hồi Đơn hàng này?')">
+                                            <i class="fas fa-undo"></i>
+                                        </a>                                        
                                     </td>
                                 </tr>
                                 @endforeach
@@ -98,6 +111,7 @@
 @stop
 
 @section('css')
+<!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/vendor/fontawesome-free/css/all.min.css">
@@ -106,11 +120,10 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css">
+{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
 @stop
 
 @section('js')
-<!-- Google Font: Source Sans Pro -->
 <script src="/vendor/jquery/jquery.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -125,6 +138,9 @@
 <script src="/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- jquery-validation -->
+<script src="/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/vendor/jquery-validation/additional-methods.min.js"></script>
 <!-- Page specific script -->
 <script>
     $(function() {
@@ -150,8 +166,37 @@
                     },
                 },     
                 "ordering": false,                 
-                "order": [[ 0, "desc" ]], 
+                //"order": [[ 0, "desc" ]],                
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
+</script>
+
+<script>
+    //Kiểm tra dữ liệu đầu vào
+    $(function() {
+        $('#donhang-index').validate({
+            rules: {
+                "id_donhangduocchon[]": {
+                    required: true, 
+                    minlength: 1,
+                },
+            },
+            messages: {
+                "id_donhangduocchon[]": "Chọn ít nhất một đơn hàng",
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('').append(error);
+
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
 </script>
 @stop

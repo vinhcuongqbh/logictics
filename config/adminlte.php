@@ -282,6 +282,11 @@ return [
                     'url'  => 'admin/donhang/dmdangluukho',
                     'icon' => 'fas fa-fw fa-angle-right',
                 ],
+                [
+                    'text' => 'Thất lạc',
+                    'url'  => 'admin/donhang/dmthatlac',
+                    'icon' => 'fas fa-fw fa-angle-right',
+                ],
                 // [
                 //     'text' => 'Đã xuất Kho',
                 //     'url'  => 'admin/donhang/dmdaxuatkho',

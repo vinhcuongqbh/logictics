@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-3">
-            <h1>ĐƠN HÀNG</h1>
+            <h1>ĐƠN HÀNG LƯU KHO</h1>
         </div>
         <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
@@ -35,10 +35,12 @@
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-outline-success">XUẤT KHO</button>
-                            </div>                            
+                            </div>
                             <div class="col-auto">
                                 <a href="{{ route('donhang.xuattoanbokho') }}"><button type="button"
-                                        class="btn btn-outline-success" onclick="return confirm('Bạn muốn Xuất toàn bộ Kho hàng?')">XUẤT HẾT</button></a>
+                                        class="btn btn-outline-success"
+                                        onclick="return confirm('Bạn muốn Xuất toàn bộ Kho hàng?')">XUẤT
+                                        HẾT</button></a>
                             </div>
                         </div>
                     </div>
@@ -85,6 +87,7 @@
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}
                                     </td>
                                     <td style="text-align: center">
+                                        @if (Auth::user()->id_loainhanvien == 3)
                                         <a href="{{ route('donhang.edit', $donhang->id) }}" style="padding: 3px">
                                             <i class="fas fa-edit"></i>
                                         </a>
@@ -99,6 +102,10 @@
                                             <i class="fas fa-undo"></i>
                                         </a>
                                         @endif
+                                        @endif
+                                        <a href="{{ route('donhang.thatlac', $donhang->id) }}" style="padding: 3px"
+                                            onclick="return confirm('Chuyển Đơn hàng này vào Danh mục Đơn hàng thất lạc?')">
+                                            <i class="fas fa-minus-circle"></i>
                                     </td>
                                 </tr>
                                 @endforeach

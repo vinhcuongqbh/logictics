@@ -83,9 +83,13 @@ class ThongkedoanhthuController extends Controller
         }
 
         if ($id_nhanvien == 2) {
-            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])->sum('tongchiphi');
+            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->where('id_trangthai', '<>', '6')
+                ->where('id_trangthai', '<>', '7')->sum('tongchiphi');
         } else {
             $soluongdoanhthu = Donhang::where('id_nhanvienkhoitao', $id_nhanvien)
+                ->where('id_trangthai', '<>', '6')
+                ->where('id_trangthai', '<>', '7')
                 ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->sum('tongchiphi');
         }

@@ -78,7 +78,7 @@
                                             @if ($khohang->id_trangthai == 1)
                                                 <a href="{{ route('khohang.delete', $khohang->id) }}"
                                                     onclick="return confirm('Bạn muốn đóng Kho hàng này?')">
-                                                    <i class="fas fa-trash-alt"></i>
+                                                    <i class="fas fa-minus-circle"></i>
                                                 </a>
                                             @else
                                                 <a href="{{ route('khohang.restore', $khohang->id) }}"

@@ -90,9 +90,14 @@ class ThongkedonhangController extends Controller
         }
 
         if ($id_nhanvien == 2) {
-            $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])->count();
+            $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->where('id_trangthai', '<>', '6')
+                ->where('id_trangthai', '<>', '7')
+                ->count();
         } else {
             $soluongdonhang = Donhang::where('id_nhanvienkhoitao', $id_nhanvien)
+                ->where('id_trangthai', '<>', '6')
+                ->where('id_trangthai', '<>', '7')
                 ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->count();
         }

@@ -198,6 +198,8 @@
                     <!-- /.card-body -->
                     <input type="hidden" id="tongchiphi2" name="tongchiphi2">
                     <input type="hidden" id="chiTietDonHang" name="chiTietDonHang">
+                    <input type="hidden" id="sodienthoainguoiguicu" name="sodienthoainguoiguicu" value="{{ $donhang->sodienthoainguoigui }}">
+                    <input type="hidden" id="sodienthoainguoinhancu" name="sodienthoainguoinhancu" value="{{ $donhang->sodienthoainguoinhan }}">
                 </form>
             </div>
             <!-- /.card -->
@@ -579,6 +581,7 @@
             //Start: Thêm Row
             $('#addRow').on('click', function() {
                 //Start: Lấy dữ liệu từ các input
+                if (document.querySelector("#chiphi").value.replace(".","") > 0) {
                 donhangTable.row.add({
                     "stt": null,
                     "tenmathang": document.querySelector("#tenmathang").value,
@@ -590,6 +593,7 @@
                 }).draw();
 
                 lamtrongdulieu();
+                }
             });
             //End: Thêm Row
 

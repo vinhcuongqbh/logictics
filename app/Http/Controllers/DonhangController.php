@@ -210,7 +210,7 @@ class DonhangController extends Controller
     public function update(Request $request, $id)
     {
         //Cập nhật thông tin Người gửi
-        $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoigui)->first();
+        $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoiguicu)->first();
         if ($khachhang != null) {
             $khachhang->tenkhachhang = $request->tennguoigui;
             $khachhang->id_loaikhachhang = 0;
@@ -223,7 +223,7 @@ class DonhangController extends Controller
         }
 
         //Cập nhật thông tin Người nhận
-        $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoinhan)->first();
+        $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoinhancu)->first();
         if ($khachhang != null) {
             $khachhang->tenkhachhang = $request->tennguoinhan;
             $khachhang->id_loaikhachhang = 1;
@@ -243,9 +243,11 @@ class DonhangController extends Controller
         $donhang->tennguoigui = $request->tennguoigui;
         $donhang->sodienthoainguoigui = $request->sodienthoainguoigui;
         $donhang->diachinguoigui = $request->diachinguoigui;
+        $donhang->emailnguoigui = $request->emailnguoigui;
         $donhang->tennguoinhan = $request->tennguoinhan;
         $donhang->sodienthoainguoinhan = $request->sodienthoainguoinhan;
         $donhang->diachinguoinhan = $request->diachinguoinhan;
+        $donhang->emailnguoinhan = $request->emailnguoinhan;
         $donhang->tongchiphi = $request->tongchiphi2;
         $donhang->save();
 
@@ -435,7 +437,7 @@ class DonhangController extends Controller
     {
         $donhang = Donhang::where('donhangs.id_trangthai', 2)
             ->where('donhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->get();
 
         return view('admin.donhang.dmdangluukho', ['donhangs' => $donhang]);
@@ -454,6 +456,17 @@ class DonhangController extends Controller
         return view('admin.donhang.dmdaxuatkho', ['donhangs' => $donhang]);
     }
 
+    //Danh sách Đơn hàng bị thất lạc
+    public function dmthatlac()
+    {
+        $donhang = Donhang::where('donhangs.id_trangthai', 6)
+            ->where('donhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin.donhang.dmthatlac', ['donhangs' => $donhang]);
+    }
+
     public function lichsudonhang($id)
     {
         $lichsudonhangController = new LichsudonhangController;
@@ -466,8 +479,9 @@ class DonhangController extends Controller
     public function destroy($id)
     {
         $donhang = Donhang::find($id);
+        $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_trangthai = 7;
-        $donhang->delete();
+        $donhang->save();
 
         //Lưu sự kiện "Xóa" cho Đơn hàng
         $lichsudonhangController = new LichsudonhangController;
@@ -489,8 +503,41 @@ class DonhangController extends Controller
     public function thatlac($id)
     {
         $donhang = Donhang::find($id);
+        $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_trangthai = 6;
         $donhang->save();
+
+        //Lưu sự kiện "Thất lạc" cho Đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhangController->luusukien(
+            $donhang->id,
+            $donhang->id_nhanvienquanly,
+            null,
+            $donhang->id_khogui,
+            $donhang->id_khonhan,
+            $donhang->id_trangthai
+        );
+
+        return back();
+    }
+
+    //Phục hồi Dơn hàng
+    public function restore($id)
+    {
+        $donhang = Donhang::find($id);
+        $donhang->id_trangthai = 2;
+        $donhang->save();
+
+        //Lưu sự kiện "Phục hồi" cho Đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhangController->luusukien(
+            $donhang->id,
+            $donhang->id_nhanvienquanly,
+            $donhang->id_chuyenhang,
+            $donhang->id_khogui,
+            $donhang->id_khonhan,
+            $donhang->id_trangthai
+        );
 
         return back();
     }
@@ -503,7 +550,7 @@ class DonhangController extends Controller
     }
 
 
-    //Tra cứu Đơn hàng
+    //Kết quản tra cứu Đơn hàng
     public function ketquatracuu(Request $request)
     {
         $donhang = Donhang::where('id', $request->thongtintimkiem)
