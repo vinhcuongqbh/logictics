@@ -504,6 +504,7 @@ class DonhangController extends Controller
     {
         $donhang = Donhang::find($id);
         $donhang->id_nhanvienquanly = Auth::id();
+        $donhang->id_chuyenhang = null;
         $donhang->id_trangthai = 6;
         $donhang->save();
 
@@ -512,7 +513,7 @@ class DonhangController extends Controller
         $lichsudonhangController->luusukien(
             $donhang->id,
             $donhang->id_nhanvienquanly,
-            null,
+            $donhang->id_chuyenhang,
             $donhang->id_khogui,
             $donhang->id_khonhan,
             $donhang->id_trangthai
@@ -525,6 +526,7 @@ class DonhangController extends Controller
     public function restore($id)
     {
         $donhang = Donhang::find($id);
+        $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_trangthai = 2;
         $donhang->save();
 
