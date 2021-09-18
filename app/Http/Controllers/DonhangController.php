@@ -503,8 +503,8 @@ class DonhangController extends Controller
     public function thatlac($id)
     {
         $donhang = Donhang::find($id);
-        $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_chuyenhang = null;
+        $donhang->id_khonhan = null;
         $donhang->id_trangthai = 6;
         $donhang->save();
 
@@ -512,11 +512,11 @@ class DonhangController extends Controller
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
             $donhang->id,
-            $donhang->id_nhanvienquanly,
+            Auth::id(),
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
             $donhang->id_khonhan,
-            $donhang->id_trangthai
+            $donhang->id_trangthai,
         );
 
         return back();

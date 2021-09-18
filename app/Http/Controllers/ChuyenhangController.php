@@ -122,6 +122,7 @@ class ChuyenhangController extends Controller
     public function donhangdanhapkho($id)
     {
         $donhang = Lichsudonhang::where('lichsudonhangs.id_chuyenhang', $id)
+            ->where('lichsudonhangs.ghichu', 1)
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
             ->get();
 
