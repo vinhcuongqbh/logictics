@@ -5,10 +5,10 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <h1>ĐƠN HÀNG LƯU KHO</h1>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-8">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item active">Đơn hàng</li>
@@ -179,9 +179,9 @@
                         "next": "Sau",
                         "previous": "Trước"
                     },
-                },     
-                "ordering": false,                 
-                //"order": [[ 0, "desc" ]],                
+                },
+                "ordering": false,
+                //"order": [[ 0, "desc" ]],
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
 </script>
@@ -192,7 +192,7 @@
         $('#donhang-index').validate({
             rules: {
                 "id_donhangduocchon[]": {
-                    required: true, 
+                    required: true,
                     minlength: 1,
                 },
             },

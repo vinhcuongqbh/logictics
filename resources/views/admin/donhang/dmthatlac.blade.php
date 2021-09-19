@@ -5,10 +5,10 @@
 @section('content_header')
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <h1>ĐƠN HÀNG THẤT LẠC</h1>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-8">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item active">Đơn hàng</li>
@@ -26,7 +26,7 @@
             <form action="{{ route('donhang.xuatkho') }}" method="post" id="donhang-index">
                 @csrf
                 <div class="card">
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <div class="row">
                             <div class="col-auto">
                                 <a href="{{ route('donhang.create') }}"><button type="button"
@@ -43,14 +43,13 @@
                                         HẾT</button></a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="donhang-table" class="table table-bordered table-striped">
                             <thead style="text-align: center">
                                 <tr>
                                     <th data-priority="1">ID</th>
-                                    <th data-priority="2">Chọn</th>
                                     <th data-priority="3">Người gửi</th>
                                     <th>Số ĐT Người gửi</th>
                                     <th>Người nhận</th>
@@ -64,12 +63,6 @@
                                 <tr>
                                     <td style="text-align: center"><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->id }}</a>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="id_donhangduocchon"
-                                                value="{{ $donhang->id }}" name="id_donhangduocchon[]">
-                                        </div>
                                     </td>
                                     <td><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>
@@ -86,11 +79,11 @@
                                     <td style="text-align: right"><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}
                                     </td>
-                                    <td style="text-align: center">                                        
+                                    <td style="text-align: center">
                                         <a href="{{ route('donhang.restore', $donhang->id) }}"
                                             onclick="return confirm('Bạn muốn phục hồi Đơn hàng này?')">
                                             <i class="fas fa-undo"></i>
-                                        </a>                                        
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -164,9 +157,9 @@
                         "next": "Sau",
                         "previous": "Trước"
                     },
-                },     
-                "ordering": false,                 
-                //"order": [[ 0, "desc" ]],                
+                },
+                "ordering": false,
+                //"order": [[ 0, "desc" ]],
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
         });
 </script>
@@ -177,7 +170,7 @@
         $('#donhang-index').validate({
             rules: {
                 "id_donhangduocchon[]": {
-                    required: true, 
+                    required: true,
                     minlength: 1,
                 },
             },

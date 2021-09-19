@@ -394,7 +394,7 @@ class DonhangController extends Controller
         $tongdonhang = 0;
         foreach ($donhangs as $donhang) {
             $donhang->id_nhanvienquanly = Auth::id();
-            $donhang->id_chuyenhang = null;
+            //$donhang->id_chuyenhang = null;
             $donhang->id_khogui = User::find(Auth::id())->id_khohangquanly;
             $donhang->id_khonhan = null;
             $donhang->id_trangthai = 2;
