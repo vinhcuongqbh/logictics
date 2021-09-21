@@ -35,6 +35,9 @@
                         {{-- Mã QR Code --}}
                         <div id="qrcode" class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div>
+                                <img src="/img/logo.png" id="logo" width="80%" height="80%" style="display: none">
+                            </div>
+                            <div>                                
                                 {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
                                 {{ $donhang->id }}
                             </div>
@@ -287,6 +290,15 @@
     }
 
     @media print {
+
+        #qrcode {
+            padding: 0px 0px 0px 0px !important;
+        }
+
+        #logo {
+            display: inline !important;
+            padding: 0px 0px 20px 0px !important;
+        }
 
         #button {
             display: none !important;
