@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 3,
                 'id_loainhanvien' => '2',
-                'name' => 'Nhân viên kho tổng Việt Nam',
+                'name' => 'Việt Nam',
                 'email' => 'nhanvienVN@etrack.com',
                 'password' => Hash::make('123456'),
                 'sodienthoai' => '+8485-975-3480',
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 4,
                 'id_loainhanvien' => '2',
-                'name' => 'Nhân viên kho tổng Nhật Bản',
+                'name' => 'Nhật Bản',
                 'email' => 'nhanvienjp@etrack.com',
                 'password' => Hash::make('123456'),
                 'sodienthoai' => '+8491-544-1781',
@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 5,
                 'id_loainhanvien' => '3',
-                'name' => 'Cộng tác viên kho Hiroshima',
+                'name' => 'Hiroshima',
                 'email' => 'congtacvien1@etrack.com',
                 'password' => Hash::make('123456'),
                 'sodienthoai' => '+8490-815-3715',
@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 6,
                 'id_loainhanvien' => '3',
-                'name' => 'Cộng tác viên kho Kyoto',
+                'name' => 'Kyoto',
                 'email' => 'congtacvien2@etrack.com',
                 'password' => Hash::make('123456'),
                 'sodienthoai' => '+8481-240-2027',
@@ -97,7 +97,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 7,
                 'id_loainhanvien' => '3',
-                'name' => 'Cộng tác viên kho Osaka',
+                'name' => 'Osaka',
                 'email' => 'congtacvien3@etrack.com',
                 'password' => Hash::make('123456'),
                 'sodienthoai' => '+8497-136-4993',

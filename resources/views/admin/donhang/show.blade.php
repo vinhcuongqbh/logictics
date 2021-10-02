@@ -33,9 +33,9 @@
                     {{-- Thông tin Người gửi và Người nhận --}}
                     <div class="row">
                         {{-- Mã QR Code --}}
-                        <div id="qrcode" class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
+                        <div id="qrcode" class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div>
-                                <img src="/img/logo.png" id="logo" width="80%" height="80%" style="display: none">
+                                <img src="/img/logo.png" id="logo" style="display: none">
                             </div>
                             <div>                                
                                 {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
@@ -43,18 +43,16 @@
                             </div>
                         </div>
                         {{-- Thông tin Người gửi --}}
-                        <div id="nguoigui" class="col-sm-5">
-                            <div style="text-align: center">
-                                <label for="nguoigui" class="col-form-label">THÔNG TIN NGƯỜI GỬI</label>
+                        <div id="nguoigui" class="col-sm-5 col-12">
+                            <div id="thongtinnguoigui" style="text-align: center">
+                                <label for="nguoigui" class="col-form-label"><u>THÔNG TIN NGƯỜI GỬI</u></label>
                             </div>
                             <div class="form-group row">
                                 <div class="col-3 col-xl-2">
                                     <label for="sodienthoainguoigui" class="col-form-label">Số ĐT</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <input type="tel" id="sodienthoainguoigui" name="sodienthoainguoigui"
-                                        placeholder="(+81)123-456-789" value="{{ $donhang->sodienthoainguoigui }}"
-                                        class="form-control" disabled>
+                                    <p class="col-form-label">{{ $donhang->sodienthoainguoigui }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -62,8 +60,7 @@
                                     <label for="tennguoigui" class="col-form-label">Họ tên</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <input type="text" id="tennguoigui" name="tennguoigui"
-                                        value="{{ $donhang->tennguoigui }}" class="form-control" disabled>
+                                    <p class="col-form-label">{{ $donhang->tennguoigui }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -71,8 +68,7 @@
                                     <label for="diachinguoigui" class="col-form-label">Địa chỉ</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <textarea id="diachinguoigui" name="diachinguoigui" class="form-control" rows="2"
-                                        style="resize: none" disabled>{{ $donhang->diachinguoigui }}</textarea>
+                                    <p class="col-form-label">{{ $donhang->diachinguoigui }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -80,24 +76,21 @@
                                     <label for="emailnguoigui" class="col-form-label">Email</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <input type="text" id="emailnguoigui" name="emailnguoigui"
-                                        value="{{ $donhang->emailnguoigui }}" class="form-control" disabled>
+                                    <p class="col-form-label">{{ $donhang->emailnguoigui }}</p>
                                 </div>
                             </div>
                         </div>
                         {{-- Thông tin người nhận --}}
-                        <div id="nguoinhan" class="col-sm-5">
-                            <div style="text-align: center">
-                                <label for="nguoinhan" class="col-form-label">THÔNG TIN NGƯỜI NHẬN</label>
+                        <div id="nguoinhan" class="col-sm-5 col-12">
+                            <div id="thongtinnguoinhan" style="text-align: center">
+                                <label  for="nguoinhan" class="col-form-label"><u>THÔNG TIN NGƯỜI NHẬN</u></label>
                             </div>
                             <div class="form-group row">
                                 <div class="col-3 col-xl-2">
                                     <label for="sodienthoainguoinhan" class="col-form-label">Số ĐT</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <input type="tel" id="sodienthoainguoinhan" name="sodienthoainguoinhan"
-                                        placeholder="(+81)123-456-789" value="{{ $donhang->sodienthoainguoinhan }}"
-                                        class="form-control" disabled>
+                                    <p class="col-form-label">{{ $donhang->sodienthoainguoinhan }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -105,8 +98,7 @@
                                     <label for="tennguoinhan" class="col-form-label">Họ tên</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <input type="text" id="tennguoinhan" name="tennguoinhan"
-                                        value="{{ $donhang->tennguoinhan }}" class="form-control" disabled>
+                                    <p class="col-form-label">{{ $donhang->tennguoinhan }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -114,8 +106,7 @@
                                     <label for="diachinguoinhan" class="col-form-label">Địa chỉ</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <textarea id="diachinguoinhan" name="diachinguoinhan" class="form-control" rows="2"
-                                        style="resize: none" disabled>{{ $donhang->diachinguoinhan }}</textarea>
+                                    <p class="col-form-label">{{ $donhang->diachinguoinhan }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -123,8 +114,7 @@
                                     <label for="emailnguoinhan" class="col-form-label">Email</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    <input type="text" id="emailnguoinhan" name="emailnguoinhan"
-                                        value="{{ $donhang->emailnguoinhan }}" class="form-control" disabled>
+                                    <p class="col-form-label">{{ $donhang->emailnguoinhan }}</p>
                                 </div>
                             </div>
                         </div>
@@ -286,18 +276,32 @@
 
 <style type="text/css">
     @page {
-        size: A4 portrait;
+        size: A5 portrait;
     }
 
     @media print {
 
+        body { 
+            font-size: 170%; 
+            padding: 0px;
+        }
+
+        .col-form-label {
+           
+        }
+      
         #qrcode {
-            padding: 0px 0px 0px 0px !important;
+            margin-left: -130px;;
         }
 
         #logo {
-            display: inline !important;
-            padding: 0px 0px 20px 0px !important;
+            width: 30%;
+            height: 30%;            
+            display: inline !important; 
+        }
+
+        #thongtinnguoigui, #thongtinnguoinhan {
+            margin-left: -250px;
         }
 
         #button {
@@ -321,7 +325,7 @@
             display: none !important;
         }
 
-        .col-sm-1,
+        /* .col-sm-1,
         .col-sm-2,
         .col-sm-3,
         .col-sm-4,
@@ -365,8 +369,8 @@
         }
 
         .col-sm-5 {
-            /* width: 41.66666666666667%; */
-            width: 37.5%;
+            width: 41.66666666666667%; 
+            /*width: 37.5%;
         }
 
         .col-sm-4 {
@@ -378,13 +382,13 @@
         }
 
         .col-sm-2 {
-            /* width: 16.666666666666664%; */
-            width: 25%;
+            width: 16.666666666666664%; 
+            /*width: 25%;
         }
 
         .col-sm-1 {
             width: 8.333333333333332%;
-        }
+        } */
     }
 </style>
 
