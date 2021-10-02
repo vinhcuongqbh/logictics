@@ -33,11 +33,12 @@
                     {{-- Thông tin Người gửi và Người nhận --}}
                     <div class="row">
                         {{-- Mã QR Code --}}
-                        <div id="qrcode" class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
+                        <div id="qrcode" class="col-sm-2 col-12"
+                            style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div>
                                 <img src="/img/logo.png" id="logo" style="display: none">
                             </div>
-                            <div>                                
+                            <div>
                                 {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
                                 {{ $donhang->id }}
                             </div>
@@ -83,7 +84,7 @@
                         {{-- Thông tin người nhận --}}
                         <div id="nguoinhan" class="col-sm-5 col-12">
                             <div id="thongtinnguoinhan" style="text-align: center">
-                                <label  for="nguoinhan" class="col-form-label"><u>THÔNG TIN NGƯỜI NHẬN</u></label>
+                                <label for="nguoinhan" class="col-form-label"><u>THÔNG TIN NGƯỜI NHẬN</u></label>
                             </div>
                             <div class="form-group row">
                                 <div class="col-3 col-xl-2">
@@ -227,16 +228,13 @@
                                         Đơn hàng được khởi tạo
                                         @elseif ($lichsudonhang->id_trangthai == 2)
                                         {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
-                                        ({{ $lichsudonhang->diachikhogui }})
                                         @elseif ($lichsudonhang->id_trangthai == 3)
                                         @if ($lichsudonhang->id_khonhan == 0)
-                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                        ({{ $lichsudonhang->diachikhogui }}) đến địa chỉ <b>Người
-                                            nhận</b>
+                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến
+                                        địa chỉ <b>Người nhận</b>
                                         @else
-                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                        ({{ $lichsudonhang->diachikhogui }}) đến
-                                        <b>{{ $lichsudonhang->khonhan }}</b> ({{ $lichsudonhang->diachikhonhan }})
+                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến
+                                        <b>{{ $lichsudonhang->khonhan }}</b>
                                         @endif
                                         @else
                                         {{ $lichsudonhang->tentrangthai }}
@@ -281,26 +279,26 @@
 
     @media print {
 
-        body { 
-            font-size: 170%; 
+        body {
+            font-size: 170%;
             padding: 0px;
         }
 
-        .col-form-label {
-           
-        }
-      
+        .col-form-label {}
+
         #qrcode {
-            margin-left: -130px;;
+            margin-left: -130px;
+            ;
         }
 
         #logo {
             width: 30%;
-            height: 30%;            
-            display: inline !important; 
+            height: 30%;
+            display: inline !important;
         }
 
-        #thongtinnguoigui, #thongtinnguoinhan {
+        #thongtinnguoigui,
+        #thongtinnguoinhan {
             margin-left: -250px;
         }
 
