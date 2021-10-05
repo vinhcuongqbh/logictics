@@ -75,7 +75,7 @@
                                 </td>
                                 <td><a href="{{ route('khachhang.show', $khachhang->id) }}">{{ $khachhang->diachi }}</a>
                                 </td>
-                                <td><a
+                                <td style="text-align: center"><a
                                         href="{{ route('nhanvien.show', $khachhang->id_nhanvienquanly) }}">{{ $khachhang->name }}</a>
                                 </td>
                                 <td style="text-align: center">
