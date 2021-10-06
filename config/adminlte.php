@@ -294,7 +294,7 @@ return [
                 // ],
                 [
                     'text' => 'Tra cứu',
-                    'url'  => 'admin/donhang/tracuu',
+                    'url'  => 'admin/donhang/dmdatao',
                     'icon' => 'fas fa-fw fa-angle-right',
                 ],                   
             ],

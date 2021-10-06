@@ -11,7 +11,7 @@
         <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="/admin/donhang/dmdangluukho">Đơn hàng</a></li>
+                <li class="breadcrumb-item"><a href="/admin/donhang/dmdatao">Đơn hàng</a></li>
                 <li class="breadcrumb-item active">{{ $donhang->id }}</li>
             </ol>
         </div>

@@ -456,6 +456,22 @@ class DonhangController extends Controller
         return view('admin.donhang.dmdaxuatkho', ['donhangs' => $donhang]);
     }
 
+
+
+    //Danh sách Đơn hàng đã tạo
+    public function dmdatao()
+    {
+        $donhang = Lichsudonhang::where('lichsudonhangs.id_trangthai', 1)
+            ->where('lichsudonhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
+            ->leftjoin('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')    
+            ->orderBy('lichsudonhangs.id_donhang', 'desc')       
+            ->paginate(25);
+
+        return view('admin.donhang.dmdatao', ['donhangs' => $donhang]);
+    }
+
+
+
     //Danh sách Đơn hàng bị thất lạc
     public function dmthatlac()
     {
@@ -474,6 +490,8 @@ class DonhangController extends Controller
 
         return view('admin.donhang.lichsudonhang', ['lichsudonhangs' => $lichsudonhang]);
     }
+
+
 
     //Xóa Đơn hàng
     public function destroy($id)
@@ -522,6 +540,8 @@ class DonhangController extends Controller
         return back();
     }
 
+
+
     //Phục hồi Dơn hàng
     public function restore($id)
     {
@@ -545,11 +565,13 @@ class DonhangController extends Controller
     }
 
 
+
     //Trang Tra cứu Đơn hàng
     public function tracuu()
     {
         return view('admin.donhang.tracuu');
     }
+
 
 
     //Kết quản tra cứu Đơn hàng
