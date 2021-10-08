@@ -24,49 +24,64 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <!-- /.card-header -->
-                <div class="card-body">
-
-                    <table id="donhang-table" class="table table-bordered table-striped">
-
-                        <thead style="text-align: center">
-                            <tr>
-                                <th>ID</th>
-                                <th>Người gửi</th>
-                                <th>Số điện thoại Người gửi</th>
-                                <th>Người nhận</th>
-                                <th>Số điện thoại Người nhận</th>
-                                <th>Tổng chi phí</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($donhangs as $donhang)
-                            <tr>
-                                <td style="text-align: center"><a
-                                        href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->id }}</a>
-                                </td>
-                                <td><a href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoigui }}</a>
-                                </td>
-                                <td><a href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoinhan }}</a>
-                                </td>
-                                <td style="text-align: center"><a
-                                        href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
-                                </td>
-                                <td style="text-align: right"><a
-                                        href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            <form action="{{ route('donhang.hoanlai') }}" method="post" id="donhang-index">
+                @csrf
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-outline-success float-left"
+                                        style="width: 100px; margin-right: 10px">HOÀN LẠI</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <input type="hidden" id="id_chuyenhang" name="id_chuyenhang" value="{{ $id_chuyenhang }}">
+                        <table id="donhang-table" class="table table-bordered table-striped">
+                            <thead style="text-align: center">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Người gửi</th>
+                                    <th>Số điện thoại Người gửi</th>
+                                    <th>Người nhận</th>
+                                    <th>Số điện thoại Người nhận</th>
+                                    <th>Tổng chi phí</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($donhangs as $donhang)
+                                <tr>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->id }}</a>
+                                    </td>
+                                    <td><a
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>
+                                    </td>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoigui }}</a>
+                                    </td>
+                                    <td><a
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoinhan }}</a>
+                                    </td>
+                                    <td style="text-align: center"><a
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->sodienthoainguoinhan }}</a>
+                                    </td>
+                                    <td style="text-align: right"><a
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+                <!-- /.card -->
+            </form>
+            <!-- /.form -->
         </div>
         <!-- /.col -->
     </div>

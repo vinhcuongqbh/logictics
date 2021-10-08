@@ -54,6 +54,19 @@ class ChuyenhangController extends Controller
         $chuyenhang->save();
     }
 
+    //Hoàn lại Chuyến hàng
+    public function hoanlai($chuyenhang)
+    {
+        $lichsuchuyenhang = Lichsuchuyenhang::where('id_chuyenhang', $chuyenhang->id)
+                            ->where('id_trangthai', 3)
+                            ->first();
+        
+        $chuyenhang->ngaynhan = $lichsuchuyenhang->ngaynhan;             
+        $chuyenhang->id_khogui = $lichsuchuyenhang->id_khogui;
+        $chuyenhang->id_trangthai = $lichsuchuyenhang->id_trangthai;
+        $chuyenhang->save();
+    }
+
     //Danh mục Chuyến hàng chờ nhập kho
     public function dmchonhapkho()
     {

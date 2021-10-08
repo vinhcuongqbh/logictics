@@ -174,6 +174,10 @@
                                     </tfoot>
                                 </table>
                             </div>
+                            <div id="ghichu" class="form-group">
+                                <label for="ghichu">Ghi chú</label>
+                                <input type="text" id="ghichu" name="ghichu" value="{{ old('ghichu') }}" class="form-control">
+                            </div>
                             <div class="form-group justify-content-end">
                                 <button type="submit" id="submitForm" class="btn btn-primary float-right">TẠO
                                     MỚI</button>
@@ -185,6 +189,7 @@
                     </form>
                 </div>
                 <!-- /.card-body -->
+                
             </div>
             <!-- /.card -->
         </div>

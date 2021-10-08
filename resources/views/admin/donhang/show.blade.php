@@ -11,7 +11,7 @@
         <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="/admin/donhang/dmdatao">Đơn hàng</a></li>
+                <li class="breadcrumb-item"><a href="/admin/donhang/dmdangluukho">Đơn hàng</a></li>
                 <li class="breadcrumb-item active">{{ $donhang->id }}</li>
             </ol>
         </div>
@@ -178,17 +178,25 @@
                             </tfoot>
                         </table>
                     </div>
+                    <div id="ghichu" class="form-group">
+                        <label for="ghichu">Ghi chú</label>
+                        <input type="text" id="ghichu" name="ghichu" value="" class="form-control" disabled>
+                    </div>
                     <div id="button" class="form-group row justify-content-end">
+                        
                         <div class="col-3 col-md-1">
                             <button type="button" onClick="window.print()" value="IN"
                                 class="btn btn-block btn-primary">IN</button>
                         </div>
-                        @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
-                        $donhang->id_nhanvienkhoitao))
+                        @if ((($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
+                        $donhang->id_nhanvienkhoitao)) || (($donhang->id_trangthai == 2) && (Auth::user()->id_loainhanvien <=2)))
                         <div class="col-3 col-md-1">
                             <a href="{{ route('donhang.edit', $donhang->id) }}"><button type="button" value="SỬA"
                                     class="btn btn-block btn-secondary">SỬA</button></a>
                         </div>
+                        @endif
+                        @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
+                        $donhang->id_nhanvienkhoitao))
                         <div class="col-3 col-md-1">
                             <a href="{{ route('donhang.delete', $donhang->id) }}"><button type="button" value="XÓA"
                                     class="btn btn-block btn-danger">XÓA</button></a>
@@ -223,6 +231,7 @@
                                     <th>TT</th>
                                     <th>Thời gian (GMT+9)</th>
                                     <th>Sự kiện</th>
+                                    <th>Ghi chú</th>
                                     <th>Nhân viên</th>
                                 </tr>
                             </thead>
@@ -232,7 +241,7 @@
                                     <td style="text-align: center"></td>
                                     <td style="text-align: center;">
                                         {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
-                                    </td>
+                                    </td>                                    
                                     <td>
                                         @if ($lichsudonhang->id_trangthai == 1)
                                         Đơn hàng được khởi tạo
@@ -250,6 +259,7 @@
                                         {{ $lichsudonhang->tentrangthai }}
                                         @endif
                                     </td>
+                                    <td>{{ $lichsudonhang->ghichu }}</td>
                                     <td style="text-align: center">{{ $lichsudonhang->name }}</td>
                                 </tr>
                                 @endforeach
@@ -312,7 +322,8 @@
         #button,
         #donhang-table,
         #lichsudonhang-table,
-        .card-header,
+        #ghichu,
+        .card-header,        
         hr {
             display: none !important;
         }

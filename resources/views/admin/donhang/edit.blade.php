@@ -130,6 +130,7 @@
                         </div>
                         <hr>
                         {{-- Thêm mới đơn hàng --}}
+                        @if (Auth::user()->id_loainhanvien == 3)
                         <div class="d-block">
                             {{-- Các nút Thêm, Sửa, Xóa --}}
                             <div class="form-group" style="margin-bottom: 5px;">
@@ -144,6 +145,7 @@
                                 </button>
                             </div>
                         </div>
+                        @endif
                         {{-- Table Danh sách mặt hàng --}}
                         <div id="donhang-table-div" class="form-group">
                             <table id="donhang-table" class="table table-bordered table-striped">
@@ -191,6 +193,10 @@
                                 </tfoot>
                             </table>
                         </div>
+                        <div id="ghichu" class="form-group">
+                            <label for="ghichu">Ghi chú</label>
+                            <input type="text" id="ghichu" name="ghichu" value="" class="form-control">
+                        </div>
                         <div class="form-group justify-content-end">
                             <button type="submit" id="submitForm" class="btn btn-primary float-right">CẬP NHẬT</button>
                         </div>
@@ -222,6 +228,7 @@
                                         <th>TT</th>
                                         <th>Thời gian (GMT+9)</th>
                                         <th>Sự kiện</th>
+                                        <th>Ghi chú</th>
                                         <th>Nhân viên</th>
                                     </tr>
                                 </thead>
@@ -237,21 +244,19 @@
                                             Đơn hàng được khởi tạo
                                             @elseif ($lichsudonhang->id_trangthai == 2)
                                             {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
-                                            ({{ $lichsudonhang->diachikhogui }})
                                             @elseif ($lichsudonhang->id_trangthai == 3)
                                             @if ($lichsudonhang->id_khonhan == 0)
-                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                            ({{ $lichsudonhang->diachikhogui }}) đến địa chỉ <b>Người
-                                                nhận</b>
+                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến
+                                            địa chỉ <b>Người nhận</b>
                                             @else
-                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                            ({{ $lichsudonhang->diachikhogui }}) đến
-                                            <b>{{ $lichsudonhang->khonhan }}</b> ({{ $lichsudonhang->diachikhonhan }})
+                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến
+                                            <b>{{ $lichsudonhang->khonhan }}</b>
                                             @endif
                                             @else
                                             {{ $lichsudonhang->tentrangthai }}
                                             @endif
                                         </td>
+                                        <td>{{ $lichsudonhang->ghichu }}</td>
                                         <td style="text-align: center">{{ $lichsudonhang->name }}</td>
                                     </tr>
                                     @endforeach

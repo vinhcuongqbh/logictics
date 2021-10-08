@@ -93,6 +93,7 @@ class DonhangController extends Controller
         $donhang->sodienthoainguoinhan = $request->sodienthoainguoinhan;
         $donhang->diachinguoinhan = $request->diachinguoinhan;
         $donhang->emailnguoinhan = $request->emailnguoinhan;
+        $donhang->ghichu = $request->ghichu;
         $donhang->save();
 
         //Tạo Chi tiết đơn hàng
@@ -118,6 +119,7 @@ class DonhangController extends Controller
             $donhang->id_khogui,
             $donhang->id_khonhan,
             $donhang->id_trangthai,
+            $donhang->ghichu,
         );
 
         //Nhập Đơn hàng vào kho
@@ -131,7 +133,8 @@ class DonhangController extends Controller
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
             $donhang->id_khonhan,
-            $donhang->id_trangthai
+            $donhang->id_trangthai,
+            null,
         );
 
         return redirect()->action([DonhangController::class, 'show'], ['id' => $donhang->id]);
@@ -142,7 +145,7 @@ class DonhangController extends Controller
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::find($id);
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "ETRACK".$donhang->id;
+        $qrcode = "ETRACK" . $donhang->id;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -177,7 +180,7 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "ETRACK".$donhang->id;
+        $qrcode = "ETRACK" . $donhang->id;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -217,7 +220,6 @@ class DonhangController extends Controller
             $khachhang->sodienthoai = $request->sodienthoainguoigui;
             $khachhang->diachi = $request->diachinguoigui;
             $khachhang->email = $request->emailnguoigui;
-            $khachhang->id_nhanvienquanly = Auth::id();
             $khachhang->id_trangthai = 1;
             $khachhang->save();
         }
@@ -230,7 +232,6 @@ class DonhangController extends Controller
             $khachhang->sodienthoai = $request->sodienthoainguoinhan;
             $khachhang->diachi = $request->diachinguoinhan;
             $khachhang->email = $request->emailnguoinhan;
-            $khachhang->id_nhanvienquanly = Auth::id();
             $khachhang->id_trangthai = 1;
             $khachhang->save();
         }
@@ -249,7 +250,20 @@ class DonhangController extends Controller
         $donhang->diachinguoinhan = $request->diachinguoinhan;
         $donhang->emailnguoinhan = $request->emailnguoinhan;
         $donhang->tongchiphi = $request->tongchiphi2;
+        $donhang->ghichu = $request->ghichu;
         $donhang->save();
+
+         //Lưu sự kiện cho từng Đơn hàng
+         $lichsudonhangController = new LichsudonhangController;
+         $lichsudonhangController->luusukien(
+             $donhang->id,
+             $donhang->id_nhanvienquanly,
+             $donhang->id_chuyenhang,
+             $donhang->id_khogui,
+             $donhang->id_khonhan,
+             8,
+             $donhang->ghichu,
+         );
 
         //Xóa Chi tiết đơn hàng trước khi tạo mới
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->delete();
@@ -300,7 +314,8 @@ class DonhangController extends Controller
                         $donhang->id_chuyenhang,
                         $donhang->id_khogui,
                         $donhang->id_khonhan,
-                        $donhang->id_trangthai
+                        $donhang->id_trangthai,
+                        null,
                     );
                     $tongdonhang++;
                 }
@@ -313,6 +328,8 @@ class DonhangController extends Controller
             $lichsuchuyenhangController = new LichsuchuyenhangController;
             $lichsuchuyenhangController->luusukien(
                 $chuyenhang->id,
+                Carbon::now(),
+                null,
                 $tongdonhang,
                 $chuyenhang->id_nhanvienquanly,
                 $chuyenhang->id_khogui,
@@ -355,7 +372,8 @@ class DonhangController extends Controller
                     $donhang->id_chuyenhang,
                     $donhang->id_khogui,
                     $donhang->id_khonhan,
-                    $donhang->id_trangthai
+                    $donhang->id_trangthai,
+                    null,
                 );
 
                 $tongdonhang++;
@@ -368,6 +386,8 @@ class DonhangController extends Controller
             $lichsuchuyenhangController = new LichsuchuyenhangController;
             $lichsuchuyenhangController->luusukien(
                 $chuyenhang->id,
+                Carbon::now(),
+                null,
                 $tongdonhang,
                 $chuyenhang->id_nhanvienquanly,
                 $chuyenhang->id_khogui,
@@ -409,6 +429,7 @@ class DonhangController extends Controller
                 $donhang->id_khogui,
                 $donhang->id_khonhan,
                 $donhang->id_trangthai,
+                null,
             );
 
             $tongdonhang++;
@@ -422,12 +443,53 @@ class DonhangController extends Controller
         $lichsuchuyenhangController = new LichsuchuyenhangController;
         $lichsuchuyenhangController->luusukien(
             $chuyenhang->id,
+            null,
+            Carbon::now(),
             $tongdonhang,
             $chuyenhang->id_nhanvienquanly,
             $chuyenhang->id_khogui,
             $chuyenhang->id_khonhan,
             $chuyenhang->id_trangthai
         );
+
+        return back();
+    }
+
+    public function hoanlai(Request $request)
+    {
+        //Tìm Chuyến hàng
+        $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
+
+        //Tìm các đơn hàng thuộc Chuyến hàng
+        $donhangs = LichsuDonhang::where('id_chuyenhang', $request->id_chuyenhang)
+            ->where('id_trangthai', 3)
+            ->get();
+
+        //Cập nhật thông tin hoàn lại cho từng Đơn hàng
+        foreach ($donhangs as $i) {
+            $donhang = Donhang::find($i->id_donhang);
+            $donhang->id_nhanvienquanly = $i->id_nhanvienquanly;
+            $donhang->id_khogui = $i->id_khogui;
+            $donhang->id_khonhan = $i->id_khonhan;
+            $donhang->id_trangthai = $i->id_trangthai;
+            $donhang->save();
+        }
+
+        //Xóa sự kiện nhập kho cho từng Đơn hàng 
+        $donhangs = LichsuDonhang::where('id_chuyenhang', $request->id_chuyenhang)
+            ->where('id_trangthai', 2)
+            ->get();
+        foreach ($donhangs as $i) {
+            $i->delete();
+        }
+
+        //Cập nhật thông tin hoàn lại cho Chuyến hàng
+        $chuyenhangController = new ChuyenhangController;
+        $chuyenhangController->hoanlai($chuyenhang);
+
+        //Xóa sự kiện nhập kho cho Chuyến hàng
+        $lichsuchuyenhangController = new LichsuchuyenhangController;
+        $lichsuchuyenhangController->xoasukien($request->id_chuyenhang, 2);
 
         return back();
     }
@@ -463,8 +525,8 @@ class DonhangController extends Controller
     {
         $donhang = Lichsudonhang::where('lichsudonhangs.id_trangthai', 1)
             ->where('lichsudonhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
-            ->leftjoin('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')    
-            ->orderBy('lichsudonhangs.id_donhang', 'desc')       
+            ->leftjoin('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
+            ->orderBy('lichsudonhangs.id_donhang', 'desc')
             ->paginate(25);
 
         return view('admin.donhang.dmdatao', ['donhangs' => $donhang]);
@@ -509,7 +571,8 @@ class DonhangController extends Controller
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
             $donhang->id_khonhan,
-            $donhang->id_trangthai
+            $donhang->id_trangthai,
+            null,
         );
 
         return redirect()->action([DonhangController::class, 'dmdangluukho']);
@@ -526,6 +589,8 @@ class DonhangController extends Controller
         $donhang->id_trangthai = 6;
         $donhang->save();
 
+        echo $donhang->id_chuyenhang;
+
         //Lưu sự kiện "Thất lạc" cho Đơn hàng
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
@@ -535,6 +600,7 @@ class DonhangController extends Controller
             $donhang->id_khogui,
             $donhang->id_khonhan,
             $donhang->id_trangthai,
+            $donhang->ghichu,
         );
 
         return back();
@@ -558,7 +624,8 @@ class DonhangController extends Controller
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
             $donhang->id_khonhan,
-            $donhang->id_trangthai
+            $donhang->id_trangthai,
+            $donhang->ghichu,
         );
 
         return back();
@@ -577,15 +644,28 @@ class DonhangController extends Controller
     //Kết quản tra cứu Đơn hàng
     public function ketquatracuu(Request $request)
     {
-        $donhang = Donhang::where('id', $request->thongtintimkiem)
-            ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
-            ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
-            ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
-            //->orwhere('tennguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
-            //->orwhere('sodienthoainguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
-            //->orwhere('emailnguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
-            ->orderby('created_at', 'desc')
-            ->get();
+        if (Auth::user()->id_loainhanvien <= 2) {
+            $donhang = Donhang::where('id', $request->thongtintimkiem)
+                ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                //->orwhere('tennguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                //->orwhere('sodienthoainguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                //->orwhere('emailnguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                ->orderby('created_at', 'desc')
+                ->get();
+        } elseif (Auth::user()->id_loainhanvien > 2) {
+            $donhang = Donhang::where('id_nhanvienkhoitao', Auth::id())
+                ->where('id', $request->thongtintimkiem)
+                ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
+                //->orwhere('tennguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                //->orwhere('sodienthoainguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                //->orwhere('emailnguoinhan', 'LIKE', "%{$request->thongtintimkiem}%")
+                ->orderby('created_at', 'desc')
+                ->get();
+        }
         return view('admin.donhang.ketquatracuu', ['thongtintimkiem' => $request->thongtintimkiem, 'donhangs' => $donhang]);
     }
 }

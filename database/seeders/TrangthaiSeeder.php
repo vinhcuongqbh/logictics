@@ -44,6 +44,10 @@ class TrangthaiSeeder extends Seeder
                 'id' => 7,
                 'tentrangthai' => 'Đơn hàng bị xóa',
             ],
+            [
+                'id' => 8,
+                'tentrangthai' => 'Đơn hàng được cập nhật',
+            ],
         ]);
     }
 }
