@@ -600,7 +600,7 @@ class DonhangController extends Controller
             $donhang->id_khogui,
             $donhang->id_khonhan,
             $donhang->id_trangthai,
-            $donhang->ghichu,
+            null,
         );
 
         return back();
@@ -608,7 +608,7 @@ class DonhangController extends Controller
 
 
 
-    //Phục hồi Dơn hàng
+    //Phục hồi Đơn hàng
     public function restore($id)
     {
         $donhang = Donhang::find($id);
@@ -625,7 +625,7 @@ class DonhangController extends Controller
             $donhang->id_khogui,
             $donhang->id_khonhan,
             $donhang->id_trangthai,
-            $donhang->ghichu,
+            null,
         );
 
         return back();
