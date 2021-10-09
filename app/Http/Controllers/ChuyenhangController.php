@@ -58,10 +58,10 @@ class ChuyenhangController extends Controller
     public function hoanlai($chuyenhang)
     {
         $lichsuchuyenhang = Lichsuchuyenhang::where('id_chuyenhang', $chuyenhang->id)
-                            ->where('id_trangthai', 3)
-                            ->first();
-        
-        $chuyenhang->ngaynhan = $lichsuchuyenhang->ngaynhan;             
+            ->where('id_trangthai', 3)
+            ->first();
+
+        $chuyenhang->ngaynhan = $lichsuchuyenhang->ngaynhan;
         $chuyenhang->id_khogui = $lichsuchuyenhang->id_khogui;
         $chuyenhang->id_trangthai = $lichsuchuyenhang->id_trangthai;
         $chuyenhang->save();
@@ -124,11 +124,18 @@ class ChuyenhangController extends Controller
     public function donhangdaxuatkho($id)
     {
         $donhang = Lichsudonhang::where('lichsudonhangs.id_chuyenhang', $id)
-        ->where('lichsudonhangs.id_trangthai', 3)
+            ->where('lichsudonhangs.id_trangthai', 3)
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
             ->get();
 
-        return view('admin.chuyenhang.donhangdaxuatkho', ['donhangs' => $donhang, 'id_chuyenhang' => $id]);
+        $donhang2 = Donhang::where('donhangs.id_trangthai', 2)
+            ->where('donhangs.id_khogui', User::find(Auth::id())->id_khohangquanly)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $chuyenhang = Chuyenhang::find($id);
+
+        return view('admin.chuyenhang.donhangdaxuatkho', ['donhangs' => $donhang, 'donhang2s' => $donhang2, 'chuyenhang' => $chuyenhang]);
     }
 
 
@@ -139,6 +146,8 @@ class ChuyenhangController extends Controller
             ->where('lichsudonhangs.id_trangthai', 2)
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
             ->get();
+
+
 
         return view('admin.chuyenhang.donhangdanhapkho', ['donhangs' => $donhang, 'id_chuyenhang' => $id]);
     }

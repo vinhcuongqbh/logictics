@@ -253,17 +253,17 @@ class DonhangController extends Controller
         $donhang->ghichu = $request->ghichu;
         $donhang->save();
 
-         //Lưu sự kiện cho từng Đơn hàng
-         $lichsudonhangController = new LichsudonhangController;
-         $lichsudonhangController->luusukien(
-             $donhang->id,
-             $donhang->id_nhanvienquanly,
-             $donhang->id_chuyenhang,
-             $donhang->id_khogui,
-             $donhang->id_khonhan,
-             8,
-             $donhang->ghichu,
-         );
+        //Lưu sự kiện cho từng Đơn hàng
+        $lichsudonhangController = new LichsudonhangController;
+        $lichsudonhangController->luusukien(
+            $donhang->id,
+            $donhang->id_nhanvienquanly,
+            $donhang->id_chuyenhang,
+            $donhang->id_khogui,
+            $donhang->id_khonhan,
+            8,
+            $donhang->ghichu,
+        );
 
         //Xóa Chi tiết đơn hàng trước khi tạo mới
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->delete();
@@ -283,6 +283,65 @@ class DonhangController extends Controller
         }
 
         return redirect()->action([DonhangController::class, 'show'], ['id' => $donhang->id]);
+    }
+
+
+
+    public function themdonhang(Request $request)
+    {
+        //Cập nhật thông tin xuất kho cho Đơn hàng
+        $id_donhangduocchons = $request->input('id_donhangduocchon');
+        //Tìm chuyến hàng
+        $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
+        $tongdonhang = $chuyenhang->tongdonhang;
+        if ($chuyenhang->id_trangthai == 3) {
+            if ($id_donhangduocchons <> null) {
+                foreach ($id_donhangduocchons as $id_donhangduocchon) {
+                    //Cập nhật thông tin xuất kho cho từng Đơn hàng
+                    $donhang = Donhang::find($id_donhangduocchon);
+                    if ($donhang->id_trangthai == 2) {
+                        $donhang->id_khonhan = $chuyenhang->id_khonhan;
+                        $donhang->id_chuyenhang = $chuyenhang->id;
+                        $donhang->id_trangthai = 3;
+                        $donhang->save();
+
+                        //Lưu sự kiện cho từng Đơn hàng
+                        $lichsudonhangController = new LichsudonhangController;
+                        $lichsudonhangController->luusukien(
+                            $donhang->id,
+                            $donhang->id_nhanvienquanly,
+                            $donhang->id_chuyenhang,
+                            $donhang->id_khogui,
+                            $donhang->id_khonhan,
+                            $donhang->id_trangthai,
+                            null,
+                        );
+                        $tongdonhang++;
+                    }
+                }
+
+                //Cập nhật thông tin xuất kho cho Chuyến hàng
+                $chuyenhangController = new ChuyenhangController;
+                $chuyenhangController->xuatkho($chuyenhang, $tongdonhang);
+
+                //Lưu sự kiện cho Chuyến hàng
+                $lichsuchuyenhangController = new LichsuchuyenhangController;
+                //Xóa sự kiện cho Chuyến hàng
+                $lichsuchuyenhangController->xoasukien($chuyenhang->id, 3);
+                $lichsuchuyenhangController->luusukien(
+                    $chuyenhang->id,
+                    Carbon::now(),
+                    null,
+                    $tongdonhang,
+                    $chuyenhang->id_nhanvienquanly,
+                    $chuyenhang->id_khogui,
+                    $chuyenhang->id_khonhan,
+                    $chuyenhang->id_trangthai
+                );
+            }
+        }
+
+        return back();
     }
 
 
