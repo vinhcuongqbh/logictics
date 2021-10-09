@@ -96,7 +96,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card-body">
-                        <table id="donhang-table" class="table table-bordered table-striped">
+                        <table id="donhang-table2" class="table table-bordered table-striped">
                             <thead style="text-align: center">
                                 <tr>
                                     <th data-priority="1">ID</th>
@@ -187,30 +187,55 @@
 <!-- Page specific script -->
 <script>
     $(function() {
-            $("#donhang-table").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "pageLength": 25,
-                "searching": true,
-                "autoWidth": false,
-                "buttons": ["copy", "excel", "pdf", "print"],
-                "language": {
-                    "search": "Tìm kiếm:",
-                    "emptyTable": "Không có dữ liệu phù hợp",
-                    "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
-                    "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
-                    "infoEmpty": "",
-                    "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
-                    "paginate": {
-                        "first": "Đầu tiên",
-                        "last": "Cuối cùng",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                },     
-                "ordering": false,                 
-                "order": [[ 0, "desc" ]], 
-            }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
-        });
+        $("#donhang-table").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "pageLength": 25,
+            "searching": true,
+            "autoWidth": false,
+            "buttons": ["copy", "excel", "pdf", "print"],
+            "language": {
+                "search": "Tìm kiếm:",
+                "emptyTable": "Không có dữ liệu phù hợp",
+                "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                "infoEmpty": "",
+                "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
+                "paginate": {
+                    "first": "Đầu tiên",
+                    "last": "Cuối cùng",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },     
+            "ordering": false,                 
+            "order": [[ 0, "desc" ]], 
+        }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
+
+        $("#donhang-table2").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "pageLength": 10,
+            "searching": true,
+            "autoWidth": false,
+            "buttons": ["copy", "excel", "pdf", "print"],
+            "language": {
+                "search": "Tìm kiếm:",
+                "emptyTable": "Không có dữ liệu phù hợp",
+                "zeroRecords": "Không tìm thấy dữ liệu phù hợp",
+                "info": "Hiển thị _START_ - _END_ trong tổng _TOTAL_ kết quả",
+                "infoEmpty": "",
+                "infoFiltered": "(Tìm kiếm trong tổng _MAX_ bản ghi)",
+                "paginate": {
+                    "first": "Đầu tiên",
+                    "last": "Cuối cùng",
+                    "next": "Sau",
+                    "previous": "Trước"
+                },
+            },     
+            "ordering": false,                 
+            "order": [[ 0, "desc" ]], 
+        }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
+    });
 </script>
 @stop
