@@ -68,7 +68,7 @@
                                     <td style="text-align: center">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="id_donhangduocchon"
-                                                value="{{ $donhang->id }}" name="id_donhangduocchon[]">
+                                                value="{{ $donhang->id }}" name="id_donhangduocchon">
                                         </div>
                                     </td>
                                     <td><a
@@ -111,6 +111,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <input type="hidden" id="id_duocchon" name="id_duocchon">
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -183,7 +184,20 @@
                 "ordering": false,
                 //"order": [[ 0, "desc" ]],
             }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
-        });
+
+   
+    });
+</script>
+
+<script>   
+    //Các đơn hàng được chọn để xuất kho
+    $(document).ready(function() {
+        donhangTable = $('#donhang-table').dataTable();
+        $('#donhang-index').submit( function() {
+            var id_duocchon = donhangTable.$('input').serializeArray();
+            document.querySelector("#id_duocchon").value = JSON.stringify(id_duocchon);           
+        } );
+    } );
 </script>
 
 <script>
@@ -191,13 +205,13 @@
     $(function() {
         $('#donhang-index').validate({
             rules: {
-                "id_donhangduocchon[]": {
+                "id_donhangduocchon": {
                     required: true,
                     minlength: 1,
                 },
             },
             messages: {
-                "id_donhangduocchon[]": "Chọn ít nhất một đơn hàng",
+                "id_donhangduocchon": "Chọn ít nhất một đơn hàng",
             },
             errorElement: 'span',
             errorPlacement: function(error, element) {
