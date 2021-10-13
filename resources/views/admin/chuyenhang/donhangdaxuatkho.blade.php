@@ -73,6 +73,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <input type="hidden" id="id_duocchon" name="id_duocchon">
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -117,7 +118,7 @@
                                     <td style="text-align: center">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="id_donhangduocchon"
-                                                value="{{ $donhang2->id }}" name="id_donhangduocchon[]">
+                                                value="{{ $donhang2->id }}" name="id_donhangduocchon">
                                         </div>
                                     </td>
                                     <td>
@@ -237,5 +238,16 @@
             "order": [[ 0, "desc" ]], 
         }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
     });
+</script>
+
+<script>   
+    //Các đơn hàng được chọn để xuất kho
+    $(document).ready(function() {
+        donhangTable2 = $('#donhang-table2').dataTable();
+        $('#donhang-index').submit( function() {
+            var id_duocchon = donhangTable2.$('input').serializeArray();
+            document.querySelector("#id_duocchon").value = JSON.stringify(id_duocchon);           
+        } );
+    } );
 </script>
 @stop

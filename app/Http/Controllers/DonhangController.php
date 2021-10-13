@@ -290,15 +290,18 @@ class DonhangController extends Controller
     public function themdonhang(Request $request)
     {
         //Cập nhật thông tin xuất kho cho Đơn hàng
-        $id_donhangduocchons = $request->input('id_donhangduocchon');
+        //$id_donhangduocchons = $request->input('id_donhangduocchon');
+
+        $id_duocchons = json_decode($request->id_duocchon, true);  
+
         //Tìm chuyến hàng
         $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
         $tongdonhang = $chuyenhang->tongdonhang;
         if ($chuyenhang->id_trangthai == 3) {
-            if ($id_donhangduocchons <> null) {
-                foreach ($id_donhangduocchons as $id_donhangduocchon) {
+            if ($id_duocchons <> null) {
+                foreach ($id_duocchons as $id_duocchon) {
                     //Cập nhật thông tin xuất kho cho từng Đơn hàng
-                    $donhang = Donhang::find($id_donhangduocchon);
+                    $donhang = Donhang::find($id_duocchon['value']);
                     if ($donhang->id_trangthai == 2) {
                         $donhang->id_khonhan = $chuyenhang->id_khonhan;
                         $donhang->id_chuyenhang = $chuyenhang->id;
@@ -351,8 +354,7 @@ class DonhangController extends Controller
         //Cập nhật thông tin xuất kho cho Đơn hàng
         // $id_donhangduocchons = $request->input('id_donhangduocchon');        
         
-        $id_duocchons = json_decode($request->id_duocchon, true);       
-        
+        $id_duocchons = json_decode($request->id_duocchon, true);   
         
         if ($id_duocchons <> null) {
             //Tạo chuyến hàng mới
