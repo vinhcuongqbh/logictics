@@ -31,16 +31,25 @@
                 </div>
                 <div class="card-body">
                     {{-- Thông tin Người gửi và Người nhận --}}
+                    <div class="row" id="logo" style="display: none;">
+                        <div class="col" style="text-align: center;">
+                            <img src="/img/logo.png" style="width: 300px;">
+                        </div>
+                    </div>
                     <div class="row">
                         {{-- Mã QR Code --}}
-                        <div class="col-sm-2 col-12"
-                            style="text-align: center; padding: 40px 0px 20px 0px;">
-                            <div>
-                                <img src="/img/logo.png" id="logo" style="display: none">
-                            </div>
-                            <div id="qrcode">
-                                {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                {{ $donhang->id }}
+                        <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
+                            <div class="row">
+                                <div class="col" id="qrcode">
+                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
+                                    {{ $donhang->id }}
+                                </div>
+                                <div class="col-8" id="thongtincongty" style="text-align: left; display: none;">
+                                    <h4><b>{{ $thongtincongty->tencongty }}</b></h4>
+                                    <h4><b>Địa chỉ: </b>{{ $thongtincongty->diachi }}</h4>
+                                    <h4><b>Số điện thoại: </b>{{ $thongtincongty->sodienthoai }}</h4>
+                                    <h4><b>Website: </b>{{ $thongtincongty->website }}</h4>
+                                </div>
                             </div>
                         </div>
                         {{-- Thông tin Người gửi --}}
@@ -128,7 +137,10 @@
                                         value="{{ $donhang->emailnguoinhan }}" class="form-control" disabled>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
+                    </div>
+                    <div>
+                        <h4 id="tongchiphi2" style="display: none;"><b>Tổng chi phí: </b>{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</h4>   
                     </div>
                     <hr>
                     {{-- Table Danh sách mặt hàng --}}
@@ -183,29 +195,29 @@
                         <input type="text" id="ghichu" name="ghichu" value="" class="form-control" disabled>
                     </div>
                     <div id="button" class="form-group row justify-content-end">
-                        
+
                         <div class="col-3 col-md-1">
                             <button type="button" onClick="window.print()" value="IN"
                                 class="btn btn-block btn-primary">IN</button>
                         </div>
                         @if ((($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
-                        $donhang->id_nhanvienkhoitao)) || (($donhang->id_trangthai == 2) && (Auth::user()->id_loainhanvien <=2)))
-                        <div class="col-3 col-md-1">
+                        $donhang->id_nhanvienkhoitao)) || (($donhang->id_trangthai == 2) &&
+                        (Auth::user()->id_loainhanvien <=2))) <div class="col-3 col-md-1">
                             <a href="{{ route('donhang.edit', $donhang->id) }}"><button type="button" value="SỬA"
                                     class="btn btn-block btn-secondary">SỬA</button></a>
-                        </div>
-                        @endif
-                        @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
-                        $donhang->id_nhanvienkhoitao))
-                        <div class="col-3 col-md-1">
-                            <a href="{{ route('donhang.delete', $donhang->id) }}"><button type="button" value="XÓA"
-                                    class="btn btn-block btn-danger">XÓA</button></a>
-                        </div>
-                        @endif
-                        {{-- <div class="col-3 col-md-1">
-                            <a href="{{ route('donhang.create') }}"><button type="button" value="TẠO MỚI"
-                            class="btn btn-block btn-primary">TẠO
-                            MỚI</button></a>
+                    </div>
+                    @endif
+                    @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
+                    $donhang->id_nhanvienkhoitao))
+                    <div class="col-3 col-md-1">
+                        <a href="{{ route('donhang.delete', $donhang->id) }}"><button type="button" value="XÓA"
+                                class="btn btn-block btn-danger">XÓA</button></a>
+                    </div>
+                    @endif
+                    {{-- <div class="col-3 col-md-1">
+                        <a href="{{ route('donhang.create') }}"><button type="button" value="TẠO MỚI"
+                                class="btn btn-block btn-primary">TẠO
+                                MỚI</button></a>
                     </div> --}}
                 </div>
             </div>
@@ -241,7 +253,7 @@
                                     <td style="text-align: center"></td>
                                     <td style="text-align: center;">
                                         {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
-                                    </td>                                    
+                                    </td>
                                     <td>
                                         @if ($lichsudonhang->id_trangthai == 1)
                                         Đơn hàng được khởi tạo
@@ -289,7 +301,8 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
+{{--
+<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
 <style type="text/css">
@@ -300,8 +313,8 @@
 
     @media print {
 
-        body {     
-            font-size: 150%;  
+        body {
+            font-size: 150%;
             padding: 0px;
         }
 
@@ -313,32 +326,43 @@
         }
 
         #logo {
-            width: 40%;
-            height: 40%;
             display: inline !important;
             padding: 0px !important;
         }
+
+        #thongtincongty {
+            display: inline !important;
+        }
+
+        #tongchiphi2 {
+            display: inline !important;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            text-align: right;
+        }
+
 
         #button,
         #donhang-table,
         #lichsudonhang-table,
         #ghichu,
-        .card-header,        
+        .card-header,
         hr {
             display: none !important;
         }
 
+        
         .form-control {
             border: 0;
-            font-size: 100%;   
+            font-size: 100%;
             color: black;
-        }       
+        }
 
         .form-group {
-            margin: 0px;   
+            margin: 0px;
             border: 1px solid;
         }
-       
+
     }
 </style>
 

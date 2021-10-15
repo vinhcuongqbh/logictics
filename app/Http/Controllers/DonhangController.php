@@ -14,6 +14,7 @@ use App\Models\Dongiatinhtheokhoiluong;
 use App\Models\Dongiatinhtheosoluong;
 use App\Models\Dongiahangcongkenh;
 use App\Models\Chitietdonhang;
+use App\Models\Thongtincongty;
 
 
 class DonhangController extends Controller
@@ -153,10 +154,11 @@ class DonhangController extends Controller
         // "\nNgười nhận: ".$donhang->tennguoinhan.
         // "\nSĐT Người nhận: ".$donhang->sodienthoainguoinhan.
         // "\nĐịa chỉ Người nhận: ".$donhang->diachinguoinhan;
+        $thongtincongty = Thongtincongty::find(1);
 
         //Hiển thị lịch sử đơn hàng
         $lichsudonhangController = new LichsudonhangController;
-        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
+        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);        
 
         return view(
             'admin.donhang.show',
@@ -164,7 +166,8 @@ class DonhangController extends Controller
                 'donhang' => $donhang,
                 'chitietdonhangs' => $chitietdonhang,
                 'lichsudonhangs' => $lichsudonhang,
-                'qrcode' => $qrcode
+                'qrcode' => $qrcode,
+                'thongtincongty' => $thongtincongty,
             ]
         );
     }
