@@ -30,26 +30,15 @@
                     <h3 class="card-title">Thông tin Đơn hàng</h3>
                 </div>
                 <div class="card-body">
-                    {{-- Thông tin Người gửi và Người nhận --}}
-                    <div class="row" id="logo" style="display: none;">
-                        <div class="col" style="text-align: center;">
-                            <img src="/img/logo.png" style="width: 300px;">
-                        </div>
-                    </div>
-                    <div class="row">
+                    {{-- Thông tin Người gửi và Người nhận --}}                    
+                    <div class="row" id="rowshow">
                         {{-- Mã QR Code --}}
                         <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div class="row">
                                 <div class="col" id="qrcode">
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
                                     {{ $donhang->id }}
-                                </div>
-                                <div class="col-8" id="thongtincongty" style="text-align: left; display: none;">
-                                    <h4><b>{{ $thongtincongty->tencongty }}</b></h4>
-                                    <h4><b>Địa chỉ: </b>{{ $thongtincongty->diachi }}</h4>
-                                    <h4><b>Số điện thoại: </b>{{ $thongtincongty->sodienthoai }}</h4>
-                                    <h4><b>Website: </b>{{ $thongtincongty->website }}</h4>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                         {{-- Thông tin Người gửi --}}
@@ -139,19 +128,132 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tongchiphi2" style="display: none;">
-                        <h4><b>Đơn hàng: </b>
-                            @foreach ($chitietdonhangs as $chitietdonhang)
-                            @if ($chitietdonhang->soluong <> null) {{ $chitietdonhang->tenmathang }} x {{
-                                $chitietdonhang->soluong }} cái,
-                                @elseif ($chitietdonhang->khoiluong <> null) {{ $chitietdonhang->tenmathang }} x {{
-                                    $chitietdonhang->khoiluong }} kg,
-                                    @elseif ($chitietdonhang->kichthuoc <> null) {{ $chitietdonhang->tenmathang }} x {{
-                                        $chitietdonhang->kichthuoc }},
-                                        @endif
-                                        @endforeach
-                        </h4>
-                        <h4><b>Tổng chi phí: </b>{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</h4>
+
+                    {{-- Thông tin in ra Đơn hàng --}}
+                    <div class="row" id="logo" style="display: none;">
+                        <div class="col" style="text-align: center;">
+                            <img src="/img/logo.png" style="width: 300px;">
+                        </div>
+                    </div>
+                    <div class="row" id="rowhide" style="display: none;">
+                        {{-- Mã QR Code --}}
+                        <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
+                            <div class="row">
+                                <div class="col" id="qrcode">
+                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
+                                    {{ $donhang->id }}
+                                </div>
+                                <div class="col-8" id="thongtincongty" style="text-align: left">
+                                    <h4><b>{{ $thongtincongty->tencongty }}</b></h4>
+                                    <h4><b>Địa chỉ: </b>{{ $thongtincongty->diachi }}</h4>
+                                    <h4><b>Số điện thoại: </b>{{ $thongtincongty->sodienthoai }}</h4>
+                                    <h4><b>Website: </b>{{ $thongtincongty->website }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Thông tin Người gửi --}}
+                        <div class="col-sm-5 col-12">
+                            <div style="text-align: center">
+                                <label><u>THÔNG TIN NGƯỜI GỬI</u></label>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Số ĐT</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->sodienthoainguoigui }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Họ tên</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->tennguoigui }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Địa chỉ</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->diachinguoigui }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->emailnguoigui }}
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Thông tin người nhận --}}
+                        <div class="col-sm-5 col-12" style="margin-top: 20px">
+                            <div style="text-align: center">
+                                <label><u>THÔNG TIN NGƯỜI NHẬN</u></label>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Số ĐT</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->sodienthoainguoinhan }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Họ tên</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->tennguoinhan }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Địa chỉ</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ $donhang->diachinguoinhan }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                   {{ $donhang->emailnguoinhan }}
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Thông tin Đơn hàng --}}
+                        <div class="col-12" style="margin-top: 20px">
+                            <div style="text-align: center">
+                                <label><u>THÔNG TIN ĐƠN HÀNG</u></label>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Mặt hàng</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    @foreach ($chitietdonhangs as $chitietdonhang) 
+                                        @if ($chitietdonhang->soluong <> null) {{ $chitietdonhang->tenmathang }} x {{ $chitietdonhang->soluong }} cái,
+                                        @elseif ($chitietdonhang->khoiluong <> null) {{ $chitietdonhang->tenmathang }} x {{ $chitietdonhang->khoiluong }} kg,
+                                        @elseif ($chitietdonhang->kichthuoc <> null) {{ $chitietdonhang->tenmathang }} x {{ $chitietdonhang->kichthuoc }}, 
+                                        @endif 
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label>Tổng chi phí</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    {{ number_format($donhang->tongchiphi, 0, '.', '.') }} VNĐ
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr>
                     {{-- Table Danh sách mặt hàng --}}
@@ -232,68 +334,68 @@
     </div>
 </div>
 
-    {{-- Lịch sử đơn hàng --}}
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Lịch sử Đơn hàng</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <table id="lichsudonhang-table" class="table table-bordered table-striped">
-                                <thead style="text-align: center">
-                                    <tr>
-                                        <th>TT</th>
-                                        <th>Thời gian (GMT+9)</th>
-                                        <th>Sự kiện</th>
-                                        <th>Ghi chú</th>
-                                        <th>Nhân viên</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($lichsudonhangs as $lichsudonhang)
-                                    <tr>
-                                        <td style="text-align: center"></td>
-                                        <td style="text-align: center;">
-                                            {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
-                                        </td>
-                                        <td>
-                                            @if ($lichsudonhang->id_trangthai == 1)
-                                            Đơn hàng được khởi tạo
-                                            @elseif ($lichsudonhang->id_trangthai == 2)
-                                            {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
-                                            @elseif ($lichsudonhang->id_trangthai == 3)
-                                            @if ($lichsudonhang->id_khonhan == 0)
-                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                            đến
-                                            địa chỉ <b>Người nhận</b>
-                                            @else
-                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                            đến
-                                            <b>{{ $lichsudonhang->khonhan }}</b>
-                                            @endif
-                                            @else
-                                            {{ $lichsudonhang->tentrangthai }}
-                                            @endif
-                                        </td>
-                                        <td>{{ $lichsudonhang->ghichu }}</td>
-                                        <td style="text-align: center">{{ $lichsudonhang->name }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- /.cardbody -->
+{{-- Lịch sử đơn hàng --}}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Lịch sử Đơn hàng</h3>
             </div>
-            <!-- /.card -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table id="lichsudonhang-table" class="table table-bordered table-striped">
+                            <thead style="text-align: center">
+                                <tr>
+                                    <th>TT</th>
+                                    <th>Thời gian (GMT+9)</th>
+                                    <th>Sự kiện</th>
+                                    <th>Ghi chú</th>
+                                    <th>Nhân viên</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($lichsudonhangs as $lichsudonhang)
+                                <tr>
+                                    <td style="text-align: center"></td>
+                                    <td style="text-align: center;">
+                                        {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
+                                    </td>
+                                    <td>
+                                        @if ($lichsudonhang->id_trangthai == 1)
+                                        Đơn hàng được khởi tạo
+                                        @elseif ($lichsudonhang->id_trangthai == 2)
+                                        {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
+                                        @elseif ($lichsudonhang->id_trangthai == 3)
+                                        @if ($lichsudonhang->id_khonhan == 0)
+                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
+                                        đến
+                                        địa chỉ <b>Người nhận</b>
+                                        @else
+                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
+                                        đến
+                                        <b>{{ $lichsudonhang->khonhan }}</b>
+                                        @endif
+                                        @else
+                                        {{ $lichsudonhang->tentrangthai }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $lichsudonhang->ghichu }}</td>
+                                    <td style="text-align: center">{{ $lichsudonhang->name }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.cardbody -->
         </div>
+        <!-- /.card -->
     </div>
+</div>
 </div>
 <!-- /.container-fluid -->
 @stop
@@ -338,12 +440,11 @@
             margin: 0px !important;
         }
 
-        #thongtincongty {
-            display: block !important;
+        #rowshow {
+            display: none !important;
         }
 
-        #tongchiphi2 {
-            margin-top: 30px;
+        #rowhide {
             display: block !important;
         }
 

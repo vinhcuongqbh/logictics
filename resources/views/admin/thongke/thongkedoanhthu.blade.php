@@ -112,7 +112,7 @@
         <div class="card-header border-0">
           <div class="d-flex justify-content-between">
             <h3 class="card-title">Theo tuần</h3>
-            <a href="javascript:void(0);">Báo cáo chi tiết</a>
+            {{-- <a href="javascript:void(0);">Báo cáo chi tiết</a> --}}
           </div>
         </div>
         <div class="card-body">
@@ -163,7 +163,7 @@
         <div class="card-header border-0">
           <div class="d-flex justify-content-between">
             <h3 class="card-title">Theo năm</h3>
-            <a href="javascript:void(0);">Báo cáo chi tiết</a>
+            {{-- <a href="javascript:void(0);">Báo cáo chi tiết</a> --}}
           </div>
         </div>
         <div class="card-body">
