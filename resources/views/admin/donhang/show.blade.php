@@ -238,9 +238,9 @@
                                 </div>
                                 <div class="col-9 col-xl-9">
                                     @foreach ($chitietdonhangs as $chitietdonhang) 
-                                        @if ($chitietdonhang->soluong <> null) {{ $chitietdonhang->tenmathang }} x {{ $chitietdonhang->soluong }} cái,
-                                        @elseif ($chitietdonhang->khoiluong <> null) {{ $chitietdonhang->tenmathang }} x {{ $chitietdonhang->khoiluong }} kg,
-                                        @elseif ($chitietdonhang->kichthuoc <> null) {{ $chitietdonhang->tenmathang }} x {{ $chitietdonhang->kichthuoc }}, 
+                                        @if ($chitietdonhang->soluong <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->soluong }} cái,
+                                        @elseif ($chitietdonhang->khoiluong <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->khoiluong }} kg,
+                                        @elseif ($chitietdonhang->kichthuoc <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->kichthuoc }}, 
                                         @endif 
                                     @endforeach
                                 </div>
