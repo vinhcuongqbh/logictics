@@ -74,7 +74,7 @@
                                         <a href="{{ route('khohang.edit', $khohang->id) }}" style="padding: 3px">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        @if ($khohang->id > 2)
+                                        {{-- @if ($khohang->id > 2)
                                             @if ($khohang->id_trangthai == 1)
                                                 <a href="{{ route('khohang.delete', $khohang->id) }}"
                                                     onclick="return confirm('Bạn muốn đóng Kho hàng này?')">
@@ -86,7 +86,7 @@
                                                     <i class="fas fa-undo"></i>
                                                 </a>
                                             @endif
-                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                             @endforeach

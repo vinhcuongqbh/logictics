@@ -118,8 +118,8 @@
                         <div class="col-3 col-md-2">
                             @if ($nhanvien->id_trangthai == 1)
                                 <a href="{{ route('nhanvien.delete', $nhanvien->id) }}"
-                                    onclick="return confirm('Bạn muốn xóa Nhân viên này?')"><button type="button"
-                                        class="btn btn-block btn-danger">XÓA</button></a>
+                                    onclick="return confirm('Bạn muốn khóa tài khoản Nhân viên này?')"><button type="button"
+                                        class="btn btn-block btn-danger">KHÓA</button></a>
                             @else
                                 <a href="{{ route('nhanvien.restore', $nhanvien->id) }}"
                                     onclick="return confirm('Bạn muốn phục hồi Nhân viên này?')"><button type="button"

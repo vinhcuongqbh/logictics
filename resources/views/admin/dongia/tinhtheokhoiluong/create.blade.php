@@ -13,7 +13,7 @@
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/dongia/dongiatinhtheokhoiluong">Đơn giá theo khối lượng</a>
                 </li>
-                <li class="breadcrumb-item active">Tạo mới</li>
+                <li class="breadcrumb-item active">Thêm mới</li>
             </ol>
         </div>
     </div>

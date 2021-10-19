@@ -51,7 +51,7 @@
                             <a href="{{ route('khohang.edit', $khohang->id) }}"><button type="button"
                                     class="btn btn-block btn-secondary">SỬA</button></a>
                         </div>
-                        <div class="col-3 col-md-2">
+                        {{-- <div class="col-3 col-md-2">
                             @if ($khohang->id_trangthai == 1)
                                 <a href="{{ route('khohang.delete', $khohang->id) }}"
                                     onclick="return confirm('Bạn muốn xóa Kho hàng này?')"><button type="button"
@@ -61,7 +61,7 @@
                                     onclick="return confirm('Bạn muốn phục hồi Kho hàng này?')"><button type="button"
                                         class="btn btn-block btn-success">PHỤC HỒI</button></a>
                             @endif
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
