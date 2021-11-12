@@ -411,15 +411,14 @@
         <div>
             <table class="table table-borderless">
                 <tr>
-                    <td style="width: 20%; padding: 0px; text-align: center;"> 
+                    <td style="width: 30%; padding: 0px; text-align: center;"> 
                         @if ($donhang->id_hinhthucgui == 1)                       
-                            <h2>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h2>
+                            <h3>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h3>
                         @else
-                            <h2>AIR - BAY <br> <i class="fas fa-plane"></i></h2>                            
-                        @endif
-                        
+                            <h3>AIR - BAY <br> <i class="fas fa-plane"></i></h3>                            
+                        @endif                        
                     </td>
-                    <td style="width: 60%;"></td>
+                    <td style="width: 50%;"></td>
                     <td style="width: 20%; padding: 0px; text-align: center; vertical-align: middle;">{!! QrCode::encoding('UTF-8')->generate($qrcode); !!} <br> {{ $donhang->id }} </td>
                 </tr>
             </table>
@@ -428,8 +427,8 @@
         <div>
             <table class="table table-borderless">
                 <tr>
-                    <td style="width: 40%; text-align: center; vertical-align: top;"><img src="/img/logo.png" style="width: 300px;"></td>
-                    <td style="width: 60%; text-align: center; vertical-align: top;"><h2><b>CÔNG TY VẬN CHUYỂN ETRACK</b></h2></td>
+                    <td style="width: 40%; text-align: center; vertical-align: top;"><img src="/img/logo.png" style="width: 200px;"></td>
+                    <td style="width: 60%; text-align: center; vertical-align: top;"><h3><b>CÔNG TY VẬN CHUYỂN ETRACK</b></h3></td>
                 </tr>
             </table>
         </div>        
@@ -500,21 +499,21 @@
 
 <style type="text/css">
     @page {
-        size: A5 portrait;
+        size: A6 portrait;
         margin: 0px;
     }
 
     @media print {
 
         body {
-            font-size: 150%;
+            font-size: 110%;
             padding: 0px;
         }
 
         .container-fluid {
-            width: 87%;
+            width: 72%;
             padding: 0px;
-            margin: 50px 20px;
+            margin: 40px 20px;
 
         }
 
@@ -527,14 +526,15 @@
         }
 
         table.table-bordered{
-            border:1px solid black !important;
+            border: 1px solid black !important;
             margin-top:20px;
         }
         table.table-bordered > thead > tr > th{
-            border:1px solid black !important;
+            border: 1px solid black !important;
         }
         table.table-bordered > tbody > tr > td{
-            border:1px solid black !important;
+            border: 1px solid black !important;
+            padding: 7px;
         }
     }
 </style>

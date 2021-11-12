@@ -37,7 +37,7 @@
                             <div class="col-sm-5">  
                                 <div class="form-group row">
                                     <div class="col-3 col-xl-2">
-                                        <label for="hinhthucgui" class="col-form-label">Vận tải</label>
+                                        <label class="col-form-label">Vận tải</label>
                                     </div>
                                     <div class="col-9 col-xl-9">                                        
                                         <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select">

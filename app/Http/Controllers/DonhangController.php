@@ -152,6 +152,7 @@ class DonhangController extends Controller
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::where('donhangs.id', $id)
             ->join('hinhthucguis', 'hinhthucguis.id', 'donhangs.id_hinhthucgui')
+            ->select('donhangs.*', 'hinhthucguis.tenhinhthucgui')
             ->first();         
 
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
