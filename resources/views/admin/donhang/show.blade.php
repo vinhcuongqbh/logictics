@@ -413,9 +413,9 @@
                 <tr>
                     <td style="width: 30%; padding: 0px; text-align: center;"> 
                         @if ($donhang->id_hinhthucgui == 1)                       
-                            <h3>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h3>
+                            <h2>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h2>
                         @else
-                            <h3>AIR - BAY <br> <i class="fas fa-plane"></i></h3>                            
+                            <h2>AIR - BAY <br> <i class="fas fa-plane"></i></h2>                            
                         @endif                        
                     </td>
                     <td style="width: 50%;"></td>
@@ -428,7 +428,7 @@
             <table class="table table-borderless">
                 <tr>
                     <td style="width: 40%; text-align: center; vertical-align: top;"><img src="/img/logo.png" style="width: 200px;"></td>
-                    <td style="width: 60%; text-align: center; vertical-align: top;"><h3><b>CÔNG TY VẬN CHUYỂN ETRACK</b></h3></td>
+                    <td style="width: 60%; text-align: center; vertical-align: top;"><h2><b>CÔNG TY VẬN CHUYỂN ETRACK</b></h2></td>
                 </tr>
             </table>
         </div>        
@@ -436,7 +436,7 @@
             <table class="table table-bordered" style="border-color:black;">
                 <tr>
                     <td colspan="2" style="width: 30%;">Ngày xử lý</td>
-                    <td>{{ $donhang->created_at }}</td>
+                    <td>{{ date('d-m-Y H:i:s', strtotime($donhang->created_at)) }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="width: 30%;">Mã Tracking</td>
@@ -478,6 +478,14 @@
                 </tr>
             </table>
         </div>
+        <div>
+            <h5>
+            <b>LƯU Ý:</b><br>
+            - Nhận hàng, kiểm tra hàng cùng với bưu tá, quay video lại quá trình khui hàng;<br>
+            - Trong trường hợp hàng bị hỏng, bị thiếu thì lập biên bản ngay cùng với bưu tá;<br>
+            - Khi đã đồng ý nhận hàng, bên vận chuyển sẽ không chấp nhận đền bù và khiếu nại phát sinh sau này.
+            </h5>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->
@@ -499,21 +507,21 @@
 
 <style type="text/css">
     @page {
-        size: A6 portrait;
+        size: A5 portrait;
         margin: 0px;
     }
 
     @media print {
 
         body {
-            font-size: 110%;
+            font-size: 170%;
             padding: 0px;
         }
 
         .container-fluid {
-            width: 72%;
-            padding: 0px;
-            margin: 40px 20px;
+            width: 87%;
+            padding: 0px 0px 0px 30px;
+            margin: 40px 5px;
 
         }
 
