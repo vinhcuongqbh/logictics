@@ -24,7 +24,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('donhang.hoanlai') }}" method="post" id="donhang-index">
+            <form action="{{ route('donhang.hoanlainhapkho') }}" method="post" id="donhang-index">
                 @csrf
                 <div class="card">
                     <div class="card-header">

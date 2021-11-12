@@ -32,15 +32,26 @@
                     id="donhang-update">
                     @csrf
                     <div class="card-body">
-                        {{-- Thông tin Người gửi và Người nhận --}}
-                        <div class="row">
-                            {{-- Mã QR Code --}}
-                            <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
-                                <div>
-                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->id }}
+                        {{-- Thông tin Hình thức gửi --}}
+                        <div class="row justify-content-between">
+                            <div class="col-sm-5">  
+                                <div class="form-group row">
+                                    <div class="col-3 col-xl-2">
+                                        <label for="hinhthucgui" class="col-form-label">Vận tải</label>
+                                    </div>
+                                    <div class="col-9 col-xl-9">                                        
+                                        <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select">
+                                            @foreach ($hinhthucgui as $hinhthucgui)
+                                                <option value="{{ $hinhthucgui->id }}" @if ($hinhthucgui->id == $donhang->id_hinhthucgui) {{ 'selected' }} @endif>{{ $hinhthucgui->tenhinhthucgui }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <hr>
+                        {{-- Thông tin Người gửi và Người nhận --}}
+                        <div class="row">                            
                             {{-- Thông tin Người gửi --}}
                             <div class="col-sm-5">
                                 <div style="text-align: center">
@@ -125,6 +136,13 @@
                                         <input type="text" id="emailnguoinhan" name="emailnguoinhan"
                                             value="{{ $donhang->emailnguoinhan }}" class="form-control">
                                     </div>
+                                </div>
+                            </div>
+                            {{-- Mã QR Code --}}
+                            <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
+                                <div>
+                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
+                                    {{ $donhang->id }}
                                 </div>
                             </div>
                         </div>

@@ -37,4 +37,8 @@ class LichsudonhangController extends Controller
 
         return $lichsudonhang;
     }
+
+    //Xóa Lịch sử đơn hàng
+    
+
 }

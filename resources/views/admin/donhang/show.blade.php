@@ -23,24 +23,31 @@
 @section('content')
 <div class="container-fluid">
     {{-- Thông tin đơn hàng --}}
-    <div class="row">
+    <div id="thongtindonhang" class="row">
         <div class="col-sm-12">
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Thông tin Đơn hàng</h3>
                 </div>
                 <div class="card-body">
-                    {{-- Thông tin Người gửi và Người nhận --}}                    
-                    <div class="row" id="rowshow">
-                        {{-- Mã QR Code --}}
-                        <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
-                            <div class="row">
-                                <div class="col" id="qrcode">
-                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->id }}
-                                </div>                                
+                    {{-- Thông tin Hình thức gửi --}}
+                    <div class="row justify-content-between">
+                        <div class="col-sm-5">  
+                            <div class="form-group row">
+                                <div class="col-3 col-xl-2">
+                                    <label for="hinhthucgui" class="col-form-label">Vận tải</label>
+                                </div>
+                                <div class="col-9 col-xl-9">
+                                    <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select" disabled>
+                                        <option value="{{ $donhang->id_hinhthucgui }}">{{ $donhang->tenhinhthucgui }}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <hr>
+                    {{-- Thông tin Người gửi và Người nhận --}}
+                    <div class="row" id="rowshow">                        
                         {{-- Thông tin Người gửi --}}
                         <div id="nguoigui" class="col-sm-5 col-12">
                             <div id="thongtinnguoigui" style="text-align: center">
@@ -124,6 +131,15 @@
                                 <div class="col-9 col-xl-9">
                                     <input type="text" id="emailnguoinhan" name="emailnguoinhan"
                                         value="{{ $donhang->emailnguoinhan }}" class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Mã QR Code --}}
+                        <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
+                            <div class="row">
+                                <div class="col" id="qrcode">
+                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
+                                    {{ $donhang->id }}
                                 </div>
                             </div>
                         </div>
@@ -223,7 +239,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                   {{ $donhang->emailnguoinhan }}
+                                    {{ $donhang->emailnguoinhan }}
                                 </div>
                             </div>
                         </div>
@@ -237,12 +253,16 @@
                                     <label>Mặt hàng</label>
                                 </div>
                                 <div class="col-9 col-xl-9">
-                                    @foreach ($chitietdonhangs as $chitietdonhang) 
-                                        @if ($chitietdonhang->soluong <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->soluong }} cái,
-                                        @elseif ($chitietdonhang->khoiluong <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->khoiluong }} kg,
-                                        @elseif ($chitietdonhang->kichthuoc <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->kichthuoc }}, 
-                                        @endif 
-                                    @endforeach
+                                    @foreach ($chitietdonhangs as $chitietdonhang)
+                                    @if ($chitietdonhang->soluong <> null) <b>{{ $chitietdonhang->tenmathang }}</b> x {{
+                                        $chitietdonhang->soluong }} cái,
+                                        @elseif ($chitietdonhang->khoiluong <> null) <b>{{ $chitietdonhang->tenmathang
+                                                }}</b> x {{ $chitietdonhang->khoiluong }} kg,
+                                            @elseif ($chitietdonhang->kichthuoc <> null) <b>{{
+                                                    $chitietdonhang->tenmathang }}</b> x {{ $chitietdonhang->kichthuoc
+                                                }},
+                                                @endif
+                                                @endforeach
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -312,90 +332,154 @@
                             <button type="button" onClick="window.print()" value="IN"
                                 class="btn btn-block btn-primary">IN</button>
                         </div>
-                        @if ((($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
-                        $donhang->id_nhanvienkhoitao)) || (($donhang->id_trangthai == 2) &&
-                        (Auth::user()->id_loainhanvien <=2))) <div class="col-3 col-md-1">
-                            <a href="{{ route('donhang.edit', $donhang->id) }}"><button type="button" value="SỬA"
-                                    class="btn btn-block btn-secondary">SỬA</button></a>
+                        @if ((($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly == $donhang->id_nhanvienkhoitao)) || (($donhang->id_trangthai == 2) && (Auth::user()->id_loainhanvien <=2)))
+                            <div class="col-3 col-md-1">
+                                <a href="{{ route('donhang.edit', $donhang->id) }}">
+                                    <button type="button" value="SỬA" class="btn btn-block btn-secondary">SỬA</button>
+                                </a>
+                            </div>
+                        @endif
+                        @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly == $donhang->id_nhanvienkhoitao))
+                            <div class="col-3 col-md-1">
+                                <a href="{{ route('donhang.delete', $donhang->id) }}">
+                                    <button type="button" value="XÓA" class="btn btn-block btn-danger">XÓA</button>
+                                </a>
+                            </div>
+                        @endif
                     </div>
-                    @endif
-                    @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly ==
-                    $donhang->id_nhanvienkhoitao))
-                    <div class="col-3 col-md-1">
-                        <a href="{{ route('donhang.delete', $donhang->id) }}"><button type="button" value="XÓA"
-                                class="btn btn-block btn-danger">XÓA</button></a>
-                    </div>
-                    @endif
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+
+    {{-- Lịch sử đơn hàng --}}
+    <div id="lichsudonhang" class="row">
+        <div class="col-sm-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Lịch sử Đơn hàng</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="lichsudonhang-table" class="table table-bordered table-striped">
+                                <thead style="text-align: center">
+                                    <tr>
+                                        <th>TT</th>
+                                        <th>Thời gian (GMT+9)</th>
+                                        <th>Sự kiện</th>
+                                        <th>Ghi chú</th>
+                                        <th>Nhân viên</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($lichsudonhangs as $lichsudonhang)
+                                    <tr>
+                                        <td style="text-align: center"></td>
+                                        <td style="text-align: center;">
+                                            {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
+                                        </td>
+                                        <td>
+                                            @if ($lichsudonhang->id_trangthai == 1) Đơn hàng được khởi tạo
+                                            @elseif ($lichsudonhang->id_trangthai == 2) {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
+                                            @elseif ($lichsudonhang->id_trangthai == 3)
+                                                @if ($lichsudonhang->id_khonhan == 0) {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến địa chỉ <b>Người nhận</b>
+                                                @else {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến <b>{{ $lichsudonhang->khonhan }}</b>
+                                                @endif
+                                            @else  {{ $lichsudonhang->tentrangthai }}
+                                            @endif
+                                        </td>
+                                        <td>{{ $lichsudonhang->ghichu }}</td>
+                                        <td style="text-align: center">{{ $lichsudonhang->name }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.cardbody -->
             </div>
             <!-- /.card -->
         </div>
     </div>
-</div>
-
-{{-- Lịch sử đơn hàng --}}
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Lịch sử Đơn hàng</h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <table id="lichsudonhang-table" class="table table-bordered table-striped">
-                            <thead style="text-align: center">
-                                <tr>
-                                    <th>TT</th>
-                                    <th>Thời gian (GMT+9)</th>
-                                    <th>Sự kiện</th>
-                                    <th>Ghi chú</th>
-                                    <th>Nhân viên</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($lichsudonhangs as $lichsudonhang)
-                                <tr>
-                                    <td style="text-align: center"></td>
-                                    <td style="text-align: center;">
-                                        {{ date('d-m-Y H:i:s', strtotime($lichsudonhang->created_at)) }}
-                                    </td>
-                                    <td>
-                                        @if ($lichsudonhang->id_trangthai == 1)
-                                        Đơn hàng được khởi tạo
-                                        @elseif ($lichsudonhang->id_trangthai == 2)
-                                        {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
-                                        @elseif ($lichsudonhang->id_trangthai == 3)
-                                        @if ($lichsudonhang->id_khonhan == 0)
-                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                        đến
-                                        địa chỉ <b>Người nhận</b>
-                                        @else
-                                        {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
-                                        đến
-                                        <b>{{ $lichsudonhang->khonhan }}</b>
-                                        @endif
-                                        @else
-                                        {{ $lichsudonhang->tentrangthai }}
-                                        @endif
-                                    </td>
-                                    <td>{{ $lichsudonhang->ghichu }}</td>
-                                    <td style="text-align: center">{{ $lichsudonhang->name }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.cardbody -->
+    <div id="phieuin" style="display: none">
+        <div>
+            <table class="table table-borderless">
+                <tr>
+                    <td style="width: 20%; padding: 0px; text-align: center;"> 
+                        @if ($donhang->id_hinhthucgui == 1)                       
+                            <h2>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h2>
+                        @else
+                            <h2>AIR - BAY <br> <i class="fas fa-plane"></i></h2>                            
+                        @endif
+                        
+                    </td>
+                    <td style="width: 60%;"></td>
+                    <td style="width: 20%; padding: 0px; text-align: center; vertical-align: middle;">{!! QrCode::encoding('UTF-8')->generate($qrcode); !!} <br> {{ $donhang->id }} </td>
+                </tr>
+            </table>
         </div>
-        <!-- /.card -->
+        <hr>
+        <div>
+            <table class="table table-borderless">
+                <tr>
+                    <td style="width: 40%; text-align: center; vertical-align: top;"><img src="/img/logo.png" style="width: 300px;"></td>
+                    <td style="width: 60%; text-align: center; vertical-align: top;"><h2><b>CÔNG TY VẬN CHUYỂN ETRACK</b></h2></td>
+                </tr>
+            </table>
+        </div>        
+        <div>
+            <table class="table table-bordered" style="border-color:black;">
+                <tr>
+                    <td colspan="2" style="width: 30%;">Ngày xử lý</td>
+                    <td>{{ $donhang->created_at }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 30%;">Mã Tracking</td>
+                    <td>{{ $donhang->id }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 30%;">Cân nặng</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 30%;">Nội dung hàng hóa</td>
+                    <td>
+                        @foreach ($chitietdonhangs as $chitietdonhang)
+                            {{ $chitietdonhang->tenmathang }},
+                        @endforeach
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="width: 10%; text-align: center; writing-mode: vertical-lr">NGƯỜI NHẬN</td>
+                    <td style="width: 20%;">Địa chỉ</td>
+                    <td style="width: 70%;">{{ $donhang->diachinguoinhan }}</td>
+                </tr>
+                <tr>
+                    <td>Họ tên</td>
+                    <td>{{ $donhang->tennguoinhan }}</td>
+                </tr>
+                <tr>
+                    <td>SĐT</td>
+                    <td>{{ $donhang->sodienthoainguoinhan }}</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="width: 10%; text-align: center; writing-mode: vertical-lr">NGƯỜI GỬI</td>
+                    <td style="width: 20%;">Họ tên</td>
+                    <td style="width: 70%;">{{ $donhang->tennguoigui }}</td>
+                </tr>
+                <tr>
+                    <td>SĐT</td>
+                    <td>{{ $donhang->sodienthoainguoigui }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
 </div>
 <!-- /.container-fluid -->
 @stop
@@ -428,47 +512,30 @@
         }
 
         .container-fluid {
-            width: 90%;
+            width: 87%;
             padding: 0px;
-            margin: 10px;
+            margin: 50px 20px;
 
         }
 
-        #logo {
+        #thongtindonhang, #lichsudonhang {
+            display: none !important;
+        }    
+        
+        #phieuin{
             display: inline !important;
-            padding: 0px !important;
-            margin: 0px !important;
         }
 
-        #rowshow {
-            display: none !important;
+        table.table-bordered{
+            border:1px solid black !important;
+            margin-top:20px;
         }
-
-        #rowhide {
-            display: block !important;
+        table.table-bordered > thead > tr > th{
+            border:1px solid black !important;
         }
-
-        #button,
-        #donhang-table,
-        #lichsudonhang-table,
-        #donhang-table-div,
-        #ghichu,
-        .card-header,
-        hr {
-            display: none !important;
+        table.table-bordered > tbody > tr > td{
+            border:1px solid black !important;
         }
-
-        .form-control {
-            border: 0;
-            font-size: 100%;
-            color: black;
-        }
-
-        .form-group {
-            margin: 0px;
-            border: 1px solid;
-        }
-
     }
 </style>
 

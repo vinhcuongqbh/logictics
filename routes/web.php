@@ -101,7 +101,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('xuatkho', [DonhangController::class, 'xuatkho'])->name('donhang.xuatkho');
         Route::get('xuattoanbokho', [DonhangController::class, 'xuattoanbokho'])->name('donhang.xuattoanbokho');
         Route::post('nhapkho', [DonhangController::class, 'nhapkho'])->name('donhang.nhapkho');
-        Route::post('hoanlai', [DonhangController::class, 'hoanlai'])->name('donhang.hoanlai');
+        Route::post('hoanlainhapkho', [DonhangController::class, 'hoanlainhapkho'])->name('donhang.hoanlainhapkho');
+        Route::get('{id}/hoanlaixuatkho', [DonhangController::class, 'hoanlaixuatkho'])->name('donhang.hoanlaixuatkho');
         Route::get('{id}/thatlac', [DonhangController::class, 'thatlac'])->name('donhang.thatlac');
         Route::get('create', [DonhangController::class, 'create'])->name('donhang.create');
         Route::post('store', [DonhangController::class, 'store'])->name('donhang.store');

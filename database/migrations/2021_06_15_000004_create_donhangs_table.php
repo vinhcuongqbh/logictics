@@ -21,6 +21,7 @@ class CreateDonhangsTable extends Migration
             $table->foreignId('id_khonhan')->nullable();
             $table->foreignId('id_chuyenhang')->nullable();
             $table->foreignId('id_trangthai');
+            $table->foreignId('id_hinhthucgui');
             $table->string('tennguoigui');
             $table->string('sodienthoainguoigui');
             $table->string('diachinguoigui');
@@ -31,7 +32,7 @@ class CreateDonhangsTable extends Migration
             $table->string('emailnguoinhan')->nullable();
             $table->bigInteger('tongchiphi');
             $table->bigInteger('chietkhau');
-            $table->text('ghichu')->nullable();
+            $table->text('ghichu')->nullable();            
             $table->timestamps();
         });
     }

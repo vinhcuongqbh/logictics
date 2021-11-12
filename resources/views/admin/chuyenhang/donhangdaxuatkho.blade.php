@@ -46,6 +46,7 @@
                                     <th>Người nhận</th>
                                     <th>Số điện thoại Người nhận</th>
                                     <th>Tổng chi phí</th>
+                                    <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,6 +69,12 @@
                                     </td>
                                     <td style="text-align: right"><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ number_format($donhang->tongchiphi, 0, '.', '.') }}</a>
+                                    </td>
+                                    <td style="text-align: center">                                        
+                                        <a href="{{ route('donhang.hoanlaixuatkho', $donhang->id) }}"
+                                            onclick="return confirm('Bạn muốn hoàn lại Đơn hàng này?')" @if ($chuyenhang->id_trangthai <> 3) style="pointer-events: none" @endif>
+                                            <i class="fas fa-undo"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -236,7 +243,7 @@
             },     
             "ordering": false,                 
             "order": [[ 0, "desc" ]], 
-        }).buttons().container().appendTo('#donhang-table_wrapper .col-md-6:eq(0)');
+        });
     });
 </script>
 

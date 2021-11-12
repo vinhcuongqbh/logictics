@@ -30,6 +30,7 @@ class DonhangFactory extends Factory
             'sodienthoainguoinhan' => $this->faker->phoneNumber(),
             'diachinguoinhan' => $this->faker->address(),
             'emailnguoinhan' => $this->faker->unique()->safeEmail(),
+            'hinhthucgui' => rand(1,2),
         ];
     }
 }

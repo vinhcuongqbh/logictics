@@ -14,7 +14,10 @@ use App\Models\Dongiatinhtheokhoiluong;
 use App\Models\Dongiatinhtheosoluong;
 use App\Models\Dongiahangcongkenh;
 use App\Models\Chitietdonhang;
+use App\Models\Lichsuchuyenhang;
 use App\Models\Thongtincongty;
+use App\Models\Hinhthucgui;
+
 
 
 class DonhangController extends Controller
@@ -26,6 +29,7 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
         $tilechietkhau = Auth::user()->tilechietkhau;
+        $hinhthucgui = Hinhthucgui::all();
 
         return view(
             'admin.donhang.create',
@@ -35,6 +39,7 @@ class DonhangController extends Controller
                 'dongiatinhtheosoluong' => $dongiatinhtheosoluong,
                 'dongiahangcongkenh' => $dongiahangcongkenh,
                 'tilechietkhau' => $tilechietkhau,
+                'hinhthucgui' => $hinhthucgui,
             ]
         );
     }
@@ -84,6 +89,7 @@ class DonhangController extends Controller
         $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_khogui = $id_khohangquanly;
         $donhang->id_trangthai = 1;
+        $donhang->id_hinhthucgui =  $request->hinhthucgui;
         $donhang->tongchiphi = $request->tongchiphi2;
         $donhang->chietkhau = $request->chietkhau;
         $donhang->tennguoigui = $request->tennguoigui;
@@ -144,7 +150,10 @@ class DonhangController extends Controller
     public function show($id)
     {
         //Hiển thị thông tin Đơn hàng
-        $donhang = Donhang::find($id);
+        $donhang = Donhang::where('donhangs.id', $id)
+            ->join('hinhthucguis', 'hinhthucguis.id', 'donhangs.id_hinhthucgui')
+            ->first();         
+
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
         $qrcode = "ETRACK" . $donhang->id;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
@@ -158,7 +167,7 @@ class DonhangController extends Controller
 
         //Hiển thị lịch sử đơn hàng
         $lichsudonhangController = new LichsudonhangController;
-        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);        
+        $lichsudonhang = $lichsudonhangController->lichsudonhang($id);
 
         return view(
             'admin.donhang.show',
@@ -177,6 +186,7 @@ class DonhangController extends Controller
     public function edit($id)
     {
         $donhang = Donhang::find($id);
+        $hinhthucgui = Hinhthucgui::all();
 
         //Hiển thị thông tin Đơn hàng
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
@@ -206,7 +216,8 @@ class DonhangController extends Controller
                 'dongiahangcongkenh' => $dongiahangcongkenh,
                 'chitietdonhangs' => $chitietdonhang,
                 'lichsudonhangs' => $lichsudonhang,
-                'qrcode' => $qrcode
+                'qrcode' => $qrcode,
+                'hinhthucgui' => $hinhthucgui,
             ]
         );
     }
@@ -254,6 +265,7 @@ class DonhangController extends Controller
         $donhang->emailnguoinhan = $request->emailnguoinhan;
         $donhang->tongchiphi = $request->tongchiphi2;
         $donhang->ghichu = $request->ghichu;
+        $donhang->id_hinhthucgui = $request->hinhthucgui;
         $donhang->save();
 
         //Lưu sự kiện cho từng Đơn hàng
@@ -295,7 +307,7 @@ class DonhangController extends Controller
         //Cập nhật thông tin xuất kho cho Đơn hàng
         //$id_donhangduocchons = $request->input('id_donhangduocchon');
 
-        $id_duocchons = json_decode($request->id_duocchon, true);  
+        $id_duocchons = json_decode($request->id_duocchon, true);
 
         //Tìm chuyến hàng
         $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
@@ -356,9 +368,9 @@ class DonhangController extends Controller
     {
         //Cập nhật thông tin xuất kho cho Đơn hàng
         // $id_donhangduocchons = $request->input('id_donhangduocchon');        
-        
-        $id_duocchons = json_decode($request->id_duocchon, true);   
-        
+
+        $id_duocchons = json_decode($request->id_duocchon, true);
+
         if ($id_duocchons <> null) {
             //Tạo chuyến hàng mới
             $chuyenhangController = new ChuyenhangController;
@@ -368,6 +380,7 @@ class DonhangController extends Controller
             foreach ($id_duocchons as $id_duocchon) {
                 //Cập nhật thông tin xuất kho cho từng Đơn hàng
                 $donhang = Donhang::find($id_duocchon['value']);
+                //if chỗ này để tránh trường hợp mở nhiều tab cùng một nội dung; xuất đơn hàng đi rồi xuất lại
                 if ($donhang->id_trangthai == 2) {
                     $donhang->id_khonhan = $chuyenhang->id_khonhan;
                     $donhang->id_chuyenhang = $chuyenhang->id;
@@ -523,7 +536,42 @@ class DonhangController extends Controller
         return back();
     }
 
-    public function hoanlai(Request $request)
+    public function hoanlaixuatkho($id)
+    {
+        $donhang = Donhang::find($id);
+        $id_chuyenhang = $donhang->id_chuyenhang;
+        $chuyenhang = Chuyenhang::find($id_chuyenhang);
+
+        if ($chuyenhang->id_trangthai == 3) {
+            //Cập nhật thông tin hoàn lại cho Đơn hàng
+            $donhang->id_khonhan = null;
+            $donhang->id_chuyenhang = null;
+            $donhang->id_trangthai = 2;
+            $donhang->save();
+
+            //Xóa sự kiện xuất kho cho Đơn hàng 
+            $lichsudonhangs = LichsuDonhang::where('id_donhang', $id)
+                ->where('id_chuyenhang', $id_chuyenhang)
+                ->where('id_trangthai', 3)
+                ->first();
+            $lichsudonhangs->delete();
+
+            //Cập nhật thông tin hoàn lại cho Chuyến hàng
+            $chuyenhang = Chuyenhang::find($id_chuyenhang);
+            $chuyenhang->tongdonhang = $chuyenhang->tongdonhang - 1;
+            $chuyenhang->save();
+
+            //Cập nhật thông tin hoàn lại cho Chuyến hàng
+            $lichsuchuyenhang = Lichsuchuyenhang::where('id_chuyenhang', $id_chuyenhang)
+                ->where('id_trangthai', 3)
+                ->first();
+            $lichsuchuyenhang->tongdonhang = $lichsuchuyenhang->tongdonhang - 1;
+            $lichsuchuyenhang->save();            
+        }
+        return back();
+    }
+
+    public function hoanlainhapkho(Request $request)
     {
         //Tìm Chuyến hàng
         $chuyenhang = Chuyenhang::find($request->id_chuyenhang);
@@ -544,10 +592,10 @@ class DonhangController extends Controller
         }
 
         //Xóa sự kiện nhập kho cho từng Đơn hàng 
-        $donhangs = LichsuDonhang::where('id_chuyenhang', $request->id_chuyenhang)
+        $lichsudonhangs = LichsuDonhang::where('id_chuyenhang', $request->id_chuyenhang)
             ->where('id_trangthai', 2)
             ->get();
-        foreach ($donhangs as $i) {
+        foreach ($lichsudonhangs as $i) {
             $i->delete();
         }
 

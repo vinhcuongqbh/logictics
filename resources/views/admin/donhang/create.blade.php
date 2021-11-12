@@ -32,10 +32,28 @@
                     <form class="form-horizontal" action="{{ route('donhang.store') }}" method="post"
                         id="donhang-create">
                         @csrf
+                        {{-- Thông tin Hình thức gửi --}}
+                        <div class="row">
+                            <div class="col-sm-5" >  
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <label for="hinhthucgui" class="col-form-label">Vận tải</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select">
+                                            @foreach ($hinhthucgui as $i)                                                                               
+                                                <option value="{{ $i->id }}">{{ $i->tenhinhthucgui }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                         {{-- Thông tin Người gửi và Người nhận --}}
                         <div class="row justify-content-between">
                             {{-- Thông tin người nhận --}}
-                            <div class="col-sm-5">
+                            <div class="col-sm-5">                                
                                 <div style="text-align: center">
                                     <label for="nguoigui">THÔNG TIN NGƯỜI GỬI</label>
                                 </div>
@@ -45,7 +63,7 @@
                                     </div>
                                     <div class="col-6 col-md-7">
                                         <input type="tel" id="sodienthoainguoigui" name="sodienthoainguoigui"
-                                            placeholder="(+81)123-456-789" value="{{ old('sodienthoainguoigui') }}"
+                                            value="{{ old('sodienthoainguoigui') }}"
                                             class="form-control">
                                     </div>
                                     <div class="col-3 col-md-2">
@@ -92,7 +110,7 @@
                                     </div>
                                     <div class="col-6 col-md-7">
                                         <input type="tel" id="sodienthoainguoinhan" name="sodienthoainguoinhan"
-                                            placeholder="(+81)123-456-789" value="{{ old('sodienthoainguoinhan') }}"
+                                            value="{{ old('sodienthoainguoinhan') }}"
                                             class="form-control">
                                     </div>
                                     <div class="col-3 col-md-2">
