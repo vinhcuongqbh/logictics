@@ -413,9 +413,9 @@
                 <tr>
                     <td style="width: 30%; padding: 0px; text-align: center;"> 
                         @if ($donhang->id_hinhthucgui == 1)                       
-                            <h2>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h2>
-                        @else
-                            <h2>AIR - BAY <br> <i class="fas fa-plane"></i></h2>                            
+                            <h2>AIR - BAY <br> <i class="fas fa-plane"></i></h2> 
+                        @else                            
+                            <h2>SEA - BIỂN <br> <i class="fas fa-anchor"></i></h2>                           
                         @endif                        
                     </td>
                     <td style="width: 50%;"></td>
