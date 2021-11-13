@@ -48,9 +48,15 @@
                                 value="{{ $dongiatinhtheokhoiluong->khoiluongmax }}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="dongia">Đơn giá (VNĐ)</label>
-                            <input type="text" id="dongia" name="dongia"
-                                value="{{ number_format($dongiatinhtheokhoiluong->dongia, 0, '.', '.') }}"
+                            <label for="dongiaduongkhong">Đơn giá đường không (VNĐ)</label>
+                            <input type="text" id="dongiaduongkhong" name="dongiaduongkhong"
+                                value="{{ number_format($dongiatinhtheokhoiluong->dongiaduongkhong, 0, '.', '.') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="dongiaduongbien">Đơn giá đường biển (VNĐ)</label>
+                            <input type="text" id="dongiaduongbien" name="dongiaduongbien"
+                                value="{{ number_format($dongiatinhtheokhoiluong->dongiaduongbien, 0, '.', '.') }}"
                                 class="form-control">
                         </div>
                         <div class="form-group row justify-content-end">
@@ -91,7 +97,10 @@
                     required: true,
                     number: true,
                 },
-                dongia: {
+                dongiaduongkhong: {
+                    required: true,
+                },
+                dongiaduongbien: {
                     required: true,
                 },
             },
@@ -100,7 +109,10 @@
                     required: "Nhập Khối lượng lớn nhất tính theo Đơn giá này",
                     number: "Nhập kiểu số",
                 },
-                dongia: {
+                dongiaduongkhong: {
+                    required: "Nhập Đơn giá",
+                },
+                dongiaduongbien: {
                     required: "Nhập Đơn giá",
                 },
             },

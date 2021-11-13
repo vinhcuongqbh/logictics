@@ -15,7 +15,8 @@ class CreateDongiahangcongkenhsTable extends Migration
     {
         Schema::create('dongiahangcongkenhs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('dongia');
+            $table->bigInteger('dongiaduongbien');
+            $table->bigInteger('dongiaduongkhong');
             $table->timestamps();
         });
     }

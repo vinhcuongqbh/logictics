@@ -6,42 +6,44 @@ use Illuminate\Http\Request;
 use App\Models\Dongiatinhtheokhoiluong;
 
 class DongiatinhtheokhoiluongController extends Controller
-{        
+{
     public function index()    {
-        
+
         //Hiển thị danh sách đơn giá
-        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'asc')->get();      
+        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'asc')->get();
 
         return view('admin.dongia.tinhtheokhoiluong.index', ['dongiatinhtheokhoiluongs' => $dongiatinhtheokhoiluong]);
     }
-   
 
-   
+
+
     public function create()
-    {       
+    {
         return view('admin.dongia.tinhtheokhoiluong.create');
     }
 
-   
+
 
     public function store(Request $request)
-    {        
+    {
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'khoiluongmax' => 'required',
-            'dongia' => 'required',
+            'dongiaduongkhong' => 'required',
+            'dongiaduongbien' => 'required',
         ]);
 
         //Tạo Đơn giá mới
         $dongiatinhtheokhoiluong = new Dongiatinhtheokhoiluong();
         $dongiatinhtheokhoiluong->khoiluongmax = $request->khoiluongmax;
-        $dongiatinhtheokhoiluong->dongia = str_replace(".","", $request->dongia);      
+        $dongiatinhtheokhoiluong->dongiaduongkhong = str_replace(".","", $request->dongiaduongkhong);
+        $dongiatinhtheokhoiluong->dongiaduongbien = str_replace(".","", $request->dongiaduongbien);
         $dongiatinhtheokhoiluong->save();
 
         return redirect()->action([DongiatinhtheokhoiluongController::class, 'index']);
     }
 
-    
+
 
     // public function show($id)
     // {
@@ -54,38 +56,40 @@ class DongiatinhtheokhoiluongController extends Controller
     //     return view('admin.khohang.show', ['khohang' => $khohang]);
     // }
 
-    
+
 
     public function edit($id)
     {
-       
-        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::find($id);       
+
+        $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::find($id);
 
         return view('admin.dongia.tinhtheokhoiluong.edit', ['dongiatinhtheokhoiluong' => $dongiatinhtheokhoiluong]);
     }
 
-   
+
 
     public function update(Request $request, $id)
-    {        
+    {
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'khoiluongmax' => 'required',
-            'dongia' => 'required',
+            'dongiaduongkhong' => 'required',
+            'dongiaduongbien' => 'required',
         ]);
 
         //Cập nhật thông tin Kho hàng
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::find($id);
         $dongiatinhtheokhoiluong->khoiluongmax = $request->khoiluongmax;
-        $dongiatinhtheokhoiluong->dongia = str_replace(".","", $request->dongia);   
+        $dongiatinhtheokhoiluong->dongiaduongkhong = str_replace(".","", $request->dongiaduongkhong);
+        $dongiatinhtheokhoiluong->dongiaduongbien = str_replace(".","", $request->dongiaduongbien);
         $dongiatinhtheokhoiluong->save();
 
         return redirect()->action([DongiatinhtheokhoiluongController::class, 'index']);
     }
 
-   
+
     public function destroy($id)
-    {    
+    {
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::find($id);
         $dongiatinhtheokhoiluong->delete();
 

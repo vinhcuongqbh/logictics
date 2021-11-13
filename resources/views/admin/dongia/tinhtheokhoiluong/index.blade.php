@@ -39,7 +39,8 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Khối lượng max (kg)</th>
-                                <th>Đơn giá (VNĐ)</th>
+                                <th>Đơn giá đường không (VNĐ)</th>
+                                <th>Đơn giá đường biển (VNĐ)</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -50,7 +51,11 @@
                                     <td>{{ $dongiatinhtheokhoiluong->khoiluongmax }}
                                     </td>
                                     <td style="text-align: right">
-                                        {{ number_format($dongiatinhtheokhoiluong->dongia, 0, '.', '.') }}</td>
+                                        {{ number_format($dongiatinhtheokhoiluong->dongiaduongkhong, 0, '.', '.') }}
+                                    </td>
+                                    <td style="text-align: right">
+                                        {{ number_format($dongiatinhtheokhoiluong->dongiaduongbien, 0, '.', '.') }}
+                                    </td>
                                     <td style="text-align: center">
                                         <a href="{{ route('dongiatinhtheokhoiluong.edit', $dongiatinhtheokhoiluong->id) }}"
                                             style="padding: 3px">

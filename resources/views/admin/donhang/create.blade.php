@@ -34,14 +34,14 @@
                         @csrf
                         {{-- Thông tin Hình thức gửi --}}
                         <div class="row">
-                            <div class="col-sm-5" >  
+                            <div class="col-sm-5" >
                                 <div class="form-group row">
                                     <div class="col-3">
                                         <label for="hinhthucgui" class="col-form-label">Vận tải</label>
                                     </div>
                                     <div class="col-9">
                                         <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select">
-                                            @foreach ($hinhthucgui as $i)                                                                               
+                                            @foreach ($hinhthucgui as $i)
                                                 <option value="{{ $i->id }}">{{ $i->tenhinhthucgui }}</option>
                                             @endforeach
                                         </select>
@@ -53,7 +53,7 @@
                         {{-- Thông tin Người gửi và Người nhận --}}
                         <div class="row justify-content-between">
                             {{-- Thông tin người nhận --}}
-                            <div class="col-sm-5">                                
+                            <div class="col-sm-5">
                                 <div style="text-align: center">
                                     <label for="nguoigui">THÔNG TIN NGƯỜI GỬI</label>
                                 </div>
@@ -207,7 +207,7 @@
                     </form>
                 </div>
                 <!-- /.card-body -->
-                
+
             </div>
             <!-- /.card -->
         </div>
@@ -416,11 +416,11 @@
 {{-- Tìm thông tin Người gửi --}}
 <script>
     var khachhang = @json($khachhang);
-    $('#timKiemNguoiGui').on('click', function() {        
+    $('#timKiemNguoiGui').on('click', function() {
         var sodienthoaikhachhang = document.querySelector("#sodienthoainguoigui").value;
         if (sodienthoaikhachhang != null) {
             //var ketqua = khachhang.filter(e => e.sodienthoai.indexOf(sodienthoaikhachhang) > -1) || 0;
-            var ketqua = khachhang.find(e => e.sodienthoai == sodienthoaikhachhang) || 0;   
+            var ketqua = khachhang.find(e => e.sodienthoai == sodienthoaikhachhang) || 0;
             document.querySelector("#tennguoigui").value = ketqua.tenkhachhang || null;
             document.querySelector("#diachinguoigui").value = ketqua.diachi || null;
             document.querySelector("#emailnguoigui").value = ketqua.email || null;
@@ -428,13 +428,13 @@
     });
 </script>
 
-{{-- Tìm thông tin Người gửi --}}
+{{-- Tìm thông tin Người nhận --}}
 <script>
-    $('#timKiemNguoiNhan').on('click', function() {        
+    $('#timKiemNguoiNhan').on('click', function() {
         var sodienthoaikhachhang = document.querySelector("#sodienthoainguoinhan").value;
         if (sodienthoaikhachhang != null) {
             //var ketqua = khachhang.filter(e => e.sodienthoai.indexOf(sodienthoaikhachhang) > -1) || 0;
-            var ketqua = khachhang.find(e => e.sodienthoai == sodienthoaikhachhang) || 0;   
+            var ketqua = khachhang.find(e => e.sodienthoai == sodienthoaikhachhang) || 0;
             document.querySelector("#tennguoinhan").value = ketqua.tenkhachhang || null;
             document.querySelector("#diachinguoinhan").value = ketqua.diachi || null;
             document.querySelector("#emailnguoinhan").value = ketqua.email || null;
@@ -477,7 +477,7 @@
                     "next": "Sau",
                     "previous": "Trước"
                 },
-            },     
+            },
             "columns": [
                 {
                     "data": "stt",
@@ -572,8 +572,6 @@
         });
         //End: Thêm Row
 
-
-
         //Start: Sửa Row
         $('#editRow').on('click', function() {
             document.querySelector("#tenmathangEdit").value = donhangTable.row(rowIndex).data()
@@ -589,7 +587,6 @@
         });
         //End: Sửa Row
 
-
         //Start: Cập nhật Row
         $('#updateRow').on('click', function() {
             donhangTable.row(rowIndex).data({
@@ -604,15 +601,12 @@
         });
         //End: Cập nhật Row
 
-
         //Start: Xóa Row
         $('#deleteRow').click(function() {
             donhangTable.row('.selected').remove().draw(false);
             document.querySelector("#editRow").disabled = true;
             document.querySelector("#deleteRow").disabled = true;
         }); //End: Xóa row
-
-
 
         //Start: Tính chi chí
         var dongiatinhtheokhoiluong = @json($dongiatinhtheokhoiluong);
@@ -622,24 +616,49 @@
         var tinhChiPhi = function() {
             let soluong = document.querySelector("#soluong").value;
             let khoiluong = document.querySelector("#khoiluong").value;
-            document.querySelector("#chiphi").value = "";
 
-            if (soluong != 0 && khoiluong == "") {
-                let tenmathang = document.querySelector("#tenmathang").value;
-                let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                        tenmathang)?.dongia ||
-                    0);
-                document.querySelector("#chiphi").value = chiphi.toLocaleString();
-            }
+            let e = document.getElementById("hinhthucgui");
+            let hinhthucgui = e.options[e.selectedIndex].value;
+            if (hinhthucgui == 1) {
+                document.querySelector("#chiphi").value = "";
 
-            if (khoiluong != 0 && soluong == "") {
-                for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                    if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                        dongia = dongiatinhtheokhoiluong[i].dongia;
-                    }
+                if (soluong != 0 && khoiluong == "") {
+                    let tenmathang = document.querySelector("#tenmathang").value;
+                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                            tenmathang)?.dongiaduongkhong ||
+                        0);
+                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
                 }
-                let chiphi = khoiluong * parseInt(dongia || 0);
-                document.querySelector("#chiphi").value = chiphi.toLocaleString();
+
+                if (khoiluong != 0 && soluong == "") {
+                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                            dongia = dongiatinhtheokhoiluong[i].dongiaduongkhong;
+                        }
+                    }
+                    let chiphi = khoiluong * parseInt(dongia || 0);
+                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
+                }
+            } else if (hinhthucgui == 2) {
+                document.querySelector("#chiphi").value = "";
+
+                if (soluong != 0 && khoiluong == "") {
+                    let tenmathang = document.querySelector("#tenmathang").value;
+                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                            tenmathang)?.dongiaduongbien ||
+                        0);
+                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
+                }
+
+                if (khoiluong != 0 && soluong == "") {
+                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                            dongia = dongiatinhtheokhoiluong[i].dongiaduongbien;
+                        }
+                    }
+                    let chiphi = khoiluong * parseInt(dongia || 0);
+                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
+                }
             }
         }
 
@@ -648,30 +667,53 @@
         document.querySelector("#khoiluong").addEventListener('blur', tinhChiPhi);
         //End: Tính Chi Phí
 
-
-
         //Start: Tính Chi phí Edit
         var tinhChiPhiEdit = function() {
             let soluong = document.querySelector("#soluongEdit").value;
             let khoiluong = document.querySelector("#khoiluongEdit").value;
-            document.querySelector("#chiphiEdit").value = "";
 
-            if (soluong != 0 && khoiluong == "") {
-                let tenmathang = document.querySelector("#tenmathangEdit").value;
-                let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                        tenmathang)?.dongia ||
-                    0);
-                document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
-            }
+            let e = document.getElementById("hinhthucgui");
+            let hinhthucgui = e.options[e.selectedIndex].value;
+            if (hinhthucgui == 1) {
+                document.querySelector("#chiphiEdit").value = "";
 
-            if (khoiluong != 0 && soluong == "") {
-                for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                    if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                        dongia = dongiatinhtheokhoiluong[i].dongia;
-                    }
+                if (soluong != 0 && khoiluong == "") {
+                    let tenmathang = document.querySelector("#tenmathangEdit").value;
+                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                            tenmathang)?.dongiaduongkhong ||
+                        0);
+                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
                 }
-                let chiphi = khoiluong * parseInt(dongia || 0);
-                document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+
+                if (khoiluong != 0 && soluong == "") {
+                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                            dongia = dongiatinhtheokhoiluong[i].dongiaduongkhong;
+                        }
+                    }
+                    let chiphi = khoiluong * parseInt(dongia || 0);
+                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+                }
+            } else if (hinhthucgui == 2) {
+                document.querySelector("#chiphiEdit").value = "";
+
+                if (soluong != 0 && khoiluong == "") {
+                    let tenmathang = document.querySelector("#tenmathangEdit").value;
+                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                            tenmathang)?.dongiaduongbien ||
+                        0);
+                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+                }
+
+                if (khoiluong != 0 && soluong == "") {
+                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                            dongia = dongiatinhtheokhoiluong[i].dongiaduongbien;
+                        }
+                    }
+                    let chiphi = khoiluong * parseInt(dongia || 0);
+                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+                }
             }
         }
 
@@ -680,23 +722,17 @@
         document.querySelector("#khoiluongEdit").addEventListener('blur', tinhChiPhiEdit);
         //End: Tính Chi phí Edit
 
-
-
         //Start: Hàm tính tổng chi phí
         const tongchiphi = function() {
             document.querySelector("#tongchiphi").innerHTML = (donhangTable.column(6).data().sum()).toLocaleString();
         }
         //End: Hàm tính tổng chi phí
 
-
-
         //Start: Cập nhật lại Tổng Chi phí khi Table thay đổi
         donhangTable.on('draw', function() {
             tongchiphi();
         }).draw();
         //End: Cập nhật lại Tổng Chi phí khi Table thay đổi
-
-
 
         //Gán giá trị cho #chiTietDonHang, #chietkhau và #tongChiPhi2
         $('#submitForm').on('click', function() {
@@ -706,8 +742,6 @@
             document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
 
         });
-
-
 
         //Start: Hàm làm trống dữ liệu input
         const lamtrongdulieu = function() {

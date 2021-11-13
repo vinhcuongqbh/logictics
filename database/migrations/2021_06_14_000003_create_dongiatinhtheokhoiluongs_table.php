@@ -16,7 +16,8 @@ class CreateDongiatinhtheokhoiluongsTable extends Migration
         Schema::create('dongiatinhtheokhoiluongs', function (Blueprint $table) {
             $table->id();
             $table->integer('khoiluongmax');
-            $table->bigInteger('dongia');
+            $table->bigInteger('dongiaduongbien');
+            $table->bigInteger('dongiaduongkhong');
             $table->timestamps();
         });
     }

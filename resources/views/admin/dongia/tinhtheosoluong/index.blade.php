@@ -39,7 +39,8 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Tên Mặt hàng</th>
-                                <th>Đơn giá (VNĐ)</th>
+                                <th>Đơn giá đường không (VNĐ)</th>
+                                <th>Đơn giá đường biển (VNĐ)</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -50,7 +51,11 @@
                                     <td>{{ $dongiatinhtheosoluong->tenmathang }}
                                     </td>
                                     <td style="text-align: right">
-                                        {{ number_format($dongiatinhtheosoluong->dongia, 0, '.', '.') }}</td>
+                                        {{ number_format($dongiatinhtheosoluong->dongiaduongkhong, 0, '.', '.') }}
+                                    </td>
+                                    <td style="text-align: right">
+                                        {{ number_format($dongiatinhtheosoluong->dongiaduongbien, 0, '.', '.') }}
+                                    </td>
                                     <td style="text-align: center">
                                         <a href="{{ route('dongiatinhtheosoluong.edit', $dongiatinhtheosoluong->id) }}"
                                             style="padding: 3px">

@@ -17,11 +17,11 @@ class HinhthucguiSeeder extends Seeder
         DB::table('hinhthucguis')->insert([
             [
                 'id' => 1,
-                'tenhinhthucgui' => 'Đường biển',
+                'tenhinhthucgui' => 'Đường hàng không',
             ],
             [
                 'id' => 2,
-                'tenhinhthucgui' => 'Đường hàng không',
+                'tenhinhthucgui' => 'Đường biển',
             ],
         ]);
     }

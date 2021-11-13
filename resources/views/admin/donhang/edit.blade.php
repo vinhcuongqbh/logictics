@@ -34,12 +34,12 @@
                     <div class="card-body">
                         {{-- Thông tin Hình thức gửi --}}
                         <div class="row justify-content-between">
-                            <div class="col-sm-5">  
+                            <div class="col-sm-5">
                                 <div class="form-group row">
                                     <div class="col-3 col-xl-2">
                                         <label class="col-form-label">Vận tải</label>
                                     </div>
-                                    <div class="col-9 col-xl-9">                                        
+                                    <div class="col-9 col-xl-9">
                                         <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select">
                                             @foreach ($hinhthucgui as $hinhthucgui)
                                                 <option value="{{ $hinhthucgui->id }}" @if ($hinhthucgui->id == $donhang->id_hinhthucgui) {{ 'selected' }} @endif>{{ $hinhthucgui->tenhinhthucgui }}</option>
@@ -51,7 +51,7 @@
                         </div>
                         <hr>
                         {{-- Thông tin Người gửi và Người nhận --}}
-                        <div class="row">                            
+                        <div class="row">
                             {{-- Thông tin Người gửi --}}
                             <div class="col-sm-5">
                                 <div style="text-align: center">
@@ -670,24 +670,49 @@
             var tinhChiPhi = function() {
                 let soluong = document.querySelector("#soluong").value;
                 let khoiluong = document.querySelector("#khoiluong").value;
-                document.querySelector("#chiphi").value = "";
 
-                if (soluong != 0 && khoiluong == "") {
-                    let tenmathang = document.querySelector("#tenmathang").value;
-                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                            tenmathang)?.dongia ||
-                        0);
-                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
-                }
+                let e = document.getElementById("hinhthucgui");
+                let hinhthucgui = e.options[e.selectedIndex].value;
+                if (hinhthucgui == 1) {
+                    document.querySelector("#chiphi").value = "";
 
-                if (khoiluong != 0 && soluong == "") {
-                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                            dongia = dongiatinhtheokhoiluong[i].dongia;
-                        }
+                    if (soluong != 0 && khoiluong == "") {
+                        let tenmathang = document.querySelector("#tenmathang").value;
+                        let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                                tenmathang)?.dongiaduongkhong ||
+                            0);
+                        document.querySelector("#chiphi").value = chiphi.toLocaleString();
                     }
-                    let chiphi = khoiluong * parseInt(dongia || 0);
-                    document.querySelector("#chiphi").value = chiphi.toLocaleString();
+
+                    if (khoiluong != 0 && soluong == "") {
+                        for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                            if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                                dongia = dongiatinhtheokhoiluong[i].dongiaduongkhong;
+                            }
+                        }
+                        let chiphi = khoiluong * parseInt(dongia || 0);
+                        document.querySelector("#chiphi").value = chiphi.toLocaleString();
+                    }
+                } else if (hinhthucgui == 2) {
+                    document.querySelector("#chiphi").value = "";
+
+                    if (soluong != 0 && khoiluong == "") {
+                        let tenmathang = document.querySelector("#tenmathang").value;
+                        let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                                tenmathang)?.dongiaduongbien ||
+                            0);
+                        document.querySelector("#chiphi").value = chiphi.toLocaleString();
+                    }
+
+                    if (khoiluong != 0 && soluong == "") {
+                        for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                            if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                                dongia = dongiatinhtheokhoiluong[i].dongiaduongbien;
+                            }
+                        }
+                        let chiphi = khoiluong * parseInt(dongia || 0);
+                        document.querySelector("#chiphi").value = chiphi.toLocaleString();
+                    }
                 }
             }
 
@@ -702,24 +727,49 @@
             var tinhChiPhiEdit = function() {
                 let soluong = document.querySelector("#soluongEdit").value;
                 let khoiluong = document.querySelector("#khoiluongEdit").value;
-                document.querySelector("#chiphiEdit").value = "";
 
-                if (soluong != 0 && khoiluong == "") {
-                    let tenmathang = document.querySelector("#tenmathangEdit").value;
-                    let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
-                            tenmathang)?.dongia ||
-                        0);
-                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
-                }
+                let e = document.getElementById("hinhthucgui");
+                let hinhthucgui = e.options[e.selectedIndex].value;
+                if (hinhthucgui == 1) {
+                    document.querySelector("#chiphiEdit").value = "";
 
-                if (khoiluong != 0 && soluong == "") {
-                    for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
-                        if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
-                            dongia = dongiatinhtheokhoiluong[i].dongia;
-                        }
+                    if (soluong != 0 && khoiluong == "") {
+                        let tenmathang = document.querySelector("#tenmathangEdit").value;
+                        let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                                tenmathang)?.dongiaduongkhong ||
+                            0);
+                        document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
                     }
-                    let chiphi = khoiluong * parseInt(dongia || 0);
-                    document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+
+                    if (khoiluong != 0 && soluong == "") {
+                        for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                            if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                                dongia = dongiatinhtheokhoiluong[i].dongiaduongkhong;
+                            }
+                        }
+                        let chiphi = khoiluong * parseInt(dongia || 0);
+                        document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+                    }
+                } else if (hinhthucgui == 2) {
+                    document.querySelector("#chiphiEdit").value = "";
+
+                    if (soluong != 0 && khoiluong == "") {
+                        let tenmathang = document.querySelector("#tenmathangEdit").value;
+                        let chiphi = soluong * parseInt(dongiatinhtheosoluong.find(e => e.tenmathang ==
+                                tenmathang)?.dongiaduongbien ||
+                            0);
+                        document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+                    }
+
+                    if (khoiluong != 0 && soluong == "") {
+                        for (var i = 0; i < dongiatinhtheokhoiluong.length; i++) {
+                            if (khoiluong < dongiatinhtheokhoiluong[i].khoiluongmax) {
+                                dongia = dongiatinhtheokhoiluong[i].dongiaduongbien;
+                            }
+                        }
+                        let chiphi = khoiluong * parseInt(dongia || 0);
+                        document.querySelector("#chiphiEdit").value = chiphi.toLocaleString();
+                    }
                 }
             }
 
@@ -790,7 +840,7 @@
                     "next": "Sau",
                     "previous": "Trước"
                 },
-            },     
+            },
             "order": [
                 [0, 'desc']
             ],

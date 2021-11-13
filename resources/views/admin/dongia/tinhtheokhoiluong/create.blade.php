@@ -46,8 +46,13 @@
                                 value="{{ old('khoiluongmax') }}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="dongia">Đơn giá (VNĐ)</label>
-                            <input type="number" id="dongia" name="dongia" value="{{ old('dongia') }}"
+                            <label for="dongiaduongkhong">Đơn giá đường không (VNĐ)</label>
+                            <input type="number" id="dongiaduongkhong" name="dongiaduongkhong" value="{{ old('dongiaduongkhong') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="dongiaduongbien">Đơn giá đường biển (VNĐ)</label>
+                            <input type="number" id="dongiaduongbien" name="dongiaduongbien" value="{{ old('dongiaduongbien') }}"
                                 class="form-control">
                         </div>
                         <div class="form-group row justify-content-end">
@@ -89,7 +94,11 @@
                     required: true,
                     number: true,
                 },
-                dongia: {
+                dongiaduongkhong: {
+                    required: true,
+                    number: true,
+                },
+                dongiaduongbien: {
                     required: true,
                     number: true,
                 },
@@ -99,7 +108,11 @@
                     required: "Nhập Khối lượng lớn nhất tính theo Đơn giá này",
                     number: "Nhập kiểu số",
                 },
-                dongia: {
+                dongiaduongkhong: {
+                    required: "Nhập Đơn giá",
+                    number: "Nhập kiểu số",
+                },
+                dongiaduongbien: {
                     required: "Nhập Đơn giá",
                     number: "Nhập kiểu số",
                 },

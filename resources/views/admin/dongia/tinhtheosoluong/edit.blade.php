@@ -48,9 +48,15 @@
                                 value="{{ $dongiatinhtheosoluong->tenmathang }}" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="dongia">Đơn giá (VNĐ)</label>
-                            <input type="text" id="dongia" name="dongia"
-                                value="{{ number_format($dongiatinhtheosoluong->dongia, 0, '.', '.') }}"
+                            <label for="dongiaduongkhong">Đơn giá đường không (VNĐ)</label>
+                            <input type="text" id="dongiaduongkhong" name="dongiaduongkhong"
+                                value="{{ number_format($dongiatinhtheosoluong->dongiaduongkhong, 0, '.', '.') }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="dongiaduongbien">Đơn giá đường biển (VNĐ)</label>
+                            <input type="text" id="dongiaduongbien" name="dongiaduongbien"
+                                value="{{ number_format($dongiatinhtheosoluong->dongiaduongbien, 0, '.', '.') }}"
                                 class="form-control">
                         </div>
                         <div class="form-group row justify-content-end">
@@ -90,7 +96,10 @@
                 tenmathang: {
                     required: true,
                 },
-                dongia: {
+                dongiaduongkhong: {
+                    required: true,
+                },
+                dongiaduongbien: {
                     required: true,
                 },
             },
@@ -98,7 +107,10 @@
                 tenmathang: {
                     required: "Nhập Tên mặt hàng",
                 },
-                dongia: {
+                dongiaduongkhong: {
+                    required: "Nhập Đơn giá",
+                },
+                dongiaduongbien: {
                     required: "Nhập Đơn giá",
                 },
             },

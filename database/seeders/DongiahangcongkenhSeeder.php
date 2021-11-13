@@ -17,9 +17,10 @@ class DongiahangcongkenhSeeder extends Seeder
     {
         {
             DB::table('dongiahangcongkenhs')->insert([
-                [                    
-                    'dongia' => 50000,                   
-                ],               
+                [
+                    'dongiaduongkhong' => 50000,
+                    'dongiaduongbien' => 40000,
+                ],
             ]);
         }
     }
