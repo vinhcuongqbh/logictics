@@ -486,6 +486,9 @@
             - Khi đã đồng ý nhận hàng, bên vận chuyển sẽ không chấp nhận đền bù và khiếu nại phát sinh sau này.
             </h5>
         </div>
+        <div style="text-align: center">
+            <h5><i>Truy cập vào <b>https://etrack.jp</b> để tra cứu mã vận đơn.</i></h5>
+        </div>
     </div>
 </div>
 <!-- /.container-fluid -->

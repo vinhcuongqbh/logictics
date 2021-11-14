@@ -54,7 +54,8 @@
                                 <th>Cấp bậc</th>
                                 <th>Chiết khấu (%)</th>
                                 <th data-priority="3">Kho quản lý</th>
-                                <th data-priority="4">Thao tác</th>
+                                <th data-priority="4">Trạng thái</th>
+                                <th data-priority="5">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,6 +78,13 @@
                                     </td>
                                     <td><a
                                             href="{{ route('nhanvien.show', $nhanvien->id) }}">{{ $nhanvien->tenkhohang }}</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('nhanvien.show', $nhanvien->id) }}">
+                                            @if ($nhanvien->id_trangthai == 1) Đang hoạt động
+                                            @elseif ($nhanvien->id_trangthai == 0) Đang khóa
+                                            @endif
+                                        </a>
                                     </td>
                                     <td style="text-align: center">
                                         <a href="{{ route('nhanvien.edit', $nhanvien->id) }}" style="padding: 3px">
