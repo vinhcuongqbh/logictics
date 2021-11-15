@@ -80,7 +80,7 @@
                                 <input type="email" id="email" name="email" value="{{ $nhanvien->email }}"
                                     class="form-control" disabled>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="form-group row">
                             <div class="col-sm-3">
                                 <label for="diachi">Địa chỉ</label>
