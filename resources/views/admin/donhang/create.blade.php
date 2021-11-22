@@ -26,7 +26,7 @@
         <div class="col-sm-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm mới Đơn hàng</h3>
+                    <h3 class="card-title">Tạo Đơn hàng</h3>
                 </div>
                 <div class="card-body">
                     <form class="form-horizontal" action="{{ route('donhang.store') }}" method="post"
@@ -198,7 +198,7 @@
                             </div>
                             <div class="form-group justify-content-end">
                                 <button type="submit" id="submitForm" class="btn btn-primary float-right">TẠO
-                                    MỚI</button>
+                                    ĐƠN</button>
                             </div>
                         </div>
                         <input type="hidden" id="tongchiphi2" name="tongchiphi2">

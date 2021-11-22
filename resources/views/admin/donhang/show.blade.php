@@ -487,7 +487,7 @@
             </h5>
         </div>
         <div style="text-align: center">
-            <h5><i>Truy cập vào <b>https://etrack.jp</b> để tra cứu mã vận đơn.</i></h5>
+            <h5>Truy cập vào <b>https://etrack.jp</b> để tra cứu mã vận đơn.</h5>
         </div>
     </div>
 </div>

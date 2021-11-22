@@ -30,8 +30,7 @@
                         <div class="row">
                             <div class="col-auto">
                                 <a href="{{ route('donhang.create') }}"><button type="button"
-                                        class="btn btn-primary">THÊM
-                                        MỚI</button></a>
+                                        class="btn btn-primary">TẠO ĐƠN</button></a>
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-outline-success">XUẤT KHO</button>
