@@ -226,9 +226,9 @@ return [
 
     'menu' => [        
         [           
-            'text'        => 'Thêm mới',
+            'text'        => 'TẠO ĐƠN',
             'url'         => 'admin/donhang/create',
-            'icon'    => 'fas fa-fw fa-shopping-cart',
+            'icon'    => 'fas fa-plus-circle',
             'topnav_right' => true,
         ],
         [
