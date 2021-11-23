@@ -14,7 +14,8 @@ class UpdateDonhangsTable extends Migration
     public function up()
     {
         Schema::table('donhangs', function (Blueprint $table) {            
-            $table->string('diachinguoigui')->nullable()->change();;
+            $table->string('diachinguoigui')->nullable()->change();
+            $table->integer('tongkhoiluong')->nullable()->change();
         });
     }
 

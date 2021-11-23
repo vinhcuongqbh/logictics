@@ -142,7 +142,7 @@
                             <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
                                 <div>
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->id }}
+                                    {{ $donhang->matracuu }}
                                 </div>
                             </div>
                         </div>
@@ -210,6 +210,10 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                        </div>
+                        <div id="tongkhoiluong" class="form-group">
+                            <label for="tongkhoiluong">Tổng khối lượng đơn hàng (kg)</label>
+                            <input type="number" id="tongkhoiluong" name="tongkhoiluong" value="{{ $donhang->tongkhoiluong }}" class="form-control">
                         </div>
                         <div id="ghichu" class="form-group">
                             <label for="ghichu">Ghi chú</label>
@@ -408,8 +412,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label for="khoiluongEdit" class="col-form-label">Khối lượng
-                            (kg)</label>
+                        <label for="khoiluongEdit" class="col-form-label">Khối lượng (kg)</label>
                     </div>
                     <div class="col-8">
                         <input type="number" id="khoiluongEdit" class="form-control">
@@ -426,9 +429,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label for="giatriuoctinhEdit" class="col-form-label">Giá trị
-                            ước
-                            tính (VNĐ)</label>
+                        <label for="giatriuoctinhEdit" class="col-form-label">Giá trị ước tính (VNĐ)</label>
                     </div>
                     <div class="col-8">
                         <input type="text" id="giatriuoctinhEdit" class="form-control">
@@ -436,8 +437,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label for="chiphiEdit" class="col-form-label">Chi phí
-                            (VNĐ)</label>
+                        <label for="chiphiEdit" class="col-form-label">Chi phí (VNĐ)</label>
                     </div>
                     <div class="col-8">
                         <input type="text" id="chiphiEdit" class="form-control">

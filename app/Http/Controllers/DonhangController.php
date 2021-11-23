@@ -85,7 +85,7 @@ class DonhangController extends Controller
 
         //Tạo đơn hàng mới
         $donhang = new Donhang;
-        $donhang->id_tracuudonhang = strtoupper(uniqid());
+        $donhang->matracuu = strtoupper(uniqid());
         $donhang->id_nhanvienkhoitao = Auth::id();
         $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_khogui = $id_khohangquanly;
@@ -101,6 +101,7 @@ class DonhangController extends Controller
         $donhang->sodienthoainguoinhan = $request->sodienthoainguoinhan;
         $donhang->diachinguoinhan = $request->diachinguoinhan;
         $donhang->emailnguoinhan = $request->emailnguoinhan;
+        $donhang->tongkhoiluong = $request->tongkhoiluong;
         $donhang->ghichu = $request->ghichu;
         $donhang->save();
 
@@ -157,7 +158,7 @@ class DonhangController extends Controller
             ->first();         
 
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "ETRACK" . $donhang->id;
+        $qrcode = "ETRACK" . $donhang->matracuu;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -196,7 +197,7 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "ETRACK" . $donhang->id;
+        $qrcode = "ETRACK" . $donhang->matracuu;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -269,6 +270,7 @@ class DonhangController extends Controller
         $donhang->emailnguoinhan = $request->emailnguoinhan;
         $donhang->tongchiphi = $request->tongchiphi2;
         $donhang->chietkhau = $request->chietkhau;
+        $donhang->tongkhoiluong = $request->tongkhoiluong;
         $donhang->ghichu = $request->ghichu;
         $donhang->id_hinhthucgui = $request->hinhthucgui;
         $donhang->save();

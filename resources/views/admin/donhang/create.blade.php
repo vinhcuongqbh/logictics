@@ -192,6 +192,10 @@
                                     </tfoot>
                                 </table>
                             </div>
+                            <div id="tongkhoiluong" class="form-group">
+                                <label for="tongkhoiluong">Tổng khối lượng đơn hàng (kg)</label>
+                                <input type="number" id="tongkhoiluong" name="tongkhoiluong" value="{{ old('tongkhoiluong') }}" class="form-control">
+                            </div>
                             <div id="ghichu" class="form-group">
                                 <label for="ghichu">Ghi chú</label>
                                 <input type="text" id="ghichu" name="ghichu" value="{{ old('ghichu') }}" class="form-control">
@@ -781,7 +785,11 @@
                 tongchiphi: {
                     required: true,
                     min: 1,
+                },
+                tongkhoiluong: {
+                    required: true,
                 }
+
             },
             messages: {
                 sodienthoainguoigui: {
@@ -803,6 +811,9 @@
                 },
                 tongchiphi: {
                     required: "Nhập Mặt hàng",
+                },
+                tongkhoiluong: {
+                    required: "Nhập Tổng khối lượng đơn hàng",
                 }
             },
             errorElement: 'span',

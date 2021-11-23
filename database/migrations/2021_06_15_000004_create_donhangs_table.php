@@ -15,7 +15,7 @@ class CreateDonhangsTable extends Migration
     {
         Schema::create('donhangs', function (Blueprint $table) {
             $table->id();           
-            $table->string('id_tracuudonhang')->unique();
+            $table->string('matracuu')->unique();
             $table->foreignId('id_nhanvienkhoitao');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_khogui')->nullable();
@@ -33,7 +33,8 @@ class CreateDonhangsTable extends Migration
             $table->string('emailnguoinhan')->nullable();
             $table->bigInteger('tongchiphi');
             $table->bigInteger('chietkhau');
-            $table->text('ghichu')->nullable();            
+            $table->text('ghichu')->nullable();     
+            $table->integer('tongkhoiluong')->nullable(); 
             $table->timestamps();
         });
     }

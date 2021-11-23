@@ -16,24 +16,24 @@ class dongiatinhtheokhoiluongSeeder extends Seeder
     {
         DB::table('dongiatinhtheokhoiluongs')->insert([
             [
-                'khoiluongmax' => 11,
-                'dongiaduongkhong' => 215000,
-                'dongiaduongbien' => 185000,
+                'khoiluongmax' => 10,
+                'dongiaduongkhong' => 204000,
+                'dongiaduongbien' => 0,
             ],
             [
-                'khoiluongmax' => 31,
-                'dongiaduongkhong' => 210000,
-                'dongiaduongbien' => 180000,
-            ],
-            [
-                'khoiluongmax' => 61,
-                'dongiaduongkhong' => 200000,
-                'dongiaduongbien' => 170000,
+                'khoiluongmax' => 50,
+                'dongiaduongkhong' => 199000,
+                'dongiaduongbien' => 116000,
             ],
             [
                 'khoiluongmax' => 500,
-                'dongiaduongkhong' => 195000,
-                'dongiaduongbien' => 165000,
+                'dongiaduongkhong' => 189000,
+                'dongiaduongbien' => 104000,
+            ],
+            [
+                'khoiluongmax' => 9999,
+                'dongiaduongkhong' => 0,
+                'dongiaduongbien' => 0,
             ],
         ]);
     }

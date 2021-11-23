@@ -16,8 +16,8 @@ class CreateThongtincongtysTable extends Migration
         Schema::create('thongtincongtys', function (Blueprint $table) {
             $table->id();
             $table->string('tencongty');
-            $table->string('sodienthoai');
-            $table->string('diachi');
+            $table->string('sodienthoai')->nullable();
+            $table->string('diachi')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->timestamps();

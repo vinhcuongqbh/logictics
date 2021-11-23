@@ -139,7 +139,7 @@
                             <div class="row">
                                 <div class="col" id="qrcode">
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->id }}
+                                    {{ $donhang->matracuu }}
                                 </div>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="col" id="qrcode">
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->id }}
+                                    {{ $donhang->matracuu }}
                                 </div>
                                 <div class="col-8" id="thongtincongty" style="text-align: left">
                                     <h4><b>{{ $thongtincongty->tencongty }}</b></h4>
@@ -323,6 +323,10 @@
                             </tfoot>
                         </table>
                     </div>
+                    <div id="tongkhoiluong" class="form-group">
+                        <label for="tongkhoiluong">Tổng khối lượng đơn hàng (kg)</label>
+                        <input type="number" id="tongkhoiluong" name="tongkhoiluong" value="{{ $donhang->tongkhoiluong }}" class="form-control" disabled>
+                    </div>
                     <div id="ghichu" class="form-group">
                         <label for="ghichu">Ghi chú</label>
                         <input type="text" id="ghichu" name="ghichu" value="" class="form-control" disabled>
@@ -419,7 +423,7 @@
                         @endif                        
                     </td>
                     <td style="width: 50%;"></td>
-                    <td style="width: 20%; padding: 0px; text-align: center; vertical-align: middle;">{!! QrCode::encoding('UTF-8')->generate($qrcode); !!} <br> {{ $donhang->id }} </td>
+                    <td style="width: 20%; padding: 0px; text-align: center; vertical-align: middle;">{!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br><h6>{{ $donhang->matracuu }}</h6></td>
                 </tr>
             </table>
         </div>
@@ -440,11 +444,11 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="width: 30%;">Mã Tracking</td>
-                    <td>{{ $donhang->id }}</td>
+                    <td>{{ $donhang->matracuu }}</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="width: 30%;">Cân nặng</td>
-                    <td></td>
+                    <td>{{ $donhang->tongkhoiluong }} kg</td>
                 </tr>
                 <tr>
                     <td colspan="2" style="width: 30%;">Nội dung hàng hóa</td>
