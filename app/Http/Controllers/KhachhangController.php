@@ -53,7 +53,6 @@ class KhachhangController extends Controller
         $validated = $request->validate([
             'tenkhachhang' => 'required',
             'sodienthoai' => 'required|unique:App\Models\Khachhang,sodienthoai',
-            'diachi' => 'required',
         ]);
 
         //Tạo Khách hàng mới
@@ -111,7 +110,6 @@ class KhachhangController extends Controller
         $validated = $request->validate([
             'tenkhachhang' => 'required',
             'sodienthoai' => 'required',
-            'diachi' => 'required',
         ]);
 
         //Cập nhật thông tin Khách hàng

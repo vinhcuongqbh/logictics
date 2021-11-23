@@ -17,8 +17,8 @@ class CreateKhachhangsTable extends Migration
             $table->id();
             $table->string('tenkhachhang');
             $table->foreignId('id_loaikhachhang');
-            $table->string('sodienthoai')/*->unique()*/;
-            $table->string('diachi');
+            $table->string('sodienthoai');
+            $table->string('diachi')->nullable();
             $table->string('email')->nullable();
             $table->string('lienhekhac')->nullable();
             $table->foreignId('id_nhanvienquanly');

@@ -68,7 +68,7 @@
                                 <label for="sodienthoai">Số điện thoại</label>
                             </div>
                             <div class="col-sm-9">
-                                <input type="tel" id="sodienthoai" name="sodienthoai" placeholder="(+81)123-456-789"
+                                <input type="tel" id="sodienthoai" name="sodienthoai"
                                     value="{{ $nhanvien->sodienthoai }}" class="form-control">
                             </div>
                         </div>
@@ -199,7 +199,7 @@
             errorElement: 'span',
             errorPlacement: function(error, element) {
                 error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
+                element.closest('.col-sm-9').append(error);
 
             },
             highlight: function(element, errorClass, validClass) {

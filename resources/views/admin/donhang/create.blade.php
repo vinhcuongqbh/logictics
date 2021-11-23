@@ -737,10 +737,9 @@
         //Gán giá trị cho #chiTietDonHang, #chietkhau và #tongChiPhi2
         $('#submitForm').on('click', function() {
             var tilechietkhau = @json($tilechietkhau);
-            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
-            document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100;
             document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
-
+            document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
+            document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100;  
         });
 
         //Start: Hàm làm trống dữ liệu input
@@ -769,9 +768,6 @@
                 tennguoigui: {
                     required: true,
                 },
-                diachinguoigui: {
-                    required: true,
-                },
                 sodienthoainguoinhan: {
                     required: true,
                     number: true,
@@ -794,9 +790,6 @@
                 },
                 tennguoigui: {
                     required: "Nhập Họ tên của Người gửi",
-                },
-                diachinguoigui: {
-                    required: "Nhập Địa chỉ của Người gửi",
                 },
                 sodienthoainguoinhan: {
                     required: "Nhập Số điện thoại của Người nhận",

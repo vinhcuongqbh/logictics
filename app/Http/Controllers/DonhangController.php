@@ -85,6 +85,7 @@ class DonhangController extends Controller
 
         //Tạo đơn hàng mới
         $donhang = new Donhang;
+        $donhang->id_tracuudonhang = strtoupper(uniqid());
         $donhang->id_nhanvienkhoitao = Auth::id();
         $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_khogui = $id_khohangquanly;
@@ -188,6 +189,7 @@ class DonhangController extends Controller
     {
         $donhang = Donhang::find($id);
         $hinhthucgui = Hinhthucgui::all();
+        $tilechietkhau = Auth::user()->tilechietkhau;
 
         //Hiển thị thông tin Đơn hàng
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
@@ -218,6 +220,7 @@ class DonhangController extends Controller
                 'chitietdonhangs' => $chitietdonhang,
                 'lichsudonhangs' => $lichsudonhang,
                 'qrcode' => $qrcode,
+                'tilechietkhau' => $tilechietkhau,
                 'hinhthucgui' => $hinhthucgui,
             ]
         );
@@ -265,6 +268,7 @@ class DonhangController extends Controller
         $donhang->diachinguoinhan = $request->diachinguoinhan;
         $donhang->emailnguoinhan = $request->emailnguoinhan;
         $donhang->tongchiphi = $request->tongchiphi2;
+        $donhang->chietkhau = $request->chietkhau;
         $donhang->ghichu = $request->ghichu;
         $donhang->id_hinhthucgui = $request->hinhthucgui;
         $donhang->save();

@@ -14,7 +14,8 @@ class CreateDonhangsTable extends Migration
     public function up()
     {
         Schema::create('donhangs', function (Blueprint $table) {
-            $table->id();            
+            $table->id();           
+            $table->string('id_tracuudonhang')->unique();
             $table->foreignId('id_nhanvienkhoitao');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_khogui')->nullable();
@@ -24,7 +25,7 @@ class CreateDonhangsTable extends Migration
             $table->foreignId('id_hinhthucgui');
             $table->string('tennguoigui');
             $table->string('sodienthoainguoigui');
-            $table->string('diachinguoigui');
+            $table->string('diachinguoigui')->nullable();
             $table->string('emailnguoigui')->nullable();
             $table->string('tennguoinhan');
             $table->string('sodienthoainguoinhan');

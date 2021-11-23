@@ -229,6 +229,7 @@ return [
             'text'        => 'TẠO ĐƠN',
             'url'         => 'admin/donhang/create',
             'icon'    => 'fas fa-plus-circle',
+            'icon_color' => 'success',
             'topnav_right' => true,
         ],
         [

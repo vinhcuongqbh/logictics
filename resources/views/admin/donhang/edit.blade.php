@@ -220,8 +220,9 @@
                         </div>
                     </div>
                     <!-- /.card-body -->
-                    <input type="hidden" id="tongchiphi2" name="tongchiphi2">
                     <input type="hidden" id="chiTietDonHang" name="chiTietDonHang">
+                    <input type="hidden" id="tongchiphi2" name="tongchiphi2">
+                    <input type="hidden" id="chietkhau" name="chietkhau">                    
                     <input type="hidden" id="sodienthoainguoiguicu" name="sodienthoainguoiguicu" value="{{ $donhang->sodienthoainguoigui }}">
                     <input type="hidden" id="sodienthoainguoinhancu" name="sodienthoainguoinhancu" value="{{ $donhang->sodienthoainguoinhan }}">
                 </form>
@@ -795,9 +796,11 @@
             //End: Cập nhật lại Tổng Chi phí khi Table thay đổi
 
 
-            //Gán giá trị cho #chiTietDonHang và #tongChiPhi2
+            //Gán giá trị cho #chiTietDonHang, #chietkhau và #tongChiPhi2
             $('#submitForm').on('click', function() {
+                var tilechietkhau = @json($tilechietkhau);
                 document.querySelector("#chiTietDonHang").value = JSON.stringify(donhangTable.data().toArray());
+                document.querySelector("#chietkhau").value = donhangTable.column(6).data().sum()*tilechietkhau/100;
                 document.querySelector("#tongchiphi2").value = donhangTable.column(6).data().sum();
             });
 
@@ -871,9 +874,6 @@
                     tennguoigui: {
                         required: true,
                     },
-                    diachinguoigui: {
-                        required: true,
-                    },
                     sodienthoainguoinhan: {
                         required: true,
                         number: true,
@@ -892,9 +892,6 @@
                     },
                     tennguoigui: {
                         required: "Nhập Họ tên của Người gửi",
-                    },
-                    diachinguoigui: {
-                        required: "Nhập Địa chỉ của Người gửi",
                     },
                     sodienthoainguoinhan: {
                         required: "Nhập Số điện thoại của Người nhận",
