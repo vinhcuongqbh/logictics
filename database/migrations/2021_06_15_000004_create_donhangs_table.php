@@ -34,7 +34,7 @@ class CreateDonhangsTable extends Migration
             $table->bigInteger('tongchiphi');
             $table->bigInteger('chietkhau');
             $table->text('ghichu')->nullable();     
-            $table->integer('tongkhoiluong')->nullable(); 
+            $table->float('tongkhoiluong', 8, 2)->nullable(); 
             $table->timestamps();
         });
     }

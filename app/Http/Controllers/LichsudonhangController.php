@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 class LichsudonhangController extends Controller
 {
     //Lưu sự kiện của đơn hàng
-    public function luusukien($id_donhang, $id_nhanvienquanly, $id_chuyenhang, $id_khogui, $id_khonhan, $id_trangthai, $ghichu)
+    public function luusukien($id_donhang, $matracuu, $id_nhanvienquanly, $id_chuyenhang, $id_khogui, $id_khonhan, $id_trangthai, $ghichu)
     {
         $lichsudonhang = new Lichsudonhang;
         $lichsudonhang->id_donhang = $id_donhang;
+        $lichsudonhang->matracuu = $matracuu;
         $lichsudonhang->id_nhanvienquanly = $id_nhanvienquanly;
         $lichsudonhang->id_chuyenhang = $id_chuyenhang;
         $lichsudonhang->id_khogui = $id_khogui;

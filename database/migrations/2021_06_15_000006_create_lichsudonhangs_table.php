@@ -16,6 +16,7 @@ class CreateLichsudonhangsTable extends Migration
         Schema::create('lichsudonhangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_donhang');
+            $table->string('matracuu');
             $table->foreignId('id_nhanvienquanly');
             $table->foreignId('id_chuyenhang')->nullable();
             $table->foreignId('id_khogui');

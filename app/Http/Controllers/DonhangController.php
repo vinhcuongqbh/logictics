@@ -123,6 +123,7 @@ class DonhangController extends Controller
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
             $donhang->id,
+            $donhang->matracuu,
             $donhang->id_nhanvienquanly,
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
@@ -138,6 +139,7 @@ class DonhangController extends Controller
         //Lưu sự kiện "Nhập kho" cho Đơn hàng
         $lichsudonhangController->luusukien(
             $donhang->id,
+            $donhang->matracuu,
             $donhang->id_nhanvienquanly,
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
@@ -279,6 +281,7 @@ class DonhangController extends Controller
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
             $donhang->id,
+            $donhang->matracuu,
             $donhang->id_nhanvienquanly,
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
@@ -334,6 +337,7 @@ class DonhangController extends Controller
                         $lichsudonhangController = new LichsudonhangController;
                         $lichsudonhangController->luusukien(
                             $donhang->id,
+                            $donhang->matracuu,
                             $donhang->id_nhanvienquanly,
                             $donhang->id_chuyenhang,
                             $donhang->id_khogui,
@@ -398,6 +402,7 @@ class DonhangController extends Controller
                     $lichsudonhangController = new LichsudonhangController;
                     $lichsudonhangController->luusukien(
                         $donhang->id,
+                        $donhang->matracuu,
                         $donhang->id_nhanvienquanly,
                         $donhang->id_chuyenhang,
                         $donhang->id_khogui,
@@ -456,6 +461,7 @@ class DonhangController extends Controller
                 $lichsudonhangController = new LichsudonhangController;
                 $lichsudonhangController->luusukien(
                     $donhang->id,
+                    $donhang->matracuu,
                     $donhang->id_nhanvienquanly,
                     $donhang->id_chuyenhang,
                     $donhang->id_khogui,
@@ -512,6 +518,7 @@ class DonhangController extends Controller
             $lichsudonhangController = new LichsudonhangController;
             $lichsudonhangController->luusukien(
                 $donhang->id,
+                $donhang->matracuu,
                 $donhang->id_nhanvienquanly,
                 $donhang->id_chuyenhang,
                 $donhang->id_khogui,
@@ -690,6 +697,7 @@ class DonhangController extends Controller
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
             $donhang->id,
+            $donhang->matracuu,
             $donhang->id_nhanvienquanly,
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
@@ -718,6 +726,7 @@ class DonhangController extends Controller
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
             $donhang->id,
+            $donhang->matracuu,
             Auth::id(),
             $donhang->id_chuyenhang,
             $donhang->id_khogui,
@@ -743,6 +752,7 @@ class DonhangController extends Controller
         $lichsudonhangController = new LichsudonhangController;
         $lichsudonhangController->luusukien(
             $donhang->id,
+            $donhang->matracuu,
             $donhang->id_nhanvienquanly,
             $donhang->id_chuyenhang,
             $donhang->id_khogui,

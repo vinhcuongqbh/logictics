@@ -194,7 +194,7 @@
                             </div>
                             <div id="tongkhoiluong" class="form-group">
                                 <label for="tongkhoiluong">Tổng khối lượng đơn hàng (kg)</label>
-                                <input type="number" id="tongkhoiluong" name="tongkhoiluong" value="{{ old('tongkhoiluong') }}" class="form-control">
+                                <input type="number" step="0.01" id="tongkhoiluong" name="tongkhoiluong" value="{{ old('tongkhoiluong') }}" class="form-control">
                             </div>
                             <div id="ghichu" class="form-group">
                                 <label for="ghichu">Ghi chú</label>
