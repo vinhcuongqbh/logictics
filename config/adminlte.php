@@ -231,6 +231,7 @@ return [
             'icon'    => 'fas fa-plus-circle',
             'icon_color' => 'success',
             'topnav_right' => true,
+            'can'         => 'donhang',
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -324,7 +325,13 @@ return [
                 ],               
             ],
         ],
-        ['header' => 'THỐNG KÊ'],        
+        ['header' => 'THỐNG KÊ'],    
+        [
+            'text'        => 'Tổng hợp',
+            'url'         => 'admin/thongke/thongketonghop',
+            'icon' => 'fas fa-fw fa-angle-right',
+            'can'         => 'thongke-tonghop',
+        ],    
         [
             'text'        => 'Đơn hàng',
             'url'         => 'admin/thongke/thongkedonhang',

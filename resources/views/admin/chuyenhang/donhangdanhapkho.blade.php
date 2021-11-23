@@ -55,7 +55,7 @@
                                 @foreach ($donhangs as $donhang)
                                 <tr>
                                     <td style="text-align: center"><a
-                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->id }}</a>
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->matracuu }}</a>
                                     </td>
                                     <td><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>

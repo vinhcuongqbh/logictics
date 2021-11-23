@@ -778,7 +778,7 @@ class DonhangController extends Controller
     public function ketquatracuu(Request $request)
     {
         if (Auth::user()->id_loainhanvien <= 2) {
-            $donhang = Donhang::where('id', $request->thongtintimkiem)
+            $donhang = Donhang::where('matracuu', $request->thongtintimkiem)
                 ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
                 ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
                 ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
@@ -789,7 +789,7 @@ class DonhangController extends Controller
                 ->get();
         } elseif (Auth::user()->id_loainhanvien > 2) {
             $donhang = Donhang::where('id_nhanvienkhoitao', Auth::id())
-                ->where('id', $request->thongtintimkiem)
+                ->where('matracuu', $request->thongtintimkiem)
                 ->orwhere('tennguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
                 ->orwhere('sodienthoainguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
                 ->orwhere('emailnguoigui', 'LIKE', "%{$request->thongtintimkiem}%")
