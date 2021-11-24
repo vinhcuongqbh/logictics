@@ -4,10 +4,10 @@
 
 @section('content_header')
 <div class="container-fluid">
-    <form action="{{ route('thongke.thongKeLoiNhuanDashBoard') }}" method="get">
+    <form action="{{ route('thongke.thongKeChietKhauDashBoard') }}" method="get">
       <div class="row mb-2">
         <div class="col-md-6">
-          <h1>THỐNG KÊ LỢI NHUẬN</h1>
+          <h1>THỐNG KÊ CHIẾT KHẤU</h1>
         </div>
         @if (Auth::user()->id_loainhanvien == 1)
         <div class="col-lg-3 col-6">
@@ -43,9 +43,9 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3 style="display: inline;">{{  $loiNhuanTrongNgay }} <p style="font-size: 20px; display: inline;">triệu</<p>
+          <h3 style="display: inline;">{{  $chietKhauTrongNgay }} <p style="font-size: 20px; display: inline;">triệu</<p>
           </h3>
-          <p>Lợi nhuận trong ngày</p>
+          <p>Chiết khấu trong ngày</p>
         </div>
         <div class="icon">
           <i class="ion ion-cash"></i>
@@ -59,9 +59,9 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3 style="display: inline;">{{  $loiNhuanTrongTuan }} <p style="font-size: 20px; display: inline;">triệu</<p>
+          <h3 style="display: inline;">{{  $chietKhauTrongTuan }} <p style="font-size: 20px; display: inline;">triệu</<p>
           </h3>
-          <p>Lợi nhuận trong tuần</p>
+          <p>Chiết khấu trong tuần</p>
         </div>
         <div class="icon">
           <i class="ion ion-cash"></i>
@@ -75,10 +75,10 @@
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3 style="display: inline;">{{  $loiNhuanTrongThang }} <p style="font-size: 20px; display: inline;">triệu
+          <h3 style="display: inline;">{{  $chietKhauTrongThang }} <p style="font-size: 20px; display: inline;">triệu
               </<p>
           </h3>
-          <p>Lợi nhuận trong tháng</p>
+          <p>Chiết khấu trong tháng</p>
         </div>
         <div class="icon">
           <i class="ion ion-cash"></i>
@@ -92,9 +92,9 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3 style="display: inline;">{{  $loiNhuanTrongNam }} <p style="font-size: 20px; display: inline;">triệu</<p>
+          <h3 style="display: inline;">{{  $chietKhauTrongNam }} <p style="font-size: 20px; display: inline;">triệu</<p>
           </h3>
-          <p>Lợi nhuận trong năm</p>
+          <p>Chiết khấu trong năm</p>
         </div>
         <div class="icon">
           <i class="ion ion-cash"></i>
@@ -118,8 +118,8 @@
         <div class="card-body">
           <div class="d-flex">
             <p class="d-flex flex-column">
-              <span class="text-bold text-lg">{{ $loiNhuanTrongTuan }} <sup style="font-size: 15px;">triệu</<sup></span>
-              <span>Lợi nhuận</span>
+              <span class="text-bold text-lg">{{ $chietKhauTrongTuan }} <sup style="font-size: 15px;">triệu</<sup></span>
+              <span>Chiết khấu</span>
             </p>
             <p class="ml-auto d-flex flex-column text-right">
               @if ($tiLeTangTruongTuan >0)
@@ -141,7 +141,7 @@
           <!-- /.d-flex -->
 
           <div class="position-relative mb-4">
-            <canvas id="bieudotuan-loinhuan" height="200"></canvas>
+            <canvas id="bieudotuan-chietkhau" height="200"></canvas>
           </div>
 
           <div class="d-flex flex-row justify-content-end">
@@ -169,8 +169,8 @@
         <div class="card-body">
           <div class="d-flex">
             <p class="d-flex flex-column">
-              <span class="text-bold text-lg">{{ $loiNhuanTrongNam }} <sup style="font-size: 15px;">triệu</<sup></span>
-              <span>Lợi nhuận</span>
+              <span class="text-bold text-lg">{{ $chietKhauTrongNam }} <sup style="font-size: 15px;">triệu</<sup></span>
+              <span>Chiết khấu</span>
             </p>
             <p class="ml-auto d-flex flex-column text-right">
               @if ($tiLeTangTruongNam >0)
@@ -192,16 +192,16 @@
           <!-- /.d-flex -->
 
           <div class="position-relative mb-4">
-            <canvas id="bieudonam-loinhuan" height="200"></canvas>
+            <canvas id="bieudonam-chietkhau" height="200"></canvas>
           </div>
 
           <div class="d-flex flex-row justify-content-end">
             <span class="mr-2">
-              <i class="fas fa-square text-primary"></i> {{ $loiNhuanNamHienTai[0]}}
+              <i class="fas fa-square text-primary"></i> {{ $chietKhauNamHienTai[0]}}
             </span>
 
             <span>
-              <i class="fas fa-square text-gray"></i> {{ $loiNhuanNamTruoc[0] }}
+              <i class="fas fa-square text-gray"></i> {{ $chietKhauNamTruoc[0] }}
             </span>
           </div>
         </div>
@@ -245,12 +245,12 @@
   var mode = 'index'
   var intersect = true
 
-  //Biểu đồ lợi nhuận thống kê theo Năm
-  var $salesChart = $('#bieudonam-loinhuan')
+  //Biểu đồ chiết khấu thống kê theo Năm
+  var $salesChart = $('#bieudonam-chietkhau')
   // eslint-disable-next-line no-unused-vars
 
-  var loiNhuanNamHienTai = @json($loiNhuanNamHienTai);
-  var loiNhuanNamTruoc = @json($loiNhuanNamTruoc);
+  var chietKhauNamHienTai = @json($chietKhauNamHienTai);
+  var chietKhauNamTruoc = @json($chietKhauNamTruoc);
   var salesChart = new Chart($salesChart, {
     type: 'bar',
     data: {
@@ -259,12 +259,12 @@
         {
           backgroundColor: '#007bff',
           borderColor: '#007bff',
-          data: [loiNhuanNamHienTai[1], loiNhuanNamHienTai[2], loiNhuanNamHienTai[3], loiNhuanNamHienTai[4], loiNhuanNamHienTai[5], loiNhuanNamHienTai[6], loiNhuanNamHienTai[7], loiNhuanNamHienTai[8], loiNhuanNamHienTai[9], loiNhuanNamHienTai[10], loiNhuanNamHienTai[11], loiNhuanNamHienTai[12]]
+          data: [chietKhauNamHienTai[1], chietKhauNamHienTai[2], chietKhauNamHienTai[3], chietKhauNamHienTai[4], chietKhauNamHienTai[5], chietKhauNamHienTai[6], chietKhauNamHienTai[7], chietKhauNamHienTai[8], chietKhauNamHienTai[9], chietKhauNamHienTai[10], chietKhauNamHienTai[11], chietKhauNamHienTai[12]]
         },
         {
           backgroundColor: '#ced4da',
           borderColor: '#ced4da',
-          data: [loiNhuanNamTruoc[1], loiNhuanNamTruoc[2], loiNhuanNamTruoc[3], loiNhuanNamTruoc[4], loiNhuanNamTruoc[5], loiNhuanNamTruoc[6], loiNhuanNamTruoc[7], loiNhuanNamTruoc[8], loiNhuanNamTruoc[9], loiNhuanNamTruoc[10], loiNhuanNamTruoc[11], loiNhuanNamTruoc[12]]
+          data: [chietKhauNamTruoc[1], chietKhauNamTruoc[2], chietKhauNamTruoc[3], chietKhauNamTruoc[4], chietKhauNamTruoc[5], chietKhauNamTruoc[6], chietKhauNamTruoc[7], chietKhauNamTruoc[8], chietKhauNamTruoc[9], chietKhauNamTruoc[10], chietKhauNamTruoc[11], chietKhauNamTruoc[12]]
         }
       ]
     },
@@ -315,17 +315,17 @@
     }
   })
 
-  //Biểu đồ lợi nhuận thống kê theo tuần
-  var $visitorsChart = $('#bieudotuan-loinhuan')
+  //Biểu đồ chiết khấu thống kê theo tuần
+  var $visitorsChart = $('#bieudotuan-chietkhau')
   // eslint-disable-next-line no-unused-vars
-  var loiNhuanTuanHienTai = @json($loiNhuanTuanHienTai);
-  var loiNhuanTuanTruoc = @json($loiNhuanTuanTruoc);
+  var chietKhauTuanHienTai = @json($chietKhauTuanHienTai);
+  var chietKhauTuanTruoc = @json($chietKhauTuanTruoc);
   var visitorsChart = new Chart($visitorsChart, {
     data: {
       labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
       datasets: [{
         type: 'line',
-        data: [loiNhuanTuanHienTai[2], loiNhuanTuanHienTai[3], loiNhuanTuanHienTai[4], loiNhuanTuanHienTai[5], loiNhuanTuanHienTai[6], loiNhuanTuanHienTai[7], loiNhuanTuanHienTai[8] ],
+        data: [chietKhauTuanHienTai[2], chietKhauTuanHienTai[3], chietKhauTuanHienTai[4], chietKhauTuanHienTai[5], chietKhauTuanHienTai[6], chietKhauTuanHienTai[7], chietKhauTuanHienTai[8] ],
         backgroundColor: 'transparent',
         borderColor: '#007bff',
         pointBorderColor: '#007bff',
@@ -336,7 +336,7 @@
       },
       {
         type: 'line',
-        data: [loiNhuanTuanTruoc[2], loiNhuanTuanTruoc[3], loiNhuanTuanTruoc[4], loiNhuanTuanTruoc[5], loiNhuanTuanTruoc[6], loiNhuanTuanTruoc[7], loiNhuanTuanTruoc[8] ],
+        data: [chietKhauTuanTruoc[2], chietKhauTuanTruoc[3], chietKhauTuanTruoc[4], chietKhauTuanTruoc[5], chietKhauTuanTruoc[6], chietKhauTuanTruoc[7], chietKhauTuanTruoc[8] ],
         backgroundColor: 'tansparent',
         borderColor: '#ced4da',
         pointBorderColor: '#ced4da',

@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class ChuyenhangController extends Controller
 {
-    //Tạo chuyến hàng mới
+    //Tạo Chuyến hàng mới
     public function taochuyenhangmoi()
     {
         //Tìm id Kho hàng mà nhân viên đang đăng nhập quản lý

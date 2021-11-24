@@ -38,6 +38,8 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @else
+                                <input type="hidden" id="nhanvien" name="nhanvien" value="{{ Auth::id() }}">
                             @endif
                             <div class="col-2">
                                 <label>Ngày bắt đầu</label>
@@ -67,12 +69,12 @@
                                 <th colspan="3">Số đơn hàng đã nhận</th>
                                 <th colspan="3">Số đơn hàng thất lạc</th>
                                 <th colspan="3">Doanh thu (triệu)</th>
-                                <th colspan="3">Lợi nhuận (triệu)</th>
+                                <th colspan="3">Chiết khấu (triệu)</th>
                             </tr>
                             <tr>
                                 <th>Tổng</th>
                                 <th>Đ.Không</th>
-                                <th>Đ.Biển</th>
+                                <th>Đ.Biển</th>                                
                                 <th>Tổng</th>
                                 <th>Đ.Không</th>
                                 <th>Đ.Biển</th>
@@ -96,36 +98,28 @@
                                 <td style="text-align: center">{{ $thongke['sodonhangthatlacduongkhong'] }}</td>
                                 <td style="text-align: center">{{ $thongke['sodonhangthatlacduongbien'] }}</td>
                                 <td style="text-align: center">{{ $thongke['doanhthu'] }}</td>
-                                <td style="text-align: center"></td>
-                                <td style="text-align: center"></td>
-                                <td style="text-align: center">{{ $thongke['loinhuan'] }}</td>
-                                <td style="text-align: center"></td>
-                                <td style="text-align: center"></td>
+                                <td style="text-align: center">{{ $thongke['doanhthuduongkhong'] }}</td>
+                                <td style="text-align: center">{{ $thongke['doanhthuduongbien'] }}</td>
+                                <td style="text-align: center">{{ $thongke['chietkhau'] }}</td>
+                                <td style="text-align: center">{{ $thongke['chietkhauduongkhong'] }}</td>
+                                <td style="text-align: center">{{ $thongke['chietkhauduongbien'] }}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <td style="text-align: center"></td>
                                 <td><b>TỔNG</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangdanhan') }}</b></td>
-                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangdanhanduongkhong') }}</b>
-                                </td>
-                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangdanhanduongbien') }}</b>
-                                </td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangdanhanduongkhong') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangdanhanduongbien') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlac') }}</b></td>
-                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlacduongkhong') }}</b>
-                                </td>
-                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlacduongbien') }}</b>
-                                </td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlacduongkhong') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlacduongbien') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('doanhthu') }}</b></td>
-                                <td style="text-align: center"></td>
-                                <td style="text-align: center"></td>
-                                <td style="text-align: center"><b>
-                                        @if ($id_nhanvien ==2) {{ $thongkes->sum('doanhthu')-$thongkes->sum('loinhuan') }}
-                                        @else {{ $thongkes->sum('loinhuan') }}
-                                        @endif
-                                    </b></td>
-                                <td style="text-align: center"></td>
-                                <td style="text-align: center"></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('doanhthuduongkhong') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('doanhthuduongbien') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('chietkhau') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('chietkhauduongkhong') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('chietkhauduongbien') }}</b></td>
                             </tr>
                         </tbody>
                     </table>

@@ -33,7 +33,7 @@ class ThongketonghopController extends Controller
 
         $thongkedonhang = new ThongkedonhangController;
         $thongkedoanhthu = new ThongkedoanhthuController;
-        $thongkeloinhuan = new ThongkeloinhuanController;
+        $thongkechietkhau = new ThongkechietkhauController;
 
         //Tạo Collection để lưu trữ dữ liệu thống kê
         $thongke = collect();
@@ -47,7 +47,12 @@ class ThongketonghopController extends Controller
                 $sodonhangthatlacduongbien = $thongkedonhang->thongKeDonHangThatLacDuongBien($nhanvien->id, $ngayBatDau, $ngayKetThuc);
                 $sodonhangthatlac = $sodonhangthatlacduongkhong + $sodonhangthatlacduongbien;
                 $doanhthu =  $thongkedoanhthu->thongKeDoanhThu($nhanvien->id, $ngayBatDau, $ngayKetThuc);
-                $loinhuan =  $thongkeloinhuan->thongKeLoiNhuan($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $doanhthuduongkhong =  $thongkedoanhthu->thongKeDoanhThuDuongKhong($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $doanhthuduongbien =  $thongkedoanhthu->thongKeDoanhThuDuongBien($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $chietkhau =  $thongkechietkhau->thongKeChietKhau($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $chietkhauduongkhong =  $thongkechietkhau->thongKeChietKhauDuongKhong($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $chietkhauduongbien =  $thongkechietkhau->thongKeChietKhauDuongBien($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+
 
                 $thongke->push([
                     'id_nhanvien' => $nhanvien->id,
@@ -59,7 +64,11 @@ class ThongketonghopController extends Controller
                     'sodonhangthatlacduongkhong' => $sodonhangthatlacduongkhong,
                     'sodonhangthatlacduongbien' => $sodonhangthatlacduongbien,
                     'doanhthu' => $doanhthu,
-                    'loinhuan' => $loinhuan,
+                    'doanhthuduongkhong' => $doanhthuduongkhong,
+                    'doanhthuduongbien' => $doanhthuduongbien,
+                    'chietkhau' => $chietkhau,
+                    'chietkhauduongkhong' => $chietkhauduongkhong,
+                    'chietkhauduongbien' => $chietkhauduongbien,
                 ]);
             }
         } else {
@@ -70,7 +79,11 @@ class ThongketonghopController extends Controller
             $sodonhangthatlacduongbien = $thongkedonhang->thongKeDonHangThatLacDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc);
             $sodonhangthatlac = $sodonhangthatlacduongkhong + $sodonhangthatlacduongbien;
             $doanhthu =  $thongkedoanhthu->thongKeDoanhThu($id_nhanvien, $ngayBatDau, $ngayKetThuc);
-            $loinhuan =  $thongkeloinhuan->thongKeLoiNhuan($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $doanhthuduongkhong =  $thongkedoanhthu->thongKeDoanhThuDuongKhong($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $doanhthuduongbien =  $thongkedoanhthu->thongKeDoanhThuDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $chietkhau =  $thongkechietkhau->thongKeChietKhau($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $chietkhauduongkhong =  $thongkechietkhau->thongKeChietKhauDuongKhong($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $chietkhauduongbien =  $thongkechietkhau->thongKeChietKhauDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc);
 
             $thongke->push([
                 'id_nhanvien' => $id_nhanvien,
@@ -82,7 +95,11 @@ class ThongketonghopController extends Controller
                 'sodonhangthatlacduongkhong' => $sodonhangthatlacduongkhong,
                 'sodonhangthatlacduongbien' => $sodonhangthatlacduongbien,
                 'doanhthu' => $doanhthu,
-                'loinhuan' => $loinhuan,
+                'doanhthuduongkhong' => $doanhthuduongkhong,
+                'doanhthuduongbien' => $doanhthuduongbien,
+                'chietkhau' => $chietkhau,
+                'chietkhauduongkhong' => $chietkhauduongkhong,
+                'chietkhauduongbien' => $chietkhauduongbien,
             ]);
         }
 

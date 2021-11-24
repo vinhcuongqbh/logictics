@@ -84,17 +84,80 @@ class ThongkedoanhthuController extends Controller
 
         if ($id_nhanvien == 2) {
             $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-                ->where('id_trangthai', '<>', '6')
-                ->where('id_trangthai', '<>', '7')->sum('tongchiphi');
+                //->where('id_trangthai', '<>', 6)
+                ->where('id_trangthai', '<>', 7)
+                ->sum('tongchiphi');
         } else {
-            $soluongdoanhthu = Donhang::where('id_nhanvienkhoitao', $id_nhanvien)
-                ->where('id_trangthai', '<>', '6')
-                ->where('id_trangthai', '<>', '7')
-                ->whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                //->where('id_trangthai', '<>', 6)
+                ->where('id_trangthai', '<>', 7)
+                ->where('id_nhanvienkhoitao', $id_nhanvien)
                 ->sum('tongchiphi');
         }
+
         return round($soluongdoanhthu / 1000000, 2);
     }
+
+    //Hàm thống kê Doanh thu Duong khong
+    public function thongKeDoanhThuDuongKhong($id_nhanvien, $ngayBatDau, $ngayKetThuc)
+    {
+        //Nếu Ngày Kết thúc lớn hơn Ngày hiện tại thì Ngày kết thúc = Ngày hiện tại
+        $ngayBatDau = $ngayBatDau->copy()->startOfDay();
+        if ($ngayKetThuc->greaterThan(Carbon::now())) {
+            $ngayKetThuc = Carbon::now()->endOfDay();
+        } else {
+            $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        }
+
+        if ($id_nhanvien == 2) {
+            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+            ->where('id_hinhthucgui', 1)
+                //->where('id_trangthai', '<>', 6)
+                ->where('id_trangthai', '<>', 7)
+                ->sum('tongchiphi');
+        } else {
+            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->where('id_hinhthucgui', 1)
+                //->where('id_trangthai', '<>', 6)
+                ->where('id_trangthai', '<>', 7)
+                ->where('id_nhanvienkhoitao', $id_nhanvien)
+                ->sum('tongchiphi');
+        }
+        
+        return round($soluongdoanhthu / 1000000, 2);
+    }
+
+
+
+    //Hàm thống kê Doanh thu Duong bien
+    public function thongKeDoanhThuDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc)
+    {
+        //Nếu Ngày Kết thúc lớn hơn Ngày hiện tại thì Ngày kết thúc = Ngày hiện tại
+        $ngayBatDau = $ngayBatDau->copy()->startOfDay();
+        if ($ngayKetThuc->greaterThan(Carbon::now())) {
+            $ngayKetThuc = Carbon::now()->endOfDay();
+        } else {
+            $ngayKetThuc = $ngayKetThuc->copy()->endOfDay();
+        }
+
+        if ($id_nhanvien == 2) {
+            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+            ->where('id_hinhthucgui', 2)
+                //->where('id_trangthai', '<>', 6)
+                ->where('id_trangthai', '<>', 7)
+                ->sum('tongchiphi');
+        } else {
+            $soluongdoanhthu = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
+                ->where('id_hinhthucgui', 2)
+                //->where('id_trangthai', '<>', 6)
+                ->where('id_trangthai', '<>', 7)
+                ->where('id_nhanvienkhoitao', $id_nhanvien)
+                ->sum('tongchiphi');
+        }
+        
+        return round($soluongdoanhthu / 1000000, 2);
+    }
+
 
 
     //Hàm thống kê Doanh thu theo Năm

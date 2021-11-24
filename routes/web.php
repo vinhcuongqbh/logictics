@@ -11,7 +11,7 @@ use App\Http\Controllers\ChuyenhangController;
 use App\Http\Controllers\ThongketonghopController;
 use App\Http\Controllers\ThongkedonhangController;
 use App\Http\Controllers\ThongkedoanhthuController;
-use App\Http\Controllers\ThongkeloinhuanController;
+use App\Http\Controllers\ThongkechietkhauController;
 
 
 /*
@@ -132,7 +132,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('ketquathongke', [ThongketonghopController::class, 'ketQuaThongKe'])->name('thongke.ketquathongke');
         Route::get('thongkedonhang', [ThongkedonhangController::class, 'thongKeDonHangDashBoard'])->name('thongke.thongKeDonHangDashBoard');
         Route::get('thongkedoanhthu', [ThongkedoanhthuController::class, 'thongKeDoanhThuDashBoard'])->name('thongke.thongKeDoanhThuDashBoard');
-        Route::get('thongkeloinhuan', [ThongkeloinhuanController::class, 'thongKeLoiNhuanDashBoard'])->name('thongke.thongKeLoiNhuanDashBoard');
+        Route::get('thongkechietkhau', [ThongkechietkhauController::class, 'thongKeChietKhauDashBoard'])->name('thongke.thongKeChietKhauDashBoard');
     });
 });
 

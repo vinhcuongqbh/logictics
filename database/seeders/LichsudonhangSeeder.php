@@ -21,24 +21,27 @@ class LichsudonhangSeeder extends Seeder
     public function run()
     {
         $id_donhang = 0; 
-        $id_khogui = 2;       
+        $id_khogui = 2;        
         for ($id_nhanvienquanly = 5; $id_nhanvienquanly <= 7; $id_nhanvienquanly++) {
-            $soluongdonhang = rand(4000, 6000);     
+            $soluongdonhang = rand(4000, 6000);   
             $id_khogui++;   
             $tilechietkhau = 10;     
             for ($i = 1; $i <= $soluongdonhang; $i++) {
                 $id_donhang++;
+                $uniqid = strtoupper(uniqid());
+                //$uniqid = str_replace('619', rand(100,999), $uniqid);
                 $tongchiphi = rand(100,3000)*1000;
                 $chietkhau = $tongchiphi*$tilechietkhau/100;
 
                 $day = Carbon::now()->subDays(rand(0, 730));
                 $donhang = Donhang::factory()->count(1)->create([
-                    'id' => $id_donhang,
+                    'id' => $id_donhang,    
+                    'matracuu' => $uniqid,
                     'id_nhanvienkhoitao' => $id_nhanvienquanly,
                     'id_nhanvienquanly' => 3,
                     'id_khogui' => 1,
                     'id_khonhan' => 0,
-                    'id_trangthai' => 4,
+                    'id_trangthai' => rand(4,6),
                     'tongchiphi' =>  $tongchiphi,
                     'chietkhau' => $chietkhau,
                     'created_at' => $day->copy()->addDays(15),
@@ -49,6 +52,7 @@ class LichsudonhangSeeder extends Seeder
                 DB::table('lichsudonhangs')->insert([
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => $id_nhanvienquanly,
                         'id_khogui' => $id_khogui,
                         'id_khonhan' => null,
@@ -58,6 +62,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => $id_nhanvienquanly,
                         'id_khogui' => $id_khogui,
                         'id_khonhan' => null,
@@ -67,6 +72,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => $id_nhanvienquanly,
                         'id_khogui' => $id_khogui,
                         'id_khonhan' => 2,
@@ -76,6 +82,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => 4,
                         'id_khogui' => 2,
                         'id_khonhan' => null,
@@ -85,6 +92,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => 4,
                         'id_khogui' => 2,
                         'id_khonhan' => 1,
@@ -94,6 +102,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => 3,
                         'id_khogui' => 1,
                         'id_khonhan' => null,
@@ -103,6 +112,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => 3,
                         'id_khogui' => 1,
                         'id_khonhan' => 0,
@@ -112,6 +122,7 @@ class LichsudonhangSeeder extends Seeder
                     ],
                     [
                         'id_donhang' => $id_donhang,
+                        'matracuu' => $uniqid,
                         'id_nhanvienquanly' => 3,
                         'id_khogui' => 1,
                         'id_khonhan' => 0,

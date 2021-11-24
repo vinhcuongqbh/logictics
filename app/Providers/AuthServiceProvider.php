@@ -58,7 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('thongke-doanhthu', function (User $user) {
             return true;
         });
-        Gate::define('thongke-loinhuan', function (User $user) {
+        Gate::define('thongke-chietkhau', function (User $user) {
             return true;
         });
     }

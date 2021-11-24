@@ -345,10 +345,10 @@ return [
             'can'         => 'thongke-doanhthu',
         ],
         [
-            'text'        => 'Lợi nhuận',
-            'url'         => 'admin/thongke/thongkeloinhuan',
+            'text'        => 'Chiết khấu',
+            'url'         => 'admin/thongke/thongkechietkhau',
             'icon' => 'fas fa-fw fa-angle-right',
-            'can'         => 'thongke-loinhuan',
+            'can'         => 'thongke-chietkhau',
         ],     
     ],
 

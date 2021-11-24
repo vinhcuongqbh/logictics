@@ -91,12 +91,12 @@ class ThongkedonhangController extends Controller
 
         if ($id_nhanvien == 2) {
             $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-                ->where('id_trangthai', '<>', 6)
+                //->where('id_trangthai', '<>', 6)
                 ->where('id_trangthai', '<>', 7)
                 ->count();
         } else {
             $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
-                ->where('id_trangthai', '<>', 6)
+                //->where('id_trangthai', '<>', 6)
                 ->where('id_trangthai', '<>', 7)
                 ->where('id_nhanvienkhoitao', $id_nhanvien)               
                 ->count();
@@ -121,13 +121,13 @@ class ThongkedonhangController extends Controller
         if ($id_nhanvien == 2) {
             $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->where('id_hinhthucgui', 1)
-                ->where('id_trangthai', '<>', 6)
+                //->where('id_trangthai', '<>', 6)
                 ->where('id_trangthai', '<>', 7)
                 ->count();
         } else {
             $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->where('id_hinhthucgui', 1)
-                ->where('id_trangthai', '<>', 6)
+                //->where('id_trangthai', '<>', 6)
                 ->where('id_trangthai', '<>', 7)
                 ->where('id_nhanvienkhoitao', $id_nhanvien)               
                 ->count();
@@ -152,13 +152,13 @@ class ThongkedonhangController extends Controller
         if ($id_nhanvien == 2) {
             $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->where('id_hinhthucgui', 2)
-                ->where('id_trangthai', '<>', 6)
+                //->where('id_trangthai', '<>', 6)
                 ->where('id_trangthai', '<>', 7)
                 ->count();
         } else {
             $soluongdonhang = Donhang::whereBetween('created_at', [$ngayBatDau, $ngayKetThuc])
                 ->where('id_hinhthucgui', 2)
-                ->where('id_trangthai', '<>', 6)
+                //->where('id_trangthai', '<>', 6)
                 ->where('id_trangthai', '<>', 7)
                 ->where('id_nhanvienkhoitao', $id_nhanvien)               
                 ->count();

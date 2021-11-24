@@ -38,6 +38,8 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @else
+                                <input type="hidden" id="nhanvien" name="nhanvien" value="{{ Auth::id() }}">
                             @endif
                             <div class="col-12 col-md-2">
                                 <label>Ngày bắt đầu</label>
@@ -65,7 +67,7 @@
                                 <th colspan="3">Số đơn hàng đã nhận</th>
                                 <th colspan="3">Số đơn hàng thất lạc</th>
                                 <th colspan="3">Doanh thu (triệu)</th>
-                                <th colspan="3">Lợi nhuận (triệu)</th>
+                                <th colspan="3">Chiết khấu (triệu)</th>
                             </tr>
                             <tr>
                                 <th>Tổng</th>
@@ -83,13 +85,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i=1;$i<=5;$i++) 
-                                <tr>
-                                    @for ($j=1;$j<=14;$j++) 
-                                    <td></td>
+                            @for ($i=1;$i<=5;$i++) <tr>
+                                @for ($j=1;$j<=14;$j++) <td>
+                                    </td>
                                     @endfor
-                                </tr>
-                            @endfor
+                                    </tr>
+                                    @endfor
                         </tbody>
                     </table>
                 </div>
