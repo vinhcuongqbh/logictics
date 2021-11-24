@@ -23,11 +23,11 @@ class DonhangFactory extends Factory
     {
         return [
             'tennguoigui' => $this->faker->name(),
-            'sodienthoainguoigui' => $this->faker->phoneNumber(),
+            'sodienthoainguoigui' => "09".rand(10000000,99999999),
             'diachinguoigui' => $this->faker->address(),
             'emailnguoigui' => $this->faker->unique()->safeEmail(),
             'tennguoinhan' => $this->faker->name(),
-            'sodienthoainguoinhan' => $this->faker->phoneNumber(),
+            'sodienthoainguoinhan' => "09".rand(10000000,99999999),
             'diachinguoinhan' => $this->faker->address(),
             'emailnguoinhan' => $this->faker->unique()->safeEmail(),
             'id_hinhthucgui' => rand(1,2),

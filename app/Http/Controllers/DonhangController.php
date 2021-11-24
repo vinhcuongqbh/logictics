@@ -85,7 +85,8 @@ class DonhangController extends Controller
 
         //Tạo đơn hàng mới
         $donhang = new Donhang;
-        $donhang->matracuu = strtoupper(uniqid());
+        $donhang->matracuu = str_replace(".","", microtime(true));
+
         $donhang->id_nhanvienkhoitao = Auth::id();
         $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_khogui = $id_khohangquanly;

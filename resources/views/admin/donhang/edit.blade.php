@@ -3,6 +3,9 @@
 @section('title', 'Cập nhật Đơn hàng')
 
 @section('content_header')
+<?php
+    include(app_path().'/myFunction/Hamdungchung.php');
+?>
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-3">
@@ -12,7 +15,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/donhang/dmdangluukho">Đơn hàng</a></li>
-                <li class="breadcrumb-item active">{{ $donhang->matracuu }}</li>
+                <li class="breadcrumb-item active">{{ chuanHoaMaTraCuu($donhang->matracuu) }}</li>
             </ol>
         </div>
     </div>
@@ -42,7 +45,9 @@
                                     <div class="col-9 col-xl-9">
                                         <select id="hinhthucgui" name="hinhthucgui" class="form-control custom-select">
                                             @foreach ($hinhthucgui as $hinhthucgui)
-                                                <option value="{{ $hinhthucgui->id }}" @if ($hinhthucgui->id == $donhang->id_hinhthucgui) {{ 'selected' }} @endif>{{ $hinhthucgui->tenhinhthucgui }}</option>
+                                            <option value="{{ $hinhthucgui->id }}" @if ($hinhthucgui->id ==
+                                                $donhang->id_hinhthucgui) {{ 'selected' }} @endif>{{
+                                                $hinhthucgui->tenhinhthucgui }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -63,8 +68,7 @@
                                     </div>
                                     <div class="col-9 col-xl-9">
                                         <input type="tel" id="sodienthoainguoigui" name="sodienthoainguoigui"
-                                            placeholder="(+81)123-456-789" value="{{ $donhang->sodienthoainguoigui }}"
-                                            class="form-control">
+                                            value="{{ $donhang->sodienthoainguoigui }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -106,8 +110,7 @@
                                     </div>
                                     <div class="col-9 col-xl-9">
                                         <input type="tel" id="sodienthoainguoinhan" name="sodienthoainguoinhan"
-                                            placeholder="(+81)123-456-789" value="{{ $donhang->sodienthoainguoinhan }}"
-                                            class="form-control">
+                                            value="{{ $donhang->sodienthoainguoinhan }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -142,7 +145,7 @@
                             <div class="col-sm-2" style="text-align: center; padding: 40px 0px 20px 0px;">
                                 <div>
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->matracuu }}
+                                    {{ chuanHoaMaTraCuu($donhang->matracuu) }}
                                 </div>
                             </div>
                         </div>
@@ -205,7 +208,8 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th id="tongchiphi" style="text-align: right; padding-right:10px; text; font-weight: bold;">
+                                        <th id="tongchiphi"
+                                            style="text-align: right; padding-right:10px; text; font-weight: bold;">
                                             {{ number_format($donhang->tongchiphi, 0, '.', '.') }}</th>
                                     </tr>
                                 </tfoot>
@@ -213,7 +217,8 @@
                         </div>
                         <div id="tongkhoiluong" class="form-group">
                             <label for="tongkhoiluong">Tổng khối lượng đơn hàng (kg)</label>
-                            <input type="number" id="tongkhoiluong" name="tongkhoiluong" value="{{ $donhang->tongkhoiluong }}" class="form-control">
+                            <input type="number" id="tongkhoiluong" name="tongkhoiluong"
+                                value="{{ $donhang->tongkhoiluong }}" class="form-control">
                         </div>
                         <div id="ghichu" class="form-group">
                             <label for="ghichu">Ghi chú</label>
@@ -226,9 +231,11 @@
                     <!-- /.card-body -->
                     <input type="hidden" id="chiTietDonHang" name="chiTietDonHang">
                     <input type="hidden" id="tongchiphi2" name="tongchiphi2">
-                    <input type="hidden" id="chietkhau" name="chietkhau">                    
-                    <input type="hidden" id="sodienthoainguoiguicu" name="sodienthoainguoiguicu" value="{{ $donhang->sodienthoainguoigui }}">
-                    <input type="hidden" id="sodienthoainguoinhancu" name="sodienthoainguoinhancu" value="{{ $donhang->sodienthoainguoinhan }}">
+                    <input type="hidden" id="chietkhau" name="chietkhau">
+                    <input type="hidden" id="sodienthoainguoiguicu" name="sodienthoainguoiguicu"
+                        value="{{ $donhang->sodienthoainguoigui }}">
+                    <input type="hidden" id="sodienthoainguoinhancu" name="sodienthoainguoinhancu"
+                        value="{{ $donhang->sodienthoainguoinhan }}">
                 </form>
             </div>
             <!-- /.card -->
@@ -269,10 +276,12 @@
                                             {{ $lichsudonhang->tentrangthai }} vào <b>{{ $lichsudonhang->khogui }}</b>
                                             @elseif ($lichsudonhang->id_trangthai == 3)
                                             @if ($lichsudonhang->id_khonhan == 0)
-                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến
+                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
+                                            đến
                                             địa chỉ <b>Người nhận</b>
                                             @else
-                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b> đến
+                                            {{ $lichsudonhang->tentrangthai }} từ <b>{{ $lichsudonhang->khogui }}</b>
+                                            đến
                                             <b>{{ $lichsudonhang->khonhan }}</b>
                                             @endif
                                             @else
@@ -466,7 +475,8 @@
 <link rel="stylesheet" href="/vendor/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/vendor/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
-{{-- <link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
+{{--
+<link rel="stylesheet" href="/vendor/adminlte/dist/css/adminlte.min.css"> --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 @stop
 

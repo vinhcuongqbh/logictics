@@ -3,6 +3,9 @@
 @section('title', 'Chuyến hàng')
 
 @section('content_header')
+<?php
+    include(app_path().'/myFunction/Hamdungchung.php');
+?>
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-3">
@@ -53,7 +56,7 @@
                                 @foreach ($donhangs as $donhang)
                                 <tr>
                                     <td style="text-align: center"><a
-                                            href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->matracuu }}</a>
+                                            href="{{ route('donhang.show', $donhang->id) }}">{{ chuanHoaMaTraCuu($donhang->matracuu) }}</a>
                                     </td>
                                     <td><a
                                             href="{{ route('donhang.show', $donhang->id) }}">{{ $donhang->tennguoigui }}</a>
@@ -120,7 +123,7 @@
                                 @foreach ($donhang2s as $donhang2)
                                 <tr>
                                     <td style="text-align: center">
-                                        {{ $donhang2->id }}
+                                        {{ chuanHoaMaTraCuu($donhang2->matracuu) }}
                                     </td>
                                     <td style="text-align: center">
                                         <div class="form-check">

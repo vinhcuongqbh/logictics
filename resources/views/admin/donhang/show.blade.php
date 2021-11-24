@@ -3,6 +3,9 @@
 @section('title', 'Thông tin Đơn hàng')
 
 @section('content_header')
+<?php
+    include(app_path().'/myFunction/Hamdungchung.php');
+?>
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-3">
@@ -12,7 +15,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/donhang/dmdangluukho">Đơn hàng</a></li>
-                <li class="breadcrumb-item active">{{ $donhang->matracuu }}</li>
+                <li class="breadcrumb-item active">{{ chuanHoaMaTraCuu($donhang->matracuu) }}</li>
             </ol>
         </div>
     </div>
@@ -140,9 +143,8 @@
                         <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div class="row">
                                 <div class="col" id="qrcode">
-                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ substr($donhang->matracuu, 0, 5) }}-{{ substr($donhang->matracuu, 5, 4) }}-{{
-                                    substr($donhang->matracuu, 9, 4) }}
+                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>                                    
+                                        {{ chuanHoaMaTraCuu($donhang->matracuu) }}
                                 </div>
                             </div>
                         </div>
@@ -160,7 +162,7 @@
                             <div class="row">
                                 <div class="col" id="qrcode">
                                     {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                                    {{ $donhang->matracuu }}
+                                    {{ chuanHoaMaTraCuu($donhang->matracuu) }}
                                 </div>
                                 <div class="col-8" id="thongtincongty" style="text-align: left">
                                     <h4><b>{{ $thongtincongty->tencongty }}</b></h4>
@@ -433,8 +435,7 @@
                 <td style="width: 50%;"></td>
                 <td style="width: 20%; padding: 0px; text-align: center; vertical-align: middle;">{!!
                     QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
-                    <h6>{{ substr($donhang->matracuu, 0, 5) }}-{{ substr($donhang->matracuu, 5, 4) }}-{{
-                        substr($donhang->matracuu, 9, 4) }}</h6>
+                    <h6>{{ chuanHoaMaTraCuu($donhang->matracuu) }}</h6>
                 </td>
             </tr>
         </table>
@@ -459,8 +460,7 @@
             </tr>
             <tr>
                 <td colspan="2" style="width: 30%;">Mã Tracking</td>
-                <td>{{ substr($donhang->matracuu, 0, 5) }}-{{ substr($donhang->matracuu, 5, 4) }}-{{
-                    substr($donhang->matracuu, 9, 4) }}</td>
+                <td>{{ chuanHoaMaTraCuu($donhang->matracuu) }}</td>
             </tr>
             <tr>
                 <td colspan="2" style="width: 30%;">Tổng khối lượng</td>
@@ -572,7 +572,6 @@
         }
     }
 </style>
-
 @stop
 
 @section('js')
