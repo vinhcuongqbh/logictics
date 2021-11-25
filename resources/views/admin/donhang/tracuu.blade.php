@@ -31,8 +31,6 @@
                         <div class="form-group row">
                             <div class="col-auto">
                                 <label for="thongtintimkiem" class="col-form-label">Thông tin Đơn hàng</label>
-                            </div>
-                            <div class="col-auto">
                                 <input type="text" name="thongtintimkiem" id="thongtintimkiem" class="form-control">
                             </div>
                             <div class="col-auto">

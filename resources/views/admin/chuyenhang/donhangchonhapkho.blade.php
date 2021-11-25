@@ -15,7 +15,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/chuyenhang/dmchonhapkho">Chuyến hàng</a></li>
-                <li class="breadcrumb-item active">{{ $id_chuyenhang }}</li>
+                <li class="breadcrumb-item active">{{ chuanHoaMaChuyenHang($chuyenhang->machuyenhang) }}</li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <input type="hidden" id="id_chuyenhang" name="id_chuyenhang" value="{{ $id_chuyenhang }}">
+                        <input type="hidden" id="id_chuyenhang" name="id_chuyenhang" value="{{ $chuyenhang->id }}">
                         <table id="donhang-table" class="table table-bordered table-striped">
                             <thead style="text-align: center">
                                 <tr>

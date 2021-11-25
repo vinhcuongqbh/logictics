@@ -33,6 +33,24 @@ class ChuyenhangController extends Controller
         $chuyenhang->id_trangthai = 1;
         $chuyenhang->save();
 
+        //Tạo Mã chuyến hàng
+        // $manhanvien = Auth::id();
+        // while (strlen($manhanvien) < 3) {
+        //     $manhanvien = "0" . $manhanvien;
+        // }
+        // $id_chuyenhang = $chuyenhang->id;
+        // while (strlen($id_chuyenhang) < 6) {
+        //     $id_chuyenhang = "0" . $id_chuyenhang;
+        // }
+        // $machuyenhang = $manhanvien . $id_chuyenhang;
+        $manhanvien = Auth::id();
+        while (strlen($manhanvien) < 3) {
+            $manhanvien = "0" . $manhanvien;
+        }
+        $machuyenhang = $manhanvien . Carbon::now()->timestamp;
+        $chuyenhang->machuyenhang = $machuyenhang;
+        $chuyenhang->save();
+
         return $chuyenhang;
     }
 
@@ -123,6 +141,7 @@ class ChuyenhangController extends Controller
     //Danh mục Đơn hàng thuộc Chuyến hàng đã xuất Kho
     public function donhangdaxuatkho($id)
     {
+        $chuyenhang = Chuyenhang::find($id);
         $donhang = Lichsudonhang::where('lichsudonhangs.id_chuyenhang', $id)
             ->where('lichsudonhangs.id_trangthai', 3)
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
@@ -133,8 +152,6 @@ class ChuyenhangController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        $chuyenhang = Chuyenhang::find($id);
-
         return view('admin.chuyenhang.donhangdaxuatkho', ['donhangs' => $donhang, 'donhang2s' => $donhang2, 'chuyenhang' => $chuyenhang]);
     }
 
@@ -142,6 +159,7 @@ class ChuyenhangController extends Controller
     //Danh mục Đơn hàng thuộc Chuyến hàng đã nhập Kho
     public function donhangdanhapkho($id)
     {
+        $chuyenhang = Chuyenhang::find($id);
         $donhang = Lichsudonhang::where('lichsudonhangs.id_chuyenhang', $id)
             ->where('lichsudonhangs.id_trangthai', 2)
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
@@ -149,16 +167,17 @@ class ChuyenhangController extends Controller
 
 
 
-        return view('admin.chuyenhang.donhangdanhapkho', ['donhangs' => $donhang, 'id_chuyenhang' => $id]);
+        return view('admin.chuyenhang.donhangdanhapkho', ['donhangs' => $donhang, 'chuyenhang' => $chuyenhang]);
     }
 
     //Danh mục Đơn hàng thuộc Chuyến hàng chờ nhập Kho
     public function donhangchonhapkho($id)
     {
+        $chuyenhang = Chuyenhang::find($id);
         $donhang = Donhang::where('id_chuyenhang', $id)
             ->where('id_trangthai', 3)
             ->get();
 
-        return view('admin.chuyenhang.donhangchonhapkho', ['donhangs' => $donhang, 'id_chuyenhang' => $id]);
+        return view('admin.chuyenhang.donhangchonhapkho', ['donhangs' => $donhang, 'chuyenhang' => $chuyenhang]);
     }
 }

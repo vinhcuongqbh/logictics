@@ -20,35 +20,40 @@ class LichsudonhangSeeder extends Seeder
 
     public function run()
     {
-        $id_donhang = 0; 
-        $id_khogui = 2;        
+        $id_donhang = 0;
+        $id_khogui = 2;
         for ($id_nhanvienquanly = 5; $id_nhanvienquanly <= 7; $id_nhanvienquanly++) {
-            $soluongdonhang = rand(4000, 6000);   
-            $id_khogui++;   
-            $tilechietkhau = 10;     
+            $soluongdonhang = rand(4000, 6000);
+            $id_khogui++;
+            $tilechietkhau = 10;
             for ($i = 1; $i <= $soluongdonhang; $i++) {
                 $id_donhang++;
-                $matracuu = str_replace(".","", microtime(true));
-                $tongchiphi = rand(100,3000)*1000;
-                $chietkhau = $tongchiphi*$tilechietkhau/100;
+                $matracuu = str_replace(".", "", microtime(true));
+                if (strlen($matracuu) <> 14) {
+                    while (strlen($matracuu)<14) {
+                        $matracuu = $matracuu . "0";
+                    }
+                }
+                $tongchiphi = rand(100, 3000) * 1000;
+                $chietkhau = $tongchiphi * $tilechietkhau / 100;
 
                 $day = Carbon::now()->subDays(rand(0, 730));
                 $donhang = Donhang::factory()->count(1)->create([
-                    'id' => $id_donhang,    
+                    'id' => $id_donhang,
                     'matracuu' => $matracuu,
                     'id_nhanvienkhoitao' => $id_nhanvienquanly,
                     'id_nhanvienquanly' => 3,
                     'id_khogui' => 1,
                     'id_khonhan' => 0,
-                    'id_trangthai' => rand(4,6),
-                    'tongkhoiluong' => rand(1,50),
+                    'id_trangthai' => rand(4, 6),
+                    'tongkhoiluong' => rand(1, 50),
                     'tongchiphi' =>  $tongchiphi,
                     'chietkhau' => $chietkhau,
                     'created_at' => $day->copy()->addDays(15),
                     'updated_at' => $day->copy()->addDays(15),
                 ]);
 
-               
+
                 DB::table('lichsudonhangs')->insert([
                     [
                         'id_donhang' => $id_donhang,

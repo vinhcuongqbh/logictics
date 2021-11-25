@@ -85,8 +85,13 @@ class DonhangController extends Controller
 
         //Tạo đơn hàng mới
         $donhang = new Donhang;
-        $donhang->matracuu = str_replace(".","", microtime(true));
-
+        $donhang->matracuu = str_replace(".", "", microtime(true));
+        //Trường hợp Mã tra cứu không đủ 14 ký tự
+        if (strlen($donhang->matracuu) <> 14) {
+            while (strlen($donhang->matracuu) <14) {
+                $donhang->matracuu = $donhang->matracuu . "0";
+            }
+        }
         $donhang->id_nhanvienkhoitao = Auth::id();
         $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_khogui = $id_khohangquanly;
@@ -158,7 +163,7 @@ class DonhangController extends Controller
         $donhang = Donhang::where('donhangs.id', $id)
             ->join('hinhthucguis', 'hinhthucguis.id', 'donhangs.id_hinhthucgui')
             ->select('donhangs.*', 'hinhthucguis.tenhinhthucgui')
-            ->first();         
+            ->first();
 
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
         $qrcode = "ETRACK" . $donhang->matracuu;
@@ -360,6 +365,7 @@ class DonhangController extends Controller
                 $lichsuchuyenhangController->xoasukien($chuyenhang->id, 3);
                 $lichsuchuyenhangController->luusukien(
                     $chuyenhang->id,
+                    $chuyenhang->machuyenhang,
                     Carbon::now(),
                     null,
                     $tongdonhang,
@@ -422,6 +428,7 @@ class DonhangController extends Controller
             $lichsuchuyenhangController = new LichsuchuyenhangController;
             $lichsuchuyenhangController->luusukien(
                 $chuyenhang->id,
+                $chuyenhang->machuyenhang,
                 Carbon::now(),
                 null,
                 $tongdonhang,
@@ -481,6 +488,7 @@ class DonhangController extends Controller
             $lichsuchuyenhangController = new LichsuchuyenhangController;
             $lichsuchuyenhangController->luusukien(
                 $chuyenhang->id,
+                $chuyenhang->machuyenhang,
                 Carbon::now(),
                 null,
                 $tongdonhang,
@@ -539,6 +547,7 @@ class DonhangController extends Controller
         $lichsuchuyenhangController = new LichsuchuyenhangController;
         $lichsuchuyenhangController->luusukien(
             $chuyenhang->id,
+            $chuyenhang->machuyenhang,
             null,
             Carbon::now(),
             $tongdonhang,
@@ -581,7 +590,7 @@ class DonhangController extends Controller
                 ->where('id_trangthai', 3)
                 ->first();
             $lichsuchuyenhang->tongdonhang = $lichsuchuyenhang->tongdonhang - 1;
-            $lichsuchuyenhang->save();            
+            $lichsuchuyenhang->save();
         }
         return back();
     }

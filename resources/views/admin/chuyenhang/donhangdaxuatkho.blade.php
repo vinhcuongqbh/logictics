@@ -15,7 +15,7 @@
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/chuyenhang/dmdaxuatkho">Chuyến hàng</a></li>
-                <li class="breadcrumb-item active">{{ $chuyenhang->id }}</li>
+                <li class="breadcrumb-item active">{{ chuanHoaMaChuyenHang($chuyenhang->machuyenhang) }}</li>
             </ol>
         </div>
     </div>

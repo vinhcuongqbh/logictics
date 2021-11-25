@@ -7,7 +7,7 @@ use App\Models\Lichsuchuyenhang;
 
 class LichsuchuyenhangController extends Controller
 {
-    public function luusukien($id_chuyenhang, $ngaygui, $ngaynhan, $tongdonhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
+    public function luusukien($id_chuyenhang, $machuyenhang, $ngaygui, $ngaynhan, $tongdonhang, $id_nhanvienquanly, $id_khogui, $id_khonhan, $id_trangthai)
     {
         //Lưu sự kiện của Chuyến hàng
         $lichsuchuyenhang = new Lichsuchuyenhang;
@@ -15,6 +15,7 @@ class LichsuchuyenhangController extends Controller
         $lichsuchuyenhang->ngaynhan = $ngaynhan;
         $lichsuchuyenhang->tongdonhang = $tongdonhang;
         $lichsuchuyenhang->id_chuyenhang = $id_chuyenhang;
+        $lichsuchuyenhang->machuyenhang = $machuyenhang;
         $lichsuchuyenhang->id_nhanvienquanly = $id_nhanvienquanly;
         $lichsuchuyenhang->id_khogui = $id_khogui;
         $lichsuchuyenhang->id_khonhan = $id_khonhan;

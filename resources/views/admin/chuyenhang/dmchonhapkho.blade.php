@@ -3,6 +3,9 @@
 @section('title', 'Chuyến hàng')
 
 @section('content_header')
+<?php
+    include(app_path().'/myFunction/Hamdungchung.php');
+?>
 <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-5">
@@ -52,7 +55,7 @@
                             @foreach ($chuyenhangs as $chuyenhang)
                             <tr>
                                 <td style="text-align: center"><a
-                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ $chuyenhang->id }}</a>
+                                        href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">{{ chuanHoaMaChuyenHang($chuyenhang->machuyenhang) }}</a>
                                 </td>
                                 <td style="text-align: center"><a
                                         href="{{ route('chuyenhang.donhangchonhapkho', $chuyenhang->id) }}">@if ($chuyenhang->ngaygui <> null) {{ date('d-m-Y H:i:s', strtotime($chuyenhang->ngaygui)) }} @endif</a>

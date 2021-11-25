@@ -11,8 +11,14 @@
     <?php
     function chuanHoaMaTraCuu($matracuu)
     {
-        $matracuu = substr($matracuu, 0, 5)."-".substr($matracuu, 5, 5)."-".substr($matracuu, 10, 4);
+        $matracuu = substr($matracuu, 0, 5) . "-" . substr($matracuu, 5, 5) . "-" . substr($matracuu, 10, 4);
         return $matracuu;
+    }
+
+    function chuanHoaMaChuyenHang($machuyenhang)
+    {
+        $machuyenhang = substr($machuyenhang, 0, 3)."-".substr($machuyenhang, 3, 5)."-".substr($machuyenhang, 8, 5);
+        return $machuyenhang;
     }
 
     ?>
