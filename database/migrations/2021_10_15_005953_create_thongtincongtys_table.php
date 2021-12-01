@@ -20,6 +20,7 @@ class CreateThongtincongtysTable extends Migration
             $table->string('diachi')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->string('slogan')->nullable();
             $table->timestamps();
         });
     }

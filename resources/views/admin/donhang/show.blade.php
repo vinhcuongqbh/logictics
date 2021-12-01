@@ -447,7 +447,7 @@
                 <td style="width: 40%; text-align: center; vertical-align: top;"><img src="/img/logo.png"
                         style="width: 200px;"></td>
                 <td style="width: 60%; text-align: center; vertical-align: top;">
-                    <h2><b>CÔNG TY VẬN CHUYỂN ETRACK</b></h2>
+                    <h4><b>Order mua hàng Nhật & vận chuyển an toàn số 1 Nhật Bản</b></h4>
                 </td>
             </tr>
         </table>

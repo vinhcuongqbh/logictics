@@ -166,7 +166,7 @@ class DonhangController extends Controller
             ->first();
 
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "ETRACK" . $donhang->matracuu;
+        $qrcode = "https://etrack.jp/track-info/" . $donhang->matracuu;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -205,7 +205,7 @@ class DonhangController extends Controller
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
         $dongiahangcongkenh = Dongiahangcongkenh::all();
         $chitietdonhang = Chitietdonhang::where('id_donhang', $id)->get();
-        $qrcode = "ETRACK" . $donhang->matracuu;
+        $qrcode = "https://etrack.jp/track-info/" . $donhang->matracuu;
         // $qrcode = "Mã đơn hàng: ".$donhang->id.
         // "\nNgười gửi: ".$donhang->tennguoigui.
         // "\nSĐT Người gửi: ".$donhang->sodienthoainguoigui.
@@ -387,8 +387,10 @@ class DonhangController extends Controller
         //Cập nhật thông tin xuất kho cho Đơn hàng
         // $id_donhangduocchons = $request->input('id_donhangduocchon');        
 
+        //Lấy thông tin các đơn hàng được chọn
         $id_duocchons = json_decode($request->id_duocchon, true);
 
+        //Nếu có đơn hàng được chọn để xuất kho
         if ($id_duocchons <> null) {
             //Tạo chuyến hàng mới
             $chuyenhangController = new ChuyenhangController;
@@ -441,6 +443,8 @@ class DonhangController extends Controller
 
         return back();
     }
+
+    
 
     public function xuattoanbokho()
     {

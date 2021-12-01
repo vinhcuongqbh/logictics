@@ -40,6 +40,7 @@ class TestSeeder extends Seeder
                     'id_khonhan' => null,
                     'id_trangthai' => 2,
                     'tongchiphi' =>  $tongchiphi,
+                    'tongkhoiluong' => rand(1, 50),
                     'chietkhau' => $chietkhau,
                     'created_at' => $day->copy()->addDays(15),
                     'updated_at' => $day->copy()->addDays(15),

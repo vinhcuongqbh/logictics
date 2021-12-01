@@ -21,6 +21,7 @@ class ThongtincongtySeeder extends Seeder
                 'sodienthoai' => '+81 48-400-2787',
                 'email' => 'etrack@gmail.com',
                 'website' => 'etrack.co.jp',
+                'slogan' => 'Order mua hàng Nhật & vận chuyển an toàn số 1 Nhật Bản',
             ],
         ]);
     }

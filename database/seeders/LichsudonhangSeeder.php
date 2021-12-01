@@ -137,6 +137,59 @@ class LichsudonhangSeeder extends Seeder
                     ],
                 ]);
             }
+
+
+            for ($i = 1; $i <= 100; $i++) {
+                $id_donhang++;
+                $matracuu = str_replace(".", "", microtime(true));
+                if (strlen($matracuu) <> 14) {
+                    while (strlen($matracuu)<14) {
+                        $matracuu = $matracuu . "0";
+                    }
+                }
+                $tongchiphi = rand(100, 3000) * 1000;
+                $chietkhau = $tongchiphi * $tilechietkhau / 100;
+
+                $day = Carbon::now()->subDays(rand(0, 730));
+                $donhang = Donhang::factory()->count(1)->create([
+                    'id' => $id_donhang,
+                    'matracuu' => $matracuu,
+                    'id_nhanvienkhoitao' => $id_nhanvienquanly,
+                    'id_nhanvienquanly' => 3,
+                    'id_khogui' => $id_nhanvienquanly - 2,
+                    'id_khonhan' => null,
+                    'id_trangthai' => 2,
+                    'tongkhoiluong' => rand(1, 50),
+                    'tongchiphi' =>  $tongchiphi,
+                    'chietkhau' => $chietkhau,
+                    'created_at' => $day->copy()->addDays(15),
+                    'updated_at' => $day->copy()->addDays(15),
+                ]);
+
+
+                DB::table('lichsudonhangs')->insert([
+                    [
+                        'id_donhang' => $id_donhang,
+                        'matracuu' => $matracuu,
+                        'id_nhanvienquanly' => $id_nhanvienquanly,
+                        'id_khogui' => $id_khogui,
+                        'id_khonhan' => null,
+                        'id_trangthai' => 1,
+                        'created_at' => $day,
+                        'updated_at' => $day,
+                    ],
+                    [
+                        'id_donhang' => $id_donhang,
+                        'matracuu' => $matracuu,
+                        'id_nhanvienquanly' => $id_nhanvienquanly,
+                        'id_khogui' => $id_khogui,
+                        'id_khonhan' => null,
+                        'id_trangthai' => 2,
+                        'created_at' => $day,
+                        'updated_at' => $day,
+                    ],                   
+                ]);
+            }
         }
     }
 }
