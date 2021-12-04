@@ -36,8 +36,9 @@ class LichsudonhangSeeder extends Seeder
                 }
                 $tongchiphi = rand(100, 3000) * 1000;
                 $chietkhau = $tongchiphi * $tilechietkhau / 100;
-
+                $id_trangthai = rand(4, 6);
                 $day = Carbon::now()->subDays(rand(0, 730));
+
                 $donhang = Donhang::factory()->count(1)->create([
                     'id' => $id_donhang,
                     'matracuu' => $matracuu,
@@ -45,15 +46,14 @@ class LichsudonhangSeeder extends Seeder
                     'id_nhanvienquanly' => 3,
                     'id_khogui' => 1,
                     'id_khonhan' => 0,
-                    'id_trangthai' => rand(4, 6),
+                    'id_trangthai' => $id_trangthai,
                     'tongkhoiluong' => rand(1, 50),
                     'tongchiphi' =>  $tongchiphi,
                     'chietkhau' => $chietkhau,
                     'created_at' => $day->copy()->addDays(15),
                     'updated_at' => $day->copy()->addDays(15),
                 ]);
-
-
+                
                 DB::table('lichsudonhangs')->insert([
                     [
                         'id_donhang' => $id_donhang,
