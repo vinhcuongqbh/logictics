@@ -78,6 +78,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('{id}/update', [NhanvienController::class, 'update'])->name('nhanvien.update');
         Route::get('{id}/delete', [NhanvienController::class, 'destroy'])->name('nhanvien.delete');
         Route::get('{id}/restore', [NhanvienController::class, 'restore'])->name('nhanvien.restore');
+        Route::post('resetpass', [NhanvienController::class, 'resetpass'])->name('nhanvien.resetpass');
     });
 
     Route::group(['prefix' => 'khachhang'], function () {

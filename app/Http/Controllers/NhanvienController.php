@@ -134,7 +134,7 @@ class NhanvienController extends Controller
     }
 
     
-
+    //Khóa tài khoản Nhân viên
     public function destroy($id)
     {
         $nhanvien = User::find($id);
@@ -145,11 +145,29 @@ class NhanvienController extends Controller
     }
 
     
-
+    //Mở lại tài khoản Nhân viên
     public function restore($id)
     {
         $nhanvien = User::find($id);
         $nhanvien->id_trangthai = 1;
+        $nhanvien->save();
+
+        return back();
+    }
+
+
+    //Cấp lại mật mã tài khoản Nhân viên
+    public function resetpass(Request $request)
+    {
+        //Kiểm tra thông tin đầu vào
+        $validated = $request->validate([
+            'password' => 'required',            
+        ]);
+
+
+        //Cấp lại mật mã tài khoản Nhân viên
+        $nhanvien = User::find($request->id_nhanvien);
+        $nhanvien->password = Hash::make($request->password);
         $nhanvien->save();
 
         return back();

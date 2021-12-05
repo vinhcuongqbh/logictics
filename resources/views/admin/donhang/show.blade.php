@@ -143,8 +143,8 @@
                         <div class="col-sm-2 col-12" style="text-align: center; padding: 40px 0px 20px 0px;">
                             <div class="row">
                                 <div class="col" id="qrcode">
-                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>                                    
-                                        {{ chuanHoaMaTraCuu($donhang->matracuu) }}
+                                    {!! QrCode::encoding('UTF-8')->generate($qrcode); !!}<br>
+                                    {{ chuanHoaMaTraCuu($donhang->matracuu) }}
                                 </div>
                             </div>
                         </div>
@@ -353,7 +353,8 @@
                     @if (($donhang->id_trangthai == 2) && ($donhang->id_nhanvienquanly == $donhang->id_nhanvienkhoitao))
                     <div class="col-3 col-md-1">
                         <a href="{{ route('donhang.delete', $donhang->id) }}">
-                            <button type="button" value="XÓA" class="btn btn-block btn-danger">XÓA</button>
+                            <button type="button" value="XÓA" class="btn btn-block btn-danger"
+                                onclick="return confirm('Bạn muốn xóa Đơn hàng này?')">XÓA</button>
                         </a>
                     </div>
                     @endif
@@ -589,6 +590,7 @@
 <script src="/vendor/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 <script>
     $(document).ready(function() {
         var donhangTable = $('#donhang-table').DataTable({
