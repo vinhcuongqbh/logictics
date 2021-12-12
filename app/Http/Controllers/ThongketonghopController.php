@@ -32,6 +32,7 @@ class ThongketonghopController extends Controller
         $ngayKetThuc = new Carbon($request->ngayketthuc);
 
         $thongkedonhang = new ThongkedonhangController;
+        $thongkekhoiluong = new ThongkekhoiluongController;
         $thongkedoanhthu = new ThongkedoanhthuController;
         $thongkechietkhau = new ThongkechietkhauController;
 
@@ -43,6 +44,9 @@ class ThongketonghopController extends Controller
                 $sodonhangdanhanduongkhong = $thongkedonhang->thongKeDonHangDuongKhong($nhanvien->id, $ngayBatDau, $ngayKetThuc);
                 $sodonhangdanhanduongbien = $thongkedonhang->thongKeDonHangDuongBien($nhanvien->id, $ngayBatDau, $ngayKetThuc);
                 $sodonhangdanhan = $sodonhangdanhanduongkhong + $sodonhangdanhanduongbien;
+                $khoiluongdanhanduongkhong = $thongkekhoiluong->thongKeKhoiLuongDuongKhong($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $khoiluongdanhanduongbien = $thongkekhoiluong->thongKeKhoiLuongDuongBien($nhanvien->id, $ngayBatDau, $ngayKetThuc);
+                $khoiluongdanhan = $khoiluongdanhanduongkhong + $khoiluongdanhanduongbien;
                 $sodonhangthatlacduongkhong = $thongkedonhang->thongKeDonHangThatLacDuongKhong($nhanvien->id, $ngayBatDau, $ngayKetThuc);
                 $sodonhangthatlacduongbien = $thongkedonhang->thongKeDonHangThatLacDuongBien($nhanvien->id, $ngayBatDau, $ngayKetThuc);
                 $sodonhangthatlac = $sodonhangthatlacduongkhong + $sodonhangthatlacduongbien;
@@ -60,6 +64,9 @@ class ThongketonghopController extends Controller
                     'sodonhangdanhan' => $sodonhangdanhan,
                     'sodonhangdanhanduongkhong' => $sodonhangdanhanduongkhong,
                     'sodonhangdanhanduongbien' => $sodonhangdanhanduongbien,
+                    'khoiluongdanhan' => $khoiluongdanhan,
+                    'khoiluongdanhanduongkhong' => $khoiluongdanhanduongkhong,
+                    'khoiluongdanhanduongbien' => $khoiluongdanhanduongbien,
                     'sodonhangthatlac' => $sodonhangthatlac,
                     'sodonhangthatlacduongkhong' => $sodonhangthatlacduongkhong,
                     'sodonhangthatlacduongbien' => $sodonhangthatlacduongbien,
@@ -75,6 +82,9 @@ class ThongketonghopController extends Controller
             $sodonhangdanhanduongkhong = $thongkedonhang->thongKeDonHangDuongKhong($id_nhanvien, $ngayBatDau, $ngayKetThuc);
             $sodonhangdanhanduongbien = $thongkedonhang->thongKeDonHangDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc);
             $sodonhangdanhan = $sodonhangdanhanduongkhong + $sodonhangdanhanduongbien;
+            $khoiluongdanhanduongkhong = $thongkekhoiluong->thongKeKhoiLuongDuongKhong($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $khoiluongdanhanduongbien = $thongkekhoiluong->thongKeKhoiLuongDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc);
+            $khoiluongdanhan = $khoiluongdanhanduongkhong + $khoiluongdanhanduongbien;
             $sodonhangthatlacduongkhong = $thongkedonhang->thongKeDonHangThatLacDuongKhong($id_nhanvien, $ngayBatDau, $ngayKetThuc);
             $sodonhangthatlacduongbien = $thongkedonhang->thongKeDonHangThatLacDuongBien($id_nhanvien, $ngayBatDau, $ngayKetThuc);
             $sodonhangthatlac = $sodonhangthatlacduongkhong + $sodonhangthatlacduongbien;
@@ -91,9 +101,12 @@ class ThongketonghopController extends Controller
                 'sodonhangdanhan' => $sodonhangdanhan,
                 'sodonhangdanhanduongkhong' => $sodonhangdanhanduongkhong,
                 'sodonhangdanhanduongbien' => $sodonhangdanhanduongbien,
+                'khoiluongdanhan' => $khoiluongdanhan,
+                'khoiluongdanhanduongkhong' => $khoiluongdanhanduongkhong,
+                'khoiluongdanhanduongbien' => $khoiluongdanhanduongbien,
                 'sodonhangthatlac' => $sodonhangthatlac,
                 'sodonhangthatlacduongkhong' => $sodonhangthatlacduongkhong,
-                'sodonhangthatlacduongbien' => $sodonhangthatlacduongbien,
+                'sodonhangthatlacduongbien' => $sodonhangthatlacduongbien,                
                 'doanhthu' => $doanhthu,
                 'doanhthuduongkhong' => $doanhthuduongkhong,
                 'doanhthuduongbien' => $doanhthuduongbien,

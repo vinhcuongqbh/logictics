@@ -68,8 +68,9 @@
                                 <th rowspan="2">Tên Nhân viên</th>
                                 <th colspan="3">Số đơn hàng đã nhận</th>
                                 <th colspan="3">Số đơn hàng thất lạc</th>
+                                <th colspan="3">Khối lượng đã nhận (kg)</th>
                                 <th colspan="3">Doanh thu (triệu)</th>
-                                <th colspan="3">Chiết khấu (triệu)</th>
+                                {{-- <th colspan="3">Chiết khấu (triệu)</th> --}}
                             </tr>
                             <tr>
                                 <th>Tổng</th>
@@ -84,6 +85,9 @@
                                 <th>Tổng</th>
                                 <th>Đ.Không</th>
                                 <th>Đ.Biển</th>
+                                {{-- <th>Tổng</th>
+                                <th>Đ.Không</th>
+                                <th>Đ.Biển</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -97,12 +101,15 @@
                                 <td style="text-align: center">{{ $thongke['sodonhangthatlac'] }}</td>
                                 <td style="text-align: center">{{ $thongke['sodonhangthatlacduongkhong'] }}</td>
                                 <td style="text-align: center">{{ $thongke['sodonhangthatlacduongbien'] }}</td>
+                                <td style="text-align: center">{{ $thongke['khoiluongdanhan'] }}</td>
+                                <td style="text-align: center">{{ $thongke['khoiluongdanhanduongkhong'] }}</td>
+                                <td style="text-align: center">{{ $thongke['khoiluongdanhanduongbien'] }}</td>                                
                                 <td style="text-align: center">{{ $thongke['doanhthu'] }}</td>
                                 <td style="text-align: center">{{ $thongke['doanhthuduongkhong'] }}</td>
                                 <td style="text-align: center">{{ $thongke['doanhthuduongbien'] }}</td>
-                                <td style="text-align: center">{{ $thongke['chietkhau'] }}</td>
+                                {{-- <td style="text-align: center">{{ $thongke['chietkhau'] }}</td>
                                 <td style="text-align: center">{{ $thongke['chietkhauduongkhong'] }}</td>
-                                <td style="text-align: center">{{ $thongke['chietkhauduongbien'] }}</td>
+                                <td style="text-align: center">{{ $thongke['chietkhauduongbien'] }}</td> --}}
                             </tr>
                             @endforeach
                             <tr>
@@ -114,12 +121,15 @@
                                 <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlac') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlacduongkhong') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('sodonhangthatlacduongbien') }}</b></td>
+                                <td style="text-align: center">{{ $thongkes->sum('khoiluongdanhan') }}</td>
+                                <td style="text-align: center">{{ $thongkes->sum('khoiluongdanhanduongkhong') }}</td>
+                                <td style="text-align: center">{{ $thongkes->sum('khoiluongdanhanduongbien') }}</td>  
                                 <td style="text-align: center"><b>{{ $thongkes->sum('doanhthu') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('doanhthuduongkhong') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('doanhthuduongbien') }}</b></td>
-                                <td style="text-align: center"><b>{{ $thongkes->sum('chietkhau') }}</b></td>
+                                {{-- <td style="text-align: center"><b>{{ $thongkes->sum('chietkhau') }}</b></td>
                                 <td style="text-align: center"><b>{{ $thongkes->sum('chietkhauduongkhong') }}</b></td>
-                                <td style="text-align: center"><b>{{ $thongkes->sum('chietkhauduongbien') }}</b></td>
+                                <td style="text-align: center"><b>{{ $thongkes->sum('chietkhauduongbien') }}</b></td> --}}
                             </tr>
                         </tbody>
                     </table>

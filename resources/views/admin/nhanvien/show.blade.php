@@ -112,6 +112,7 @@
                                 style="padding-left:0px; padding-right:0px" data-toggle="modal"
                                 data-target="#reset-pass">ĐỔI MẬT MÃ</button>
                         </div>
+                        @if (Auth::user()->id_loainhanvien == 1)
                         <div class="col-3 col-md-2">
                             <a href="{{ route('nhanvien.edit', $nhanvien->id) }}"><button type="button"
                                     class="btn btn-block btn-secondary">SỬA</button></a>
@@ -127,6 +128,7 @@
                                     class="btn btn-block btn-success">PHỤC HỒI</button></a>
                             @endif
                         </div>
+                        @endif
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -154,7 +156,7 @@
                             <label for="password" class="col-form-label">Mật mã mới</label>
                         </div>
                         <div class="col-8">
-                            <input type="text" id="password" name="password" class="form-control">
+                            <input type="password" id="password" name="password" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -162,7 +164,7 @@
                             <label for="confirmpassword" class="col-form-label">Nhập lại Mật mã mới</label>
                         </div>
                         <div class="col-8">
-                            <input type="text" id="confirmpassword" name="confirmpassword" class="form-control">
+                            <input type="password" id="confirmpassword" name="confirmpassword" class="form-control">
                         </div>
                     </div>
                     <input type="hidden" id="id_nhanvien" name="id_nhanvien" value="{{ $nhanvien->id }}">

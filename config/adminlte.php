@@ -350,6 +350,17 @@ return [
             'icon' => 'fas fa-fw fa-angle-right',
             'can'         => 'thongke-chietkhau',
         ],     
+        ['header' => 'CÁ NHÂN'],    
+        [
+            'text'        => 'Thông tin tài khoản',
+            'url'         => 'admin/nhanvien/thongtintaikhoan',
+            'icon' => 'fas fa-fw fa-angle-right',
+        ],    
+        [
+            'text'        => 'Log Out',
+            'url'         => 'admin/nhanvien/logout',
+            'icon' => 'fas fa-fw fa-angle-right',
+        ],
     ],
 
     /*

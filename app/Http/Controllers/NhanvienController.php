@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Loainhanvien;
@@ -16,7 +17,7 @@ class NhanvienController extends Controller
     {
         //Hiển thị danh sách Tài khoản đang sử dụng
         $nhanvien = User::join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
-            ->join('khohangs', 'khohangs.id', 'users.id_khohangquanly')
+            ->leftjoin('khohangs', 'khohangs.id', 'users.id_khohangquanly')
             ->select('users.*', 'loainhanviens.tenloainhanvien', 'khohangs.tenkhohang')
             ->orderBy('id', 'asc')
             ->get();
@@ -30,26 +31,26 @@ class NhanvienController extends Controller
     {
         //Hiển thị danh sách Tài khoản đã nghỉ việc
         $nhanvien = User::where('users.id_trangthai', 0)
-        ->join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
-        ->join('khohangs', 'khohangs.id', 'users.id_khohangquanly')
-        ->select('users.*', 'loainhanviens.tenloainhanvien', 'khohangs.tenkhohang')
-        ->orderBy('id', 'asc')
-        ->get();
+            ->join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
+            ->leftjoin('khohangs', 'khohangs.id', 'users.id_khohangquanly')
+            ->select('users.*', 'loainhanviens.tenloainhanvien', 'khohangs.tenkhohang')
+            ->orderBy('id', 'asc')
+            ->get();
 
         return view('admin.nhanvien.index', ['nhanviens' => $nhanvien]);
     }
 
-   
+
 
     public function create()
     {
         $loainhanvien = Loainhanvien::all();
         $khohang = Khohang::all();
-        $password = rand(100000,999999);
-        return view('admin.nhanvien.create',['loainhanvien' => $loainhanvien, 'password' => $password, 'khohangs' => $khohang]);
+        $password = rand(100000, 999999);
+        return view('admin.nhanvien.create', ['loainhanvien' => $loainhanvien, 'password' => $password, 'khohangs' => $khohang]);
     }
 
-    
+
 
     public function store(Request $request)
     {
@@ -81,21 +82,22 @@ class NhanvienController extends Controller
         return redirect()->route('nhanvien.show', $nhanvien->id);
     }
 
-   
+
 
     public function show($id)
     {
+
         //Hiển thị thông tin Nhân viên
         $nhanvien = User::where('users.id', $id)
             ->join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
-            ->join('khohangs', 'khohangs.id', 'users.id_khohangquanly')
+            ->leftjoin('khohangs', 'khohangs.id', 'users.id_khohangquanly')
             ->select('users.*', 'loainhanviens.tenloainhanvien', 'khohangs.tenkhohang')
             ->first();
 
         return view('admin.nhanvien.show', ['nhanvien' => $nhanvien]);
     }
 
-    
+
 
     public function edit($id)
     {
@@ -107,7 +109,7 @@ class NhanvienController extends Controller
         return view('admin.nhanvien.edit', ['nhanvien' => $nhanvien, 'loainhanviens' => $loainhanvien, 'khohangs' => $khohang]);
     }
 
-    
+
 
     public function update(Request $request, $id)
     {
@@ -133,7 +135,7 @@ class NhanvienController extends Controller
         return redirect()->route('nhanvien.show', $nhanvien->id);
     }
 
-    
+
     //Khóa tài khoản Nhân viên
     public function destroy($id)
     {
@@ -144,7 +146,7 @@ class NhanvienController extends Controller
         return back();
     }
 
-    
+
     //Mở lại tài khoản Nhân viên
     public function restore($id)
     {
@@ -161,7 +163,7 @@ class NhanvienController extends Controller
     {
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
-            'password' => 'required',            
+            'password' => 'required',
         ]);
 
 
@@ -173,4 +175,27 @@ class NhanvienController extends Controller
         return back();
     }
 
+
+    //Hiển thị thông tin tài khoản
+    public function thongtintaikhoan()
+    {
+        //Lấy id nhân viên đang đăng nhập
+        $id_nhanvien = Auth::id();
+
+        return redirect()->action(
+            [NhanvienController::class, 'show'],
+            ['id' => $id_nhanvien]
+        );
+    }
+
+
+
+    //Thoát tài khoản 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }

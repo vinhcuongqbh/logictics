@@ -66,13 +66,14 @@
                                 <th rowspan="2">Tên Nhân viên</th>
                                 <th colspan="3">Số đơn hàng đã nhận</th>
                                 <th colspan="3">Số đơn hàng thất lạc</th>
+                                <th colspan="3">Khối lượng đã nhận (kg)</th>
                                 <th colspan="3">Doanh thu (triệu)</th>
-                                <th colspan="3">Chiết khấu (triệu)</th>
+                                {{-- <th colspan="3">Chiết khấu (triệu)</th> --}}
                             </tr>
                             <tr>
                                 <th>Tổng</th>
                                 <th>Đ.Không</th>
-                                <th>Đ.Biển</th>
+                                <th>Đ.Biển</th>                                
                                 <th>Tổng</th>
                                 <th>Đ.Không</th>
                                 <th>Đ.Biển</th>
@@ -82,6 +83,9 @@
                                 <th>Tổng</th>
                                 <th>Đ.Không</th>
                                 <th>Đ.Biển</th>
+                                {{-- <th>Tổng</th>
+                                <th>Đ.Không</th>
+                                <th>Đ.Biển</th> --}}
                             </tr>
                         </thead>
                         <tbody>

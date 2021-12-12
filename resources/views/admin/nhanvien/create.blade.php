@@ -67,7 +67,7 @@
                                 <label for="sodienthoai">Số điện thoại</label>
                             </div>
                             <div class="col-sm-9">
-                                <input type="tel" id="sodienthoai" name="sodienthoai" placeholder="(+81)123-456-789"
+                                <input type="tel" id="sodienthoai" name="sodienthoai" 
                                     value="{{ old('sodienthoai') }}" class="form-control">
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
-                                    {{-- <option value="0"></option> --}}
+                                    <option></option>
                                     @foreach ($khohangs as $khohang)
                                         <option value="{{ $khohang->id }}">
                                             {{ $khohang->tenkhohang }}</option>

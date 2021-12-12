@@ -10,6 +10,7 @@ use App\Http\Controllers\DonhangController;
 use App\Http\Controllers\ChuyenhangController;
 use App\Http\Controllers\ThongketonghopController;
 use App\Http\Controllers\ThongkedonhangController;
+use App\Http\Controllers\ThongkekhoiluongController;
 use App\Http\Controllers\ThongkedoanhthuController;
 use App\Http\Controllers\ThongkechietkhauController;
 
@@ -73,12 +74,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('danghiviec', [NhanvienController::class, 'danghiviec'])->name('nhanvien.danghiviec');
         Route::get('create', [NhanvienController::class, 'create'])->name('nhanvien.create');
         Route::post('store', [NhanvienController::class, 'store'])->name('nhanvien.store');
-        Route::get('{id}', [NhanvienController::class, 'show'])->name('nhanvien.show');
+        Route::get('{id}/show', [NhanvienController::class, 'show'])->name('nhanvien.show');
         Route::get('{id}/edit', [NhanvienController::class, 'edit'])->name('nhanvien.edit');
         Route::post('{id}/update', [NhanvienController::class, 'update'])->name('nhanvien.update');
         Route::get('{id}/delete', [NhanvienController::class, 'destroy'])->name('nhanvien.delete');
         Route::get('{id}/restore', [NhanvienController::class, 'restore'])->name('nhanvien.restore');
         Route::post('resetpass', [NhanvienController::class, 'resetpass'])->name('nhanvien.resetpass');
+        Route::get('thongtintaikhoan', [NhanvienController::class, 'thongtintaikhoan'])->name('nhanvien.thongtintaikhoan');
+        Route::get('logout', [NhanvienController::class, 'logout'])->name('nhanvien.logout');
     });
 
     Route::group(['prefix' => 'khachhang'], function () {
@@ -132,6 +135,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('thongketonghop', [ThongketonghopController::class, 'thongKeTongHopDashBoard'])->name('thongke.thongKeTongHopDashBoard');
         Route::get('ketquathongke', [ThongketonghopController::class, 'ketQuaThongKe'])->name('thongke.ketquathongke');
         Route::get('thongkedonhang', [ThongkedonhangController::class, 'thongKeDonHangDashBoard'])->name('thongke.thongKeDonHangDashBoard');
+        Route::get('thongkekhoiluong', [ThongkekhoiluongController::class, 'thongKeKhoiLuongDashBoard'])->name('thongke.thongKeKhoiLuongDashBoard');
         Route::get('thongkedoanhthu', [ThongkedoanhthuController::class, 'thongKeDoanhThuDashBoard'])->name('thongke.thongKeDoanhThuDashBoard');
         Route::get('thongkechietkhau', [ThongkechietkhauController::class, 'thongKeChietKhauDashBoard'])->name('thongke.thongKeChietKhauDashBoard');
     });

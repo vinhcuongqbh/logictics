@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-sm-9">
                                 <select class="custom-select" id="id_khohangquanly" name="id_khohangquanly">
-                                    {{-- <option value="0"></option> --}}
+                                    <option></option>
                                     @foreach ($khohangs as $khohang)
                                         <option value="{{ $khohang->id }}" @if ($nhanvien->id_khohangquanly == $khohang->id) {{ 'selected' }} @endif>
                                             {{ $khohang->tenkhohang }}</option>
