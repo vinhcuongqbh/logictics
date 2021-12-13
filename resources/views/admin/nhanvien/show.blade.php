@@ -8,13 +8,13 @@
         <div class="col-sm-3">
             <h1>NHÂN VIÊN</h1>
         </div>
-        <div class="col-sm-9">
+        {{-- <div class="col-sm-9">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="/admin/nhanvien">Nhân viên</a></li>
                 <li class="breadcrumb-item active">{{ $nhanvien->name }}</li>
             </ol>
-        </div>
+        </div> --}}
     </div>
 </div>
 <!-- /.container-fluid -->
