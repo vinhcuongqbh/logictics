@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="modal fade in" id="modal-default">
+            <div class="modal fade in" id="modal-default" style="margin-top: 100px">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
