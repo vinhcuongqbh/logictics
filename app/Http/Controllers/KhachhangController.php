@@ -11,6 +11,8 @@ class KhachhangController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Khachhang::class);
+
         //Hiển thị danh sách Tài khoản đang sử dụng
         if (Auth::user()->id_loainhanvien == 1) {
             $khachhang = Khachhang::join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
@@ -27,24 +29,7 @@ class KhachhangController extends Controller
 
         return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
     }
-
-    // public function daxoa()
-    // {
-    //     //Hiển thị danh sách Tài khoản đã xóa
-    //     $khachhang = Khachhang::where('khachhangs.id_trangthai', 0)
-    //         ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
-    //         ->select('khachhangs.*', 'users.name')
-    //         ->orderBy('id', 'asc')
-    //         ->get();
-
-    //     return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
-    // }
-
-
-    // public function create()
-    // {
-    //     return view('admin.khachhang.create');
-    // }
+  
 
 
     public function store(Request $request)
@@ -77,10 +62,11 @@ class KhachhangController extends Controller
 
     
 
-
-
     public function show($id)
     {
+        $khachhang = Khachhang::find($id);
+        $this->authorize('view', $khachhang);
+
         //Hiển thị thông tin Khách hàng
         $khachhang = Khachhang::where('khachhangs.id', $id)
             ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
@@ -94,6 +80,9 @@ class KhachhangController extends Controller
     public function edit($id)
     {
         $khachhang = Khachhang::find($id);
+        $this->authorize('update', $khachhang);
+
+        $khachhang = Khachhang::find($id);
         $nhanvien = User::select('id', 'name')
             ->where('id_loainhanvien', '>', 1)
             ->where('id_trangthai', 1)
@@ -106,6 +95,9 @@ class KhachhangController extends Controller
 
     public function update(Request $request, $id)
     {
+        $khachhang = Khachhang::find($id);
+        $this->authorize('update', $khachhang);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenkhachhang' => 'required',
@@ -124,6 +116,26 @@ class KhachhangController extends Controller
 
         return redirect()->action([KhachhangController::class, 'show'], ['id' => $id]);
     }
+
+
+
+    // public function daxoa()
+    // {
+    //     //Hiển thị danh sách Tài khoản đã xóa
+    //     $khachhang = Khachhang::where('khachhangs.id_trangthai', 0)
+    //         ->join('users', 'users.id', 'khachhangs.id_nhanvienquanly')
+    //         ->select('khachhangs.*', 'users.name')
+    //         ->orderBy('id', 'asc')
+    //         ->get();
+
+    //     return view('admin.khachhang.index', ['khachhangs' => $khachhang]);
+    // }
+
+
+    // public function create()
+    // {
+    //     return view('admin.khachhang.create');
+    // }
 
 
 

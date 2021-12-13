@@ -20,7 +20,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn không đủ thẩm quyền để thực hiện chức năng này.</p>
+                            <p>Bạn không đủ quyền để thực hiện chức năng này.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

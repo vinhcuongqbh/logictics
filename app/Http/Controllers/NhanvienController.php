@@ -15,6 +15,8 @@ class NhanvienController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', User::class);
+
         //Hiển thị danh sách Tài khoản đang sử dụng
         $nhanvien = User::join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
             ->leftjoin('khohangs', 'khohangs.id', 'users.id_khohangquanly')
@@ -29,6 +31,8 @@ class NhanvienController extends Controller
 
     public function danghiviec()
     {
+        $this->authorize('viewAny', User::class);
+
         //Hiển thị danh sách Tài khoản đã nghỉ việc
         $nhanvien = User::where('users.id_trangthai', 0)
             ->join('loainhanviens', 'loainhanviens.id', 'users.id_loainhanvien')
@@ -44,6 +48,8 @@ class NhanvienController extends Controller
 
     public function create()
     {
+        $this->authorize('create', User::class);
+
         $loainhanvien = Loainhanvien::all();
         $khohang = Khohang::all();
         $password = rand(100000, 999999);
@@ -54,6 +60,8 @@ class NhanvienController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', User::class);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'id_loainhanvien' => 'required',
@@ -84,8 +92,10 @@ class NhanvienController extends Controller
 
 
 
-    public function show($id)
+    public function show($id, User $nhanvien)
     {
+        $nhanvien = User::find($id);
+        $this->authorize('view', $nhanvien);
 
         //Hiển thị thông tin Nhân viên
         $nhanvien = User::where('users.id', $id)
@@ -99,8 +109,10 @@ class NhanvienController extends Controller
 
 
 
-    public function edit($id)
+    public function edit($id, User $nhanvien)
     {
+        $this->authorize('update', User::class);
+
         $nhanvien = User::find($id);
         $loainhanvien = LoaiNhanvien::all();
         $khohang = Khohang::all();
@@ -113,6 +125,8 @@ class NhanvienController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('update', User::class);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'id_loainhanvien' => 'required',
@@ -139,6 +153,8 @@ class NhanvienController extends Controller
     //Khóa tài khoản Nhân viên
     public function destroy($id)
     {
+        $this->authorize('destroy', User::class);
+
         $nhanvien = User::find($id);
         $nhanvien->id_trangthai = 0;
         $nhanvien->save();
@@ -150,6 +166,8 @@ class NhanvienController extends Controller
     //Mở lại tài khoản Nhân viên
     public function restore($id)
     {
+        $this->authorize('restore', User::class);
+
         $nhanvien = User::find($id);
         $nhanvien->id_trangthai = 1;
         $nhanvien->save();
@@ -161,6 +179,9 @@ class NhanvienController extends Controller
     //Cấp lại mật mã tài khoản Nhân viên
     public function resetpass(Request $request)
     {
+        $nhanvien = User::find($request->id_nhanvien);
+        $this->authorize('resetpass', $nhanvien);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'password' => 'required',

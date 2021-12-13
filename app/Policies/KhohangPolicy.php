@@ -19,17 +19,17 @@ class KhohangPolicy
      * @return mixed
      */
 
-    // public function before(User $user, $ability)
-    // {
-    //     if ($user->id_loainhanvien === 1) {
-    //         return true;
-    //     }
-    // }
+    public function before(User $user, $ability)
+    {
+        if ($user->id_loainhanvien === 1) {
+            return true;
+        }
+    }
 
 
     public function viewAny(User $user)
     {
-        return $user->id_loainhanvien === 1;
+        return false;
     }
 
     /**
@@ -41,7 +41,7 @@ class KhohangPolicy
      */
     public function view(User $user)
     {
-        return $user->id_loainhanvien === 1;
+        return false;
     }
 
     /**
@@ -52,7 +52,7 @@ class KhohangPolicy
      */
     public function create(User $user)
     {
-        return $user->id_loainhanvien === 1;
+        return false;
     }
 
     /**
@@ -62,9 +62,9 @@ class KhohangPolicy
      * @param  \App\Models\Khohang  $khohang
      * @return mixed
      */
-    public function update(User $user, Khohang $khohang)
+    public function update(User $user)
     {
-        return $user->id_loainhanvien === 1;
+        return false;
     }
 
     /**
@@ -74,9 +74,9 @@ class KhohangPolicy
      * @param  \App\Models\Khohang  $khohang
      * @return mixed
      */
-    public function delete(User $user, Khohang $khohang)
+    public function delete(User $user)
     {
-        return $user->id_loainhanvien === 1;
+        return false;
     }
 
     /**
@@ -88,7 +88,7 @@ class KhohangPolicy
      */
     public function restore(User $user, Khohang $khohang)
     {
-        return $user->id_loainhanvien === 1;
+        return false;
     }
 
     /**

@@ -15,7 +15,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Khohang::class => KhohangPolicy::class,
+        //Khohang::class => KhohangPolicy::class,
+        //User::class => UserPolicy::class,
+        //Khachhang::class => KhachhangPolicy::class,
     ];
 
     /**
