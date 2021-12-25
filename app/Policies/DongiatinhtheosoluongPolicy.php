@@ -2,17 +2,13 @@
 
 namespace App\Policies;
 
-use App\Models\Khohang;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 
-
-class KhohangPolicy
+class DongiatinhtheosoluongPolicy
 {
     use HandlesAuthorization;
 
-        
     public function before(User $user, $ability)
     {
         if ($user->id_loainhanvien === 1) {
@@ -53,18 +49,4 @@ class KhohangPolicy
     {
         return false;
     }
-  
-
-
-    public function restore(User $user, Khohang $khohang)
-    {
-        return false;
-    }
-
-    
-
-    // public function forceDelete(User $user, Khohang $khohang)
-    // {
-    //     return $user->id_loainhanvien === 1;
-    // }
 }

@@ -24,6 +24,8 @@ class DonhangController extends Controller
 {
     public function create()
     {
+        $this->authorize('create', Donhang::class);
+
         $khachhang = Khachhang::where('id_nhanvienquanly', Auth::id())->get();
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'desc')->get();
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::all();
@@ -159,6 +161,9 @@ class DonhangController extends Controller
 
     public function show($id)
     {
+        $donhang = Donhang::find($id);
+        $this->authorize('view', $donhang);
+
         //Hiển thị thông tin Đơn hàng
         $donhang = Donhang::where('donhangs.id', $id)
             ->join('hinhthucguis', 'hinhthucguis.id', 'donhangs.id_hinhthucgui')
@@ -197,6 +202,8 @@ class DonhangController extends Controller
     public function edit($id)
     {
         $donhang = Donhang::find($id);
+        $this->authorize('update', $donhang);
+
         $hinhthucgui = Hinhthucgui::all();
         $tilechietkhau = Auth::user()->tilechietkhau;
 
@@ -239,6 +246,9 @@ class DonhangController extends Controller
 
     public function update(Request $request, $id)
     {
+        $donhang = Donhang::find($id);
+        $this->authorize('update', $donhang);
+
         //Cập nhật thông tin Người gửi
         $khachhang = Khachhang::where('sodienthoai', $request->sodienthoainguoiguicu)->first();
         if ($khachhang != null) {
@@ -703,6 +713,8 @@ class DonhangController extends Controller
     public function destroy($id)
     {
         $donhang = Donhang::find($id);
+        $this->authorize('delete', $donhang);
+
         $donhang->id_nhanvienquanly = Auth::id();
         $donhang->id_trangthai = 7;
         $donhang->save();
@@ -733,8 +745,6 @@ class DonhangController extends Controller
         $donhang->id_khonhan = null;
         $donhang->id_trangthai = 6;
         $donhang->save();
-
-        echo $donhang->id_chuyenhang;
 
         //Lưu sự kiện "Thất lạc" cho Đơn hàng
         $lichsudonhangController = new LichsudonhangController;

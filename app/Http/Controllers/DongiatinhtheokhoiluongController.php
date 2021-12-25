@@ -7,7 +7,9 @@ use App\Models\Dongiatinhtheokhoiluong;
 
 class DongiatinhtheokhoiluongController extends Controller
 {
-    public function index()    {
+    public function index()    
+    {
+        $this->authorize('viewAny', Dongiatinhtheokhoiluong::class);
 
         //Hiển thị danh sách đơn giá
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::orderBy('khoiluongmax', 'asc')->get();
@@ -19,6 +21,8 @@ class DongiatinhtheokhoiluongController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Dongiatinhtheokhoiluong::class);
+
         return view('admin.dongia.tinhtheokhoiluong.create');
     }
 
@@ -26,6 +30,8 @@ class DongiatinhtheokhoiluongController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Dongiatinhtheokhoiluong::class);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'khoiluongmax' => 'required',
@@ -60,6 +66,7 @@ class DongiatinhtheokhoiluongController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('update', Dongiatinhtheokhoiluong::class);
 
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::find($id);
 
@@ -70,6 +77,8 @@ class DongiatinhtheokhoiluongController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Dongiatinhtheokhoiluong::class);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'khoiluongmax' => 'required',
@@ -90,6 +99,8 @@ class DongiatinhtheokhoiluongController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Dongiatinhtheokhoiluong::class);
+
         $dongiatinhtheokhoiluong = Dongiatinhtheokhoiluong::find($id);
         $dongiatinhtheokhoiluong->delete();
 

@@ -42,7 +42,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <input type="hidden" id="id_chuyenhang" name="id_chuyenhang" value="{{ $id_chuyenhang }}">
+                        <input type="hidden" id="id_chuyenhang" name="id_chuyenhang" value="{{ $chuyenhang->id }}">
                         <table id="donhang-table" class="table table-bordered table-striped">
                             <thead style="text-align: center">
                                 <tr>

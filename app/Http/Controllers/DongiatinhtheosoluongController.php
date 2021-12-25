@@ -7,7 +7,9 @@ use App\Models\Dongiatinhtheosoluong;
 
 class DongiatinhtheosoluongController extends Controller
 {
-    public function index()    {
+    public function index()    
+    {
+        $this->authorize('viewAny', Dongiatinhtheosoluong::class);
 
         //Hiển thị danh sách đơn giá
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::orderBy('tenmathang', 'asc')->get();
@@ -19,6 +21,8 @@ class DongiatinhtheosoluongController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Dongiatinhtheosoluong::class);
+
         return view('admin.dongia.tinhtheosoluong.create');
     }
 
@@ -26,6 +30,8 @@ class DongiatinhtheosoluongController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Dongiatinhtheosoluong::class);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenmathang' => 'required',
@@ -60,6 +66,7 @@ class DongiatinhtheosoluongController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('update', Dongiatinhtheosoluong::class);
 
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::find($id);
 
@@ -70,6 +77,8 @@ class DongiatinhtheosoluongController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Dongiatinhtheosoluong::class);
+
         //Kiểm tra thông tin đầu vào
         $validated = $request->validate([
             'tenmathang' => 'required',
@@ -90,6 +99,8 @@ class DongiatinhtheosoluongController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete', Dongiatinhtheosoluong::class);
+
         $dongiatinhtheosoluong = Dongiatinhtheosoluong::find($id);
         $dongiatinhtheosoluong->delete();
 
