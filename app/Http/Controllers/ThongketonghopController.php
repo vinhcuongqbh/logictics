@@ -27,9 +27,18 @@ class ThongketonghopController extends Controller
     public function ketQuaThongKe(Request $request)
     {
         $nhanviens = User::where('id_loainhanvien', '>', 1)->get();
-        $id_nhanvien = $request->nhanvien;
-        $ngayBatDau = new Carbon($request->ngaybatdau);
-        $ngayKetThuc = new Carbon($request->ngayketthuc);
+        $id_nhanvien = $request->nhanvien; if ($id_nhanvien == null) $id_nhanvien = Auth::id();
+        if ($request->ngaybatdau == null) {
+            $ngayBatDau = Carbon::now(); 
+            echo $ngayBatDau;
+        }
+        else 
+            { 
+                $ngayBatDau = new Carbon($request->ngaybatdau); 
+                echo $ngayBatDau; 
+            }
+        if ($request->ngayketthuc == null) $ngayKetThuc = Carbon::now();
+        else $ngayKetThuc = new Carbon($request->ngayketthuc);
 
         $thongkedonhang = new ThongkedonhangController;
         $thongkekhoiluong = new ThongkekhoiluongController;
