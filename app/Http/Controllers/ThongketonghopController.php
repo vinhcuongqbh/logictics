@@ -28,16 +28,9 @@ class ThongketonghopController extends Controller
     {
         $nhanviens = User::where('id_loainhanvien', '>', 1)->get();
         $id_nhanvien = $request->nhanvien; if ($id_nhanvien == null) $id_nhanvien = Auth::id();
-        if ($request->ngaybatdau == null) {
-            $ngayBatDau = Carbon::now(); 
-            echo $ngayBatDau;
-        }
-        else 
-            { 
-                $ngayBatDau = new Carbon($request->ngaybatdau); 
-                echo $ngayBatDau; 
-            }
-        if ($request->ngayketthuc == null) $ngayKetThuc = Carbon::now();
+        if ($request->ngaybatdau == null) $ngayBatDau = Carbon::now()->startOfDay();
+        else $ngayBatDau = new Carbon($request->ngaybatdau);         
+        if ($request->ngayketthuc == null) $ngayKetThuc = Carbon::now()->endOfDay();
         else $ngayKetThuc = new Carbon($request->ngayketthuc);
 
         $thongkedonhang = new ThongkedonhangController;
@@ -125,12 +118,14 @@ class ThongketonghopController extends Controller
             ]);
         }
 
+        $ngayBatDau = $ngayBatDau->toDateString();
+        $ngayKetThuc = $ngayKetThuc->toDateString();
 
         return view('admin.thongke.ketquathongke', [
             'nhanviens' => $nhanviens,
             'id_nhanvien' => $id_nhanvien,
-            'ngaybatdau' => $request->ngaybatdau,
-            'ngayketthuc' => $request->ngayketthuc,
+            'ngaybatdau' => $ngayBatDau,
+            'ngayketthuc' => $ngayKetThuc,
             'thongkes' => $thongke,
         ]);
     }

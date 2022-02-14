@@ -10,6 +10,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
+use App\Exports\ExportFile;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ChuyenhangController extends Controller
 {
     //Tạo Chuyến hàng mới
@@ -165,8 +168,6 @@ class ChuyenhangController extends Controller
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
             ->get();
 
-
-
         return view('admin.chuyenhang.donhangdanhapkho', ['donhangs' => $donhang, 'chuyenhang' => $chuyenhang]);
     }
 
@@ -179,5 +180,44 @@ class ChuyenhangController extends Controller
             ->get();
 
         return view('admin.chuyenhang.donhangchonhapkho', ['donhangs' => $donhang, 'chuyenhang' => $chuyenhang]);
+    }
+
+    function chuanHoaMaTraCuu($matracuu)
+    {
+        $matracuu = substr($matracuu, 0, 5) . "-" . substr($matracuu, 5, 5) . "-" . substr($matracuu, 10, 4);
+        return $matracuu;
+    }
+
+
+
+    //Danh mục Đơn hàng thuộc Chuyến hàng đã nhập Kho
+    public function export($id)
+    {
+        $chuyenhang = Chuyenhang::find($id);
+        $donhang = Lichsudonhang::where('lichsudonhangs.id_chuyenhang', $id)
+            ->where('lichsudonhangs.id_trangthai', 2)
+            ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
+            ->get();
+        
+        $point = [];
+        $stt = 0;
+
+        foreach ($donhang as $donhang) {        
+            $stt++;
+            array_push($point, [
+                $stt,
+                $this->chuanHoaMaTraCuu($donhang->matracuu), 
+                $donhang->tennguoinhan, 
+                $donhang->sodienthoainguoinhan,
+                $donhang->diachinguoinhan,
+            ]);
+        }
+
+        $data = (object) array(
+                'points' => $point,
+            );
+            
+        $export = new ExportFile([$data]);
+        return Excel::download($export, "abc.xlsx");
     }
 }

@@ -14,6 +14,8 @@ use App\Http\Controllers\ThongkekhoiluongController;
 use App\Http\Controllers\ThongkedoanhthuController;
 use App\Http\Controllers\ThongkechietkhauController;
 
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -129,6 +131,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('{id}/daxuatkho', [ChuyenhangController::class, 'daxuatkho'])->name('chuyenhang.daxuatkho');
         Route::get('{id}/danhapkho', [ChuyenhangController::class, 'danhapkho'])->name('chuyenhang.danhapkho');
         Route::post('{id}/lichsuchuyenhang', [ChuyenhangController::class, 'lichsuchuyenhang'])->name('chuyenhang.lichsuchuyenhang');
+        Route::get('{id}/export', [ChuyenhangController::class, 'export'])->name('chuyenhang.export');
     });
 
     Route::group(['prefix' => 'thongke'], function () {
