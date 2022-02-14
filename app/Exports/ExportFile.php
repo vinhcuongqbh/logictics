@@ -146,6 +146,7 @@ class ExportFile implements WithHeadingRow, FromArray, WithStyles, WithEvents, W
                     ->getStartColor()->setRGB('c5e0b4');
                 $event->sheet->getDelegate()->getRowDimension('7')->setRowHeight(30);
                 $event->sheet->getStyle('E')->getAlignment()->setWrapText(true);
+                $event->sheet->getStyle('F')->getAlignment()->setWrapText(true);
 
                 $event->sheet->getStyle('A7:T200')->applyFromArray([
                     'borders' => [
