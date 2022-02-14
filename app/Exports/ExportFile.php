@@ -73,7 +73,7 @@ class ExportFile implements WithHeadingRow, FromArray, WithStyles, WithEvents, W
     {
         $sheet->setCellValue('D2', 'TẬP ĐOÀN CÔNG NGHIỆP - VIỄN THÔNG QUÂN ĐỘI');
         $sheet->setCellValue('D3', 'TỔNG CÔNG TY CỔ PHẦN BƯU CHÍNH VIETTEL');
-        $sheet->setCellValue('F5', 'DANH SÁCH ĐƠN HÀNG');   
+        $sheet->setCellValue('E5', 'DANH SÁCH ĐƠN HÀNG');   
 
         return [
             // Styling an entire column.            
@@ -134,8 +134,8 @@ class ExportFile implements WithHeadingRow, FromArray, WithStyles, WithEvents, W
                 $event->sheet->getStyle('D2')->getAlignment()->setHorizontal('left');
                 $event->sheet->getDelegate()->getStyle('D3')->getFont()->setName('Times New Roman')->setSize(12)->setBold(true);
                 $event->sheet->getStyle('D3')->getAlignment()->setHorizontal('left');
-                $event->sheet->getDelegate()->getStyle('F5')->getFont()->setName('Times New Roman')->setSize(18)->setBold(true);
-                $event->sheet->getDelegate()->getStyle('F5')->getFont()->getColor()->setRGB('385724');
+                $event->sheet->getDelegate()->getStyle('E5')->getFont()->setName('Times New Roman')->setSize(18)->setBold(true);
+                $event->sheet->getDelegate()->getStyle('E5')->getFont()->getColor()->setRGB('385724');
                 
 
                 // $event->sheet->getStyle('A1:A500')->ApplyFromArray($styleCenter);
