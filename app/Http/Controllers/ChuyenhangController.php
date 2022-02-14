@@ -190,16 +190,46 @@ class ChuyenhangController extends Controller
 
 
 
-    //Danh mục Đơn hàng thuộc Chuyến hàng đã nhập Kho
+    //Xuất file Excel Đơn hàng thuộc Chuyến hàng đã nhập Kho
     public function export($id)
     {
         $chuyenhang = Chuyenhang::find($id);
         $donhang = Lichsudonhang::where('lichsudonhangs.id_chuyenhang', $id)
             ->where('lichsudonhangs.id_trangthai', 2)
             ->join('donhangs', 'donhangs.id', 'lichsudonhangs.id_donhang')
+            ->leftjoin('chitietdonhangs', 'chitietdonhangs.id_donhang', 'lichsudonhangs.id_donhang')
             ->get();
         
-        $point = [];
+        $point = [
+            [""],
+            [""],
+            [""],
+            [""],
+            [""],            
+            [
+                "STT",
+                "Mã tra cứu",
+                "Tên Người nhận (*)",
+                "Số ĐT Người nhận (*)",
+                "Địa chỉ nhận (*)",
+                "Tên hàng hóa (*)",
+                "Số lượng",
+                "Trọng lượng (gram)",
+                "Giá trị hàng (VND) (*)",
+                "Tiền thu hộ COD (VND)",
+                "Dịch vụ (*)",
+                "Dịch vụ cộng thêm",
+                "Thu tiền xem hàng",
+                "Dài (cm)",
+                "Rộng (cm)",
+                "Cao (cm)",
+                "Người trả cước",
+                "Ghi chú",
+                "Yêu cầu khác",
+                "Thời gian giao",
+            ],
+
+        ];
         $stt = 0;
 
         foreach ($donhang as $donhang) {        
@@ -210,6 +240,10 @@ class ChuyenhangController extends Controller
                 $donhang->tennguoinhan, 
                 $donhang->sodienthoainguoinhan,
                 $donhang->diachinguoinhan,
+                $donhang->tenmathang,
+                $donhang->soluong,
+                $donhang->tongkhoiluong*1000,
+                $donhang->giatriuoctinh,
             ]);
         }
 
@@ -218,6 +252,6 @@ class ChuyenhangController extends Controller
             );
             
         $export = new ExportFile([$data]);
-        return Excel::download($export, "abc.xlsx");
+        return Excel::download($export, "chuyenhang.xls");
     }
 }

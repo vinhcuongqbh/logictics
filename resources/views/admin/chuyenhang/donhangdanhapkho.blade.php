@@ -37,6 +37,11 @@
                                     <button type="submit" class="btn btn-outline-success float-left"
                                         style="width: 100px; margin-right: 10px">HOÀN LẠI</button>
                                 </div>
+                                <div class="col-auto">
+                                    <a href="{{ route('chuyenhang.export', $chuyenhang->id) }}"><button type="button"
+                                        class="btn btn-outline-success float-left"
+                                        style="width: 120px; margin-right: 10px">XUẤT EXCEL</button></a>
+                                </div>
                             </div>
                         </div>
                     </div>
