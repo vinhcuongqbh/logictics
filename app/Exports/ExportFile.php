@@ -130,12 +130,7 @@ class ExportFile implements WithHeadingRow, FromArray, WithStyles, WithEvents, W
 
                 $event->sheet->getDelegate()->getParent()->getDefaultStyle()->getFont()->setName('Times New Roman')->setSize(10);
 
-                $event->sheet->getDelegate()->getStyle('D2')->getFont()->setName('Times New Roman')->setSize(12)->setBold(true);
-                $event->sheet->getStyle('D2')->getAlignment()->setHorizontal('left');
-                $event->sheet->getDelegate()->getStyle('D3')->getFont()->setName('Times New Roman')->setSize(12)->setBold(true);
-                $event->sheet->getStyle('D3')->getAlignment()->setHorizontal('left');
-                $event->sheet->getDelegate()->getStyle('E5')->getFont()->setName('Times New Roman')->setSize(18)->setBold(true);
-                $event->sheet->getDelegate()->getStyle('E5')->getFont()->getColor()->setRGB('385724');
+                
                 
 
                 // $event->sheet->getStyle('A1:A500')->ApplyFromArray($styleCenter);
@@ -155,7 +150,15 @@ class ExportFile implements WithHeadingRow, FromArray, WithStyles, WithEvents, W
                             'color' => ['argb' => '000000'],
                         ],
                     ],
-         ]);
+                ]);
+
+                $event->sheet->getDelegate()->getStyle('D2')->getFont()->setName('Times New Roman')->setSize(12)->setBold(true);
+                $event->sheet->getStyle('D2')->getAlignment()->setHorizontal('left');
+                $event->sheet->getDelegate()->getStyle('D3')->getFont()->setName('Times New Roman')->setSize(12)->setBold(true);
+                $event->sheet->getStyle('D3')->getAlignment()->setHorizontal('left');
+                $event->sheet->getDelegate()->getStyle('E5')->getFont()->setName('Times New Roman')->setSize(18)->setBold(true);
+                $event->sheet->getDelegate()->getStyle('E5')->getFont()->getColor()->setRGB('385724');
+                $event->sheet->getStyle('E5')->getAlignment()->setWrapText(false);
 
                 // foreach (range(1, 10) as $number) {
                 //     $event->sheet->getStyle('A1:T'. $number)->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
