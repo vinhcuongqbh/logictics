@@ -143,7 +143,7 @@
                         "previous": "Trước"
                     },
                 },
-                "ordering": false,
+                "ordering": true,
                 "order": [[ 0, "desc" ]],
             }).buttons().container().appendTo('#chuyenhang-table_wrapper .col-md-6:eq(0)');
         });
