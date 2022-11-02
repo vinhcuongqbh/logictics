@@ -161,6 +161,11 @@ class DonhangController extends Controller
 
     public function show($id)
     {
+        $nhanvien = User::where('users.id', Auth::user()->id)
+            ->join('khohangs', 'khohangs.id', 'users.id_khohangquanly')
+            ->select('users.*', 'khohangs.tenkhohang')
+            ->first();
+
         $donhang = Donhang::find($id);
         $this->authorize('view', $donhang);
 
@@ -188,6 +193,7 @@ class DonhangController extends Controller
         return view(
             'admin.donhang.show',
             [
+                'nhanvien' => $nhanvien,
                 'donhang' => $donhang,
                 'chitietdonhangs' => $chitietdonhang,
                 'lichsudonhangs' => $lichsudonhang,

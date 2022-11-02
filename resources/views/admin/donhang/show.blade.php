@@ -442,62 +442,64 @@
         </table>
     </div>
     <hr>
-    <div>
-        <table class="table table-borderless">
-            <tr>
-                <td style="width: 40%; text-align: center; vertical-align: top;"><img src="/img/logo.png"
-                        style="width: 200px;"></td>
-                <td style="width: 60%; text-align: center; vertical-align: top;">
-                    <h4><b>Order mua hàng Nhật & vận chuyển an toàn số 1 Nhật Bản</b></h4>
-                </td>
-            </tr>
-        </table>
+    <div style="text-align: center">
+        <h2><b>{{ $nhanvien->tenkhohang}}</b></h2>
     </div>
     <div>
-        <table class="table table-bordered" style="border-color:black;">
-            <tr>
-                <td colspan="2" style="width: 30%;">Ngày xử lý</td>
-                <td>{{ date('d-m-Y H:i:s', strtotime($donhang->created_at)) }}</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="width: 30%;">Mã Tracking</td>
-                <td>{{ chuanHoaMaTraCuu($donhang->matracuu) }}</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="width: 30%;">Tổng khối lượng</td>
-                <td>{{ $donhang->tongkhoiluong }} kg</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="width: 30%;">Nội dung đơn hàng</td>
-                <td>
-                    @foreach ($chitietdonhangs as $chitietdonhang)
-                    {{ $chitietdonhang->tenmathang }},
-                    @endforeach
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="3" style="width: 10%; text-align: center; writing-mode: vertical-lr">NGƯỜI NHẬN</td>
-                <td style="width: 20%;">Địa chỉ</td>
-                <td style="width: 70%;">{{ $donhang->diachinguoinhan }}</td>
-            </tr>
-            <tr>
-                <td>Họ tên</td>
-                <td>{{ $donhang->tennguoinhan }}</td>
-            </tr>
-            <tr>
-                <td>SĐT</td>
-                <td>{{ $donhang->sodienthoainguoinhan }}</td>
-            </tr>
-            <tr>
-                <td rowspan="2" style="width: 10%; text-align: center; writing-mode: vertical-lr">NGƯỜI GỬI</td>
-                <td style="width: 20%;">Họ tên</td>
-                <td style="width: 70%;">{{ $donhang->tennguoigui }}</td>
-            </tr>
-            <tr>
-                <td>SĐT</td>
-                <td>{{ $donhang->sodienthoainguoigui }}</td>
-            </tr>
-        </table>
+        <h4>
+            <b>Quản lý:</b> {{ $nhanvien->name }}</br>  
+            <b>Số điện thoại:</b> {{ $nhanvien->sodienthoai }}</br>
+            <b>Địa chỉ:</b> {{ $nhanvien->diachi }}</br>
+            <b>Liên hệ khác:</b> {{ $nhanvien->lienhekhac }}</br>
+        </h4>
+    </div>
+    <div>
+        <h3>
+            <table class="table table-bordered" style="border-color:black;">
+                <tr>
+                    <td colspan="2" style="width: 30%;">Ngày xử lý</td>
+                    <td>{{ date('d-m-Y H:i:s', strtotime($donhang->created_at)) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 30%;">Mã Tracking</td>
+                    <td>{{ chuanHoaMaTraCuu($donhang->matracuu) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 30%;">Tổng khối lượng</td>
+                    <td>{{ $donhang->tongkhoiluong }} kg</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="width: 30%;">Nội dung đơn hàng</td>
+                    <td>
+                        @foreach ($chitietdonhangs as $chitietdonhang)
+                        {{ $chitietdonhang->tenmathang }},
+                        @endforeach
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="width: 10%; text-align: center; writing-mode: vertical-lr">NGƯỜI NHẬN</td>
+                    <td style="width: 20%;">Địa chỉ</td>
+                    <td style="width: 70%;">{{ $donhang->diachinguoinhan }}</td>
+                </tr>
+                <tr>
+                    <td>Họ tên</td>
+                    <td>{{ $donhang->tennguoinhan }}</td>
+                </tr>
+                <tr>
+                    <td>SĐT</td>
+                    <td>{{ $donhang->sodienthoainguoinhan }}</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="width: 10%; text-align: center; writing-mode: vertical-lr">NGƯỜI GỬI</td>
+                    <td style="width: 20%;">Họ tên</td>
+                    <td style="width: 70%;">{{ $donhang->tennguoigui }}</td>
+                </tr>
+                <tr>
+                    <td>SĐT</td>
+                    <td>{{ $donhang->sodienthoainguoigui }}</td>
+                </tr>
+            </table>
+        </h3>
     </div>
     <div>
         <h5>
@@ -507,8 +509,19 @@
             - Khi đã đồng ý nhận hàng, bên vận chuyển sẽ không chấp nhận đền bù và khiếu nại phát sinh sau này.
         </h5>
     </div>
-    <div style="text-align: center">
-        <h5>Truy cập vào <b>https://etrack.jp</b> để tra cứu mã vận đơn.</h5>
+    <div>
+        <h5>
+        <table class="table table-borderless">
+            <tr>
+                <td style="width: 25%; text-align: left; vertical-align: top;"><img src="/img/new_logo.png"
+                        style="width: 200px;"></td>
+                <td style="width: 75%; text-align: center; vertical-align: top;">
+                    Truy cập <b>https://etrack.jp</b> để tra cứu Mã vận đơn.</br>
+                    <b>Hệ thống quản lý vận chuyển Etrack</b>
+                </td>
+            </tr>
+        </table>
+        </h5>
     </div>
 </div>
 </div>
